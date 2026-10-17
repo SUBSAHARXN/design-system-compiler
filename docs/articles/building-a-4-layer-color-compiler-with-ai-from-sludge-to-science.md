@@ -6,88 +6,78 @@
 
 This project didn't start a few weeks ago. It started back in **April**.
 
-And contrary to what most design system guides tell you, I never handpicked 11-stop color scales in Figma. Nobody has the patience or visual precision to manually tweak 50 through 1000 lightness steps and somehow guarantee they pass WCAG 2.2 AA contrast across both light and dark themes. 
+And contrary to what most design system tutorials preach, I never handpicked 11-stop color scales in Figma. Nobody has the patience or visual precision to manually tweak 50 through 1000 lightness steps and somehow guarantee they pass WCAG 2.2 AA contrast across both light and dark themes. 
 
 **The only color I ever handpicked was the primary 500.**
 
-To build out the rest of the palette, I was relying on Figma plugins—specifically tools like **HSL Shader** and similar palette generators. If you’ve ever used HSL Shader, you know how seductive the workflow is: you select a single target hex anchor (your 500), and the plugin immediately calculates:
-1. A **lighting ramp** (chromatic steps stepping from 1000 down to 50)
-2. A **paired grayscale ramp** (showing the luminance distribution of each step)
+To build out the rest of the palette, I was using Figma plugins—specifically tools like **HSL Shader** and similar lighting generators. If you’ve ever used HSL Shader, you know how straightforward the premise is: you select a single target hex anchor (your 500), and the plugin generates:
+1. A **lighting ramp** (stepping from 1000 down to 50)
+2. A **paired grayscale ramp** (showing the lightness distribution of each step)
 
-> 📷 **[Insert Screenshot: Original Figma HSL Shader Exploration]**  
-> *Top: Chromatic lighting ramp from 1000 down to 50. Bottom: Paired grayscale luminance ramp.*
+> 📷 **[Insert Screenshot: Original Figma HSL Shader Exploration from April]**  
+> *Top: Chromatic lighting ramp generated from 1000 to 50. Bottom: Paired grayscale luminance ramp.*
 
-On paper, HSL Shader works on the exact same premise as this compiler: **one seed in, an entire lighting ramp out.**
+HSL Shader was our stepping stone. But plugins are just static visual generators on a Figma canvas. They don't give you code, they don't validate WCAG or APCA contrast, they don't handle dark mode glare on OLED screens, and they don't map abstract scales into living UI component tokens.
 
-But as soon as you look closely at that screenshot, you see the catastrophic flaw that has plagued design systems for a decade.
+I wanted something far more ambitious: an **autonomous color physics compiler**. A deterministic pipeline where you feed in your raw brand hex seeds, and it compiles an entire 4-layer design system with mathematical certainty.
 
-Look at stops **700, 800, 900, 950, and 1000** on that top lime/green ramp. 
+To build it, I paired with **Claude** and **Antigravity** (Google DeepMind’s agentic coding environment). 
 
-They don't look like deep, rich brand shadows. **They look like dirty, swampy army-green sludge.**
-
-### Why Palette Plugins Hit an Unavoidable Wall
-
-1. **HSL is mathematically non-perceptual:** HSL treats all hues equally. In HSL math, yellow at 50% lightness is treated as having the exact same luminosity as blue at 50% lightness—even though human photoreceptors perceive yellow as emitting over four times more light.
-2. **The static hue trap:** When HSL Shader steps down lightness, it keeps the hue angle locked in place. Pulling lightness down on a green or yellow without rotating the hue forces the color directly into human vision's brown/olive sensitivity trap.
-3. **Static pixels vs. living software:** A Figma plugin draws rectangles on a canvas. It doesn't validate contrast. It doesn't know if your button text will be legible on an OLED screen. It doesn't generate CSS variables, Tailwind tokens, or Figma DTCG design tokens.
-
-I realized that plugins weren't enough. What we needed wasn't another Figma widget—we needed an autonomous, deterministic **color compiler** built on first principles. A system where:
-- You feed in a brand hex 500 anchor.
-- It operates in **OKLCH** (perceptually uniform color space).
-- It enforces strict mathematical CI gates that refuse to compile if contrast fails.
-- It maps abstract ramps into 36 concrete UI component tokens without manual tweaking.
-
-To build it, I paired with **Claude** and **Antigravity** (Google DeepMind's agentic coding environment). 
-
-We designed a formal four-layer decoupled JSON architecture:
+We architected a decoupled four-layer JSON specification:
 - **Layer 1:** Generation Engine (pure color physics & OKLCH math)
-- **Layer 2:** Compiler Contract & CI Gates (accessibility thresholds & validation)
+- **Layer 2:** Compiler Contract & CI Gates (contrast gates & accessibility validation)
 - **Layer 3:** Interaction Physics (hover states, focus rings, shadow physics)
 - **Layer 4:** Semantic Taxonomy (mapping primitives to 36 concrete UI component roles)
 
-Then came the first real production trial: **The Skillbeek Test.**
+We thought pure mathematical determinism would solve color forever. 
+
+**We were completely wrong. And our own compiler proved it.**
 
 ---
 
-## 1. The Skillbeek Test: When the Palette Shattered
+## 1. The Skillbeek Revolt: When Our Own Compiler Caused the Mud
 
-The system didn't start with high-minded theory. It started in the middle of a mess.
+The first production trial for the compiler was **Skillbeek**, an education platform built around a vivid purple primary (`#A952DB`) and green (`#4CB33C`).
 
-To test our first compiler contracts, I fed in the brand anchors for **Skillbeek**, an education platform I was working with. Its primary identity was built around `#A952DB` (a vivid violet) and `#4CB33C` (a sharp green).
+We ran the compiler, generated the tokens, and handed them to the development team. 
 
-The output was an immediate wake-up call:
-1. **Lightness inversion:** Tonal steps were jumping erratically. A 600 button had less perceptual contrast against text than a 500 button.
-2. **APCA contrast failure:** The success fill looked bright to the eye but failed modern readability equations on white backgrounds.
-3. **Flat elevation:** The dark mode surfaces had zero perceptual depth—they were lifeless grey slabs.
+Then the revolt happened.
 
-Having four decoupled JSON layers saved the project right here. In a normal Tailwind config or CSS file, you’d tweak random hex values and accidentally break six other components downstream. Because the architecture was separated, we could trace the contrast failure directly to Layer 2 CI gates and fix the elevation math in Layer 3 without touching the raw brand seeds.
+When we inspected the Skillbeek codebase weeks later, we discovered **over 39 rogue, hardcoded hex values** (`#2563eb`, `#e67e22`, `#00832D`) scattered across star ratings, active badges, and call-to-action buttons. The developers had completely bypassed the compiler's tokens.
 
-Then came the real beast: **The Olive Sludge Problem.**
+Why? **Because the compiler’s output was dull, earthy, and rotted into mud.**
+
+When you treat color generation as a closed mathematical formula (applying pure power curves and static hue constraints in OKLCH), the math betrays human optical perception:
+- Low stops (50–200) came out chalky and dusty instead of luminous.
+- When we tested warm hues like pure saturated yellow (`#FFD400`), stops 600–800 turned into **`#625002`—a repulsive, dirty olive/bile green**.
+
+The developers weren't rebelling out of malice. They bypassed the design system because the compiler forced them to put swamp mud on user interfaces.
+
+When automated cleanup scripts later attempted to force those rogue hexes back into the compiler's rigid tokens, the build blew up: eight structural errors, APCA contrast failures on buttons, and completely flat elevation surfaces in dark mode.
 
 ---
 
-## 2. The "Olive Sludge" Horror Show (Why Yellows Turn to Mud)
+## 2. The Science of the "Olive Sludge" Trap
 
-Once Skillbeek was behaving, I tested an amber/yellow warning ramp (`#F3A600`) and a neon lime primary (`#61F300`). 
-
-That’s when our dark mode and shadow states turned utterly revolting.
-
-When you take a blue or violet and darken it, it turns into a gorgeous navy or deep indigo. But when you take yellow or amber (hue angles between 55° and 125°) and lower the lightness in standard sRGB or naive OKLCH, it doesn't turn into a "dark yellow." 
-
-**It turns into dirty, rancid army-green mud.**
+Looking at the logs, the problem was unmistakable: **our compiler was suffering from the Yellow-to-Olive trap.**
 
 ```
-The Yellow-to-Olive Trap:
-Pure Yellow (Lightness 0.90, Hue 95°)  --->  Lightness 0.40, Hue 95°
-Result: Dirty Camouflage Sludge (Perceived as rotting olive green)
+The Compiler's Yellow-to-Olive Trap:
+Pure Yellow (#FFD400, Lightness 0.90, Hue ~94°)  --->  Lightness 0.40, Hue 94°
+Compiler Output: #625002 (Perceived as rotting army-green mud)
 ```
 
-Why does this happen? 
-Human vision evolved under sunlight. We have three types of cone photoreceptors in our retinas (L, M, and S). In nature, there is almost no such thing as "dark yellow"—when yellow objects move into shadow, the ambient light and human eye perceive a shift in hue toward warm amber, ochre, or brown. In standard color pickers, keeping the hue constant at 95° while pulling lightness down forces the color directly through the eye's maximum sensitivity zone for green, creating sludge.
+Why did the compiler do this?
 
-### How We Solved It: Convective Hue Drift
+Human vision evolved under sunlight. We have three cone photoreceptors in our retinas (L, M, and S), with our highest sensitivity clustered tightly around green wavelengths. 
 
-We didn't solve this by manually nudging hex codes in Figma. We solved it by encoding human optical biology directly into **Layer 3 (Interaction Physics)**:
+In nature, "dark yellow" does not exist. When a yellow object moves into shadow, ambient light and human eye biology perceive a natural shift in hue toward warm amber, ochre, or burnt orange. 
+
+Because our early compiler held hue angle static at 94° while pulling lightness down, it drove the color directly through the human eye's peak green sensitivity curve. The math said it was "dark yellow." The human brain screamed "sludge."
+
+### How We Fixed It: Convective Hue Drift
+
+We didn't fix this by hand-tweaking hex codes in Figma. We fixed it by encoding human optical biology directly into the compiler's **Layer 3 (Interaction Physics)**:
 
 ```python
 # Convective Hue Drift Algorithm (Layer 3)
@@ -98,15 +88,15 @@ if 55.0 <= hue <= 125.0:  # Yellow / Lime hazard band
     corrected_hue = hue + convective_hue_shift
 ```
 
-As an amber or yellow gets darker (like for button hover, active states, or dark-mode borders), the compiler automatically rotates its hue toward warm orange/amber (`45°`). 
+Whenever the compiler darkens a hue between 55° and 125° (for hover states, active borders, or dark mode surfaces), it dynamically rotates the hue toward warm orange/amber (`45°`). 
 
-The result? The mud vanished. Yellows now degrade into rich, warm cognac, honey, and amber tones that look alive and premium.
+The mud instantly vanished. Yellows now degrade into rich honey, cognac, and amber tones.
 
 ---
 
 ## 3. The Benchmark Wake-Up Call: Our Accessibility Bias
 
-Once the compiler produced beautiful ramps and passed every WCAG check, we felt invincible. We decided to build a reproducible, automated benchmark suite (`expanded_rigorous_benchmark.py`) to pit our compiler against nine industry giants:
+With the mud eliminated and contrast passing, we felt ready to test the compiler against the industry. We built an automated, open-source benchmark suite (`benchmarks/expanded_rigorous_benchmark.py`) to audit nine major design systems under identical mathematical conditions:
 - IBM Carbon
 - Google Material Design 3 (M3)
 - GitHub Primer
@@ -116,45 +106,43 @@ Once the compiler produced beautiful ramps and passed every WCAG check, we felt 
 - Apple Human Interface Guidelines (HIG)
 - Radix Colors
 
-We scored each design system across six mathematical metrics:
-1. **WCAG 2.2 AA Pass Rate** (% of semantic pairs passing contrast)
+We audited six core dimensions:
+1. **WCAG 2.2 AA Pass Rate** (% of semantic pairs passing 4.5:1 / 3:1)
 2. **APCA Mean Readability (Lc)** (Advanced Perceptual Contrast Algorithm score)
-3. **Linearity Error (StdDev)** (How predictable and uniform the lightness steps are)
-4. **Muddy Shadow Stops** (Number of hue stops trapped in the olive mud zone)
-5. **CVD Deutan Colorblind Separation (ΔE)** (Readability under red-green colorblindness)
+3. **Linearity Error (StdDev)** (Lightness step uniformity across ramps)
+4. **Muddy Shadow Stops** (Stops trapped in the olive mud zone)
+5. **CVD Deutan Separation (ΔE)** (Readability under red-green colorblindness)
 6. **OLED Glare Ceiling Compliance** (Preventing 100% pitch-black eye strain)
 
-### The Disappointing First Run
+### The First Run: Blinded by Accessibility
 
-When the Python benchmark finished, our compiler took **#1 in APCA Readability (101.9 Lc)** and **#1 in WCAG 2.2 AA (100.0%)**.
+When the benchmark finished, our compiler took **#1 in APCA Readability (101.9 Lc)** and **#1 in WCAG 2.2 AA (100.0%)**.
 
-**But our overall composite score was humiliatingly mediocre.** We were sitting way down near the middle of the pack.
+**Yet our overall composite score was mediocre.** We ranked near the middle of the pack.
 
 Why? **Accessibility bias.**
 
-We had become so obsessed with guaranteeing that *every single token pair* passed APCA Lc 60 and WCAG 4.5:1 that we were violently warping the lightness curve between stops 400, 500, and 600. To pass contrast on dark backgrounds, we shoved stop 400 upward. To pass on light backgrounds, we shoved stop 600 downward. 
+We had become so fanatical about guaranteeing contrast that we were distorting the lightness curve to force every token pair to pass. We shoved stop 400 higher and pulled stop 600 lower. The contrast passed, but the lightness steps became erratic. IBM Carbon destroyed us on linearity error (Carbon: `0.0133`, Our initial build: `0.0520`).
 
-The contrast passed, but the **mathematical linearity was destroyed**. The delta-L steps were jagged. IBM Carbon crushed us on linearity error (Carbon: `0.0133`, Our initial build: `0.0520`).
+We had built a system with maximum contrast horsepower, but completely broken suspension.
 
-We had built the color equivalent of an engine that had immense horsepower but terrible suspension.
+### The Data-Driven Fix: The 1.15 Power Curve
 
-### The Data-Driven Fix
-
-We went back into Layer 1 (Generation Engine) with Claude and Antigravity. Instead of arbitrary piecewise hacks, we replaced the ramp distribution with a continuous **1.15 Power Curve**:
+We went back into Layer 1 with Claude and Antigravity. Instead of piecewise hacks, we replaced the ramp math with a continuous **1.15 Power Curve**:
 
 ```
 Lightness(step) = 1.0 - (step / 1000) ^ 1.15
 ```
 
-This single mathematical formulation smoothed the delta-L transition while naturally hitting the required contrast thresholds at stops 100, 500, 700, and 900.
+This single continuous curve smoothed the delta-L transition while naturally hitting contrast thresholds at key semantic anchor stops.
 
-We re-ran the automated benchmark across all nine systems.
+We re-ran the benchmark across all nine systems.
 
 **The result:**
 - Linearity error dropped from `0.0520` down to `0.0333`
 - WCAG 2.2 AA stayed at **100.0%**
-- APCA Readability held the **#1 industry spot at 101.9 Lc**
-- **Composite Score rose to 78.5 / 100**, leaping over GitHub Primer (78.3), Microsoft Fluent 2 (77.4), and Tailwind (76.3) to claim **Rank #3 overall**, right behind IBM Carbon (83.6) and Google Material 3 (81.7).
+- APCA Readability retained the **#1 industry spot at 101.9 Lc**
+- **Composite Score jumped to 78.5 / 100**, passing GitHub Primer (78.3), Microsoft Fluent 2 (77.4), and Tailwind (76.3) to claim **Rank #3 overall**, right behind IBM Carbon (83.6) and Google Material 3 (81.7).
 
 Here is the exact benchmark table generated by the audit suite:
 
@@ -170,55 +158,55 @@ Here is the exact benchmark table generated by the audit suite:
 | #8 | Apple HIG | 60.0% | 81.7 Lc | 0.0540 | 1 | 66.1 / 100 |
 | #9 | Radix Colors | 40.0% | 74.3 Lc | 0.0651 | 0 | 46.9 / 100 |
 
-*(Note: IBM Carbon’s ultra-flat linearity won it #1 overall, but our compiler took the undisputed crown for human reading clarity at 101.9 Lc).*
+---
+
+## 4. Test It Live: Hosted on Subtle Shoppers
+
+We are hosting the interactive compiler test bench live as a dedicated subdomain of **Subtle Shoppers**:
+
+👉 **Live Test Bench:** `compiler.subtleshoppers.com` *(or test locally in the repo)*  
+👉 **GitHub Repository:** [SUBSAHARXN/design-system-compiler](https://github.com/SUBSAHARXN/design-system-compiler)
+
+On the live site, you can:
+- **Input your own brand seeds:** Toggle between standard sRGB Hex and native OKLCH sliders (Lightness, Chroma, Hue).
+- **Inspect P3 Gamut Boundaries:** The compiler automatically detects wide-gamut Display P3 colors and clips out-of-gamut values cleanly.
+- **Audit CVD Colorblindness:** Toggle Deuteranopia, Protanopia, and Tritanopia filters in real-time to see how your palette holds up under human visual deficiencies.
+- **Export 36 Component Tokens:** Copy ready-to-use CSS variables, Tailwind tokens, and DTCG design tokens.
+
+> 📷 **[Insert Screenshot: Live Brand Test Bench UI showing Dual-Mode Hex / OKLCH Picker]**  
+> *The live compiler interface running on Subtle Shoppers.*
 
 ---
 
-## 4. Visuals on Medium: Why Images Beat Code Embeds
+## 5. "4-Layer Compiler" is a Boring Name. Help Me Name It.
 
-A quick note on how I’m formatting this story and how you should share technical color work on Medium.
+Right now, the repo and architecture are called the **4-Layer OKLCH Design System Compiler**. 
 
-A lot of engineers reach for interactive CodePens or iframe embeds. On Medium, **interactive canvas or CSS embeds are clunky or completely unsupported**. Readers reading on their phones will hit broken iframes or unreadable code snippets.
+That is an excruciatingly boring, utilitarian engineering title. It sounds like a government whitepaper from 2004.
 
-For color physics, **high-contrast side-by-side images always win:**
-1. **The Before/After Mud Swatch:** A simple visual comparing a 95° yellow darkening into olive sludge versus our convective hue drift darkening into honey amber. You don't need words; the eye immediately understands the bug.
-2. **The Dual-Mode Color Picker UI:** A clean screenshot of the test bench showing live Display P3 gamut boundaries and OKLCH Lightness/Chroma/Hue sliders.
-3. **The Benchmark Matrix:** The clean table screenshot showing our system standing shoulder-to-shoulder with IBM Carbon and Material 3.
-
----
-
-## 5. "4-Layer Compiler" is a Terrible Name. Help Me Name It.
-
-Right now, the project repo and architecture are called the **4-Layer OKLCH Design System Compiler**. 
-
-Let’s be honest: that is an excruciatingly boring, utilitarian engineering working title. It sounds like an internal enterprise document from 2004.
-
-I don’t have a good brand name for it yet. Some ideas that floated around:
+I don’t have a good brand name for it yet. Some ideas:
 - *Specter* (or *SpectraCore*)
 - *PrismEngine*
 - *ChromaLoom*
 - *OklchOS*
 - *Percepta*
 
-If you have an idea for what a first-principles, mathematical color compiler should be called, drop it in the responses. I'm completely open to suggestions.
+If you have an idea for what an autonomous, first-principles color compiler should be called, leave a comment. I am completely open to suggestions.
 
 ---
 
-## 6. Tear It Apart: An Open Invitation
+## 6. Tear It Apart: An Open Invitation for Feedback
 
-This system wasn't built in an ivory tower. It was built by breaking things in public, finding bugs with Skillbeek, getting humbled by IBM Carbon’s linearity, and rewriting math in Python and JavaScript until the gates turned green.
+This compiler wasn't built in an academic vacuum. It was built by breaking palettes in production with Skillbeek, getting caught by our developers for making muddy yellow buttons, getting humbled by IBM Carbon’s linearity in benchmarks, and pairing with AI to write mathematical proofs that actually hold up.
 
-Everything is public and open source:
-- **Interactive Live Showcase & Test Bench:** Test your own brand hex codes or native OKLCH values in real-time, toggle CVD colorblindness filters, and inspect the 36 UI component tokens.
-- **GitHub Repository:** [SUBSAHARXN/design-system-compiler](https://github.com/SUBSAHARXN/design-system-compiler)
-- **Benchmark Suite:** The complete Python script (`benchmarks/expanded_rigorous_benchmark.py`) is in the repo so you can run the exact same tests on your own design system.
+I want you to test this. 
 
-I want you to test this. Input your weirdest, most difficult brand colors—the saturated teals, the neon greens, the hyper-bright yellows that usually break every design system. 
+Input your weirdest, hardest brand colors—the saturated teals, the neon greens, the hyper-bright yellows that usually break every design system. 
 
-Find where our math fails. Criticize our 1.15 power curve. Tell me why our APCA thresholds are too strict, or open a pull request to make the gamut-mapping faster. 
+Find where our 1.15 curve fails. Criticize our APCA assumptions. Tell me where the tokens feel too opinionated, or open an issue on GitHub to help improve the math.
 
-Good systems aren't built on faith—they're built by compilers that refuse to lie.
+Good systems aren't built on dogma—they're built by compilers that refuse to produce output that violates their own spec.
 
 ---
 
-*Found a bug or want to suggest a name? Drop a response below or open an issue on [GitHub](https://github.com/SUBSAHARXN/design-system-compiler).*
+*Test the compiler live on the Subtle Shoppers subdomain, inspect the code on [GitHub](https://github.com/SUBSAHARXN/design-system-compiler), and drop your feedback, name ideas, and critique below.*
