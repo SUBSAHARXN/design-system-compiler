@@ -36,21 +36,21 @@ We expected pure math to handle every edge case out of the box, but real product
 
 ---
 
-## 1. Testing with Skillbeek: When Our Own Compiler Caused the Mud
+## 1. Testing with Skillbeek: When Math Met Reality
 
 The first production trial for the compiler was Skillbeek, an education platform I built and recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
 
-I used MCP to bring the compiler's generated tokens into the codebase and wire them into the live React components.
+I used MCP to bring the compiler's generated tokens into the Skillbeek codebase and wire them into the live React components.
 
-That was when the cracks appeared. On real screens, the generated output looked dull, earthy, and rotted into mud. When I checked amber warning buttons, active chips, and tag backgrounds, the compiler handed me swamp water. Even worse, instead of adhering strictly to the token contract, the AI had hallucinated random raw hex values across star ratings, badges, and card borders. 
+That was when the real defect hit: on actual screens, the compiler's tokens looked dull, muddy, and lifeless. The gold and amber tones rotted into murky swamp water whenever they were applied to buttons, active chips, and badges.
 
-When we attempted to clean that up and bind everything to strict compiler tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
+I brought the issue straight into our AI pairing session with a direct question: *Is the compiler over-optimizing for accessibility at the expense of vividness? Is that why it becomes muddy?*
 
-I stopped and brought the issue straight into our AI pairing session: why was an automated system designed for mathematical perfection generating sludge on actual screens?
+We opened the logs and investigated the engine. The answer was yes. The compiler had been designed with dogmatic contrast gates: to pass strict WCAG AA (4.5:1) and APCA Lc 60 against white backgrounds, it aggressively forced lightness down. But in color physics, yellow and gold only possess high chroma at high lightness. Crushing lightness while keeping hue locked turned vibrant gold into olive mud.
 
 > 📷 **[IMAGE STOP 2: Skillbeek Live Production UI]**  
-> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the badges, star ratings, or card components where the mud was caught.  
-> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Testing the compiler's tokens in live React components exposed the muddy color defect and token mapping failures before we corrected the math.*
+> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the buttons, badges, or card components where the dullness was first caught.  
+> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Testing the compiler's tokens in live React components exposed the muddy color defect and led us to uncover the contrast-versus-vividness trap.*
 
 ---
 
