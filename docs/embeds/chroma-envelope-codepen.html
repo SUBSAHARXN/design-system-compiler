@@ -10,27 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* -------------------------------------------------------------
-       SKILLBEEK DESIGN SYSTEM TOKENS (from Skillbeek-App index.css)
+       SKILLBEEK DUAL-THEME SYSTEM TOKENS (from Skillbeek index.css)
        ------------------------------------------------------------- */
     :root {
-      /* Base Typography */
       --Typeface-Nunito: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
       --Typeface-Mono: 'JetBrains Mono', monospace;
 
-      /* Neutrals */
-      --Neutral-50: #FAF7FE;
-      --Neutral-100: #F0EDF4;
-      --Neutral-200: #E0DCE3;
-      --Neutral-300: #C0BCC3;
-      --Neutral-400: #A09DA3;
-      --Neutral-500: #737076;
-      --Neutral-600: #656268;
-      --Neutral-700: #49464C;
-      --Neutral-800: #2F2C32;
-      --Neutral-900: #171519;
-      --Neutral-950: #070508;
-
-      /* Primary (Royal Purple) */
+      /* Primary Brand (Purple) */
       --Primary-50: #FBF6FF;
       --Primary-100: #F8EFFF;
       --Primary-200: #EACFFF;
@@ -39,25 +25,92 @@
       --Primary-500: #8C35BE;
       --Primary-600: #5F0193;
 
-      /* Illustration Brown / Ochre Gold (Brand Secondary) */
-      --Brown-50: #FDF4E9;
-      --Brown-100: #FFEEDA;
-      --Brown-200: #FCDAAF;
-      --Brown-300: #EDC086;
-      --Brown-400: #D5A25E;
-      --Brown-500: #B7812F;
-      --Brown-600: #865300;
-      --Brown-700: #573001;
-
       /* Status */
       --Error-500: #BA3430;
-      --Error-bg: rgba(186, 52, 48, 0.16);
       --Success-500: #2FA836;
-      --Success-bg: rgba(47, 168, 54, 0.16);
 
-      /* Skillbeek Elevation Shadows */
-      --skillbeek-sm: 0px 4px 12px 0px rgba(18, 9, 0, 0.25), 0px 12px 24px -8px rgba(18, 9, 0, 0.45);
-      --skillbeek-xs: 0px 1px 3px 0px rgba(18, 9, 0, 0.2);
+      /* Ochre Ramp Stops */
+      --Ochre-50-old: #F9F4EE;
+      --Ochre-100-old: #F9F4EE;
+      --Ochre-200-old: #F4DCBF;
+      --Ochre-300-old: #E7C292;
+
+      --Ochre-50-new: #FDF4E9;
+      --Ochre-100-new: #FFEEDA;
+      --Ochre-200-new: #FCDAAF;
+      --Ochre-300-new: #EDC086;
+    }
+
+    /* DARK THEME (Default) */
+    body, [data-theme="dark"] {
+      --canvas-bg: #070508;
+      --card-bg: #171519;
+      --card-border: rgba(224, 220, 227, 0.12);
+      --column-bg: #2F2C32;
+      --column-border: rgba(224, 220, 227, 0.1);
+      --item-bg: rgba(23, 21, 25, 0.6);
+      --item-border: rgba(224, 220, 227, 0.06);
+      --item-hover-bg: rgba(23, 21, 25, 0.95);
+      --item-hover-border: rgba(224, 220, 227, 0.2);
+
+      --text-heading: #FAF7FE;
+      --text-body: #C0BCC3;
+      --text-muted: #737076;
+
+      --code-bg: rgba(255, 255, 255, 0.06);
+      --code-text: #E0DCE3;
+
+      --danger-pill-bg: rgba(186, 52, 48, 0.16);
+      --danger-pill-text: #FF8784;
+      --danger-pill-border: rgba(186, 52, 48, 0.35);
+
+      --success-pill-bg: rgba(47, 168, 54, 0.16);
+      --success-pill-text: #6CE374;
+      --success-pill-border: rgba(47, 168, 54, 0.35);
+
+      --shadow-card: 0px 4px 12px 0px rgba(18, 9, 0, 0.25), 0px 12px 24px -8px rgba(18, 9, 0, 0.45);
+      --shadow-hover: 0px 2px 8px 0px rgba(18, 9, 0, 0.3);
+
+      --glow-purple: radial-gradient(circle, rgba(140, 53, 190, 0.2) 0%, rgba(140, 53, 190, 0) 70%);
+      --glow-ochre: radial-gradient(circle, rgba(183, 129, 47, 0.18) 0%, rgba(183, 129, 47, 0) 70%);
+      --toggle-bg: rgba(255, 255, 255, 0.08);
+      --toggle-active: var(--Primary-500);
+    }
+
+    /* LIGHT THEME (Skillbeek Daylight Mode) */
+    [data-theme="light"] {
+      --canvas-bg: #F0EDF4;
+      --card-bg: #FAF7FE;
+      --card-border: #E0DCE3;
+      --column-bg: #FFFFFF;
+      --column-border: #E0DCE3;
+      --item-bg: #FAF7FE;
+      --item-border: rgba(73, 70, 76, 0.08);
+      --item-hover-bg: #FFFFFF;
+      --item-hover-border: var(--Primary-300);
+
+      --text-heading: #171519;
+      --text-body: #49464C;
+      --text-muted: #737076;
+
+      --code-bg: rgba(23, 21, 25, 0.06);
+      --code-text: #2F2C32;
+
+      --danger-pill-bg: rgba(186, 52, 48, 0.1);
+      --danger-pill-text: #B91C1C;
+      --danger-pill-border: rgba(186, 52, 48, 0.25);
+
+      --success-pill-bg: rgba(47, 168, 54, 0.12);
+      --success-pill-text: #15803D;
+      --success-pill-border: rgba(47, 168, 54, 0.25);
+
+      --shadow-card: 0px 4px 16px 0px rgba(73, 70, 76, 0.08), 0px 1px 3px 0px rgba(73, 70, 76, 0.06);
+      --shadow-hover: 0px 4px 12px 0px rgba(73, 70, 76, 0.12);
+
+      --glow-purple: radial-gradient(circle, rgba(140, 53, 190, 0.08) 0%, rgba(140, 53, 190, 0) 70%);
+      --glow-ochre: radial-gradient(circle, rgba(183, 129, 47, 0.08) 0%, rgba(183, 129, 47, 0) 70%);
+      --toggle-bg: #E0DCE3;
+      --toggle-active: var(--Primary-500);
     }
 
     * {
@@ -67,8 +120,8 @@
     }
 
     body {
-      background: var(--Neutral-950);
-      color: var(--Neutral-50);
+      background: var(--canvas-bg);
+      color: var(--text-heading);
       font-family: var(--Typeface-Nunito);
       min-height: 100vh;
       display: flex;
@@ -76,22 +129,23 @@
       justify-content: center;
       padding: 24px 16px;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* Outer Shell: Skillbeek Colophon Card */
     .skillbeek-card {
       width: 100%;
-      max-width: 800px;
-      background: var(--Neutral-900);
-      border: 1px solid rgba(224, 220, 227, 0.12);
+      max-width: 820px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 32px 28px;
-      box-shadow: var(--skillbeek-sm);
+      box-shadow: var(--shadow-card);
       position: relative;
       overflow: hidden;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Ambient Brand Glow */
     .skillbeek-card::before {
       content: "";
       position: absolute;
@@ -99,8 +153,9 @@
       right: -80px;
       width: 280px;
       height: 280px;
-      background: radial-gradient(circle, rgba(140, 53, 190, 0.2) 0%, rgba(140, 53, 190, 0) 70%);
+      background: var(--glow-purple);
       pointer-events: none;
+      transition: background 0.3s ease;
     }
 
     .skillbeek-card::after {
@@ -110,31 +165,40 @@
       left: -80px;
       width: 280px;
       height: 280px;
-      background: radial-gradient(circle, rgba(183, 129, 47, 0.18) 0%, rgba(183, 129, 47, 0) 70%);
+      background: var(--glow-ochre);
       pointer-events: none;
+      transition: background 0.3s ease;
     }
 
     /* Header */
     .header {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       margin-bottom: 24px;
+    }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .badge-row {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 8px;
     }
 
     .chip-brand {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(140, 53, 190, 0.18);
-      border: 1px solid rgba(140, 53, 190, 0.35);
-      color: var(--Primary-200);
+      background: rgba(140, 53, 190, 0.14);
+      border: 1px solid rgba(140, 53, 190, 0.3);
+      color: var(--Primary-500);
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -152,26 +216,53 @@
     .chip-meta {
       font-family: var(--Typeface-Mono);
       font-size: 11px;
-      color: var(--Neutral-400);
-      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      background: var(--code-bg);
       padding: 3px 8px;
       border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: var(--toggle-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      color: var(--text-heading);
+      font-family: var(--Typeface-Nunito);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.03);
+      border-color: var(--Primary-400);
+    }
+
+    .theme-toggle-icon {
+      font-size: 13px;
     }
 
     h2.title {
       font-size: 22px;
       font-weight: 900;
       letter-spacing: -0.02em;
-      color: var(--Neutral-50);
+      color: var(--text-heading);
       margin-bottom: 6px;
     }
 
     p.subtitle {
       font-size: 14px;
       line-height: 1.5;
-      color: var(--Neutral-300);
-      max-width: 640px;
+      color: var(--text-body);
+      max-width: 660px;
     }
 
     /* Comparison Grid */
@@ -191,15 +282,11 @@
 
     /* Column Container */
     .column {
-      background: var(--Neutral-800);
-      border: 1px solid rgba(224, 220, 227, 0.1);
+      background: var(--column-bg);
+      border: 1px solid var(--column-border);
       border-radius: 16px;
       padding: 20px 18px;
-      transition: border-color 0.2s ease;
-    }
-
-    .column:hover {
-      border-color: rgba(224, 220, 227, 0.2);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
     .column-header {
@@ -208,7 +295,7 @@
       justify-content: space-between;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: 1px solid rgba(224, 220, 227, 0.08);
+      border-bottom: 1px solid var(--column-border);
     }
 
     .col-title-wrap {
@@ -236,7 +323,7 @@
     .col-title {
       font-size: 14px;
       font-weight: 800;
-      color: var(--Neutral-50);
+      color: var(--text-heading);
     }
 
     .col-pill {
@@ -248,15 +335,15 @@
     }
 
     .col-pill.danger {
-      background: var(--Error-bg);
-      color: #FF8784;
-      border: 1px solid rgba(186, 52, 48, 0.35);
+      background: var(--danger-pill-bg);
+      color: var(--danger-pill-text);
+      border: 1px solid var(--danger-pill-border);
     }
 
     .col-pill.success {
-      background: var(--Success-bg);
-      color: #6CE374;
-      border: 1px solid rgba(47, 168, 54, 0.35);
+      background: var(--success-pill-bg);
+      color: var(--success-pill-text);
+      border: 1px solid var(--success-pill-border);
     }
 
     /* Swatch Item */
@@ -271,17 +358,17 @@
       align-items: center;
       gap: 14px;
       padding: 10px 12px;
-      background: rgba(23, 21, 25, 0.55);
-      border: 1px solid rgba(224, 220, 227, 0.06);
+      background: var(--item-bg);
+      border: 1px solid var(--item-border);
       border-radius: 12px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .swatch-card:hover {
-      background: rgba(23, 21, 25, 0.9);
-      border-color: rgba(224, 220, 227, 0.18);
+      background: var(--item-hover-bg);
+      border-color: var(--item-hover-border);
       transform: translateY(-1px);
-      box-shadow: var(--skillbeek-xs);
+      box-shadow: var(--shadow-hover);
     }
 
     .swatch-chip {
@@ -296,7 +383,7 @@
       font-size: 11px;
       font-weight: 900;
       color: #171519;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .swatch-info {
@@ -314,15 +401,15 @@
     .swatch-token-label {
       font-size: 13px;
       font-weight: 700;
-      color: var(--Neutral-50);
+      color: var(--text-heading);
     }
 
     .swatch-hex-code {
       font-family: var(--Typeface-Mono);
       font-size: 12px;
       font-weight: 600;
-      color: var(--Neutral-200);
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--code-text);
+      background: var(--code-bg);
       padding: 1px 6px;
       border-radius: 4px;
     }
@@ -336,7 +423,7 @@
 
     .env-stat {
       font-family: var(--Typeface-Mono);
-      color: var(--Neutral-400);
+      color: var(--text-muted);
       font-size: 11px;
     }
 
@@ -349,15 +436,15 @@
     }
 
     .status-tag.danger {
-      color: #FF8784;
+      color: var(--danger-pill-text);
     }
 
     .status-tag.success {
-      color: #6CE374;
+      color: var(--success-pill-text);
     }
 
     .status-tag.neutral {
-      color: var(--Neutral-300);
+      color: var(--text-muted);
     }
 
     /* Footer / Telemetry */
@@ -366,7 +453,7 @@
       z-index: 1;
       margin-top: 22px;
       padding-top: 16px;
-      border-top: 1px solid rgba(224, 220, 227, 0.1);
+      border-top: 1px solid var(--card-border);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -374,7 +461,7 @@
       gap: 10px;
       font-family: var(--Typeface-Mono);
       font-size: 11px;
-      color: var(--Neutral-400);
+      color: var(--text-muted);
     }
 
     .footer-left {
@@ -387,7 +474,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: var(--Primary-200);
+      color: var(--Primary-500);
+      font-weight: 600;
     }
 
     .dot-pulse {
@@ -398,20 +486,29 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="dark">
 
   <div class="skillbeek-card">
     <!-- Header -->
     <div class="header">
-      <div class="badge-row">
-        <span class="chip-brand">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          Skillbeek Design System
-        </span>
-        <span class="chip-meta">Token Ramp: --illustration-brown</span>
+      <div class="header-top-row">
+        <div class="badge-row">
+          <span class="chip-brand">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Skillbeek Design System
+          </span>
+          <span class="chip-meta">Token Ramp: --illustration-brown</span>
+        </div>
+        
+        <!-- Live Theme Toggle -->
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Light and Dark Mode">
+          <span class="theme-toggle-icon" id="themeIcon">☀️</span>
+          <span id="themeLabel">Light Mode</span>
+        </button>
       </div>
+
       <h2 class="title">Highlight Chroma Envelope Recalibration</h2>
-      <p class="subtitle">Real-world production comparison of stops 50–300 in Skillbeek's ochre brand ladder before vs after resolving the 8-bit quantization collapse.</p>
+      <p class="subtitle">Interactive production comparison of stops 50–300 in Skillbeek's ochre brand ladder before vs after resolving the 8-bit quantization collapse.</p>
     </div>
 
     <!-- Comparison Grid -->
@@ -429,7 +526,7 @@
         <div class="swatch-group">
           <!-- Stop 50 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #F9F4EE;">50</div>
+            <div class="swatch-chip" style="background: var(--Ochre-50-old);">50</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 50</span>
@@ -444,7 +541,7 @@
 
           <!-- Stop 100 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #F9F4EE;">100</div>
+            <div class="swatch-chip" style="background: var(--Ochre-100-old);">100</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 100</span>
@@ -459,7 +556,7 @@
 
           <!-- Stop 200 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #F4DCBF;">200</div>
+            <div class="swatch-chip" style="background: var(--Ochre-200-old);">200</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 200</span>
@@ -474,7 +571,7 @@
 
           <!-- Stop 300 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #E7C292;">300</div>
+            <div class="swatch-chip" style="background: var(--Ochre-300-old);">300</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 300</span>
@@ -502,7 +599,7 @@
         <div class="swatch-group">
           <!-- Stop 50 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #FDF4E9;">50</div>
+            <div class="swatch-chip" style="background: var(--Ochre-50-new);">50</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 50</span>
@@ -517,7 +614,7 @@
 
           <!-- Stop 100 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #FFEEDA;">100</div>
+            <div class="swatch-chip" style="background: var(--Ochre-100-new);">100</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 100</span>
@@ -532,7 +629,7 @@
 
           <!-- Stop 200 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #FCDAAF;">200</div>
+            <div class="swatch-chip" style="background: var(--Ochre-200-new);">200</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 200</span>
@@ -547,7 +644,7 @@
 
           <!-- Stop 300 -->
           <div class="swatch-card">
-            <div class="swatch-chip" style="background: #EDC086;">300</div>
+            <div class="swatch-chip" style="background: var(--Ochre-300-new);">300</div>
             <div class="swatch-info">
               <div class="swatch-row-main">
                 <span class="swatch-token-label">Stop 300</span>
@@ -575,6 +672,34 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    const body = document.body;
+
+    // Detect system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setTheme('light');
+    }
+
+    function setTheme(theme) {
+      body.setAttribute('data-theme', theme);
+      if (theme === 'light') {
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark Mode';
+      } else {
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light Mode';
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const current = body.getAttribute('data-theme') || 'dark';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  </script>
 
 </body>
 </html>
