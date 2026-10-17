@@ -18,9 +18,14 @@ To build out the rest of the palette, I was using Figma plugins—specifically t
 > **What to capture:** A screenshot of your Figma canvas from April showing a single 500 hex anchor driving HSL Shader to output the 1000–50 chromatic lighting ramp and paired grayscale ramp.  
 > **Caption:** *Figure 1: My original Figma exploration in April using HSL Shader. Selecting a single 500 anchor automatically generated an 11-stop lighting ramp and a grayscale comparison strip.*
 
-HSL Shader was our stepping stone. But plugins are just static visual generators on a Figma canvas. They don't give you code, they don't validate WCAG or APCA contrast, they don't handle dark mode glare on OLED screens, and they don't map abstract scales into living UI component tokens.
+HSL Shader was an invaluable stepping stone. And to be fair: modern Figma plugins can easily output variables, hex values, and design tokens that you can map straight into a codebase.
 
-I wanted something far more ambitious: an **autonomous color physics compiler**. A deterministic pipeline where you feed in your raw brand hex seeds, and it compiles an entire 4-layer design system with mathematical certainty.
+The real wall wasn't that plugins couldn't generate tokens—**it was the underlying color physics and the lack of an architectural compiler pipeline:**
+1. **The HSL color space trap:** HSL is mathematically non-perceptual. It treats yellow at 50% lightness as having the exact same luminosity as blue at 50% lightness, completely ignoring how human cone photoreceptors perceive brightness across different wavelengths.
+2. **Static ramps without interaction physics:** A plugin generates a static set of swatches or variables. It doesn't define how states should mathematically mutate (like dynamic hover $\Delta L$ scaling, shadow elevation, or fill-border distinctness policies).
+3. **No automated CI gates:** If a color combination fails APCA readability (Lc 60), causes a red-green CVD collision, or breaches OLED dark glare floors, a plugin won't stop you—it just passes the invalid color down into production.
+
+I wanted something far more ambitious: an **autonomous color physics compiler**. A deterministic four-layer architecture where you feed in your raw brand seeds, and it compiles a mathematically verified design system with strict CI gates that refuse to produce output that violates its own spec.
 
 To build it, I paired with **Claude** and **Antigravity** (Google DeepMind’s agentic coding environment). 
 
