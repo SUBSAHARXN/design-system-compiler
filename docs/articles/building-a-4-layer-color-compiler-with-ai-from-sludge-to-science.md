@@ -1,6 +1,6 @@
 # From Olive Sludge to First Principles: How I Built an Autonomous OKLCH Color Compiler with Claude and Antigravity
 
-*The journey from April with Figma plugins like HSL Shader to an autonomous 4-layer compiler that solved the yellow mud trap, fixed our accessibility bias, and surged into the industry top 3.*
+*How overcompensating for accessibility contrast in an autonomous color compiler backfired into olive mud, alienated our developers, and what it took to fix the math.*
 
 ---
 
@@ -47,33 +47,35 @@ When we inspected the Skillbeek codebase weeks later, we discovered **over 39 ro
 
 Why? **Because the compiler’s output was dull, earthy, and rotted into mud.**
 
-When you treat color generation as a closed mathematical formula (applying pure power curves and static hue constraints in OKLCH), the math betrays human optical perception:
-- Low stops (50–200) came out chalky and dusty instead of luminous.
-- When we tested warm hues like pure saturated yellow (`#FFD400`), stops 600–800 turned into **`#625002`—a repulsive, dirty olive/bile green**.
-
-The developers weren't rebelling out of malice. They bypassed the design system because the compiler forced them to put swamp mud on user interfaces.
+When developers needed a vibrant active badge or a punchy amber warning button, the compiler gave them swamp water. They weren't rebelling out of malice—they bypassed the design system because the compiler forced them to put ugly mud on production user interfaces.
 
 When automated cleanup scripts later attempted to force those rogue hexes back into the compiler's rigid tokens, the build blew up: eight structural errors, APCA contrast failures on buttons, and completely flat elevation surfaces in dark mode.
 
 ---
 
-## 2. The Science of the "Olive Sludge" Trap
+## 2. The Yellow Mud Trap: Born from Accessibility Overcompensation
 
-Looking at the logs, the problem was unmistakable: **our compiler was suffering from the Yellow-to-Olive trap.**
+How did the compiler end up generating mud in the first place?
+
+Looking back at our logs and equations, the truth was embarrassing: **the yellow mud was caused by our compiler violently overcompensating for accessibility.**
+
+Here is the trap:
+1. Saturated yellow (`#FFD400`) has an extremely high natural lightness (~0.90 in OKLCH).
+2. Our Layer 2 accessibility gates demanded that text and button fills hit strict WCAG 4.5:1 and APCA Lc 60 contrast against light backgrounds.
+3. Because yellow at stop 500 physically cannot hit that contrast on white, the compiler's algorithm did what math does: **it dragged yellow’s lightness way down to 0.40 to force the contrast score.**
+4. But the algorithm kept the hue angle locked static at 94°. 
 
 ```
-The Compiler's Yellow-to-Olive Trap:
-Pure Yellow (#FFD400, Lightness 0.90, Hue ~94°)  --->  Lightness 0.40, Hue 94°
-Compiler Output: #625002 (Perceived as rotting army-green mud)
+The Accessibility Overcompensation Trap:
+Target: Pass APCA Lc 60 on light background
+Pure Yellow (#FFD400, Lightness 0.90, Hue ~94°)
+Compiler forces Lightness down to 0.40 at static Hue 94°
+Compiler Output: #625002 (Rotting army-green mud)
 ```
 
-Why did the compiler do this?
+Human vision evolved under sunlight. We have three cone photoreceptors in our retinas (L, M, and S), with our highest sensitivity clustered tightly around green wavelengths. In nature, "dark yellow" does not exist—when yellow objects move into shadow, human vision expects the hue to drift naturally toward warm amber, ochre, or burnt orange.
 
-Human vision evolved under sunlight. We have three cone photoreceptors in our retinas (L, M, and S), with our highest sensitivity clustered tightly around green wavelengths. 
-
-In nature, "dark yellow" does not exist. When a yellow object moves into shadow, ambient light and human eye biology perceive a natural shift in hue toward warm amber, ochre, or burnt orange. 
-
-Because our early compiler held hue angle static at 94° while pulling lightness down, it drove the color directly through the human eye's peak green sensitivity curve. The math said it was "dark yellow." The human brain screamed "sludge."
+By locking hue at 94° while crushing lightness to pass accessibility tests, our compiler dragged the color directly through the human eye's peak green sensitivity curve. The math said it was "accessible." The human eye saw vomit.
 
 ### How We Fixed It: Convective Hue Drift
 
@@ -94,9 +96,11 @@ The mud instantly vanished. Yellows now degrade into rich honey, cognac, and amb
 
 ---
 
-## 3. The Benchmark Wake-Up Call: Our Accessibility Bias
+## 3. The Benchmark Wake-Up Call: Auditing 9 Design Systems
 
-With the mud eliminated and contrast passing, we felt ready to test the compiler against the industry. We built an automated, open-source benchmark suite (`benchmarks/expanded_rigorous_benchmark.py`) to audit nine major design systems under identical mathematical conditions:
+With the mud eliminated and contrast passing, we wanted to see how our compiler measured up against the industry.
+
+To be clear: **no consortium or standards body handed us a trophy.** We built our own automated, open-source Python benchmark suite (`benchmarks/expanded_rigorous_benchmark.py`) to pit our compiler against nine widely used design systems under identical mathematical scrutiny:
 - IBM Carbon
 - Google Material Design 3 (M3)
 - GitHub Primer
@@ -106,7 +110,7 @@ With the mud eliminated and contrast passing, we felt ready to test the compiler
 - Apple Human Interface Guidelines (HIG)
 - Radix Colors
 
-We audited six core dimensions:
+We scored each system across six reproducible dimensions:
 1. **WCAG 2.2 AA Pass Rate** (% of semantic pairs passing 4.5:1 / 3:1)
 2. **APCA Mean Readability (Lc)** (Advanced Perceptual Contrast Algorithm score)
 3. **Linearity Error (StdDev)** (Lightness step uniformity across ramps)
@@ -138,13 +142,13 @@ This single continuous curve smoothed the delta-L transition while naturally hit
 
 We re-ran the benchmark across all nine systems.
 
-**The result:**
+**The result in our audit suite:**
 - Linearity error dropped from `0.0520` down to `0.0333`
-- WCAG 2.2 AA stayed at **100.0%**
-- APCA Readability retained the **#1 industry spot at 101.9 Lc**
-- **Composite Score jumped to 78.5 / 100**, passing GitHub Primer (78.3), Microsoft Fluent 2 (77.4), and Tailwind (76.3) to claim **Rank #3 overall**, right behind IBM Carbon (83.6) and Google Material 3 (81.7).
+- WCAG 2.2 AA held steady at **100.0%**
+- APCA Readability led the 9 audited systems at **101.9 Lc**
+- **Composite Score rose to 78.5 / 100**, placing the compiler at **#3 in the test suite**, behind IBM Carbon (83.6) and Google Material 3 (81.7), and ahead of Primer (78.3), Fluent (77.4), and Tailwind (76.3).
 
-Here is the exact benchmark table generated by the audit suite:
+Here are the exact benchmark results output by the Python audit script:
 
 | Rank | Design System | WCAG 2.2 AA | APCA Readability | Linearity Error | Muddy Stops | Overall Score |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
