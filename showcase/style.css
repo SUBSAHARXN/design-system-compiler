@@ -325,11 +325,9 @@ body {
 /* Brand Configurator Bar */
 .brand-config-bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
-  padding: 20px 24px;
+  padding: 24px;
   background: var(--app-surface);
   border: 1px solid var(--app-surface-border-strong);
   border-radius: var(--radius-xl);
@@ -337,10 +335,206 @@ body {
   box-shadow: var(--app-shadow);
 }
 
+.testbench-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--app-surface-border);
+}
+
+.picker-mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--app-bg-subtle);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--app-surface-border);
+}
+
+.mode-tab-btn {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--app-text-muted);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.mode-tab-btn.active {
+  background: var(--app-surface);
+  color: var(--brand-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.picker-inputs-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .color-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+}
+
+.input-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-name {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--app-text-secondary);
+}
+
+.gamut-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.badge-srgb {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--app-text-muted);
+  border: 1px solid var(--app-surface-border);
+}
+
+.badge-p3 {
+  background: rgba(97, 243, 0, 0.15);
+  color: #61F300;
+  border: 1px solid rgba(97, 243, 0, 0.4);
+}
+
+.oklch-quick-readout {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--app-text-muted);
+  margin-left: auto;
+}
+
+/* OKLCH Sliders Panel */
+.oklch-sliders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.oklch-channel-card {
+  background: var(--app-bg-subtle);
+  border: 1px solid var(--app-surface-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.oklch-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.swatch-mini {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+.slider-row {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.slider-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--app-text-muted);
+  width: 85px;
+  flex-shrink: 0;
+}
+
+.oklch-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-hue-track {
+  background: linear-gradient(to right, 
+    #ff0055 0%, #ff7700 30deg, #ffdd00 60deg, #61f300 120deg, 
+    #00f5d4 180deg, #00b4d8 210deg, #4361ee 240deg, #7209b7 270deg, 
+    #f72585 330deg, #ff0055 360deg
+  ) !important;
+}
+
+.oklch-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #0d100c;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform var(--trans-fast);
+}
+
+.oklch-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-num {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--app-text-primary);
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.oklch-code-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--app-code-bg);
+  border-radius: 6px;
+  border: 1px solid var(--app-surface-border);
+  margin-top: 4px;
+}
+
+.oklch-code-pill code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--brand-primary);
 }
 
 .color-swatch-picker {

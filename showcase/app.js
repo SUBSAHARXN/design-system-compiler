@@ -100,6 +100,23 @@ function gamutSafeOklchToHex(L, C, H) {
   return rgbToHex(fromLinear(rl), fromLinear(gl), fromLinear(bl));
 }
 
+function detectGamut(L, C, H) {
+  const [rl, gl, bl] = oklchToLinearRgb(L, C, H);
+  const inSrgb = (rl >= -0.002 && rl <= 1.002 && gl >= -0.002 && gl <= 1.002 && bl >= -0.002 && bl <= 1.002);
+  if (inSrgb) return 'sRGB';
+
+  const x = 0.4124564 * rl + 0.3575761 * gl + 0.1804375 * bl;
+  const y = 0.2126729 * rl + 0.7151522 * gl + 0.0721750 * bl;
+  const z = 0.0193339 * rl + 0.1191920 * gl + 0.9503041 * bl;
+
+  const p3_r =  2.4934969119 * x - 0.9313836179 * y - 0.4027107845 * z;
+  const p3_g = -0.8294889696 * x + 1.7626640603 * y + 0.0236246858 * z;
+  const p3_b =  0.0358458302 * x - 0.0761723893 * y + 0.9568845240 * z;
+
+  const inP3 = (p3_r >= -0.002 && p3_r <= 1.002 && p3_g >= -0.002 && p3_g <= 1.002 && p3_b >= -0.002 && p3_b <= 1.002);
+  return inP3 ? 'P3' : 'Out';
+}
+
 function classifyHue(H) {
   if (H >= 85 && H < 110) {
     // Yellow zone: anti-mud convex rotation to warm amber (H 45°-48°)
@@ -389,31 +406,183 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Brand Color Inputs
+  // Brand Color Inputs & OKLCH Controls
   const pInput = document.getElementById('primary-picker');
   const pHex = document.getElementById('primary-hex');
   const sInput = document.getElementById('secondary-picker');
   const sHex = document.getElementById('secondary-hex');
 
-  function syncPrimary(hex) {
+  // Primary OKLCH elements
+  const pLSlider = document.getElementById('primary-l-slider');
+  const pCSlider = document.getElementById('primary-c-slider');
+  const pHSlider = document.getElementById('primary-h-slider');
+  const pLVal = document.getElementById('primary-l-val');
+  const pCVal = document.getElementById('primary-c-val');
+  const pHVal = document.getElementById('primary-h-val');
+  const pCssString = document.getElementById('primary-css-string');
+  const pHexSync = document.getElementById('primary-hex-sync');
+  const pMiniSwatch = document.getElementById('primary-mini-swatch');
+  const pGamutBadge = document.getElementById('primary-gamut-badge');
+  const pP3Badge = document.getElementById('primary-p3-badge');
+  const pQuickReadout = document.getElementById('primary-oklch-readout');
+
+  // Secondary OKLCH elements
+  const sLSlider = document.getElementById('secondary-l-slider');
+  const sCSlider = document.getElementById('secondary-c-slider');
+  const sHSlider = document.getElementById('secondary-h-slider');
+  const sLVal = document.getElementById('secondary-l-val');
+  const sCVal = document.getElementById('secondary-c-val');
+  const sHVal = document.getElementById('secondary-h-val');
+  const sCssString = document.getElementById('secondary-css-string');
+  const sHexSync = document.getElementById('secondary-hex-sync');
+  const sMiniSwatch = document.getElementById('secondary-mini-swatch');
+  const sGamutBadge = document.getElementById('secondary-gamut-badge');
+  const sP3Badge = document.getElementById('secondary-p3-badge');
+  const sQuickReadout = document.getElementById('secondary-oklch-readout');
+
+  function updateGamutBadge(badgeEl, gamut) {
+    if (!badgeEl) return;
+    if (gamut === 'P3') {
+      badgeEl.textContent = 'P3 Wide Gamut';
+      badgeEl.className = 'gamut-badge badge-p3';
+    } else if (gamut === 'Out') {
+      badgeEl.textContent = 'Out of Gamut';
+      badgeEl.className = 'gamut-badge';
+      badgeEl.style.background = 'rgba(239, 68, 68, 0.2)';
+      badgeEl.style.color = '#ef4444';
+    } else {
+      badgeEl.textContent = 'sRGB';
+      badgeEl.className = 'gamut-badge badge-srgb';
+      badgeEl.style.background = '';
+      badgeEl.style.color = '';
+    }
+  }
+
+  function syncPrimary(hex, updateSliders = true) {
     if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) return;
     STATE.primaryHex = hex;
     pInput.value = hex;
     pHex.value = hex;
+
+    const oklch = hexToOklch(hex);
+    const gamut = detectGamut(oklch.L, oklch.C, oklch.H);
+    const L_round = Math.round(oklch.L * 1000) / 1000;
+    const C_round = Math.round(oklch.C * 1000) / 1000;
+    const H_round = Math.round(oklch.H * 10) / 10;
+    const cssStr = `oklch(${L_round} ${C_round} ${H_round})`;
+
+    if (pQuickReadout) pQuickReadout.textContent = cssStr;
+    if (pCssString) pCssString.textContent = cssStr;
+    if (pHexSync) pHexSync.textContent = hex;
+    if (pMiniSwatch) pMiniSwatch.style.background = hex;
+    updateGamutBadge(pGamutBadge, gamut);
+    updateGamutBadge(pP3Badge, gamut);
+
+    if (updateSliders) {
+      if (pLSlider) { pLSlider.value = L_round; pLVal.textContent = L_round.toFixed(3); }
+      if (pCSlider) { pCSlider.value = C_round; pCVal.textContent = C_round.toFixed(3); }
+      if (pHSlider) { pHSlider.value = H_round; pHVal.textContent = H_round.toFixed(1) + '°'; }
+    }
+
     recompileDesignSystem();
   }
 
-  function syncSecondary(hex) {
+  function syncSecondary(hex, updateSliders = true) {
     if (!/^#[0-9A-Fa-f]{6}$/.test(hex)) return;
     STATE.secondaryHex = hex;
     sInput.value = hex;
     sHex.value = hex;
+
+    const oklch = hexToOklch(hex);
+    const gamut = detectGamut(oklch.L, oklch.C, oklch.H);
+    const L_round = Math.round(oklch.L * 1000) / 1000;
+    const C_round = Math.round(oklch.C * 1000) / 1000;
+    const H_round = Math.round(oklch.H * 10) / 10;
+    const cssStr = `oklch(${L_round} ${C_round} ${H_round})`;
+
+    if (sQuickReadout) sQuickReadout.textContent = cssStr;
+    if (sCssString) sCssString.textContent = cssStr;
+    if (sHexSync) sHexSync.textContent = hex;
+    if (sMiniSwatch) sMiniSwatch.style.background = hex;
+    updateGamutBadge(sGamutBadge, gamut);
+    updateGamutBadge(sP3Badge, gamut);
+
+    if (updateSliders) {
+      if (sLSlider) { sLSlider.value = L_round; sLVal.textContent = L_round.toFixed(3); }
+      if (sCSlider) { sCSlider.value = C_round; sCVal.textContent = C_round.toFixed(3); }
+      if (sHSlider) { sHSlider.value = H_round; sHVal.textContent = H_round.toFixed(1) + '°'; }
+    }
+
     recompileDesignSystem();
   }
 
+  // Hex event listeners
   pInput.addEventListener('input', e => syncPrimary(e.target.value));
   pHex.addEventListener('change', e => syncPrimary(e.target.value.startsWith('#') ? e.target.value : '#' + e.target.value));
   sInput.addEventListener('input', e => syncSecondary(e.target.value));
   sHex.addEventListener('change', e => syncSecondary(e.target.value.startsWith('#') ? e.target.value : '#' + e.target.value));
+
+  // OKLCH Sliders Event Listeners
+  function handlePrimaryOklchSlider() {
+    const L = parseFloat(pLSlider.value);
+    const C = parseFloat(pCSlider.value);
+    const H = parseFloat(pHSlider.value);
+    pLVal.textContent = L.toFixed(3);
+    pCVal.textContent = C.toFixed(3);
+    pHVal.textContent = H.toFixed(1) + '°';
+
+    const hex = gamutSafeOklchToHex(L, C, H);
+    syncPrimary(hex, false);
+  }
+
+  function handleSecondaryOklchSlider() {
+    const L = parseFloat(sLSlider.value);
+    const C = parseFloat(sCSlider.value);
+    const H = parseFloat(sHSlider.value);
+    sLVal.textContent = L.toFixed(3);
+    sCVal.textContent = C.toFixed(3);
+    sHVal.textContent = H.toFixed(1) + '°';
+
+    const hex = gamutSafeOklchToHex(L, C, H);
+    syncSecondary(hex, false);
+  }
+
+  if (pLSlider) {
+    pLSlider.addEventListener('input', handlePrimaryOklchSlider);
+    pCSlider.addEventListener('input', handlePrimaryOklchSlider);
+    pHSlider.addEventListener('input', handlePrimaryOklchSlider);
+  }
+
+  if (sLSlider) {
+    sLSlider.addEventListener('input', handleSecondaryOklchSlider);
+    sCSlider.addEventListener('input', handleSecondaryOklchSlider);
+    sHSlider.addEventListener('input', handleSecondaryOklchSlider);
+  }
+
+  // Input Mode Switcher (HEX vs OKLCH)
+  const modeHexBtn = document.getElementById('mode-hex-btn');
+  const modeOklchBtn = document.getElementById('mode-oklch-btn');
+  const hexPanel = document.getElementById('hex-inputs-panel');
+  const oklchPanel = document.getElementById('oklch-inputs-panel');
+
+  if (modeHexBtn && modeOklchBtn) {
+    modeHexBtn.addEventListener('click', () => {
+      modeHexBtn.classList.add('active');
+      modeOklchBtn.classList.remove('active');
+      hexPanel.style.display = 'flex';
+      oklchPanel.style.display = 'none';
+    });
+
+    modeOklchBtn.addEventListener('click', () => {
+      modeOklchBtn.classList.add('active');
+      modeHexBtn.classList.remove('active');
+      hexPanel.style.display = 'none';
+      oklchPanel.style.display = 'grid';
+      // Sync sliders immediately
+      syncPrimary(STATE.primaryHex);
+      syncSecondary(STATE.secondaryHex);
+    });
+  }
 
   // Presets
   const presets = {

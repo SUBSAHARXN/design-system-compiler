@@ -96,28 +96,109 @@
 
     <!-- Interactive Brand Inputs Test Bench -->
     <div class="brand-config-bar">
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <img src="assets/subtleshoppers-icon.svg" class="testbench-logo" alt="Subtle Shoppers">
-        <div>
-          <h3 style="font-size: 15px; font-weight: 700;">Live Brand Test Bench</h3>
-          <p style="font-size: 12px; color: var(--app-text-muted);">Change hexes below to watch the entire design system and all 36 components recompile live in OKLCH.</p>
+      <div class="testbench-header-row">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img src="assets/subtleshoppers-icon.svg" class="testbench-logo" alt="Subtle Shoppers">
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700;">Live Brand Test Bench</h3>
+            <p style="font-size: 12px; color: var(--app-text-muted);">Configure brand seeds via sRGB Hex or native OKLCH (Lightness, Chroma, Hue) with P3 wide-gamut detection.</p>
+          </div>
+        </div>
+
+        <div class="picker-mode-switch">
+          <button id="mode-hex-btn" class="mode-tab-btn active" data-mode="hex">sRGB HEX</button>
+          <button id="mode-oklch-btn" class="mode-tab-btn" data-mode="oklch">OKLCH NATIVE</button>
         </div>
       </div>
 
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <!-- Hex Inputs Panel -->
+      <div id="hex-inputs-panel" class="picker-inputs-panel">
         <div class="color-input-group">
-          <span style="font-size: 12px; font-weight: 600; font-family: var(--font-mono);">Primary (500):</span>
+          <div class="input-label-row">
+            <span class="input-name">Primary Seed (500)</span>
+            <span id="primary-gamut-badge" class="gamut-badge badge-srgb">sRGB</span>
+          </div>
           <div class="color-swatch-picker">
             <input type="color" id="primary-picker" value="#61F300">
             <input type="text" id="primary-hex" class="hex-text-input" value="#61F300">
+            <span id="primary-oklch-readout" class="oklch-quick-readout">oklch(0.86 0.27 132.8)</span>
           </div>
         </div>
 
         <div class="color-input-group">
-          <span style="font-size: 12px; font-weight: 600; font-family: var(--font-mono);">Secondary (500):</span>
+          <div class="input-label-row">
+            <span class="input-name">Secondary Seed (500)</span>
+            <span id="secondary-gamut-badge" class="gamut-badge badge-srgb">sRGB</span>
+          </div>
           <div class="color-swatch-picker">
             <input type="color" id="secondary-picker" value="#F3A600">
             <input type="text" id="secondary-hex" class="hex-text-input" value="#F3A600">
+            <span id="secondary-oklch-readout" class="oklch-quick-readout">oklch(0.77 0.17 71.4)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Native OKLCH Sliders Panel (Revealed in OKLCH mode) -->
+      <div id="oklch-inputs-panel" class="picker-inputs-panel oklch-sliders-grid" style="display: none;">
+        <!-- Primary OKLCH Sliders -->
+        <div class="oklch-channel-card">
+          <div class="oklch-card-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="swatch-mini" id="primary-mini-swatch" style="background: #61F300;"></span>
+              <span class="input-name">Primary (OKLCH)</span>
+            </div>
+            <span id="primary-p3-badge" class="gamut-badge badge-srgb">sRGB</span>
+          </div>
+          
+          <div class="slider-row">
+            <span class="slider-label">L (Lightness)</span>
+            <input type="range" id="primary-l-slider" min="0.10" max="0.98" step="0.005" value="0.864" class="oklch-slider">
+            <span id="primary-l-val" class="slider-num">0.864</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">C (Chroma)</span>
+            <input type="range" id="primary-c-slider" min="0.000" max="0.360" step="0.002" value="0.274" class="oklch-slider">
+            <span id="primary-c-val" class="slider-num">0.274</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">H (Hue Angle)</span>
+            <input type="range" id="primary-h-slider" min="0" max="360" step="0.5" value="132.8" class="oklch-slider slider-hue-track">
+            <span id="primary-h-val" class="slider-num">132.8°</span>
+          </div>
+          <div class="oklch-code-pill">
+            <code id="primary-css-string">oklch(0.864 0.274 132.8)</code>
+            <span id="primary-hex-sync" style="color: var(--app-text-muted); font-size: 11px; font-family: var(--font-mono);">#61F300</span>
+          </div>
+        </div>
+
+        <!-- Secondary OKLCH Sliders -->
+        <div class="oklch-channel-card">
+          <div class="oklch-card-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="swatch-mini" id="secondary-mini-swatch" style="background: #F3A600;"></span>
+              <span class="input-name">Secondary (OKLCH)</span>
+            </div>
+            <span id="secondary-p3-badge" class="gamut-badge badge-srgb">sRGB</span>
+          </div>
+          
+          <div class="slider-row">
+            <span class="slider-label">L (Lightness)</span>
+            <input type="range" id="secondary-l-slider" min="0.10" max="0.98" step="0.005" value="0.772" class="oklch-slider">
+            <span id="secondary-l-val" class="slider-num">0.772</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">C (Chroma)</span>
+            <input type="range" id="secondary-c-slider" min="0.000" max="0.360" step="0.002" value="0.170" class="oklch-slider">
+            <span id="secondary-c-val" class="slider-num">0.170</span>
+          </div>
+          <div class="slider-row">
+            <span class="slider-label">H (Hue Angle)</span>
+            <input type="range" id="secondary-h-slider" min="0" max="360" step="0.5" value="71.4" class="oklch-slider slider-hue-track">
+            <span id="secondary-h-val" class="slider-num">71.4°</span>
+          </div>
+          <div class="oklch-code-pill">
+            <code id="secondary-css-string">oklch(0.772 0.170 71.4)</code>
+            <span id="secondary-hex-sync" style="color: var(--app-text-muted); font-size: 11px; font-family: var(--font-mono);">#F3A600</span>
           </div>
         </div>
       </div>
