@@ -2,7 +2,7 @@
 
 A mathematically deterministic, OKLCH-native design system compiler that translates brand seed colors into fully accessible, multi-tier design tokens across sRGB and Display P3 gamuts.
 
-Ranked **#3 in the World** in comprehensive cross-system design benchmarks (Score: 78.5), surpassing GitHub Primer, Microsoft Fluent 2, Adobe Spectrum, and Tailwind CSS, while achieving **#1 in the World** in contrast compliance (**100% WCAG 2.2 AA** and **101.9 APCA Mean Lc**).
+Evaluated in an automated, reproducible comparative test suite against 8 major industry design systems (IBM Carbon, Google Material Design 3, GitHub Primer, Microsoft Fluent 2, Adobe Spectrum, Tailwind CSS, Apple HIG, Radix Colors), achieving 100% WCAG 2.2 AA compliance and 101.9 APCA Mean Lc readability on paired semantic scales.
 
 ---
 
@@ -10,9 +10,9 @@ Ranked **#3 in the World** in comprehensive cross-system design benchmarks (Scor
 
 Most design systems generate color ramps using simple linear RGB blending, HSL interpolation, or arbitrary manual picking. This creates four fatal flaws in production web apps:
 
-1. **The Muddy Shadow Trap:** Yellows, golds, and ambers naturally collapse into dirty army-olive sludge at dark lightness levels unless hue is dynamically rotated toward orange/amber ($H \approx 45^\circ$).
-2. **The Colorblind Confusion Collision:** Red (Error) and Green (Success) frequently share near-identical lightness ($L \approx 0.48$). When viewed by the 8% of males with Deuteranopia or Protanopia, hue collapses and both states look identical.
-3. **The OLED Halation Glare:** Pitch-black surfaces (`#000000` or `#080503`, 21:1 contrast) trigger severe photopic halation and smearing on OLED screens for users with astigmatism.
+1. **The Muddy Shadow Trap:** Yellows, golds, and ambers naturally collapse into dirty army-olive sludge at dark lightness levels unless hue is dynamically rotated toward orange/amber (H around 45 degrees).
+2. **The Colorblind Confusion Collision:** Red (Error) and Green (Success) frequently share near-identical lightness (L around 0.48). When viewed by the 8% of males with Deuteranopia or Protanopia, hue collapses and both states look identical.
+3. **The OLED Halation Glare:** Pitch-black surfaces (#000000 or #080503, 21:1 contrast) trigger severe photopic halation and smearing on OLED screens for users with astigmatism.
 4. **Perceptual Linearity Distortion:** Non-uniform lightness steps produce abrupt contrast jumps in middle stops (400–600) while compressing shadow stops into undifferentiated mud.
 
 This compiler solves all four using perceptual color science (OKLCH, APCA, Weber-Fechner elevation, Vienot CVD matrices) without requiring designers to hand-tune raw hex codes.
@@ -67,9 +67,11 @@ The compiler is organized into 4 strict decoupled layers. Each layer represents 
 
 ---
 
-## Global Design System Benchmark
+## Comparative Automated Benchmark
 
-Evaluated across 9 world systems in `benchmarks/expanded_rigorous_benchmark.py` testing 10 standard and modern criteria:
+Deterministic mathematical evaluation across 9 design systems executed via `benchmarks/expanded_rigorous_benchmark.py` (open source, fully reproducible test harness):
+
+> **Disclaimer:** These results represent deterministic mathematical comparisons run locally across public packages (`@carbon/colors`, `@material/material-color-utilities`, `@primer/primitives`, `@radix-ui/colors`, `tailwindcss/colors`). This is an automated algorithmic test suite, not an external peer-reviewed or industry-certified ranking. All benchmark scripts and formulas are included in `benchmarks/` for open reproduction.
 
 | Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Protan dE | OLED Glare | Warm Chroma |
 |---|---|---|---|---|---|---|---|---|---|
