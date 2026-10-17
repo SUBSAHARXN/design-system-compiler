@@ -36,19 +36,19 @@ We expected pure math to handle every edge case out of the box, but real product
 
 ---
 
-## 1. The Skillbeek Revolt: When Our Own Compiler Caused the Mud
+## 1. Testing with Skillbeek: When Our Own Compiler Caused the Mud
 
-The first production trial for the compiler was Skillbeek, an education platform I recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
+The first production trial for the compiler was Skillbeek, an education platform I built and recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
 
-We ran the compiler, generated the tokens, and handed them to the development team to wire into the live React components. 
+I generated the tokens with the compiler and started wiring them directly into my live React components.
 
-When we inspected the Skillbeek codebase weeks later, we discovered over 39 hardcoded hex values (`#2563eb`, `#e67e22`, `#00832D`) scattered across star ratings, badges, buttons, and card borders. The developers had completely bypassed the compiler's tokens because the output looked dull, earthy, and rotted into mud. When they needed an amber warning button or an active badge, the compiler handed them swamp water. They bypassed the design system simply because shipping ugly mud on production screens was not an option.
+That was when the cracks appeared. On real screens, the generated output looked dull, earthy, and rotted into mud. When I needed an amber warning button, an active chip, or a clean tag background, the compiler handed me swamp water. I ended up hardcoding over 39 raw hex values (`#2563eb`, `#e67e22`, `#00832D`) across star ratings, badges, and card borders just to stop the live app from looking terrible.
 
-When automated cleanup scripts later attempted to force those rogue hexes back into the compiler's tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
+I stopped and brought the issue straight into our AI pairing session: why was an automated system designed for mathematical perfection generating sludge on actual screens? When we tried to script those rogue hexes back into the compiler's tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
 
 > 📷 **[IMAGE STOP 2: Skillbeek Live Production UI]**  
-> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown primary navigation/CTAs, purple badges, or session cards where developers rebelled against dull tokens.  
-> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Built on an ochre gold/brown (`#B7812F`) and purple (`#8C35BE`) brand palette. When the early compiler generated dull, muddy tokens, developers bypassed the design system and hardcoded 39+ raw hexes directly into the UI.*
+> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the badges, star ratings, or card components where mud was caught.  
+> **Caption:** *Figure 2: Skillbeek running in production on Vercel. While building the interface, the early compiler's muddy output forced me to bypass the tokens with raw hexes before we fixed the underlying math.*
 
 ---
 
@@ -221,7 +221,7 @@ If you have an idea for what an autonomous, first-principles color compiler shou
 
 ## 7. Tear It Apart: An Open Invitation for Feedback
 
-This compiler wasn't built in an academic vacuum. It was built by breaking palettes in production with Skillbeek, getting caught by our developers for making muddy yellow buttons, getting humbled by IBM Carbon’s linearity in benchmarks, and pairing with AI to write mathematical proofs that actually hold up.
+This compiler wasn't built in an academic vacuum. It was built by breaking palettes in production with Skillbeek, catching muddy yellow buttons on my own screens, getting humbled by IBM Carbon’s linearity in benchmarks, and pairing with AI to write mathematical proofs that actually hold up.
 
 I want you to test this. 
 
