@@ -37,9 +37,9 @@ We thought pure mathematical determinism would solve color forever.
 
 ## 1. The Skillbeek Revolt: When Our Own Compiler Caused the Mud
 
-The first production trial for the compiler was **Skillbeek**, an education platform built around a vivid purple primary (`#A952DB`) and green (`#4CB33C`).
+The first production trial for the compiler was **Skillbeek**, an education platform I recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around a vivid purple primary (`#A952DB`) and green (`#4CB33C`).
 
-We ran the compiler, generated the tokens, and handed them to the development team. 
+We ran the compiler, generated the tokens, and handed them to the development team to wire into the live React components. 
 
 Then the revolt happened.
 
@@ -212,5 +212,9 @@ Find where our 1.15 curve fails. Criticize our APCA assumptions. Tell me where t
 Good systems aren't built on dogma—they're built by compilers that refuse to produce output that violates their own spec.
 
 ---
+
+- **Live Compiler Test Bench:** `compiler.subtleshoppers.com`
+- **Compiler GitHub Repository:** [SUBSAHARXN/design-system-compiler](https://github.com/SUBSAHARXN/design-system-compiler)
+- **Skillbeek Reference App (Live on Vercel):** [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app) · [GitHub Repo](https://github.com/SUBSAHARXN/Skillbeek-App)
 
 *Test the compiler live on the Subtle Shoppers subdomain, inspect the code on [GitHub](https://github.com/SUBSAHARXN/design-system-compiler), and drop your feedback, name ideas, and critique below.*
