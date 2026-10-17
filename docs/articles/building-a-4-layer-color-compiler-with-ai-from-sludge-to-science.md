@@ -14,11 +14,8 @@ To build out the rest of the palette, I was relying on Figma plugins—specifica
 1. A **lighting ramp** (chromatic steps stepping from 1000 down to 50)
 2. A **paired grayscale ramp** (showing the luminance distribution of each step)
 
-Here is an actual screenshot from my Figma canvas during those early April experiments:
-
-![Figma HSL Shader Lighting and Grayscale Ramp](../assets/figma-hsl-shader-ramp.png)
-
-*Figure 1: My original Figma exploration in April using HSL Shader. Top: The chromatic lighting ramp from 1000 to 50. Bottom: The paired grayscale luminance ramp.*
+> 📷 **[Insert Screenshot: Original Figma HSL Shader Exploration]**  
+> *Top: Chromatic lighting ramp from 1000 down to 50. Bottom: Paired grayscale luminance ramp.*
 
 On paper, HSL Shader works on the exact same premise as this compiler: **one seed in, an entire lighting ramp out.**
 
