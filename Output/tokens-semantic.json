@@ -1,6 +1,6 @@
 {
   "$meta": {
-    "generated": "2026-10-17T11:07:27.133726+00:00",
+    "generated": "2026-10-17T11:11:44.111669+00:00",
     "layer-2-version": "1.9",
     "layer-4-version": "1.2",
     "description": "Layer 2+4 output. Semantic roles resolved to primitive aliases and hex."

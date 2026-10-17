@@ -33,15 +33,22 @@ TEXT_POLICY = {
 
 # 3. CLI PARSER
 parser = argparse.ArgumentParser(description='Design system compiler')
-parser.add_argument('--floor-stop',  type=int, help='Base lightness for dark mode surfaces')
-parser.add_argument('--cta-color',   type=str, help='Main CTA color name')
-parser.add_argument('--mode',        default='both', choices=['light','dark','both'])
-parser.add_argument('--no-css',      action='store_true', help='Skip CSS output')
-parser.add_argument('--no-contrast', action='store_true', help='Skip contrast audit')
-parser.add_argument('--verbose',     action='store_true', help='Print all passing pairs')
-parser.add_argument('--strict',      action='store_true', help='Turn warnings into hard errors (for CI)')
-parser.add_argument('--out-dir',     default='Output', help='Output directory')
-parser.add_argument('--palette',     action='store_true', help='Generate design-system-palette.html')
+parser.add_argument('--floor-stop',    type=int, help='Base lightness for dark mode surfaces')
+parser.add_argument('--cta-color',     type=str, help='Main CTA color name')
+parser.add_argument('--mode',          default='both', choices=['light','dark','both'])
+parser.add_argument('--no-css',        action='store_true', help='Skip CSS output')
+parser.add_argument('--no-contrast',   action='store_true', help='Skip contrast audit')
+parser.add_argument('--verbose',       action='store_true', help='Print all passing pairs')
+parser.add_argument('--strict',        action='store_true', help='Turn warnings into hard errors (for CI)')
+parser.add_argument('--out-dir',       default='Output', help='Output directory')
+parser.add_argument('--palette',       action='store_true', help='Generate design-system-palette.html')
+parser.add_argument('--brand-config',  type=str, help='Path to external brand-inputs JSON file')
+parser.add_argument('--primary',       type=str, help='Override primary brand hex (e.g. #0066FF)')
+parser.add_argument('--secondary',     type=str, help='Override secondary brand hex')
+parser.add_argument('--info',          type=str, help='Override info brand hex')
+parser.add_argument('--warning',       type=str, help='Override warning brand hex')
+parser.add_argument('--success',       type=str, help='Override success brand hex')
+parser.add_argument('--error',         type=str, help='Override error brand hex')
 args = parser.parse_args()
 
 OUT = Path(args.out_dir)
@@ -485,7 +492,18 @@ def classify_hue(H: float) -> dict:
 if 'brand-inputs' not in L1:
     sys.exit("\nERROR: 'brand-inputs' missing from layer-1-generation-engine.json.")
 
-BRANDS = L1['brand-inputs']
+BRANDS = dict(L1['brand-inputs'])
+if args.brand_config:
+    with open(args.brand_config, encoding='utf-8') as _bf:
+        _custom = json.load(_bf)
+        BRANDS.update(_custom.get('brand-inputs', _custom))
+if args.primary:   BRANDS['primary']   = args.primary
+if args.secondary: BRANDS['secondary'] = args.secondary
+if args.info:      BRANDS['info']      = args.info
+if args.warning:   BRANDS['warning']   = args.warning
+if args.success:   BRANDS['success']   = args.success
+if args.error:     BRANDS['error']     = args.error
+
 RAMPS  = {k: build_ramp(v) for k, v in BRANDS.items()}
 
 # 1. Read intended source from Layer 1 greyscale-outputs
