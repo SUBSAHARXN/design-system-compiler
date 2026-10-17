@@ -52,7 +52,25 @@ When automated cleanup scripts later attempted to force those rogue hexes back i
 
 ---
 
-## 2. The Yellow Mud Trap: Born from Accessibility Overcompensation
+## 2. The 100–200 Collapse: When Math Disappears in 8-Bit Space
+
+The mud was only half the problem. When we tested interactive components in Skillbeek, we ran into an even weirder defect: hovering over secondary buttons and active tags did nothing. The state transition was invisible.
+
+When we inspected the generated tokens, stop 100 and stop 200 were literally identical colors.
+
+This happened because of how floating-point color math interacts with standard 8-bit displays:
+1. Early versions of Layer 1 had an over-protective chroma envelope. To prevent bright pastels from blowing out contrast, the compiler clamped stop 100 down to 0.20 chroma and stop 200 to 0.40.
+2. The highlight lightness curve was also too shallow. Between stop 100 and stop 200, the lightness difference was less than 0.004 in OKLCH.
+3. Computer screens display color using 8 bits per channel (0 to 255). A step of 1/255 is roughly 0.0039.
+
+Because the lightness and chroma deltas between stop 100 and 200 were smaller than a single 8-bit integer step, `round(channel * 255)` rounded both stops to the exact same hex code (`#F0EDF4`). The compiler thought it was outputting two distinct states with fine mathematical nuance. In the browser, it shipped duplicate hexes.
+
+We fixed this in two places:
+First, we raised the highlight chroma envelope in Layer 1 so light tints retain real color identity (stop 100 went from 0.20 to 0.35, stop 200 went from 0.40 to 0.58). Second, we added an automated CI gate in `design_system_compiler.py` called **Concern #28: 8-Bit Quantization Collapse**. If any two adjacent deployable stops round to the same hex code, the compiler halts the build with an error instead of silently shipping dead hover states.
+
+---
+
+## 3. The Yellow Mud Trap: Born from Accessibility Overcompensation
 
 Looking back at our logs and equations, the yellow mud came directly from our compiler overcompensating for accessibility.
 
@@ -95,7 +113,7 @@ The mud vanished. Yellows now degrade into warm honey and amber tones.
 
 ---
 
-## 3. The Benchmark Wake-Up Call: Auditing 9 Design Systems
+## 4. The Benchmark Wake-Up Call: Auditing 9 Design Systems
 
 With the mud eliminated and contrast passing, we wanted to see how our compiler measured up against existing systems.
 
@@ -161,7 +179,7 @@ Here are the exact benchmark results output by the Python audit script:
 
 ---
 
-## 4. Test It Live: Hosted on Subtle Shoppers
+## 5. Test It Live: Hosted on Subtle Shoppers
 
 We are hosting the interactive compiler test bench live as a dedicated subdomain of Subtle Shoppers:
 
@@ -184,7 +202,7 @@ On the live site, you can:
 
 ---
 
-## 5. "4-Layer Compiler" is a Boring Name. Help Me Name It.
+## 6. "4-Layer Compiler" is a Boring Name. Help Me Name It.
 
 Right now, the repo and architecture are called the **4-Layer OKLCH Design System Compiler**. 
 
@@ -201,7 +219,7 @@ If you have an idea for what an autonomous, first-principles color compiler shou
 
 ---
 
-## 6. Tear It Apart: An Open Invitation for Feedback
+## 7. Tear It Apart: An Open Invitation for Feedback
 
 This compiler wasn't built in an academic vacuum. It was built by breaking palettes in production with Skillbeek, getting caught by our developers for making muddy yellow buttons, getting humbled by IBM Carbon’s linearity in benchmarks, and pairing with AI to write mathematical proofs that actually hold up.
 
