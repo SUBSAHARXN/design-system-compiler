@@ -1102,46 +1102,34 @@ body {
 }
 
 .bench-row-featured {
-  background: rgba(97, 243, 0, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   font-weight: 700;
-  border-left: 3px solid var(--brand-primary);
+  border-left: 3px solid #ffffff;
+}
+
+.bench-row-featured td {
+  color: #ffffff !important;
+  font-weight: 700 !important;
 }
 
 .bench-row-featured td:first-child {
-  color: var(--brand-primary);
+  color: #ffffff !important;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.badge-rank-1 {
-  background: #0f62fe;
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 800;
-  font-family: var(--font-mono);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.badge-rank-2 {
-  background: #6750a4;
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 800;
-  font-family: var(--font-mono);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
+.badge-rank-1,
+.badge-rank-2,
 .badge-rank-3 {
-  background: var(--brand-primary, #61F300);
-  color: #0d100c;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   font-family: var(--font-mono);
   padding: 2px 6px;
   border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .badge-rank-other {
@@ -1153,23 +1141,6 @@ body {
   padding: 2px 6px;
   border-radius: 4px;
   border: 1px solid var(--app-surface-border);
-}
-
-.sub-win-badge {
-  font-size: 10px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  background: rgba(97, 243, 0, 0.15);
-  color: var(--brand-primary);
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid rgba(97, 243, 0, 0.3);
-  margin-left: 6px;
-}
-
-.stat-highlight {
-  color: var(--brand-primary);
-  font-weight: 800;
 }
 
 /* Layer Architecture Explainer */
