@@ -1,0 +1,1079 @@
+{
+  "$meta": {
+    "generated": "2026-10-17T11:07:27.132578+00:00",
+    "layer-1-version": "10.5",
+    "floor-stop": 950,
+    "cta-color": "primary",
+    "description": "Layer 1 output. All ramp stops computed from brand hex via OKLCH engine. Never edit by hand."
+  },
+  "ramps": {
+    "primary": {
+      "50": {
+        "$value": "#FDF4E9",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.97,
+        "C_srgb": 0.0175,
+        "C_p3": 0.0175,
+        "H": 72.74
+      },
+      "100": {
+        "$value": "#FEE9CF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9439,
+        "C_srgb": 0.0408,
+        "C_p3": 0.0408,
+        "H": 72.87
+      },
+      "200": {
+        "$value": "#F2D1A6",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8775,
+        "C_srgb": 0.0676,
+        "C_p3": 0.0676,
+        "H": 73.12
+      },
+      "300": {
+        "$value": "#E3B67C",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8036,
+        "C_srgb": 0.0909,
+        "C_p3": 0.0909,
+        "H": 73.12
+      },
+      "400": {
+        "$value": "#CE9C57",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.725,
+        "C_srgb": 0.1049,
+        "C_p3": 0.1049,
+        "H": 73.34
+      },
+      "500": {
+        "$value": "#B7812F",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6429,
+        "C_srgb": 0.1166,
+        "C_p3": 0.1166,
+        "H": 73.79
+      },
+      "600": {
+        "$value": "#995600",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.52,
+        "C_srgb": 0.1224,
+        "C_p3": 0.1224,
+        "H": 61.14
+      },
+      "700": {
+        "$value": "#703601",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4017,
+        "C_srgb": 0.1142,
+        "C_p3": 0.1142,
+        "H": 54.76
+      },
+      "800": {
+        "$value": "#451F00",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2893,
+        "C_srgb": 0.1026,
+        "C_p3": 0.1026,
+        "H": 54.35
+      },
+      "900": {
+        "$value": "#200D00",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1853,
+        "C_srgb": 0.0839,
+        "C_p3": 0.0839,
+        "H": 60.62
+      },
+      "950": {
+        "$value": "#120600",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1384,
+        "C_srgb": 0.0606,
+        "C_p3": 0.0606,
+        "H": 62.03
+      },
+      "1000": {
+        "$value": "#070200",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1,
+        "C_srgb": 0.0291,
+        "C_p3": 0.0291,
+        "H": 61.19
+      }
+    },
+    "secondary": {
+      "50": {
+        "$value": "#FCF6FF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.0311,
+        "C_p3": 0.0311,
+        "H": 313.54
+      },
+      "100": {
+        "$value": "#F5E5FF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.943,
+        "C_srgb": 0.0725,
+        "C_p3": 0.0725,
+        "H": 313.11
+      },
+      "200": {
+        "$value": "#E5BAFF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8491,
+        "C_srgb": 0.1201,
+        "C_p3": 0.1201,
+        "H": 312.28
+      },
+      "300": {
+        "$value": "#CF8BF4",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7445,
+        "C_srgb": 0.1615,
+        "C_p3": 0.1615,
+        "H": 312.67
+      },
+      "400": {
+        "$value": "#AF62DA",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6333,
+        "C_srgb": 0.1863,
+        "C_p3": 0.1863,
+        "H": 311.64
+      },
+      "500": {
+        "$value": "#8C35BE",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5171,
+        "C_srgb": 0.207,
+        "C_p3": 0.207,
+        "H": 310.04
+      },
+      "600": {
+        "$value": "#6B009E",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4114,
+        "C_srgb": 0.2174,
+        "C_p3": 0.2174,
+        "H": 308.68
+      },
+      "700": {
+        "$value": "#46006C",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3096,
+        "C_srgb": 0.2029,
+        "C_p3": 0.2029,
+        "H": 307.21
+      },
+      "800": {
+        "$value": "#26003F",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2128,
+        "C_srgb": 0.1822,
+        "C_p3": 0.1822,
+        "H": 306.37
+      },
+      "900": {
+        "$value": "#0C0019",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1234,
+        "C_srgb": 0.1491,
+        "C_p3": 0.1491,
+        "H": 306.64
+      },
+      "950": {
+        "$value": "#040009",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.0831,
+        "C_srgb": 0.1077,
+        "C_p3": 0.1077,
+        "H": 307.55
+      },
+      "1000": {
+        "$value": "#010002",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.0518,
+        "C_p3": 0.0518,
+        "H": 307.24
+      }
+    },
+    "info": {
+      "50": {
+        "$value": "#F6F8FF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.0249,
+        "C_p3": 0.0249,
+        "H": 268.19
+      },
+      "100": {
+        "$value": "#E4EBFF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9413,
+        "C_srgb": 0.0582,
+        "C_p3": 0.0582,
+        "H": 268.02
+      },
+      "200": {
+        "$value": "#B6CBFE",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8431,
+        "C_srgb": 0.0964,
+        "C_p3": 0.0964,
+        "H": 267.69
+      },
+      "300": {
+        "$value": "#86A5FB",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7336,
+        "C_srgb": 0.1297,
+        "C_p3": 0.1297,
+        "H": 267.87
+      },
+      "400": {
+        "$value": "#5E7FDF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6172,
+        "C_srgb": 0.1496,
+        "C_p3": 0.1496,
+        "H": 267.44
+      },
+      "500": {
+        "$value": "#3758BF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4956,
+        "C_srgb": 0.1663,
+        "C_p3": 0.1663,
+        "H": 266.79
+      },
+      "600": {
+        "$value": "#1A37A1",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3925,
+        "C_srgb": 0.1746,
+        "C_p3": 0.1746,
+        "H": 266.11
+      },
+      "700": {
+        "$value": "#06197B",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2932,
+        "C_srgb": 0.1629,
+        "C_p3": 0.1629,
+        "H": 265.38
+      },
+      "800": {
+        "$value": "#010052",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1988,
+        "C_srgb": 0.1463,
+        "C_p3": 0.1463,
+        "H": 264.94
+      },
+      "900": {
+        "$value": "#000020",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1116,
+        "C_srgb": 0.1197,
+        "C_p3": 0.1197,
+        "H": 265.04
+      },
+      "950": {
+        "$value": "#00000D",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.0723,
+        "C_srgb": 0.0865,
+        "C_p3": 0.0865,
+        "H": 265.55
+      },
+      "1000": {
+        "$value": "#000002",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.04,
+        "C_srgb": 0.0416,
+        "C_p3": 0.0416,
+        "H": 265.39
+      }
+    },
+    "warning": {
+      "50": {
+        "$value": "#FFF6F3",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.019,
+        "C_p3": 0.019,
+        "H": 45.01
+      },
+      "100": {
+        "$value": "#FFE9DF",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9483,
+        "C_srgb": 0.0443,
+        "C_p3": 0.0443,
+        "H": 44.8
+      },
+      "200": {
+        "$value": "#FEC5AC",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.868,
+        "C_srgb": 0.0735,
+        "C_p3": 0.0735,
+        "H": 44.38
+      },
+      "300": {
+        "$value": "#EDA283",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7785,
+        "C_srgb": 0.0988,
+        "C_p3": 0.0988,
+        "H": 44.08
+      },
+      "400": {
+        "$value": "#D4815D",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6832,
+        "C_srgb": 0.114,
+        "C_p3": 0.114,
+        "H": 43.96
+      },
+      "500": {
+        "$value": "#B85F38",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5838,
+        "C_srgb": 0.1267,
+        "C_p3": 0.1267,
+        "H": 43.26
+      },
+      "600": {
+        "$value": "#933809",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.463,
+        "C_srgb": 0.133,
+        "C_p3": 0.133,
+        "H": 42.41
+      },
+      "700": {
+        "$value": "#642100",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3466,
+        "C_srgb": 0.1241,
+        "C_p3": 0.1241,
+        "H": 41.53
+      },
+      "800": {
+        "$value": "#390F00",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2361,
+        "C_srgb": 0.1115,
+        "C_p3": 0.1115,
+        "H": 41.34
+      },
+      "900": {
+        "$value": "#150300",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1339,
+        "C_srgb": 0.0912,
+        "C_p3": 0.0912,
+        "H": 41.89
+      },
+      "950": {
+        "$value": "#070100",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.0878,
+        "C_srgb": 0.0659,
+        "C_p3": 0.0659,
+        "H": 41.7
+      },
+      "1000": {
+        "$value": "#010000",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.0317,
+        "C_p3": 0.0317,
+        "H": 41.51
+      }
+    },
+    "success": {
+      "50": {
+        "$value": "#EEFEEC",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.0279,
+        "C_p3": 0.0279,
+        "H": 142.4
+      },
+      "100": {
+        "$value": "#D7FBD3",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.953,
+        "C_srgb": 0.065,
+        "C_p3": 0.065,
+        "H": 142.57
+      },
+      "200": {
+        "$value": "#AFECAA",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8846,
+        "C_srgb": 0.1077,
+        "C_p3": 0.1077,
+        "H": 142.9
+      },
+      "300": {
+        "$value": "#86D880",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8084,
+        "C_srgb": 0.1449,
+        "C_p3": 0.1449,
+        "H": 142.79
+      },
+      "400": {
+        "$value": "#5EC15C",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7273,
+        "C_srgb": 0.1672,
+        "C_p3": 0.1672,
+        "H": 143.17
+      },
+      "500": {
+        "$value": "#2FA836",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6427,
+        "C_srgb": 0.1857,
+        "C_p3": 0.1857,
+        "H": 143.8
+      },
+      "600": {
+        "$value": "#027C1E",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5085,
+        "C_srgb": 0.195,
+        "C_p3": 0.195,
+        "H": 144.82
+      },
+      "700": {
+        "$value": "#005115",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3794,
+        "C_srgb": 0.182,
+        "C_p3": 0.182,
+        "H": 145.91
+      },
+      "800": {
+        "$value": "#012C09",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2566,
+        "C_srgb": 0.1635,
+        "C_p3": 0.1635,
+        "H": 146.5
+      },
+      "900": {
+        "$value": "#000E02",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1431,
+        "C_srgb": 0.1337,
+        "C_p3": 0.1337,
+        "H": 146.18
+      },
+      "950": {
+        "$value": "#000400",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.092,
+        "C_srgb": 0.0966,
+        "C_p3": 0.0966,
+        "H": 145.67
+      },
+      "1000": {
+        "$value": "#000100",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.0464,
+        "C_p3": 0.0464,
+        "H": 145.9
+      }
+    },
+    "error": {
+      "50": {
+        "$value": "#FEF6F5",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.0257,
+        "C_p3": 0.0257,
+        "H": 28.4
+      },
+      "100": {
+        "$value": "#FFE6E2",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9439,
+        "C_srgb": 0.06,
+        "C_p3": 0.06,
+        "H": 28.18
+      },
+      "200": {
+        "$value": "#FFBBB2",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8524,
+        "C_srgb": 0.0995,
+        "C_p3": 0.0995,
+        "H": 27.77
+      },
+      "300": {
+        "$value": "#F78B7E",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7503,
+        "C_srgb": 0.1338,
+        "C_p3": 0.1338,
+        "H": 27.85
+      },
+      "400": {
+        "$value": "#DB6156",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.6418,
+        "C_srgb": 0.1544,
+        "C_p3": 0.1544,
+        "H": 27.42
+      },
+      "500": {
+        "$value": "#BA3430",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5285,
+        "C_srgb": 0.1715,
+        "C_p3": 0.1715,
+        "H": 26.65
+      },
+      "600": {
+        "$value": "#940112",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4202,
+        "C_srgb": 0.1801,
+        "C_p3": 0.1801,
+        "H": 25.8
+      },
+      "700": {
+        "$value": "#63010B",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3159,
+        "C_srgb": 0.1681,
+        "C_p3": 0.1681,
+        "H": 24.89
+      },
+      "800": {
+        "$value": "#390004",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2168,
+        "C_srgb": 0.1509,
+        "C_p3": 0.1509,
+        "H": 24.44
+      },
+      "900": {
+        "$value": "#160001",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.1252,
+        "C_srgb": 0.1235,
+        "C_p3": 0.1235,
+        "H": 24.79
+      },
+      "950": {
+        "$value": "#080000",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.0839,
+        "C_srgb": 0.0892,
+        "C_p3": 0.0892,
+        "H": 25.09
+      },
+      "1000": {
+        "$value": "#020000",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.0429,
+        "C_p3": 0.0429,
+        "H": 24.9
+      }
+    },
+    "pg": {
+      "50": {
+        "$value": "#FDF8F1",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "100": {
+        "$value": "#F3EEE7",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.95,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "200": {
+        "$value": "#E2DDD7",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "300": {
+        "$value": "#C2BDB7",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "400": {
+        "$value": "#A29E98",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "500": {
+        "$value": "#75716B",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.55,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "600": {
+        "$value": "#67625D",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "700": {
+        "$value": "#4B4742",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "800": {
+        "$value": "#312D28",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "900": {
+        "$value": "#191511",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "950": {
+        "$value": "#120F0B",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.17,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      },
+      "1000": {
+        "$value": "#010000",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 73.79
+      }
+    },
+    "sg": {
+      "50": {
+        "$value": "#FAF7FE",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.98,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "100": {
+        "$value": "#F0EDF4",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.95,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "200": {
+        "$value": "#E0DCE3",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.9,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "300": {
+        "$value": "#C0BCC3",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.8,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "400": {
+        "$value": "#A09DA3",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.7,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "500": {
+        "$value": "#737076",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.55,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "600": {
+        "$value": "#656268",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.5,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "700": {
+        "$value": "#49464C",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.4,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "800": {
+        "$value": "#2F2C32",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.3,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "900": {
+        "$value": "#171519",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.2,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "950": {
+        "$value": "#110E13",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.17,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      },
+      "1000": {
+        "$value": "#010001",
+        "$type": "color",
+        "p3": null,
+        "p3-expanded": false,
+        "L": 0.05,
+        "C_srgb": 0.01,
+        "C_p3": 0.01,
+        "H": 310.04
+      }
+    }
+  },
+  "elevation": {
+    "elev-pg.0": {
+      "$value": "#120F0B",
+      "$type": "color",
+      "L": 0.17,
+      "dL": 0.0,
+      "hue-source": "secondary (pg greyscale)",
+      "usage": "Page background \u2014 dark floor",
+      "designer-note": "Default. Use when pg is your surface ramp (purple-tinted neutrals)."
+    },
+    "elev-sg.0": {
+      "$value": "#110E13",
+      "$type": "color",
+      "L": 0.17,
+      "dL": 0.0,
+      "hue-source": "primary (sg greyscale)",
+      "usage": "Page background \u2014 dark floor",
+      "designer-note": "Alternative. Use when sg is your surface ramp (orange-tinted neutrals)."
+    },
+    "elev-pg.1": {
+      "$value": "#15120D",
+      "$type": "color",
+      "L": 0.19,
+      "dL": 0.02,
+      "hue-source": "secondary (pg greyscale)",
+      "usage": "Cards, list items, drawers",
+      "designer-note": "Default. Use when pg is your surface ramp (purple-tinted neutrals)."
+    },
+    "elev-sg.1": {
+      "$value": "#141116",
+      "$type": "color",
+      "L": 0.19,
+      "dL": 0.02,
+      "hue-source": "primary (sg greyscale)",
+      "usage": "Cards, list items, drawers",
+      "designer-note": "Alternative. Use when sg is your surface ramp (orange-tinted neutrals)."
+    },
+    "elev-pg.2": {
+      "$value": "#191612",
+      "$type": "color",
+      "L": 0.21,
+      "dL": 0.04,
+      "hue-source": "secondary (pg greyscale)",
+      "usage": "Menus, dropdowns, tooltips",
+      "designer-note": "Default. Use when pg is your surface ramp (purple-tinted neutrals)."
+    },
+    "elev-sg.2": {
+      "$value": "#18151A",
+      "$type": "color",
+      "L": 0.21,
+      "dL": 0.04,
+      "hue-source": "primary (sg greyscale)",
+      "usage": "Menus, dropdowns, tooltips",
+      "designer-note": "Alternative. Use when sg is your surface ramp (orange-tinted neutrals)."
+    },
+    "elev-pg.3": {
+      "$value": "#1F1B17",
+      "$type": "color",
+      "L": 0.23,
+      "dL": 0.06,
+      "hue-source": "secondary (pg greyscale)",
+      "usage": "Dialogs, modals",
+      "designer-note": "Default. Use when pg is your surface ramp (purple-tinted neutrals)."
+    },
+    "elev-sg.3": {
+      "$value": "#1D1B1F",
+      "$type": "color",
+      "L": 0.23,
+      "dL": 0.06,
+      "hue-source": "primary (sg greyscale)",
+      "usage": "Dialogs, modals",
+      "designer-note": "Alternative. Use when sg is your surface ramp (orange-tinted neutrals)."
+    },
+    "elev-pg.4": {
+      "$value": "#25211C",
+      "$type": "color",
+      "L": 0.25,
+      "dL": 0.08,
+      "hue-source": "secondary (pg greyscale)",
+      "usage": "Navigation drawers, sheets",
+      "designer-note": "Default. Use when pg is your surface ramp (purple-tinted neutrals)."
+    },
+    "elev-sg.4": {
+      "$value": "#232025",
+      "$type": "color",
+      "L": 0.25,
+      "dL": 0.08,
+      "hue-source": "primary (sg greyscale)",
+      "usage": "Navigation drawers, sheets",
+      "designer-note": "Alternative. Use when sg is your surface ramp (orange-tinted neutrals)."
+    }
+  }
+}

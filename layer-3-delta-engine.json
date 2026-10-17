@@ -1,0 +1,652 @@
+{
+  "delta-engine": {
+    "version": "1.5",
+    "layer": 3,
+    "description": "Perceptual delta token engine. Defines \u0394L, \u0394C, \u0394H rules per interaction state in OKLCH space.",
+    "hue-family-resolution": {
+      "method": "OKLCH hue angle ranges",
+      "circular-hue-rule": "Use min(abs(a-b), 360-abs(a-b)) for all hue proximity checks.",
+      "boundary-rule": "H on exact boundary: assign to higher-indexed family. H=65\u00b0 \u2192 yellow, not orange.",
+      "families": {
+        "pink": {
+          "ranges": [
+            [
+              335,
+              360
+            ],
+            [
+              0,
+              15
+            ]
+          ],
+          "wrap": true,
+          "note": "Wrap-around. Split-array required."
+        },
+        "red": {
+          "ranges": [
+            [
+              15,
+              45
+            ]
+          ],
+          "wrap": false
+        },
+        "orange": {
+          "ranges": [
+            [
+              45,
+              65
+            ]
+          ],
+          "wrap": false
+        },
+        "yellow": {
+          "ranges": [
+            [
+              65,
+              105
+            ]
+          ],
+          "wrap": false
+        },
+        "chartreuse": {
+          "ranges": [
+            [
+              105,
+              130
+            ]
+          ],
+          "wrap": false
+        },
+        "true-green": {
+          "ranges": [
+            [
+              130,
+              160
+            ]
+          ],
+          "wrap": false
+        },
+        "teal": {
+          "ranges": [
+            [
+              160,
+              185
+            ]
+          ],
+          "wrap": false
+        },
+        "cyan": {
+          "ranges": [
+            [
+              185,
+              225
+            ]
+          ],
+          "wrap": false
+        },
+        "blue": {
+          "ranges": [
+            [
+              225,
+              285
+            ]
+          ],
+          "wrap": false
+        },
+        "purple": {
+          "ranges": [
+            [
+              285,
+              335
+            ]
+          ],
+          "wrap": false
+        }
+      }
+    },
+    "interaction-direction-multiplier": {
+      "description": "Global direction controller. Ensures hover/active/pressed cascade correctly on both dark fills and light containers.",
+      "threshold": 0.6,
+      "below-threshold": {
+        "description": "Dark fills. Lighten on hover, darken on active/pressed.",
+        "hover-\u0394L": 0.05,
+        "active-\u0394L": -0.04,
+        "pressed-\u0394L": -0.07
+      },
+      "above-threshold": {
+        "description": "Light containers. Darken on hover, darken more on active/pressed.",
+        "hover-\u0394L": -0.05,
+        "active-\u0394L": -0.09,
+        "pressed-\u0394L": -0.12
+      }
+    },
+    "state-delta-rules": {
+      "default": {
+        "\u0394L": 0,
+        "\u0394C": 0,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "token-suffix": "default"
+      },
+      "hover": {
+        "\u0394L": "see interaction-direction-multiplier",
+        "\u0394C": 0,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "token-suffix": "hover"
+      },
+      "active": {
+        "\u0394L": "see interaction-direction-multiplier",
+        "\u0394C": 0,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "token-suffix": "active"
+      },
+      "pressed": {
+        "\u0394L": "see interaction-direction-multiplier",
+        "\u0394C": 0,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "token-suffix": "pressed"
+      },
+      "focus": {
+        "\u0394L": 0,
+        "\u0394C": 0.02,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "fallback-rule": {
+          "trigger": "computed-C + 0.02 >= hue-family ceiling",
+          "action": {
+            "\u0394C": 0,
+            "\u0394L": 0.03
+          }
+        },
+        "token-suffix": "focus"
+      },
+      "selected": {
+        "\u0394L": -0.03,
+        "\u0394C": 0.03,
+        "\u0394H": 0,
+        "\u0394Opacity": 1.0,
+        "token-suffix": "selected"
+      },
+      "disabled": {
+        "\u0394L": 0,
+        "\u0394C": 0,
+        "\u0394H": 0,
+        "\u0394Opacity": 0.38,
+        "token-suffix": "disabled"
+      },
+      "loading": {
+        "\u0394L": 0,
+        "\u0394C": -0.03,
+        "\u0394H": 0,
+        "\u0394Opacity": 0.7,
+        "token-suffix": "loading"
+      }
+    },
+    "apca-delta-correction-policy": {
+      "description": "Corrects interaction state tokens that fail APCA contrast after delta application. Runs after state-delta-rules. Audit policy in apca-extensions-audit-policy runs before this.",
+      "minimum-targets": {
+        "large-text": "Lc 45",
+        "body-text": "Lc 75",
+        "ui-components": "Lc 60",
+        "placeholder": "Lc 30",
+        "decorative": "Lc 15",
+        "non-text-ui": "Lc 15"
+      },
+      "priority-order": [
+        "reduce-\u0394L",
+        "reduce-\u0394C",
+        "reduce-\u0394Opacity"
+      ],
+      "reduce-\u0394L": {
+        "step": 0.01,
+        "until": "APCA met OR \u0394L = 0"
+      },
+      "reduce-\u0394C": {
+        "step": 0.005,
+        "until": "APCA met OR \u0394C = 0"
+      },
+      "reduce-\u0394Opacity": {
+        "step": 0.05,
+        "until": "APCA target satisfied OR \u0394Opacity reaches 1.0",
+        "restriction-1": "Non-text component states only. MUST NOT be applied to text-bearing states.",
+        "restriction-2": "MUST NOT be applied to surfaces containing text-bearing descendants. Opacity propagates to child text elements and silently alters their contrast ratios.",
+        "compiler-instruction": "Before applying: inspect component tree. If token is applied to a container role with text-bearing child roles (text-primary, text-secondary, on-* roles) in its scope, skip \u0394Opacity and emit build warning.",
+        "text-bearing-states": [
+          "disabled",
+          "loading"
+        ],
+        "note": "Last resort axis. Emit warning rather than skip silently."
+      }
+    },
+    "apca-extensions-audit-policy": {
+      "version": "1.0",
+      "description": "Defines how $extensions.org.design-system.apca is written, validated, and enforced at build time. Extends apca-delta-correction-policy \u2014 does not replace it. Audit runs FIRST. Correction policy activates only when a state token fails after delta application.",
+      "extension-namespace": "org.design-system.apca",
+      "dtcg-spec-reference": "W3C Design Tokens Community Group \u2014 $extensions field",
+      "schema": {
+        "verified": {
+          "type": "boolean",
+          "required": true,
+          "note": "Set false on any $value change. Reset to true only by audit tool."
+        },
+        "verified-date": {
+          "type": "ISO-8601 string",
+          "required": true
+        },
+        "verified-tool": {
+          "type": "string",
+          "required": true,
+          "recommended": "SAPC-APCA W3C 0.1.9 minimum"
+        },
+        "verified-by": {
+          "type": "string",
+          "required": true
+        },
+        "pairs": {
+          "type": "array",
+          "required": true,
+          "min-items": 1,
+          "item-schema": {
+            "on": {
+              "type": "token-reference",
+              "required": true,
+              "note": "Background token name e.g. bg/primary"
+            },
+            "on-hex-srgb": {
+              "type": "hex-string",
+              "required": true,
+              "note": "Resolved sRGB hex at audit time"
+            },
+            "lc": {
+              "type": "number",
+              "required": true,
+              "note": "Actual Lc from calculator \u2014 not estimated"
+            },
+            "lc-target": {
+              "type": "number",
+              "required": true,
+              "note": "Minimum required Lc for use-class"
+            },
+            "status": {
+              "type": "pass|fail|warn",
+              "required": true
+            },
+            "use-class": {
+              "type": "body|ui-label|large-text|placeholder|decorative|non-text",
+              "required": true
+            },
+            "gamut": {
+              "type": "srgb|p3",
+              "required": true,
+              "note": "Both gamuts required for dual-variant tokens"
+            }
+          }
+        },
+        "build-gate": {
+          "type": "object",
+          "required": true,
+          "fields": {
+            "block-on-fail": {
+              "type": "boolean",
+              "note": "Fail build if any pair.status = fail"
+            },
+            "block-on-unverified": {
+              "type": "boolean",
+              "note": "Fail build if verified = false"
+            }
+          }
+        }
+      },
+      "use-class-lc-thresholds": {
+        "body": {
+          "lc-min": 75,
+          "applies-to": "Running text, paragraphs, descriptions"
+        },
+        "ui-label": {
+          "lc-min": 60,
+          "applies-to": "Button labels, nav items, form labels, badges"
+        },
+        "large-text": {
+          "lc-min": 45,
+          "applies-to": "Headings >= 24px, display text"
+        },
+        "placeholder": {
+          "lc-min": 30,
+          "applies-to": "Input placeholder text"
+        },
+        "decorative": {
+          "lc-min": 15,
+          "applies-to": "Ornamental icons, disabled states \u2014 non-informational only"
+        },
+        "non-text": {
+          "lc-min": 15,
+          "applies-to": "UI component boundaries, focus rings \u2014 shape contrast not text"
+        }
+      },
+      "example-token": {
+        "color-primary": {
+          "$value": "oklch(55% 0.27 305)",
+          "$type": "color",
+          "$extensions": {
+            "org.design-system.apca": {
+              "verified": true,
+              "verified-date": "2025-03-14",
+              "verified-tool": "SAPC-APCA W3C 0.1.9",
+              "verified-by": "design-system-audit",
+              "pairs": [
+                {
+                  "on": "bg/primary",
+                  "on-hex-srgb": "#F7EFFE",
+                  "lc": 61.4,
+                  "lc-target": 60,
+                  "status": "pass",
+                  "use-class": "ui-label",
+                  "gamut": "srgb"
+                },
+                {
+                  "on": "bg/primary",
+                  "on-hex-srgb": "#F7EFFE",
+                  "lc": 63.1,
+                  "lc-target": 60,
+                  "status": "pass",
+                  "use-class": "ui-label",
+                  "gamut": "p3"
+                }
+              ],
+              "build-gate": {
+                "block-on-fail": true,
+                "block-on-unverified": true
+              }
+            }
+          }
+        }
+      },
+      "known-failures": {
+        "description": "Contrast pairs identified as failing or at-risk from audit. Must be resolved before shipping.",
+        "text-secondary-on-bg-primary": {
+          "token": "text/secondary",
+          "hex-srgb": "#6E1E9A",
+          "on": "bg/primary",
+          "on-hex": "#F7EFFE",
+          "lc-actual": 42,
+          "lc-target": 60,
+          "status": "resolved",
+          "resolution": "Move text/secondary source stop from 700 to 800 (#510D75). Estimated Lc ~68. Re-audit required.",
+          "resolution-applied": "Stop moved from 700 to 800 in layer-2 semantic-mapping and mode-mapping. Hex #373239. Estimated Lc 68 \u2014 passes ui-label threshold (Lc 60). Re-audit required to confirm and set verified=true.",
+          "resolved-stop": "800",
+          "resolved-hex-srgb": "#373239"
+        },
+        "on-primary-on-primary-fill": {
+          "token": "on-primary",
+          "hex-srgb": "#F7EFFE",
+          "on": "primary (stop 500)",
+          "on-hex": "#A050D4",
+          "lc-actual": 74,
+          "lc-target": 75,
+          "status": "warn",
+          "resolution": "Within warn-threshold (3 Lc). Acceptable for ui-label use-class (Lc 60). Fails body use-class (Lc 75). Do not use on-primary for body text on primary fill."
+        },
+        "on-secondary-on-secondary-fill": {
+          "token": "on-secondary",
+          "hex-srgb": "#FDF4EF",
+          "on": "secondary (stop 300)",
+          "on-hex": "#EDA67A",
+          "lc-actual": 71,
+          "lc-target": 75,
+          "status": "warn",
+          "resolution": "Acceptable for ui-label. Do not use on-secondary for body text on secondary fill."
+        },
+        "success-fill-on-white": {
+          "token": "success",
+          "previous-stop": "500",
+          "previous-hex": "#36AF00",
+          "lc-at-500-on-white": 51.2,
+          "status": "resolved",
+          "resolved-stop": "600",
+          "resolved-hex": "#007E00",
+          "lc-at-600-on-white": 71.6,
+          "lc-on-success-stop-50": 75.7,
+          "resolution": "Stop moved from 500 to 600. True-green family risk=medium. Stop 500 fails Lc 60 on white. Stop 600 passes ui-label on white and body text threshold for on-success."
+        },
+        "dark-mode-elevation-collapsed": {
+          "issue": "background and surface both mapped to {pg.1000} \u2014 elevation levels ignored",
+          "status": "resolved",
+          "resolution": "Dark-mode elevation computed from \u0394L deltas per layer-2 dark-mode-elevation spec. surface={elev.1}, surface-elevated={elev.2}. Elevation tokens added to primitive-token-naming."
+        }
+      },
+      "invalidation-rule": "Any change to a token $value sets verified=false on that token. Build will fail at apca-extensions-policy gate until audit tool re-runs.",
+      "audit-tool-requirement": {
+        "apca-version": "SAPC-APCA W3C 0.1.9 minimum",
+        "input": "Resolved hex pairs \u2014 both sRGB and P3 for dual-variant tokens",
+        "output": "Writes $extensions block directly to token JSON",
+        "must-not": "Must not allow hand-editing of verified, lc, or status fields"
+      },
+      "warn-threshold": 3,
+      "warn-threshold-note": "Emit build warning if lc is within 3 Lc of lc-target. A stop change could silently push it below threshold.",
+      "relationship-to-correction-policy": "apca-delta-correction-policy governs how state tokens are corrected after failing. This policy governs how all tokens are audited and gated before correction is considered. Audit always runs first."
+    },
+    "state-separation-validation": {
+      "minimum-oklch-distance": 0.025,
+      "oklch-distance-formula": "sqrt((\u0394L)\u00b2 + (\u0394C)\u00b2 + (\u0394H/360 \u00d7 2\u03c0 \u00d7 C_avg)\u00b2)",
+      "formula-classification": "polar-coordinate-approximation",
+      "distance-formula-note": "Practical approximation suitable for token comparison. NOT equivalent to \u0394E_OKLCH (Bj\u00f6rn Ottosson's formal perceptual metric). Consistent implementation is more important than switching to the formal metric.",
+      "deltaE-oklch-reference": "https://bottosson.github.io/posts/oklab/"
+    },
+    "token-scale-policy": {
+      "current-estimate": "8 roles \u00d7 7 states + 6 focus-ring tokens \u00d7 3 gamuts = ~192 base. With reduced-motion: ~384.",
+      "monitoring-threshold": 200,
+      "build-report-requirement": "If count >= 200, build report MUST include migration-guidance section, not just a warning.",
+      "role-modifier-migration": {
+        "trigger": "Token count >= monitoring-threshold",
+        "css-custom-property-pattern": {
+          "before": "--color-primary-hover: oklch(0.60 0.28 295);",
+          "after-base": "--color-primary: oklch(0.55 0.28 295); --delta-hover-l: 0.05;",
+          "after-consumption": "--color-primary-hover: oklch(calc(0.55 + var(--delta-hover-l)) 0.28 295);"
+        },
+        "figma-pattern": "Mode per interaction state on single variable. 8 modes \u00d7 1 variable = same count, far more manageable.",
+        "figma-limitation": "Modes cannot nest \u2014 requires compound modes (light-default, light-hover, dark-default, dark-hover).",
+        "recommendation": "Stay with flat tokens until threshold. Migrate CSS first. Figma Variables last."
+      }
+    },
+    "interaction-physics": {
+      "description": "Single source of truth for all interaction delta values and the lightness pivot threshold. All layer-4 component tokens reference this block \u2014 they must never hardcode these values directly.",
+      "lightness-pivot-threshold": 0.6,
+      "pivot-note": "Surfaces with L < threshold are treated as dark fills (lighten on hover). Surfaces with L >= threshold are treated as light containers (darken on hover). Change this one value to shift the pivot point system-wide.",
+      "hover-deltas": {
+        "lighten": 0.05,
+        "darken": -0.05,
+        "note": "lighten applied when source L < pivot-threshold. darken applied when source L >= pivot-threshold."
+      },
+      "active-deltas": {
+        "lighten": -0.04,
+        "darken": -0.09
+      },
+      "pressed-deltas": {
+        "lighten": -0.07,
+        "darken": -0.12
+      },
+      "selected-delta": {
+        "dL": -0.03,
+        "dC": 0.03
+      },
+      "loading-delta": {
+        "dC": -0.03,
+        "opacity": 0.7
+      },
+      "disabled-delta": {
+        "opacity": 0.38
+      },
+      "focus-delta": {
+        "dC": 0.02
+      },
+      "compiler-instruction": "When resolving a layer-4 delta reference, read the pointer path (e.g. {layer-3.interaction-physics.hover-deltas}), look up this block, then compute the resolved colour. Never inline these values into layer-4.",
+      "subtle-press-delta": {
+        "dL": -0.03,
+        "note": "Small press delta for low-emphasis components (menu items, list items, ghost active). Below the full active-delta magnitude to avoid visual jarring on subtle fills."
+      },
+      "ghost-active-delta": {
+        "dL": -0.05,
+        "note": "Ghost button active \u2014 stronger than subtle-press but not full active-delta since ghost has no fill to start with."
+      },
+      "achromatic-snap-rule": {
+        "description": "Hue angle is mathematically undefined at C=0 and numerically unstable below C=0.01. Delta application on near-neutral tokens produces hue jitter \u2014 a cool grey hover state can snap to dirty yellow because the direction of \u0394C is arbitrary at near-zero chroma.",
+        "threshold-C": 0.01,
+        "rule": "If base token C < 0.01: apply \u0394L only. Force C=0 and H=0 in output. Never apply \u0394C to near-neutral tokens.",
+        "why": "At very low chroma, floating-point hue computation produces arbitrary angles. A \u0394C of +0.02 on C=0.005 resolves to an undefined hue direction.",
+        "compiler-instruction": "In resolve_interaction_state: if C < achromatic-snap-rule.threshold-C, return gamut_safe_oklch_to_hex(new_L, 0.0, 0.0). Skip all \u0394C and \u0394H application."
+      }
+    },
+    "fill-border-distinctness-policy": {
+      "version": "1.0",
+      "description": "Governs the relationship between fill and border tokens sharing the same semantic colour. A border token that resolves to the same hex as its sibling fill token is invisible when drawn around or inside that fill. This policy makes the distinctness constraint explicit and machine-checkable.",
+      "rule": "For every semantic colour, color/border/{sem} MUST resolve to a different hex than color/fill/{sem} in every compiled mode.",
+      "sibling-pairs": [
+        {
+          "fill": "color/fill/error",
+          "border": "color/border/error"
+        },
+        {
+          "fill": "color/fill/success",
+          "border": "color/border/success"
+        },
+        {
+          "fill": "color/fill/warning",
+          "border": "color/border/warning"
+        },
+        {
+          "fill": "color/fill/info",
+          "border": "color/border/info"
+        },
+        {
+          "fill": "color/fill/brand",
+          "border": "color/border/brand"
+        }
+      ],
+      "stop-convention": {
+        "description": "Border stop is chosen to be visually distinct from the fill stop while remaining in the same hue family. The exact stop is set in Layer 4 and may differ between light and dark modes.",
+        "light-mode-pattern": "border stop = fill stop + 1 (darker, more emphasis)",
+        "dark-mode-pattern": "border stop = fill stop + 1 (darker/deeper against pale fills)"
+      },
+      "compiler-enforcement": {
+        "when": "After resolving all semantic roles to hex, before emitting any output",
+        "check": "For each sibling pair, assert fill-hex != border-hex in every mode",
+        "on-violation": "HARD BUILD ERROR \u2014 not a warning. Output is structurally incorrect.",
+        "error-message": "FILL_BORDER_CONFLICT: color/border/{sem} resolves to {hex} in {mode} mode, which is identical to color/fill/{sem}. Border is invisible against its fill. Shift the border stop in Layer 4 semantic-role-map."
+      },
+      "root-cause-note": "This bug arises when border stops are copied from fill stops during Layer 4 authoring without checking distinctness. The light-mode conflicts were caught visually in Figma. Dark-mode conflicts (all four semantic colours at stop 300) were caught by this policy check during compiler development.",
+      "known-resolution": {
+        "light-mode": {
+          "color/border/error": "stop 600 (was 500 = same as fill)",
+          "color/border/success": "stop 700 (was 600 = same as fill)",
+          "color/border/info": "stop 600 (was 500 = same as fill)",
+          "color/border/warning": "stop 600 (was already correct \u2014 fill at 700)"
+        },
+        "dark-mode": {
+          "color/border/error": "stop 400 (was 300 = same as fill)",
+          "color/border/success": "stop 400 (was 300 = same as fill)",
+          "color/border/warning": "stop 400 (was 300 = same as fill)",
+          "color/border/info": "stop 400 (was 300 = same as fill)"
+        }
+      }
+    },
+    "muddy-zone-definition": {
+      "description": "Hue+lightness+chroma coordinates that produce instinctively unappealing results. Primarily the dark-yellow/olive/muddy-brown region. Occurs when warm-floor surfaces receive linear \u0394L interaction deltas that drift into this zone.",
+      "condition": {
+        "H-min": 55,
+        "H-max": 125,
+        "L-min": 0.22,
+        "L-max": 0.5,
+        "C-min": 0.04
+      },
+      "compiler-action": "Emit WARNING when an interaction state delta produces a token in this zone. Do not hard-error \u2014 editorial use may be intentional.",
+      "most-at-risk": "pg-ramp (warm orange tint) + hover state on elev.1 or elev.2 surfaces.",
+      "reference": "pro-color-harmonies avoidMuddyZones utility. Peter Donahue UFV paint mixing lecture: 'black + yellow = olive'.",
+      "mitigation": "Reduce \u0394C on warming deltas for yellow/orange families, or add a \u22125\u00b0 hue correction to move out of the zone."
+    },
+    "cvd-guardrail-policy": {
+      "version": "1.0",
+      "description": "Colour vision deficiency (CVD) simulation check. Verifies semantic fill pairs remain perceptually distinct under deuteranopia and protanopia simulation. Deuteranopia + protanopia combined affect approximately 8% of males.",
+      "scope": "Semantic fill pairs that encode distinct meaning: success/error, success/warning.",
+      "simulation-method": "Vienot et al. 1999 approximation matrices in linear sRGB space.",
+      "matrices": {
+        "deuteranopia": {
+          "description": "No M-cone (red-green blindness, most common). Vienot 1999 approximation.",
+          "linear-sRGB": {
+            "R_out": "0.29031*R + 0.70969*G",
+            "G_out": "0.29031*R + 0.70969*G",
+            "B_out": "B"
+          }
+        },
+        "protanopia": {
+          "description": "No L-cone (red deficiency). Vienot 1999 approximation.",
+          "linear-sRGB": {
+            "R_out": "0.10889*R + 0.89111*G",
+            "G_out": "0.10889*R + 0.89111*G",
+            "B_out": "B"
+          }
+        }
+      },
+      "threshold": {
+        "metric": "OKLAB \u0394E between simulated colour pair",
+        "value": 0.1,
+        "interpretation": "\u0394E < 0.10 = states effectively indistinguishable. Hue alone is insufficient \u2014 lightness separation or iconography required."
+      },
+      "pairs-checked": [
+        {
+          "a": "color/fill/success",
+          "b": "color/fill/error",
+          "label": "success vs error"
+        },
+        {
+          "a": "color/fill/success",
+          "b": "color/fill/warning",
+          "label": "success vs warning"
+        }
+      ],
+      "severity": "WARNING by default. HARD ERROR in --strict mode.",
+      "interaction-state-extension": {
+        "description": "Extend CVD check to interaction state deltas (concern #29). A hover state change that is visually distinct for normal vision may fall on a CVD confusion line and be invisible.",
+        "check": "\u0394E in simulated space between base token and hover token must exceed JND threshold (~3) for all CVD types.",
+        "status": "Documented for future implementation. Current check covers static semantic role pairs."
+      },
+      "compiler-enforcement": "STEP 9c. Runs after fill-border check, before APCA audit."
+    },
+    "vibration-guardrail-policy": {
+      "version": "1.0",
+      "description": "Chromostereopsis check. High-chroma complementary pairs cause eye-depth conflict \u2014 the eye cannot focus both wavelengths at the same retinal depth simultaneously. Adjacent placement produces a painful vibrating effect.",
+      "scientific-basis": "Chromostereopsis. Lens focuses different wavelengths at slightly different depths on the retina. Red advances visually; blue recedes. At high saturation with hue separation > 150\u00b0, this conflict becomes physically distressing.",
+      "thresholds": {
+        "hue-separation-degrees": 150,
+        "chroma-threshold": 0.15
+      },
+      "severity": "WARNING. Hard warning if pair appears on interactive/scrollable components.",
+      "compiler-enforcement": "STEP 9e. Checks all color/fill/* pairs per mode.",
+      "mitigation": "Reduce chroma of one member of the pair below 0.15, or ensure they are never placed adjacent in layout."
+    },
+    "surface-chroma-cap-policy": {
+      "version": "1.0",
+      "description": "Prevents surface/background/subtle tokens from appearing self-luminous (emissive) rather than reflective. High chroma at mid-lightness creates a glowing appearance that breaks the material metaphor used by design systems.",
+      "scientific-basis": "Grum fluorence boundary / CIECAM02 brightness vs lightness distinction. Colours above C=0.08 at mid-lightness can cross into emissive appearance territory \u2014 they look like they emit light rather than reflect it.",
+      "chroma-cap-C": 0.08,
+      "lightness-range": {
+        "min-L": 0.35,
+        "max-L": 0.75
+      },
+      "role-keywords": [
+        "bg",
+        "surface",
+        "subtle"
+      ],
+      "severity": "WARNING",
+      "compiler-enforcement": "STEP 9f. Checks all resolved semantic tokens whose role name contains bg, surface, or subtle."
+    },
+    "changelog": {
+      "1.5": "Added achromatic-snap-rule (concern #27), muddy-zone-definition (#21), cvd-guardrail-policy (#1+#29), vibration-guardrail-policy (#26), surface-chroma-cap-policy (#31).",
+      "1.4": "Original release."
+    }
+  }
+}

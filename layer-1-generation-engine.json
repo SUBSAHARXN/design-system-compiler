@@ -1,0 +1,536 @@
+{
+  "meta": {
+    "version": "10.5",
+    "colorspace": "OKLCH",
+    "engine": "Hue-Aware Perceptual Engine",
+    "description": "Layer 1: Generation engine.",
+    "changelog": {
+      "10.5": "Enforced lightness divergence between success (#2FA836, L=0.612) and error (#BA3430, L=0.488) for CVD Deuteranopia/Protanopia separation (dE >= 0.10). Deepened yellow shadow hue drift to dD=-36 to prevent olive-mud zone collapse.",
+      "10.4": "Corrected hue-drift direction for yellow/chartreuse/true-green/teal families (concern #18). Added warm_dir field to all families documenting expected temperature-direction of highlights drift."
+    }
+  },
+  "brand-inputs": {
+    "primary": "#B7812F",
+    "secondary": "#8C35BE",
+    "info": "#3758BF",
+    "warning": "#B85F38",
+    "success": "#2FA836",
+    "error": "#BA3430"
+  },
+  "base-token-contract": {
+    "var(--base-l)": "Lightness anchor for scale-500. Valid range: 0.45\u20130.65.",
+    "var(--base-c)": "Chroma anchor. Must not exceed hue-family chroma-ceiling.srgb.",
+    "var(--base-h)": "Hue anchor. Must fall within declared hue-family range.",
+    "note": "All three vars must be set at :root before consuming this system."
+  },
+  "override-policy": {
+    "gamut-check": true,
+    "scope": "Overrides bypass drift and envelope math only.",
+    "note": "Missing note field on any override is a validation warning.",
+    "valid-override-keys": [
+      "l",
+      "c",
+      "h"
+    ]
+  },
+  "greyscale-outputs": {
+    "primary-greyscale": {
+      "generated-from": "primary",
+      "chroma-fixed": 0.01,
+      "note": "Default source for all page-surface-roles."
+    },
+    "secondary-greyscale": {
+      "generated-from": "secondary",
+      "chroma-fixed": 0.01,
+      "note": "Alternative source for page-surface-roles."
+    }
+  },
+  "dtcg-note": "Compile to DTCG format via Style Dictionary transform.",
+  "apca-note": "Safe-text-stops are starting points. Verify with APCA Lc before shipping.",
+  "stop-ladder": {
+    "sequence": [
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      950,
+      1000
+    ],
+    "total-stops": 12,
+    "midpoint": 500,
+    "hue-active-range": [
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      950
+    ],
+    "oled-reserved": [
+      1000
+    ],
+    "note": "950 is the dark mode surface floor (L 0.12). All semantic dark mode roles reference stop 950 or above it via elevation tokens. Stop 1000 (L 0.05) is OLED-reserved \u2014 not a semantic token, not included in hue-active-range. Compilers must exclude stop 1000 from hue palette output."
+  },
+  "constraint-hierarchy": {
+    "description": "Lower tier number wins unconditionally.",
+    "tiers": {
+      "1": {
+        "name": "Gamut safety",
+        "rule": "Color must be physically displayable.",
+        "overrides": "All"
+      },
+      "2": {
+        "name": "Accessibility",
+        "rule": "safe-text-stops must preserve lightness exactly.",
+        "overrides": "3,4,5"
+      },
+      "3": {
+        "name": "Human overrides",
+        "rule": "Designer overrides bypass automated math. Subject to tiers 1 and 2.",
+        "overrides": "4,5"
+      },
+      "4": {
+        "name": "Perceptual richness",
+        "rule": "Chroma envelope, drift, lightness profiles. Only when no override exists.",
+        "overrides": "5"
+      },
+      "5": {
+        "name": "State modifiers",
+        "rule": "Deltas applied last. Re-run gamut and APCA after applying.",
+        "overrides": "None"
+      }
+    }
+  },
+  "lightness-behavior": {
+    "engine": "dynamic-interpolation",
+    "description": "Lightness is calculated dynamically at compile time. Stop 500 is anchored to the input brand hex. Highlights and shadows are eased mathematically between the anchor and absolute bounds. Extreme colors are automatically gamut-safe via Chroma reduction.",
+    "anchors": {
+      "white-bound": {
+        "stop": 50,
+        "L": 0.98
+      },
+      "midpoint": {
+        "stop": 500,
+        "L": "var(--base-l)"
+      },
+      "black-bound": {
+        "stop": 1000,
+        "L": 0.05
+      }
+    },
+    "easing": "ease-out-cubic",
+    "gamut-policy": "chroma-reduction"
+  },
+  "chroma-envelope": {
+    "description": "Multiply var(--base-c) FIRST, then clamp to hue-family chroma-ceiling.",
+    "interpolation": {
+      "type": "cubic-bezier",
+      "values": [
+        0.4,
+        0.0,
+        0.6,
+        1.0
+      ],
+      "note": "Apply as t-value remapping \u2014 not CSS animation."
+    },
+    "stops": {
+      "50": 0.15,
+      "100": 0.35,
+      "200": 0.58,
+      "300": 0.78,
+      "400": 0.9,
+      "500": 1.0,
+      "600": 1.05,
+      "700": 0.98,
+      "800": 0.88,
+      "900": 0.72,
+      "950": 0.52,
+      "1000": 0.25
+    }
+  },
+  "hue-families": {
+    "pink": {
+      "ranges": [
+        [
+          335,
+          360
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "behavior": "standard",
+      "chroma-ceiling": {
+        "srgb": 0.26,
+        "p3": 0.32
+      },
+      "hue-drift": {
+        "highlights-shift": 8,
+        "shadows-shift": -6,
+        "warm_dir": 1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": true,
+      "note": "Wrap-around family. Two range arrays required."
+    },
+    "red": {
+      "ranges": [
+        [
+          15,
+          45
+        ]
+      ],
+      "behavior": "standard",
+      "chroma-ceiling": {
+        "srgb": 0.25,
+        "p3": 0.3
+      },
+      "hue-drift": {
+        "highlights-shift": 5,
+        "shadows-shift": -5,
+        "warm_dir": 1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "orange": {
+      "ranges": [
+        [
+          45,
+          65
+        ]
+      ],
+      "behavior": "standard",
+      "chroma-ceiling": {
+        "srgb": 0.22,
+        "p3": 0.27
+      },
+      "hue-drift": {
+        "highlights-shift": 6,
+        "shadows-shift": -5,
+        "warm_dir": 1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "yellow": {
+      "ranges": [
+        [
+          65,
+          105
+        ]
+      ],
+      "behavior": "yellow-optimized",
+      "chroma-ceiling": {
+        "srgb": 0.22,
+        "p3": 0.27
+      },
+      "hue-drift": {
+        "highlights-shift": -3,
+        "shadows-shift": -28,
+        "warm_dir": 1,
+        "note": "Highlights: sunlight warm shift (-H). Shadows: -28 deg toward rich amber/cognac to eliminate the muddy olive zone."
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false,
+      "note": "Low chroma-ceiling. Yellow clips to sRGB gamut quickly \u2014 raise with caution."
+    },
+    "chartreuse": {
+      "ranges": [
+        [
+          105,
+          130
+        ]
+      ],
+      "behavior": "yellow-optimized",
+      "chroma-ceiling": {
+        "srgb": 0.22,
+        "p3": 0.27
+      },
+      "hue-drift": {
+        "highlights-shift": -5,
+        "shadows-shift": -16,
+        "warm_dir": 1,
+        "note": "Highlights pull toward yellow (-H). Shadows drift warm amber/leaf (-H) away from swamp green."
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "true-green": {
+      "ranges": [
+        [
+          130,
+          160
+        ]
+      ],
+      "behavior": "green-optimized",
+      "chroma-ceiling": {
+        "srgb": 0.22,
+        "p3": 0.28
+      },
+      "hue-drift": {
+        "highlights-shift": -3,
+        "shadows-shift": 4,
+        "warm_dir": -1,
+        "note": "Highlights toward chartreuse (-H = lighter, warmer green). Shadows toward teal (+H = natural). CORRECTED."
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "teal": {
+      "ranges": [
+        [
+          160,
+          185
+        ]
+      ],
+      "behavior": "green-optimized",
+      "chroma-ceiling": {
+        "srgb": 0.2,
+        "p3": 0.25
+      },
+      "hue-drift": {
+        "highlights-shift": -2,
+        "shadows-shift": 3,
+        "warm_dir": -1,
+        "note": "Highlights pull toward green (-H). Shadows toward cyan (+H). CORRECTED."
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "cyan": {
+      "ranges": [
+        [
+          185,
+          225
+        ]
+      ],
+      "behavior": "standard",
+      "chroma-ceiling": {
+        "srgb": 0.2,
+        "p3": 0.25
+      },
+      "hue-drift": {
+        "highlights-shift": 5,
+        "shadows-shift": -4,
+        "warm_dir": -1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false
+    },
+    "blue": {
+      "ranges": [
+        [
+          225,
+          285
+        ]
+      ],
+      "behavior": "blue-optimized",
+      "chroma-ceiling": {
+        "srgb": 0.25,
+        "p3": 0.3
+      },
+      "hue-drift": {
+        "highlights-shift": 3,
+        "shadows-shift": -2,
+        "warm_dir": 1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false,
+      "note": "blue-optimized profile compresses shadows more than standard to avoid muddy navy stops."
+    },
+    "purple": {
+      "ranges": [
+        [
+          285,
+          335
+        ]
+      ],
+      "behavior": "standard",
+      "chroma-ceiling": {
+        "srgb": 0.28,
+        "p3": 0.35
+      },
+      "hue-drift": {
+        "highlights-shift": 10,
+        "shadows-shift": -8,
+        "warm_dir": 1
+      },
+      "safe-text-stops": {
+        "on-white": [
+          800,
+          900,
+          950,
+          1000
+        ],
+        "on-black": [
+          50,
+          100,
+          200,
+          300,
+          400
+        ]
+      },
+      "wrap": false,
+      "note": "Highest chroma-ceiling in the system. Purple tolerates high chroma without gamut clipping."
+    }
+  },
+  "display-gamut-switching": {
+    "strategy": "Progressive enhancement via CSS @media (color-gamut: p3).",
+    "srgb-baseline": "All tokens ship as sRGB hex. Universally compatible.",
+    "p3-expansion": "Tokens with p3 > srgb ship a second value under @media (color-gamut: p3).",
+    "hdr-tier": "Mirror P3 values under @media (color-gamut: p3) and (dynamic-range: high). Placeholder for future HDR expansion.",
+    "compiler-instruction": "Emit sRGB value first. Emit p3 override only when p3 hex differs from sRGB hex."
+  },
+  "primitive-token-naming": {
+    "pattern": "{ramp-name}-{stop}",
+    "examples": [
+      "primary-500",
+      "pg-50",
+      "error-700"
+    ],
+    "greyscale-ramps": [
+      "pg",
+      "sg"
+    ],
+    "note": "pg = primary-greyscale (tinted from primary hue). sg = secondary-greyscale. Both use chroma-fixed: 0.01."
+  }
+}

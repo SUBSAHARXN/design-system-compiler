@@ -1,0 +1,2355 @@
+{
+  "meta": {
+    "version": "1.2",
+    "layer": 4,
+    "title": "Token Architecture",
+    "description": "Layer 4: Defines the three-tier token output structure and complete component token map. When a palette is requested, the compiler runs all four layers in sequence and outputs primitives, semantic roles, and component tokens as a unified system. Component tokens reference semantic roles only \u2014 never layer-1 primitives directly.",
+    "layer-architecture": {
+      "layer-1": "Generation engine. Computes primitive ramp hex values from brand hue.",
+      "layer-2": "Semantic contract. Maps named roles to primitive stops. Defines hierarchy, direction, pairing.",
+      "layer-3": "Delta engine. Interaction state deltas, APCA correction, scale policy.",
+      "layer-4": "This file. Token architecture. Semantic role map + complete component token definitions."
+    },
+    "output-contract": {
+      "when-palette-requested": [
+        "1. Run Layer 1 engine \u2192 produce primitive ramp values for all brand hues + greyscales",
+        "2. Resolve Layer 2 semantic roles \u2192 produce named semantic tokens with light/dark aliases",
+        "3. Apply Layer 3 deltas \u2192 produce interaction state tokens for all semantic fills",
+        "4. Apply Layer 4 component map \u2192 produce component tokens referencing semantic roles",
+        "5. Output all four tiers as a unified token system"
+      ],
+      "reference-chain": "component-token \u2192 semantic-role \u2192 primitive-alias \u2192 computed-hex",
+      "forbidden": "Component tokens must never reference layer-1 primitives directly. Only semantic role names."
+    },
+    "overlay-token-contract": {
+      "description": "Canonical reference for overlay token syntax, resolution, and constraints. Full contract in Layer 2 compiler-contract.overlay-token-contract.",
+      "canonical-location": "layer-2-compiler-contract.json > compiler-contract > overlay-token-contract",
+      "syntax": "{ramp-key.stop} @ {opacity%}",
+      "figma-implementation": "Alias solid primitive variable \u2192 set opacity field. Do NOT create a solid colour with baked-in alpha.",
+      "apca-hard-rule": "Text MUST NOT be placed on any overlay token. Build error if violated.",
+      "valid-opacity-range": "1\u201399. Use transparent keyword for 0%, use solid token for 100%.",
+      "overlay-tokens-in-this-file": [
+        "color/surface-overlay",
+        "color/surface-overlay-brand",
+        "color/surface-overlay-error",
+        "color/surface-overlay-warning",
+        "color/surface-overlay-selection"
+      ]
+    },
+    "changelog": {
+      "1.2": "CVD lightness separation fix (concern #1/#29). Dark mode success/error/warning fill stops offset to provide lightness-based differentiation under deuteranopia/protanopia simulation. Structural fix \u2014 hex-agnostic. Applies to any brand inputs. Stops: fill/success dark 300\u2192100, fill/warning dark 300\u2192400. Text/icon error dark 300\u2192200, text/icon success dark 300\u2192200, text/icon warning dark 300\u2192400."
+    }
+  },
+  "semantic-role-map": {
+    "description": "The authoritative mapping of semantic role names to their hierarchy weight and intent. Component tokens reference these names. This is the Layer 2 contract expressed as a named token vocabulary.",
+    "hierarchy-weights": {
+      "1-background": "Most recessive. Page canvas. Never competes with content.",
+      "2-surface": "Component canvas. Slightly elevated from background.",
+      "3-surface-subtle": "Inset or alternate surface. Between bg and surface.",
+      "4-fill": "Component fill. Anchors interactive elements.",
+      "5-fill-subtle": "Tinted fill. Chips, tags, selection highlights.",
+      "6-border": "Structural separation. Never decorative.",
+      "7-text": "Content layer. Always passes APCA against its paired surface.",
+      "8-on-fill": "Highest contrast. Text/icon on a coloured fill. Must pass Lc 75."
+    },
+    "roles": {
+      "color/bg": {
+        "source": "background",
+        "weight": 1,
+        "light": "{pg.50}",
+        "dark": "{elev.0}",
+        "desc": "Page canvas"
+      },
+      "color/bg-subtle": {
+        "source": "surface-variant",
+        "weight": 1,
+        "light": "{pg.100}",
+        "dark": "{elev.0}",
+        "desc": "Subtle page tint"
+      },
+      "color/surface": {
+        "source": "surface",
+        "weight": 2,
+        "light": "{pg.50}",
+        "dark": "{elev.1}",
+        "desc": "Card, panel surface"
+      },
+      "color/surface-raised": {
+        "source": "surface-elevated",
+        "weight": 2,
+        "light": "{pg.50}",
+        "dark": "{elev.2}",
+        "desc": "Elevated surface \u2014 dialogs, menus"
+      },
+      "color/surface-subtle": {
+        "source": "surface-variant",
+        "weight": 2,
+        "light": "{pg.100}",
+        "dark": "{elev.1}",
+        "desc": "Inset, alternate surface"
+      },
+      "color/surface-inverse": {
+        "source": "inverse",
+        "weight": 2,
+        "light": "{pg.900}",
+        "dark": "{pg.50}",
+        "desc": "Dark surface in light mode"
+      },
+      "color/surface-overlay": {
+        "source": "overlay",
+        "weight": 2,
+        "light": "{pg.900} @ 26%",
+        "dark": "{pg.50} @ 26%",
+        "opacity": 26,
+        "base-light": "{pg.900}",
+        "base-dark": "{pg.50}",
+        "desc": "Standard modal/dialog backdrop. Text must NOT be placed on this token.",
+        "apca-rule": "NO_TEXT \u2014 overlay background. Pairs with solid surface-raised for dialog content.",
+        "use-case": "modal-backdrop"
+      },
+      "color/surface-disabled": {
+        "source": "disabled",
+        "weight": 2,
+        "light": "{pg.100}",
+        "dark": "{pg.800}",
+        "desc": "Disabled component fill"
+      },
+      "color/fill/brand": {
+        "source": "primary",
+        "weight": 4,
+        "light": "{primary.500}",
+        "dark": "{primary.300}",
+        "desc": "Primary brand fill \u2014 CTAs, active states"
+      },
+      "color/fill/brand-subtle": {
+        "source": "primary-container",
+        "weight": 5,
+        "light": "{primary.100}",
+        "dark": "{primary.800}",
+        "desc": "Brand tint \u2014 chips, tags, selection"
+      },
+      "color/fill/secondary": {
+        "source": "secondary",
+        "weight": 4,
+        "light": "{secondary.300}",
+        "dark": "{secondary.700}",
+        "desc": "Secondary brand fill"
+      },
+      "color/fill/error": {
+        "source": "error",
+        "weight": 4,
+        "light": "{error.500}",
+        "dark": "{error.300}",
+        "desc": "Error fill"
+      },
+      "color/fill/error-subtle": {
+        "source": "on-error",
+        "weight": 5,
+        "light": "{error.50}",
+        "dark": "{error.900}",
+        "desc": "Error tint \u2014 banner bg, field bg"
+      },
+      "color/fill/success": {
+        "source": "success",
+        "weight": 4,
+        "light": "{success.500}",
+        "dark": "{success.100}",
+        "desc": "Success fill [light and dark stops updated for CVD lightness separation]"
+      },
+      "color/fill/success-subtle": {
+        "source": "on-success",
+        "weight": 5,
+        "light": "{success.50}",
+        "dark": "{success.900}",
+        "desc": "Success tint \u2014 banner bg"
+      },
+      "color/fill/warning": {
+        "source": "warning",
+        "weight": 4,
+        "light": "{warning.700}",
+        "dark": "{warning.400}",
+        "desc": "Warning fill [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/fill/warning-subtle": {
+        "source": "on-warning",
+        "weight": 5,
+        "light": "{warning.50}",
+        "dark": "{warning.900}",
+        "desc": "Warning tint \u2014 banner bg"
+      },
+      "color/fill/info": {
+        "source": "info",
+        "weight": 4,
+        "light": "{info.500}",
+        "dark": "{info.300}",
+        "desc": "Info fill"
+      },
+      "color/fill/info-subtle": {
+        "source": "on-info",
+        "weight": 5,
+        "light": "{info.50}",
+        "dark": "{info.900}",
+        "desc": "Info tint \u2014 banner bg"
+      },
+      "color/fill/control": {
+        "source": "surface-variant",
+        "weight": 4,
+        "light": "{pg.200}",
+        "dark": "{pg.700}",
+        "desc": "Toggle track, slider rail, control bg"
+      },
+      "color/fill/inverse": {
+        "source": "inverse",
+        "weight": 4,
+        "light": "{pg.900}",
+        "dark": "{pg.50}",
+        "desc": "Inverse fill \u2014 dark chips in light, light in dark"
+      },
+      "color/border/default": {
+        "source": "outline",
+        "weight": 6,
+        "light": "{pg.300}",
+        "dark": "{pg.600}",
+        "desc": "Default border \u2014 inputs, cards"
+      },
+      "color/border/strong": {
+        "source": "outline-variant",
+        "weight": 6,
+        "light": "{pg.400}",
+        "dark": "{pg.500}",
+        "desc": "Emphasis border \u2014 hover states"
+      },
+      "color/border/subtle": {
+        "source": "outline-variant",
+        "weight": 6,
+        "light": "{pg.200}",
+        "dark": "{pg.600}",
+        "desc": "Dividers, table lines"
+      },
+      "color/border/inverse": {
+        "source": "inverse",
+        "weight": 6,
+        "light": "{pg.50}",
+        "dark": "{pg.50}",
+        "desc": "Border on dark fills"
+      },
+      "color/border/brand": {
+        "source": "primary",
+        "weight": 6,
+        "light": "{primary.400}",
+        "dark": "{primary.500}",
+        "desc": "Brand-coloured interactive border"
+      },
+      "color/border/brand-strong": {
+        "source": "primary",
+        "weight": 6,
+        "light": "{primary.500}",
+        "dark": "{primary.300}",
+        "desc": "Focus ring, active input border"
+      },
+      "color/border/error": {
+        "source": "error",
+        "weight": 6,
+        "light": "{error.600}",
+        "dark": "{error.400}",
+        "desc": "Error border"
+      },
+      "color/border/success": {
+        "source": "success",
+        "weight": 6,
+        "light": "{success.700}",
+        "dark": "{success.400}",
+        "desc": "Success border"
+      },
+      "color/border/warning": {
+        "source": "warning",
+        "weight": 6,
+        "light": "{warning.600}",
+        "dark": "{warning.500}",
+        "desc": "Warning border"
+      },
+      "color/border/info": {
+        "source": "info",
+        "weight": 6,
+        "light": "{info.600}",
+        "dark": "{info.400}",
+        "desc": "Info border"
+      },
+      "color/border/disabled": {
+        "source": "outline-variant",
+        "weight": 6,
+        "light": "{pg.200}",
+        "dark": "{pg.600}",
+        "desc": "Disabled border"
+      },
+      "color/text/primary": {
+        "source": "text-primary",
+        "weight": 7,
+        "light": "{pg.900}",
+        "dark": "{pg.50}",
+        "desc": "Primary text \u2014 body, headings"
+      },
+      "color/text/secondary": {
+        "source": "text-secondary",
+        "weight": 7,
+        "light": "{pg.800}",
+        "dark": "{pg.200}",
+        "desc": "Supporting text \u2014 labels, captions"
+      },
+      "color/text/tertiary": {
+        "source": "text-disabled",
+        "weight": 7,
+        "light": "{pg.600}",
+        "dark": "{pg.300}",
+        "desc": "Tertiary text \u2014 timestamps, overlines"
+      },
+      "color/text/disabled": {
+        "source": "text-disabled",
+        "weight": 7,
+        "light": "{pg.400}",
+        "dark": "{pg.400}",
+        "desc": "Disabled text"
+      },
+      "color/text/placeholder": {
+        "source": "text-disabled",
+        "weight": 7,
+        "light": "{pg.400}",
+        "dark": "{pg.400}",
+        "desc": "Input placeholder"
+      },
+      "color/text/inverse": {
+        "source": "inverse",
+        "weight": 7,
+        "light": "{pg.50}",
+        "dark": "{pg.900}",
+        "desc": "Text on dark/inverse fills"
+      },
+      "color/text/brand": {
+        "source": "primary-container",
+        "weight": 7,
+        "light": "{primary.600}",
+        "dark": "{primary.300}",
+        "desc": "Brand-coloured text, links"
+      },
+      "color/text/brand-subtle": {
+        "source": "primary-container",
+        "weight": 7,
+        "light": "{primary.500}",
+        "dark": "{primary.400}",
+        "desc": "Muted brand text"
+      },
+      "color/text/link": {
+        "weight": 8,
+        "desc": "Standard hyperlinks",
+        "light": "{info.600}",
+        "dark": "{info.300}"
+      },
+      "color/text/link-visited": {
+        "weight": 8,
+        "desc": "Visited hyperlinks",
+        "light": "{primary.700}",
+        "dark": "{primary.400}"
+      },
+      "color/text/error": {
+        "source": "error",
+        "weight": 7,
+        "light": "{error.700}",
+        "dark": "{error.200}",
+        "desc": "Error message text [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/text/success": {
+        "source": "success",
+        "weight": 7,
+        "light": "{success.700}",
+        "dark": "{success.200}",
+        "desc": "Success message text [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/text/warning": {
+        "source": "warning",
+        "weight": 7,
+        "light": "{warning.700}",
+        "dark": "{warning.400}",
+        "desc": "Warning message text [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/text/info": {
+        "source": "info",
+        "weight": 7,
+        "light": "{info.700}",
+        "dark": "{info.300}",
+        "desc": "Info message text"
+      },
+      "color/text/code": {
+        "source": "primary",
+        "weight": 7,
+        "light": "{primary.700}",
+        "dark": "{primary.300}",
+        "desc": "Inline code text"
+      },
+      "color/icon/default": {
+        "source": "text-primary",
+        "weight": 7,
+        "light": "{pg.900}",
+        "dark": "{pg.50}",
+        "desc": "Default icon"
+      },
+      "color/icon/subtle": {
+        "source": "text-secondary",
+        "weight": 7,
+        "light": "{pg.600}",
+        "dark": "{pg.300}",
+        "desc": "Muted icon"
+      },
+      "color/icon/brand": {
+        "source": "primary",
+        "weight": 7,
+        "light": "{primary.600}",
+        "dark": "{primary.300}",
+        "desc": "Brand icon"
+      },
+      "color/icon/inverse": {
+        "source": "inverse",
+        "weight": 7,
+        "light": "{pg.50}",
+        "dark": "{pg.900}",
+        "desc": "Icon on dark fill"
+      },
+      "color/icon/disabled": {
+        "source": "text-disabled",
+        "weight": 7,
+        "light": "{pg.300}",
+        "dark": "{pg.600}",
+        "desc": "Disabled icon"
+      },
+      "color/icon/error": {
+        "source": "error",
+        "weight": 7,
+        "light": "{error.600}",
+        "dark": "{error.200}",
+        "desc": "Error icon [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/icon/success": {
+        "source": "success",
+        "weight": 7,
+        "light": "{success.600}",
+        "dark": "{success.200}",
+        "desc": "Success icon [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/icon/warning": {
+        "source": "warning",
+        "weight": 7,
+        "light": "{warning.600}",
+        "dark": "{warning.400}",
+        "desc": "Warning icon [dark mode stop updated for CVD lightness separation]"
+      },
+      "color/icon/info": {
+        "source": "info",
+        "weight": 7,
+        "light": "{info.600}",
+        "dark": "{info.300}",
+        "desc": "Info icon"
+      },
+      "color/on-fill/brand-subtle": {
+        "source": "on-primary-container",
+        "weight": 8,
+        "light": "{primary.900}",
+        "dark": "{primary.50}",
+        "desc": "Text on brand-subtle fill"
+      },
+      "color/on-fill/error-subtle": {
+        "source": "on-error-container",
+        "weight": 8,
+        "light": "{error.900}",
+        "dark": "{error.50}",
+        "desc": "Text on error-subtle fill"
+      },
+      "color/on-fill/success-subtle": {
+        "source": "on-success-container",
+        "weight": 8,
+        "light": "{success.900}",
+        "dark": "{success.50}",
+        "desc": "Text on success-subtle fill"
+      },
+      "color/on-fill/warning-subtle": {
+        "source": "on-warning-container",
+        "weight": 8,
+        "light": "{warning.900}",
+        "dark": "{warning.50}",
+        "desc": "Text on warning-subtle fill"
+      },
+      "color/on-fill/info-subtle": {
+        "source": "on-info-container",
+        "weight": 8,
+        "light": "{info.900}",
+        "dark": "{info.50}",
+        "desc": "Text on info-subtle fill"
+      },
+      "color/on-fill/control": {
+        "source": "on-surface-variant",
+        "weight": 8,
+        "light": "{pg.900}",
+        "dark": "{pg.50}",
+        "desc": "Text on control fill"
+      },
+      "color/on-fill/brand": {
+        "source": "on-primary",
+        "weight": 8,
+        "light": "{primary.50}",
+        "dark": "{primary.900}",
+        "desc": "Text on primary brand fill. Must pass Lc 75."
+      },
+      "color/on-fill/secondary": {
+        "source": "on-secondary",
+        "weight": 8,
+        "light": "{secondary.900}",
+        "dark": "{secondary.50}",
+        "desc": "Text on secondary fill"
+      },
+      "color/on-fill/error": {
+        "source": "on-error",
+        "weight": 8,
+        "light": "{error.50}",
+        "dark": "{error.900}",
+        "desc": "Text on error fill. Must pass Lc 75."
+      },
+      "color/on-fill/success": {
+        "source": "on-success",
+        "weight": 8,
+        "light": "{success.50}",
+        "dark": "{success.900}",
+        "desc": "Text on success fill. Must pass Lc 75."
+      },
+      "color/on-fill/warning": {
+        "source": "on-warning",
+        "weight": 8,
+        "light": "{warning.50}",
+        "dark": "{warning.900}",
+        "desc": "Text on warning fill. Must pass Lc 75."
+      },
+      "color/on-fill/info": {
+        "source": "on-info",
+        "weight": 8,
+        "light": "{info.50}",
+        "dark": "{info.900}",
+        "desc": "Text on info fill. Must pass Lc 75."
+      },
+      "color/on-fill/inverse": {
+        "source": "inverse",
+        "weight": 8,
+        "light": "{pg.50}",
+        "dark": "{pg.900}",
+        "desc": "Text on inverse fill"
+      },
+      "color/focus/ring": {
+        "source": "primary",
+        "weight": 6,
+        "light": "{primary.500}",
+        "dark": "{primary.300}",
+        "desc": "Focus ring colour. 2px width, 2px offset."
+      },
+      "color/focus/ring-error": {
+        "source": "error",
+        "weight": 6,
+        "light": "{error.500}",
+        "dark": "{error.300}",
+        "desc": "Error focus ring"
+      },
+      "color/elevation/0": {
+        "source": "elev.0",
+        "weight": 1,
+        "light": null,
+        "dark": "{elev.0}",
+        "desc": "Dark mode bg floor"
+      },
+      "color/elevation/1": {
+        "source": "elev.1",
+        "weight": 2,
+        "light": null,
+        "dark": "{elev.1}",
+        "desc": "Dark mode cards, lists"
+      },
+      "color/elevation/2": {
+        "source": "elev.2",
+        "weight": 2,
+        "light": null,
+        "dark": "{elev.2}",
+        "desc": "Dark mode menus, tooltips"
+      },
+      "color/elevation/3": {
+        "source": "elev.3",
+        "weight": 2,
+        "light": null,
+        "dark": "{elev.3}",
+        "desc": "Dark mode dialogs"
+      },
+      "color/elevation/4": {
+        "source": "elev.4",
+        "weight": 2,
+        "light": null,
+        "dark": "{elev.4}",
+        "desc": "Dark mode nav drawers"
+      },
+      "color/surface-overlay-brand": {
+        "source": "overlay-brand",
+        "weight": 2,
+        "light": "{primary.900} @ 15%",
+        "dark": "{primary.50} @ 15%",
+        "opacity": 15,
+        "base-light": "{primary.900}",
+        "base-dark": "{primary.50}",
+        "desc": "Brand-tinted highlight over images or selected list items.",
+        "apca-rule": "NO_TEXT \u2014 overlay background.",
+        "use-case": "image-tint, selection-highlight"
+      },
+      "color/surface-overlay-error": {
+        "source": "overlay-error",
+        "weight": 2,
+        "light": "{error.900} @ 15%",
+        "dark": "{error.50} @ 15%",
+        "opacity": 15,
+        "base-light": "{error.900}",
+        "base-dark": "{error.50}",
+        "desc": "Destructive flash or critical scrim over content.",
+        "apca-rule": "NO_TEXT \u2014 overlay background.",
+        "use-case": "image-tint, destructive-highlight"
+      },
+      "color/surface-overlay-warning": {
+        "source": "overlay-warning",
+        "weight": 2,
+        "light": "{warning.900} @ 12%",
+        "dark": "{warning.50} @ 12%",
+        "opacity": 12,
+        "base-light": "{warning.900}",
+        "base-dark": "{warning.50}",
+        "desc": "Warning tint over content \u2014 degraded state indication.",
+        "apca-rule": "NO_TEXT \u2014 overlay background.",
+        "use-case": "image-tint, warning-highlight"
+      },
+      "color/surface-overlay-selection": {
+        "source": "overlay-selection",
+        "weight": 5,
+        "light": "{primary.900} @ 6%",
+        "dark": "{primary.50} @ 6%",
+        "opacity": 6,
+        "base-light": "{primary.900}",
+        "base-dark": "{primary.50}",
+        "desc": "List item selection highlight. 6% opacity preserves underlying text contrast.",
+        "apca-rule": "LOW_OPACITY_EXCEPTION \u2014 opacity <= 8% does not meaningfully impact underlying solid surface contrast. Verify empirically.",
+        "use-case": "selection-highlight"
+      }
+    },
+    "floor-stop-note": "Dark mode aliases in this file are calibrated for floor-stop 800 (L0.30, slate). If floor-stop changes, border and placeholder dark aliases must be re-verified against the new surface lightness. The Python compiler enforces this via fill-border-distinctness-policy and APCA audit."
+  },
+  "component-tokens": {
+    "description": "Complete component token map. Every token references a semantic role from semantic-role-map. Compiler resolves: component-token \u2192 semantic-role \u2192 primitive-alias \u2192 hex.",
+    "reference-rule": "Use semantic role names from semantic-role-map.roles keys. Never raw {ramp.stop} aliases here.",
+    "state-delta-source": "layer-3 delta-engine state-delta-rules + interaction-direction-multiplier",
+    "typography": {
+      "heading-1": {
+        "color": "color/text/primary",
+        "desc": "Page title, hero"
+      },
+      "heading-2": {
+        "color": "color/text/primary",
+        "desc": "Section heading"
+      },
+      "heading-3": {
+        "color": "color/text/secondary",
+        "desc": "Card title, sub-heading"
+      },
+      "heading-4": {
+        "color": "color/text/secondary",
+        "desc": "Minor heading"
+      },
+      "body": {
+        "color": "color/text/primary",
+        "desc": "Main body text"
+      },
+      "body-secondary": {
+        "color": "color/text/secondary",
+        "desc": "Supporting body"
+      },
+      "caption": {
+        "color": "color/text/tertiary",
+        "desc": "Small labels, timestamps"
+      },
+      "overline": {
+        "color": "color/text/tertiary",
+        "desc": "All-caps category label"
+      },
+      "label": {
+        "color": "color/text/secondary",
+        "desc": "Form field labels"
+      },
+      "placeholder": {
+        "color": "color/text/placeholder",
+        "desc": "Input placeholder"
+      },
+      "link": {
+        "color": "color/text/link",
+        "desc": "Hyperlink"
+      },
+      "link-visited": {
+        "color": "color/text/link-visited",
+        "desc": "Visited link"
+      },
+      "code-inline": {
+        "color": "color/text/code",
+        "bg": "color/bg-subtle",
+        "desc": "Inline code"
+      },
+      "disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled text"
+      }
+    },
+    "button": {
+      "variants": [
+        "primary",
+        "secondary",
+        "ghost",
+        "destructive",
+        "link"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "pressed",
+        "focus",
+        "selected",
+        "loading",
+        "disabled"
+      ],
+      "delta-source": "layer-3 state-delta-rules via interaction-direction-multiplier",
+      "primary": {
+        "bg/default": {
+          "color": "color/fill/brand",
+          "desc": "Primary button fill"
+        },
+        "bg/hover": {
+          "color": "color/fill/brand",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "desc": "Hover \u2014 L3 direction multiplier"
+        },
+        "bg/active": {
+          "color": "color/fill/brand",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.active-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "desc": "Active"
+        },
+        "bg/pressed": {
+          "color": "color/fill/brand",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.pressed-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "desc": "Pressed"
+        },
+        "bg/focus": {
+          "color": "color/fill/brand",
+          "desc": "Focus \u2014 ring applied via focus tokens"
+        },
+        "bg/selected": {
+          "color": "color/fill/brand",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.selected-delta}"
+          },
+          "desc": "Selected"
+        },
+        "bg/loading": {
+          "color": "color/fill/brand",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.loading-delta}"
+          },
+          "desc": "Loading"
+        },
+        "bg/disabled": {
+          "color": "color/surface-disabled",
+          "desc": "Disabled"
+        },
+        "text/default": {
+          "color": "color/on-fill/brand",
+          "desc": "Label on primary"
+        },
+        "text/disabled": {
+          "color": "color/text/disabled",
+          "desc": "Disabled label"
+        },
+        "icon/default": {
+          "color": "color/on-fill/brand",
+          "desc": "Icon on primary"
+        }
+      },
+      "secondary": {
+        "bg/default": {
+          "color": "color/fill/brand-subtle",
+          "desc": "Secondary button fill \u2014 tinted"
+        },
+        "bg/hover": {
+          "color": "color/fill/brand-subtle",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas.darken}",
+            "note": "Source is always a light container (L >= pivot). Apply darken only."
+          },
+          "desc": "Hover \u2014 lightness above 0.6 so darken"
+        },
+        "bg/active": {
+          "color": "color/fill/brand",
+          "desc": "Active \u2014 steps up to primary fill"
+        },
+        "bg/focus": {
+          "color": "color/fill/brand-subtle",
+          "desc": "Focus"
+        },
+        "bg/selected": {
+          "color": "color/fill/brand-subtle",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+          },
+          "desc": "Selected"
+        },
+        "bg/loading": {
+          "color": "color/fill/brand-subtle",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.loading-delta}"
+          },
+          "desc": "Loading"
+        },
+        "bg/disabled": {
+          "color": "color/surface-disabled",
+          "desc": "Disabled"
+        },
+        "text/default": {
+          "color": "color/text/brand",
+          "desc": "Label on secondary"
+        },
+        "text/disabled": {
+          "color": "color/text/disabled",
+          "desc": "Disabled"
+        },
+        "icon/default": {
+          "color": "color/icon/brand",
+          "desc": "Icon on secondary"
+        }
+      },
+      "ghost": {
+        "bg/default": {
+          "color": "transparent",
+          "desc": "No fill"
+        },
+        "bg/hover": {
+          "color": "color/fill/brand-subtle",
+          "desc": "Hover \u2014 shows subtle fill"
+        },
+        "bg/active": {
+          "color": "color/fill/brand-subtle",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.ghost-active-delta}"
+          },
+          "desc": "Active"
+        },
+        "bg/disabled": {
+          "color": "transparent",
+          "desc": "Disabled"
+        },
+        "border/default": {
+          "color": "color/border/default",
+          "desc": "Ghost border"
+        },
+        "border/hover": {
+          "color": "color/border/strong",
+          "desc": "Hover border"
+        },
+        "border/focus": {
+          "color": "color/border/brand-strong",
+          "desc": "Focus border"
+        },
+        "border/disabled": {
+          "color": "color/border/disabled",
+          "desc": "Disabled border"
+        },
+        "text/default": {
+          "color": "color/text/primary",
+          "desc": "Ghost label"
+        },
+        "text/disabled": {
+          "color": "color/text/disabled",
+          "desc": "Disabled"
+        }
+      },
+      "destructive": {
+        "bg/default": {
+          "color": "color/fill/error",
+          "desc": "Destructive fill"
+        },
+        "bg/hover": {
+          "color": "color/fill/error",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "desc": "Hover"
+        },
+        "bg/active": {
+          "color": "color/fill/error",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.active-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "desc": "Active"
+        },
+        "bg/focus": {
+          "color": "color/fill/error",
+          "desc": "Focus \u2014 error ring"
+        },
+        "bg/disabled": {
+          "color": "color/surface-disabled",
+          "desc": "Disabled"
+        },
+        "text/default": {
+          "color": "color/on-fill/error",
+          "desc": "Label on destructive"
+        },
+        "text/disabled": {
+          "color": "color/text/disabled",
+          "desc": "Disabled"
+        },
+        "icon/default": {
+          "color": "color/on-fill/error",
+          "desc": "Icon on destructive"
+        }
+      },
+      "link": {
+        "text/default": {
+          "color": "color/text/link",
+          "desc": "Link button text"
+        },
+        "text/hover": {
+          "color": "color/text/brand",
+          "desc": "Hover"
+        },
+        "text/visited": {
+          "color": "color/text/link-visited",
+          "desc": "Visited"
+        },
+        "text/disabled": {
+          "color": "color/text/disabled",
+          "desc": "Disabled"
+        }
+      }
+    },
+    "input": {
+      "covers": [
+        "text-input",
+        "textarea",
+        "search",
+        "select"
+      ],
+      "bg/default": {
+        "color": "color/surface",
+        "desc": "Input background"
+      },
+      "bg/hover": {
+        "color": "color/surface-subtle",
+        "desc": "Hover background"
+      },
+      "bg/focus": {
+        "color": "color/surface",
+        "desc": "Focus \u2014 border changes"
+      },
+      "bg/filled": {
+        "color": "color/surface",
+        "desc": "Has value"
+      },
+      "bg/disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled"
+      },
+      "bg/error": {
+        "color": "color/fill/error-subtle",
+        "desc": "Error state background"
+      },
+      "bg/readonly": {
+        "color": "color/bg-subtle",
+        "desc": "Read-only field"
+      },
+      "border/default": {
+        "color": "color/border/default",
+        "desc": "Default border"
+      },
+      "border/hover": {
+        "color": "color/border/strong",
+        "desc": "Hover border"
+      },
+      "border/focus": {
+        "color": "color/border/brand-strong",
+        "desc": "Focus border"
+      },
+      "border/filled": {
+        "color": "color/border/default",
+        "desc": "Has value border"
+      },
+      "border/disabled": {
+        "color": "color/border/disabled",
+        "desc": "Disabled border"
+      },
+      "border/error": {
+        "color": "color/border/error",
+        "desc": "Error border"
+      },
+      "border/readonly": {
+        "color": "color/border/subtle",
+        "desc": "Read-only border"
+      },
+      "text/value": {
+        "color": "color/text/primary",
+        "desc": "Input text"
+      },
+      "text/placeholder": {
+        "color": "color/text/placeholder",
+        "desc": "Placeholder"
+      },
+      "text/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled value"
+      },
+      "text/readonly": {
+        "color": "color/text/secondary",
+        "desc": "Read-only value"
+      },
+      "label/default": {
+        "color": "color/text/secondary",
+        "desc": "Field label"
+      },
+      "label/focus": {
+        "color": "color/text/brand",
+        "desc": "Label on focus"
+      },
+      "label/error": {
+        "color": "color/text/error",
+        "desc": "Error label"
+      },
+      "label/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled label"
+      },
+      "helper/default": {
+        "color": "color/text/tertiary",
+        "desc": "Helper text below field"
+      },
+      "helper/error": {
+        "color": "color/text/error",
+        "desc": "Error message"
+      },
+      "helper/success": {
+        "color": "color/text/success",
+        "desc": "Success message"
+      },
+      "icon/leading": {
+        "color": "color/icon/subtle",
+        "desc": "Leading icon"
+      },
+      "icon/trailing": {
+        "color": "color/icon/subtle",
+        "desc": "Trailing icon / clear / chevron"
+      },
+      "icon/error": {
+        "color": "color/icon/error",
+        "desc": "Error indicator icon"
+      }
+    },
+    "select": {
+      "extends": "input",
+      "option-list/bg": {
+        "color": "color/surface-raised",
+        "desc": "Option list background"
+      },
+      "option-list/border": {
+        "color": "color/border/default",
+        "desc": "Option list border"
+      },
+      "option/bg-default": {
+        "color": "transparent",
+        "desc": "Option default"
+      },
+      "option/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Option hover"
+      },
+      "option/bg-selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Option selected"
+      },
+      "option/bg-disabled": {
+        "color": "transparent",
+        "desc": "Option disabled"
+      },
+      "option/text-default": {
+        "color": "color/text/primary",
+        "desc": "Option text"
+      },
+      "option/text-selected": {
+        "color": "color/text/brand",
+        "desc": "Selected option text"
+      },
+      "option/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled option"
+      },
+      "option/icon-check": {
+        "color": "color/icon/brand",
+        "desc": "Checkmark on selected"
+      },
+      "option/separator": {
+        "color": "color/border/subtle",
+        "desc": "Option group separator"
+      },
+      "option/group-label": {
+        "color": "color/text/tertiary",
+        "desc": "Option group heading"
+      }
+    },
+    "checkbox": {
+      "states": [
+        "unchecked",
+        "checked",
+        "indeterminate",
+        "disabled"
+      ],
+      "box/bg-unchecked": {
+        "color": "color/surface",
+        "desc": "Unchecked background"
+      },
+      "box/bg-checked": {
+        "color": "color/fill/brand",
+        "desc": "Checked background"
+      },
+      "box/bg-indeterminate": {
+        "color": "color/fill/brand",
+        "desc": "Indeterminate background"
+      },
+      "box/bg-disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled background"
+      },
+      "box/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Hover (unchecked)"
+      },
+      "box/bg-error": {
+        "color": "color/fill/error-subtle",
+        "desc": "Error state"
+      },
+      "box/border-unchecked": {
+        "color": "color/border/default",
+        "desc": "Unchecked border"
+      },
+      "box/border-checked": {
+        "color": "color/fill/brand",
+        "desc": "Checked border"
+      },
+      "box/border-hover": {
+        "color": "color/border/brand",
+        "desc": "Hover border"
+      },
+      "box/border-error": {
+        "color": "color/border/error",
+        "desc": "Error border"
+      },
+      "box/border-disabled": {
+        "color": "color/border/disabled",
+        "desc": "Disabled border"
+      },
+      "check/color": {
+        "color": "color/on-fill/brand",
+        "desc": "Checkmark icon"
+      },
+      "check/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled checkmark"
+      },
+      "label/default": {
+        "color": "color/text/primary",
+        "desc": "Checkbox label"
+      },
+      "label/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled label"
+      },
+      "label/error": {
+        "color": "color/text/error",
+        "desc": "Error label"
+      }
+    },
+    "radio": {
+      "extends": "checkbox",
+      "dot/color": {
+        "color": "color/on-fill/brand",
+        "desc": "Selected dot"
+      },
+      "dot/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled dot"
+      }
+    },
+    "toggle": {
+      "track/bg-off": {
+        "color": "color/fill/control",
+        "desc": "Off track"
+      },
+      "track/bg-on": {
+        "color": "color/fill/brand",
+        "desc": "On track"
+      },
+      "track/bg-disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled track"
+      },
+      "track/bg-hover-off": {
+        "color": "color/border/strong",
+        "desc": "Hover off track"
+      },
+      "thumb/bg-default": {
+        "color": "color/on-fill/brand",
+        "desc": "Thumb (uses on-fill for contrast)"
+      },
+      "thumb/bg-off": {
+        "color": "color/surface",
+        "desc": "Thumb on off track"
+      },
+      "thumb/bg-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled thumb"
+      },
+      "label/default": {
+        "color": "color/text/primary",
+        "desc": "Toggle label"
+      },
+      "label/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled label"
+      }
+    },
+    "slider": {
+      "track/bg": {
+        "color": "color/fill/control",
+        "desc": "Track background"
+      },
+      "track/fill": {
+        "color": "color/fill/brand",
+        "desc": "Active portion fill"
+      },
+      "track/disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled track"
+      },
+      "thumb/bg-default": {
+        "color": "color/fill/brand",
+        "desc": "Thumb default"
+      },
+      "thumb/bg-hover": {
+        "color": "color/fill/brand",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.hover-deltas}",
+          "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+        },
+        "desc": "Thumb hover"
+      },
+      "thumb/bg-pressed": {
+        "color": "color/fill/brand",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.pressed-deltas}",
+          "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+        },
+        "desc": "Thumb pressed"
+      },
+      "thumb/bg-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled thumb"
+      },
+      "thumb/border": {
+        "color": "color/on-fill/brand",
+        "desc": "Thumb border ring"
+      },
+      "label/value": {
+        "color": "color/text/primary",
+        "desc": "Slider value label"
+      },
+      "label/min-max": {
+        "color": "color/text/tertiary",
+        "desc": "Min/max labels"
+      }
+    },
+    "tabs": {
+      "bar/bg": {
+        "color": "color/surface",
+        "desc": "Tab bar background"
+      },
+      "bar/border": {
+        "color": "color/border/subtle",
+        "desc": "Tab bar bottom border"
+      },
+      "tab/bg-default": {
+        "color": "transparent",
+        "desc": "Tab default \u2014 no fill"
+      },
+      "tab/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Tab hover"
+      },
+      "tab/bg-active": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Active tab fill"
+      },
+      "tab/bg-disabled": {
+        "color": "transparent",
+        "desc": "Disabled tab"
+      },
+      "tab/text-default": {
+        "color": "color/text/secondary",
+        "desc": "Tab label"
+      },
+      "tab/text-active": {
+        "color": "color/text/brand",
+        "desc": "Active tab label"
+      },
+      "tab/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled label"
+      },
+      "tab/icon-default": {
+        "color": "color/icon/subtle",
+        "desc": "Tab icon"
+      },
+      "tab/icon-active": {
+        "color": "color/icon/brand",
+        "desc": "Active tab icon"
+      },
+      "indicator/color": {
+        "color": "color/fill/brand",
+        "desc": "Active tab indicator line"
+      },
+      "indicator/disabled": {
+        "color": "transparent",
+        "desc": "No indicator when disabled"
+      }
+    },
+    "nav": {
+      "container/bg": {
+        "color": "color/surface",
+        "desc": "Nav container"
+      },
+      "container/border": {
+        "color": "color/border/subtle",
+        "desc": "Nav border/divider"
+      },
+      "item/bg-default": {
+        "color": "transparent",
+        "desc": "Nav item default"
+      },
+      "item/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Nav item hover"
+      },
+      "item/bg-active": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Active/current item"
+      },
+      "item/bg-selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Selected item"
+      },
+      "item/text-default": {
+        "color": "color/text/secondary",
+        "desc": "Nav item text"
+      },
+      "item/text-active": {
+        "color": "color/text/brand",
+        "desc": "Active item text"
+      },
+      "item/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled item"
+      },
+      "item/icon-default": {
+        "color": "color/icon/subtle",
+        "desc": "Nav icon"
+      },
+      "item/icon-active": {
+        "color": "color/icon/brand",
+        "desc": "Active icon"
+      },
+      "indicator/color": {
+        "color": "color/fill/brand",
+        "desc": "Active indicator dot/bar"
+      },
+      "badge/bg": {
+        "color": "color/fill/error",
+        "desc": "Nav badge (notification dot)"
+      },
+      "badge/text": {
+        "color": "color/on-fill/error",
+        "desc": "Nav badge text"
+      },
+      "section-label/text": {
+        "color": "color/text/tertiary",
+        "desc": "Nav section heading"
+      }
+    },
+    "card": {
+      "bg/default": {
+        "color": "color/surface",
+        "desc": "Card background"
+      },
+      "bg/hover": {
+        "color": "color/surface-subtle",
+        "desc": "Interactive card hover"
+      },
+      "bg/selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Selected card"
+      },
+      "bg/disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled card"
+      },
+      "border/default": {
+        "color": "color/border/subtle",
+        "desc": "Card border"
+      },
+      "border/hover": {
+        "color": "color/border/default",
+        "desc": "Card hover border"
+      },
+      "border/selected": {
+        "color": "color/border/brand",
+        "desc": "Selected card border"
+      },
+      "header/bg": {
+        "color": "color/surface-subtle",
+        "desc": "Card header area"
+      },
+      "divider": {
+        "color": "color/border/subtle",
+        "desc": "Internal card divider"
+      }
+    },
+    "modal": {
+      "backdrop/bg": {
+        "color": "color/surface-overlay",
+        "desc": "Modal backdrop"
+      },
+      "container/bg": {
+        "color": "color/surface-raised",
+        "desc": "Modal background"
+      },
+      "container/border": {
+        "color": "color/border/subtle",
+        "desc": "Modal border"
+      },
+      "header/bg": {
+        "color": "color/surface-raised",
+        "desc": "Modal header"
+      },
+      "header/text": {
+        "color": "color/text/primary",
+        "desc": "Modal title"
+      },
+      "header/border": {
+        "color": "color/border/subtle",
+        "desc": "Header bottom divider"
+      },
+      "footer/bg": {
+        "color": "color/surface-raised",
+        "desc": "Modal footer"
+      },
+      "footer/border": {
+        "color": "color/border/subtle",
+        "desc": "Footer top divider"
+      },
+      "close/icon-default": {
+        "color": "color/icon/subtle",
+        "desc": "Close button icon"
+      },
+      "close/icon-hover": {
+        "color": "color/icon/default",
+        "desc": "Close button hover"
+      },
+      "close/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Close button hover bg"
+      }
+    },
+    "menu": {
+      "container/bg": {
+        "color": "color/surface-raised",
+        "desc": "Menu container"
+      },
+      "container/border": {
+        "color": "color/border/default",
+        "desc": "Menu border"
+      },
+      "item/bg-default": {
+        "color": "transparent",
+        "desc": "Menu item default"
+      },
+      "item/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Menu item hover"
+      },
+      "item/bg-active": {
+        "color": "color/fill/brand-subtle",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+        },
+        "desc": "Item active/pressed"
+      },
+      "item/bg-selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Checked/selected item"
+      },
+      "item/bg-disabled": {
+        "color": "transparent",
+        "desc": "Disabled item"
+      },
+      "item/bg-destructive-hover": {
+        "color": "color/fill/error-subtle",
+        "desc": "Destructive item hover"
+      },
+      "item/text-default": {
+        "color": "color/text/primary",
+        "desc": "Item text"
+      },
+      "item/text-selected": {
+        "color": "color/text/brand",
+        "desc": "Selected item text"
+      },
+      "item/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled text"
+      },
+      "item/text-destructive": {
+        "color": "color/text/error",
+        "desc": "Destructive item text"
+      },
+      "item/icon-default": {
+        "color": "color/icon/subtle",
+        "desc": "Item icon"
+      },
+      "item/icon-selected": {
+        "color": "color/icon/brand",
+        "desc": "Selected item icon"
+      },
+      "item/shortcut-text": {
+        "color": "color/text/tertiary",
+        "desc": "Keyboard shortcut label"
+      },
+      "separator": {
+        "color": "color/border/subtle",
+        "desc": "Menu section separator"
+      },
+      "section-label": {
+        "color": "color/text/tertiary",
+        "desc": "Section header text"
+      }
+    },
+    "badge": {
+      "variants": [
+        "neutral",
+        "brand",
+        "error",
+        "success",
+        "warning",
+        "info"
+      ],
+      "neutral": {
+        "bg": "color/bg-subtle",
+        "text": "color/text/secondary",
+        "border": "color/border/default",
+        "desc": "Neutral badge"
+      },
+      "brand": {
+        "bg": "color/fill/brand-subtle",
+        "text": "color/text/brand",
+        "border": "color/border/brand",
+        "desc": "Brand badge"
+      },
+      "error": {
+        "bg": "color/fill/error-subtle",
+        "text": "color/text/error",
+        "border": "color/border/error",
+        "desc": "Error badge"
+      },
+      "success": {
+        "bg": "color/fill/success-subtle",
+        "text": "color/text/success",
+        "border": "color/border/success",
+        "desc": "Success badge"
+      },
+      "warning": {
+        "bg": "color/fill/warning-subtle",
+        "text": "color/text/warning",
+        "border": "color/border/warning",
+        "desc": "Warning badge"
+      },
+      "info": {
+        "bg": "color/fill/info-subtle",
+        "text": "color/text/info",
+        "border": "color/border/info",
+        "desc": "Info badge"
+      },
+      "solid-brand": {
+        "bg": "color/fill/brand",
+        "text": "color/on-fill/brand",
+        "border": "color/fill/brand",
+        "desc": "Solid brand badge"
+      },
+      "solid-error": {
+        "bg": "color/fill/error",
+        "text": "color/on-fill/error",
+        "border": "color/fill/error",
+        "desc": "Solid error badge \u2014 severity indicator"
+      }
+    },
+    "tag": {
+      "bg/default": {
+        "color": "color/surface-subtle",
+        "desc": "Tag default bg"
+      },
+      "bg/hover": {
+        "color": "color/bg-subtle",
+        "desc": "Tag hover"
+      },
+      "bg/selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Selected/active tag"
+      },
+      "bg/disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled tag"
+      },
+      "border/default": {
+        "color": "color/border/default",
+        "desc": "Tag border"
+      },
+      "border/selected": {
+        "color": "color/border/brand",
+        "desc": "Selected border"
+      },
+      "text/default": {
+        "color": "color/text/secondary",
+        "desc": "Tag text"
+      },
+      "text/selected": {
+        "color": "color/text/brand",
+        "desc": "Selected tag text"
+      },
+      "text/disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled text"
+      },
+      "icon/remove": {
+        "color": "color/icon/subtle",
+        "desc": "Remove/dismiss icon"
+      },
+      "icon/remove-hover": {
+        "color": "color/icon/default",
+        "desc": "Remove icon hover"
+      }
+    },
+    "alert": {
+      "desc": "Full-width alert/banner. 4 semantic variants.",
+      "variants": [
+        "error",
+        "success",
+        "warning",
+        "info"
+      ],
+      "error": {
+        "bg": "color/fill/error-subtle",
+        "border": "color/border/error",
+        "icon": "color/icon/error",
+        "title": "color/text/error",
+        "text": "color/text/primary",
+        "desc": "Error alert"
+      },
+      "success": {
+        "bg": "color/fill/success-subtle",
+        "border": "color/border/success",
+        "icon": "color/icon/success",
+        "title": "color/text/success",
+        "text": "color/text/primary",
+        "desc": "Success alert"
+      },
+      "warning": {
+        "bg": "color/fill/warning-subtle",
+        "border": "color/border/warning",
+        "icon": "color/icon/warning",
+        "title": "color/text/warning",
+        "text": "color/text/primary",
+        "desc": "Warning alert"
+      },
+      "info": {
+        "bg": "color/fill/info-subtle",
+        "border": "color/border/info",
+        "icon": "color/icon/info",
+        "title": "color/text/info",
+        "text": "color/text/primary",
+        "desc": "Info alert"
+      },
+      "close/icon": {
+        "color": "color/icon/subtle",
+        "desc": "Dismiss button"
+      }
+    },
+    "toast": {
+      "desc": "Transient notification. Default inverse + 4 semantic variants.",
+      "default": {
+        "bg": "color/surface-inverse",
+        "text": "color/text/inverse",
+        "icon": "color/icon/inverse",
+        "desc": "Default toast \u2014 inverse"
+      },
+      "error": {
+        "bg": "color/fill/error",
+        "text": "color/on-fill/error",
+        "icon": "color/on-fill/error",
+        "desc": "Error toast"
+      },
+      "success": {
+        "bg": "color/fill/success",
+        "text": "color/on-fill/success",
+        "icon": "color/on-fill/success",
+        "desc": "Success toast"
+      },
+      "warning": {
+        "bg": "color/fill/warning",
+        "text": "color/on-fill/warning",
+        "icon": "color/on-fill/warning",
+        "desc": "Warning toast"
+      },
+      "info": {
+        "bg": "color/fill/info",
+        "text": "color/on-fill/info",
+        "icon": "color/on-fill/info",
+        "desc": "Info toast"
+      },
+      "close/icon": {
+        "color": "color/icon/inverse",
+        "desc": "Dismiss"
+      }
+    },
+    "tooltip": {
+      "bg": {
+        "color": "color/surface-inverse",
+        "desc": "Tooltip background"
+      },
+      "text": {
+        "color": "color/text/inverse",
+        "desc": "Tooltip text"
+      },
+      "border": {
+        "color": "color/border/subtle",
+        "desc": "Tooltip border"
+      },
+      "arrow": {
+        "color": "color/surface-inverse",
+        "desc": "Arrow same as bg"
+      }
+    },
+    "popover": {
+      "bg": {
+        "color": "color/surface-raised",
+        "desc": "Popover background"
+      },
+      "border": {
+        "color": "color/border/default",
+        "desc": "Popover border"
+      },
+      "arrow": {
+        "color": "color/surface-raised",
+        "desc": "Arrow"
+      },
+      "header/text": {
+        "color": "color/text/primary",
+        "desc": "Popover heading"
+      },
+      "divider": {
+        "color": "color/border/subtle",
+        "desc": "Internal divider"
+      }
+    },
+    "accordion": {
+      "header/bg-default": {
+        "color": "transparent",
+        "desc": "Accordion header"
+      },
+      "header/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Header hover"
+      },
+      "header/bg-expanded": {
+        "color": "color/surface-subtle",
+        "desc": "Expanded header"
+      },
+      "header/text": {
+        "color": "color/text/primary",
+        "desc": "Header label"
+      },
+      "header/icon": {
+        "color": "color/icon/subtle",
+        "desc": "Chevron icon"
+      },
+      "header/border": {
+        "color": "color/border/subtle",
+        "desc": "Header bottom border"
+      },
+      "content/bg": {
+        "color": "color/surface",
+        "desc": "Content area"
+      },
+      "content/text": {
+        "color": "color/text/secondary",
+        "desc": "Content text"
+      }
+    },
+    "breadcrumb": {
+      "link/text": {
+        "color": "color/text/link",
+        "desc": "Breadcrumb link"
+      },
+      "link/hover": {
+        "color": "color/text/brand",
+        "desc": "Link hover"
+      },
+      "current/text": {
+        "color": "color/text/primary",
+        "desc": "Current page"
+      },
+      "separator/icon": {
+        "color": "color/icon/subtle",
+        "desc": "Separator chevron"
+      }
+    },
+    "pagination": {
+      "item/bg-default": {
+        "color": "transparent",
+        "desc": "Page item default"
+      },
+      "item/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Hover"
+      },
+      "item/bg-current": {
+        "color": "color/fill/brand",
+        "desc": "Current page"
+      },
+      "item/bg-disabled": {
+        "color": "transparent",
+        "desc": "Disabled"
+      },
+      "item/text-default": {
+        "color": "color/text/secondary",
+        "desc": "Page number"
+      },
+      "item/text-current": {
+        "color": "color/on-fill/brand",
+        "desc": "Current page text"
+      },
+      "item/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled"
+      },
+      "item/border": {
+        "color": "color/border/default",
+        "desc": "Item border"
+      },
+      "ellipsis/text": {
+        "color": "color/text/tertiary",
+        "desc": "... separator"
+      }
+    },
+    "stepper": {
+      "step-states": [
+        "upcoming",
+        "active",
+        "complete",
+        "error"
+      ],
+      "step/bg-upcoming": {
+        "color": "color/fill/control",
+        "desc": "Not yet reached"
+      },
+      "step/bg-active": {
+        "color": "color/fill/brand",
+        "desc": "Current step"
+      },
+      "step/bg-complete": {
+        "color": "color/fill/success",
+        "desc": "Completed step"
+      },
+      "step/bg-error": {
+        "color": "color/fill/error",
+        "desc": "Error step"
+      },
+      "step/border-upcoming": {
+        "color": "color/border/default",
+        "desc": "Upcoming border"
+      },
+      "step/border-active": {
+        "color": "color/fill/brand",
+        "desc": "Active border"
+      },
+      "step/icon-upcoming": {
+        "color": "color/icon/subtle",
+        "desc": "Step number"
+      },
+      "step/icon-active": {
+        "color": "color/on-fill/brand",
+        "desc": "Active step icon"
+      },
+      "step/icon-complete": {
+        "color": "color/on-fill/success",
+        "desc": "Check icon"
+      },
+      "step/icon-error": {
+        "color": "color/on-fill/error",
+        "desc": "Error icon"
+      },
+      "connector/upcoming": {
+        "color": "color/border/subtle",
+        "desc": "Connector line"
+      },
+      "connector/complete": {
+        "color": "color/fill/success",
+        "desc": "Completed connector"
+      },
+      "label/upcoming": {
+        "color": "color/text/tertiary",
+        "desc": "Upcoming label"
+      },
+      "label/active": {
+        "color": "color/text/primary",
+        "desc": "Active label"
+      },
+      "label/complete": {
+        "color": "color/text/secondary",
+        "desc": "Complete label"
+      },
+      "label/error": {
+        "color": "color/text/error",
+        "desc": "Error label"
+      }
+    },
+    "table": {
+      "container/bg": {
+        "color": "color/surface",
+        "desc": "Table background"
+      },
+      "container/border": {
+        "color": "color/border/subtle",
+        "desc": "Table outer border"
+      },
+      "header/bg": {
+        "color": "color/surface-subtle",
+        "desc": "Header row"
+      },
+      "header/text": {
+        "color": "color/text/secondary",
+        "desc": "Header label"
+      },
+      "header/icon-sort": {
+        "color": "color/icon/subtle",
+        "desc": "Sort chevron"
+      },
+      "header/icon-sort-active": {
+        "color": "color/icon/brand",
+        "desc": "Active sort"
+      },
+      "header/border": {
+        "color": "color/border/default",
+        "desc": "Header bottom"
+      },
+      "row/bg-default": {
+        "color": "transparent",
+        "desc": "Row default"
+      },
+      "row/bg-stripe": {
+        "color": "color/bg-subtle",
+        "desc": "Alternating stripe"
+      },
+      "row/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Row hover"
+      },
+      "row/bg-selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Selected row"
+      },
+      "row/bg-disabled": {
+        "color": "color/surface-disabled",
+        "desc": "Disabled row"
+      },
+      "row/bg-error": {
+        "color": "color/fill/error-subtle",
+        "desc": "Error row"
+      },
+      "cell/text": {
+        "color": "color/text/primary",
+        "desc": "Cell text"
+      },
+      "cell/text-secondary": {
+        "color": "color/text/secondary",
+        "desc": "Secondary cell data"
+      },
+      "cell/border": {
+        "color": "color/border/subtle",
+        "desc": "Cell divider"
+      },
+      "footer/bg": {
+        "color": "color/surface-subtle",
+        "desc": "Footer row"
+      },
+      "footer/text": {
+        "color": "color/text/secondary",
+        "desc": "Footer text"
+      }
+    },
+    "list": {
+      "item/bg-default": {
+        "color": "transparent",
+        "desc": "List item default"
+      },
+      "item/bg-hover": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Hover"
+      },
+      "item/bg-selected": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Selected"
+      },
+      "item/bg-active": {
+        "color": "color/fill/brand-subtle",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+        },
+        "desc": "Active/pressed"
+      },
+      "item/bg-disabled": {
+        "color": "transparent",
+        "desc": "Disabled"
+      },
+      "item/bg-destructive": {
+        "color": "color/fill/error-subtle",
+        "desc": "Destructive action"
+      },
+      "item/text-default": {
+        "color": "color/text/primary",
+        "desc": "Item label"
+      },
+      "item/text-secondary": {
+        "color": "color/text/secondary",
+        "desc": "Item sublabel"
+      },
+      "item/text-selected": {
+        "color": "color/text/brand",
+        "desc": "Selected item text"
+      },
+      "item/text-disabled": {
+        "color": "color/text/disabled",
+        "desc": "Disabled text"
+      },
+      "item/text-destructive": {
+        "color": "color/text/error",
+        "desc": "Destructive text"
+      },
+      "item/icon-leading": {
+        "color": "color/icon/subtle",
+        "desc": "Leading icon"
+      },
+      "item/icon-trailing": {
+        "color": "color/icon/subtle",
+        "desc": "Trailing icon/chevron"
+      },
+      "item/icon-selected": {
+        "color": "color/icon/brand",
+        "desc": "Selection checkmark"
+      },
+      "separator": {
+        "color": "color/border/subtle",
+        "desc": "Section separator"
+      },
+      "section-header": {
+        "color": "color/text/tertiary",
+        "desc": "Section group label"
+      }
+    },
+    "avatar": {
+      "bg/default": {
+        "color": "color/bg-subtle",
+        "desc": "Placeholder background"
+      },
+      "bg/brand": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Brand-tinted placeholder"
+      },
+      "text/default": {
+        "color": "color/text/secondary",
+        "desc": "Initials on neutral"
+      },
+      "text/brand": {
+        "color": "color/text/brand",
+        "desc": "Initials on brand"
+      },
+      "border/stack": {
+        "color": "color/surface",
+        "desc": "Ring for stacked avatars"
+      },
+      "status/online": {
+        "color": "color/fill/success",
+        "desc": "Online indicator"
+      },
+      "status/away": {
+        "color": "color/fill/warning",
+        "desc": "Away indicator"
+      },
+      "status/offline": {
+        "color": "color/border/default",
+        "desc": "Offline indicator"
+      },
+      "status/busy": {
+        "color": "color/fill/error",
+        "desc": "Busy indicator"
+      }
+    },
+    "progress": {
+      "track/bg": {
+        "color": "color/fill/control",
+        "desc": "Track background"
+      },
+      "fill/brand": {
+        "color": "color/fill/brand",
+        "desc": "Default progress fill"
+      },
+      "fill/success": {
+        "color": "color/fill/success",
+        "desc": "Success state"
+      },
+      "fill/error": {
+        "color": "color/fill/error",
+        "desc": "Error/critical"
+      },
+      "fill/warning": {
+        "color": "color/fill/warning",
+        "desc": "Warning"
+      },
+      "label/value": {
+        "color": "color/text/secondary",
+        "desc": "Percentage label"
+      },
+      "label/description": {
+        "color": "color/text/tertiary",
+        "desc": "Supporting text"
+      }
+    },
+    "skeleton": {
+      "base": {
+        "color": "color/surface-subtle",
+        "desc": "Skeleton base"
+      },
+      "shimmer": {
+        "color": "color/bg-subtle",
+        "desc": "Shimmer highlight"
+      }
+    },
+    "code-block": {
+      "bg": {
+        "color": "color/bg-subtle",
+        "desc": "Code block background"
+      },
+      "border": {
+        "color": "color/border/subtle",
+        "desc": "Code block border"
+      },
+      "text/default": {
+        "color": "color/text/primary",
+        "desc": "Plain code text"
+      },
+      "text/keyword": {
+        "color": "color/text/brand",
+        "desc": "Keywords \u2014 if, for, return"
+      },
+      "text/string": {
+        "color": "color/text/success",
+        "desc": "String literals"
+      },
+      "text/number": {
+        "color": "color/text/warning",
+        "desc": "Number literals"
+      },
+      "text/comment": {
+        "color": "color/text/tertiary",
+        "desc": "Comments"
+      },
+      "text/function": {
+        "color": "color/text/info",
+        "desc": "Function names"
+      },
+      "text/variable": {
+        "color": "color/text/error",
+        "desc": "Variables/properties"
+      },
+      "header/bg": {
+        "color": "color/surface-subtle",
+        "desc": "Header bar (language label)"
+      },
+      "header/text": {
+        "color": "color/text/tertiary",
+        "desc": "Language label"
+      },
+      "copy-btn/text": {
+        "color": "color/text/secondary",
+        "desc": "Copy button"
+      },
+      "line-highlight/bg": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Highlighted line"
+      },
+      "line-number/text": {
+        "color": "color/text/tertiary",
+        "desc": "Gutter line numbers"
+      }
+    },
+    "divider": {
+      "default": {
+        "color": "color/border/subtle",
+        "desc": "Horizontal/vertical divider"
+      },
+      "strong": {
+        "color": "color/border/default",
+        "desc": "Stronger section break"
+      },
+      "with-label/text": {
+        "color": "color/text/tertiary",
+        "desc": "Divider with label text"
+      }
+    },
+    "scrollbar": {
+      "track/bg": {
+        "color": "transparent",
+        "desc": "Track \u2014 transparent by default"
+      },
+      "thumb/bg-default": {
+        "color": "color/border/default",
+        "desc": "Thumb default"
+      },
+      "thumb/bg-hover": {
+        "color": "color/border/strong",
+        "desc": "Thumb hover"
+      },
+      "thumb/bg-active": {
+        "color": "color/fill/brand",
+        "desc": "Thumb active/drag"
+      }
+    },
+    "focus": {
+      "ring/color": {
+        "color": "color/focus/ring",
+        "desc": "Focus ring \u2014 2px, 2px offset. Source: Layer 2 interaction-tokens."
+      },
+      "ring/color-error": {
+        "color": "color/focus/ring-error",
+        "desc": "Error focus ring"
+      },
+      "ring/width": {
+        "value": "2px",
+        "desc": "Width \u2014 from Layer 2"
+      },
+      "ring/offset": {
+        "value": "2px",
+        "desc": "Offset \u2014 from Layer 2"
+      }
+    },
+    "selection": {
+      "highlight/bg": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Text selection highlight"
+      },
+      "highlight/text": {
+        "color": "color/text/primary",
+        "desc": "Selected text colour"
+      }
+    },
+    "kbd": {
+      "bg": {
+        "color": "color/surface-subtle",
+        "desc": "Keyboard key background"
+      },
+      "border": {
+        "color": "color/border/default",
+        "desc": "Key border"
+      },
+      "text": {
+        "color": "color/text/secondary",
+        "desc": "Key label"
+      }
+    },
+    "drag": {
+      "handle/icon-default": {
+        "color": "color/icon/subtle",
+        "desc": "Drag handle icon"
+      },
+      "handle/icon-hover": {
+        "color": "color/icon/default",
+        "desc": "Hover"
+      },
+      "handle/icon-active": {
+        "color": "color/icon/brand",
+        "desc": "Active drag"
+      },
+      "drop-zone/bg": {
+        "color": "color/fill/brand-subtle",
+        "desc": "Drop target highlight"
+      },
+      "drop-zone/border": {
+        "color": "color/border/brand-strong",
+        "desc": "Drop target border"
+      }
+    },
+    "empty-state": {
+      "illustration/bg": {
+        "color": "color/bg-subtle",
+        "desc": "Illustration container"
+      },
+      "title/text": {
+        "color": "color/text/primary",
+        "desc": "Empty state heading"
+      },
+      "body/text": {
+        "color": "color/text/secondary",
+        "desc": "Supporting text"
+      },
+      "icon/color": {
+        "color": "color/icon/subtle",
+        "desc": "Decorative icon"
+      }
+    }
+  },
+  "compiler-instructions": {
+    "step-1-primitives": "Run Layer 1 engine with brand hex inputs. Produce all ramp stops for pg, sg, primary, secondary, warning, success, info, error. Apply lightness profiles, chroma envelope, hue drift per family.",
+    "step-2-elevation": "Read Layer 2 dark-mode-config.floor-stop. Compute elev.0\u2013elev.4 hex values. Store as named tokens.",
+    "step-3-semantic": "Resolve every entry in this file's semantic-role-map against the computed primitives. Each role gets a light hex and dark hex.",
+    "step-4-components": "For each component in component-tokens, resolve the referenced semantic role names to their hex values. Apply Layer 3 deltas for state variants.",
+    "step-5-apca": "Run APCA audit on all text-on-fill pairs. Apply Layer 3 apca-delta-correction-policy where needed. Set $extensions.verified per Layer 3 apca-extensions-audit-policy.",
+    "step-6-output": "Emit three files: primitives.json (Layer 1 output), semantic-tokens.json (Layer 2+4 output), component-tokens.json (Layer 4 component output).",
+    "forbidden": "Component tokens must never resolve to raw primitive aliases. They must always resolve through a semantic role.",
+    "redundancy-check": "Before emitting, check for tokens with identical resolved hex values. Log as warnings. Do not auto-merge \u2014 flag for designer review.",
+    "dtcg-format": "All output tokens use W3C Design Token format: { '$value': hex, '$type': 'color', '$extensions': { ... } }",
+    "step-3b-overlays": "For every role with '@ {opacity}%' syntax in light or dark value: (1) resolve the base primitive alias to hex, (2) apply opacity to produce CSS color-mix output, (3) verify no text token is paired with this role as background \u2014 emit HARD BUILD ERROR if so, (4) log overlay token in build report."
+  }
+}

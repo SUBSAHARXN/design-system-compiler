@@ -1,0 +1,785 @@
+{
+  "compiler-contract": {
+    "version": "1.9",
+    "layer": 2,
+    "description": "Defines compiler behavior for source resolution, contract validation, interaction state generation, gamut routing, and design tool handoff.",
+    "source-resolution-order": [
+      "1. Check layer-2 semantic-mapping for the role name",
+      "2. Read the source field from that role",
+      "3. If source ends in -greyscale: resolve against layer-1 greyscale-outputs",
+      "4. If source is a semantic role name: recurse through semantic-mapping",
+      "5. If source is a layer-1 hue-family name: resolve directly against layer-1 hue-families",
+      "6. If source cannot be resolved: trigger on-contract-violation"
+    ],
+    "hue-family-resolution-reference": {
+      "description": "Hue family classification is formally defined in Layer 3 under hue-family-resolution. All compiler steps MUST use that definition.",
+      "canonical-location": "layer-3-delta-engine.json > hue-family-resolution",
+      "divergence-prevention": "One authoritative mapping. Do not implement a local override."
+    },
+    "hue-distance-math-requirement": {
+      "rule": "min(abs(a - b), 360 - abs(a - b)) for all hue proximity checks.",
+      "rationale": "Hue is circular. Linear abs() fails at 0\u00b0/360\u00b0 boundary.",
+      "failure-mode-if-violated": "Conflicting colours near boundary pass guardrails silently."
+    },
+    "handoff-routing": {
+      "description": "Routes gamut-specific token values to different consumer environments. Resolves the conflict between design intent (P3) and engineering safety (sRGB).",
+      "validation-check": {
+        "description": "Emit dual variants only when P3 and sRGB values actually differ.",
+        "threshold": 0.001,
+        "instruction": "If abs(C_p3 - C_srgb) < 0.001 for a stop, it is sRGB-safe \u2014 emit one token."
+      },
+      "design-tool-target": {
+        "environments": [
+          "Figma",
+          "Tokens Studio",
+          "Penpot",
+          "Sketch"
+        ],
+        "primary-value-assignment": "display-p3",
+        "fallback-assignment": "srgb",
+        "figma-instruction": "Set Figma file to Display P3 color profile before importing. File > Color Profile > Display P3.",
+        "compiler-instruction": "Base $value MUST be un-clamped P3 hex. sRGB emitted as secondary variable suffixed -srgb-fallback."
+      },
+      "engineering-target": {
+        "environments": [
+          "CSS",
+          "SCSS",
+          "Style Dictionary",
+          "Tailwind",
+          "React Native"
+        ],
+        "primary-value-assignment": "srgb",
+        "progressive-enhancement": "display-p3",
+        "css-output-pattern": {
+          "base": "--color-{role}: oklch(var(--{role}-l) var(--{role}-c-srgb) var(--{role}-h));",
+          "p3-block": "@media (color-gamut: p3) { --color-{role}: oklch(var(--{role}-l) var(--{role}-c-p3) var(--{role}-h)); }",
+          "hdr-block": "@media (color-gamut: p3) and (dynamic-range: high) { --color-{role}: oklch(var(--{role}-l) var(--{role}-c-hdr) var(--{role}-h)); }"
+        },
+        "compiler-instruction": "Base CSS value MUST be sRGB-clamped. P3 values route exclusively into @media (color-gamut: p3) blocks. HDR values route into combined @media (color-gamut: p3) and (dynamic-range: high) blocks.",
+        "react-native-note": "React Native does not support @media (color-gamut). Emit sRGB only for React Native targets."
+      },
+      "gamut-tiers": {
+        "description": "Three-tier progressive gamut system. Architecture supports HDR now even if HDR token values match P3 initially.",
+        "tier-1": {
+          "name": "sRGB",
+          "query": "baseline \u2014 no media query",
+          "chroma-var": "--{role}-c-srgb",
+          "coverage": "~60% of web users"
+        },
+        "tier-2": {
+          "name": "P3",
+          "query": "@media (color-gamut: p3)",
+          "chroma-var": "--{role}-c-p3",
+          "coverage": "~35-40% of web users"
+        },
+        "tier-3": {
+          "name": "HDR+P3",
+          "query": "@media (color-gamut: p3) and (dynamic-range: high)",
+          "chroma-var": "--{role}-c-hdr",
+          "coverage": "<15% of web users"
+        }
+      },
+      "audit-requirement": "Build report must log which tokens required dual variants and which were sRGB-safe."
+    },
+    "apca-extensions-policy": {
+      "description": "Governs which tokens require $extensions.org.design-system.apca blocks and how the compiler enforces them.",
+      "required-on": [
+        "text/*",
+        "on-*",
+        "semantic-state-roles.*"
+      ],
+      "not-required-on": [
+        "bg/*",
+        "border/*",
+        "outline*",
+        "surface*",
+        "*.container"
+      ],
+      "build-gate": {
+        "fail-if-verified-false": true,
+        "fail-if-any-pair-fails": true,
+        "warn-if-lc-within": 3
+      },
+      "gamut-requirement": "both",
+      "gamut-requirement-note": "Both srgb and p3 gamuts must be tested for any token marked as dual-variant.",
+      "re-audit-trigger": "Any $value change sets verified=false on that token. Build fails until audit tool re-runs and resets verified=true.",
+      "invalidation-rule": "verified and lc fields must not be hand-edited. They are write-once by the audit tool only."
+    },
+    "on-contract-violation": {
+      "recommended": "fail-build",
+      "options": {
+        "fail-build": {
+          "behavior": "Halt. Print role, source, resolution path.",
+          "note": "Required for CI/CD."
+        },
+        "warn-and-continue": {
+          "behavior": "Emit warning. Substitute #FF00FF as visible fallback.",
+          "note": "Local development only."
+        }
+      }
+    },
+    "interaction-state-method": {
+      "approach": "lightness-delta and chroma-delta in OKLCH space via layer-3 delta-engine",
+      "why-not-stop-index": "Stop +100 jumps are not perceptually uniform across hue families.",
+      "delta-values-source": "layer-3 delta-engine state-delta-rules \u2014 single source of truth."
+    },
+    "semantic-layer-purity-rule": "Interaction-tokens and mode-mapping must only reference semantic role names. Never layer-1 hue-family names directly.",
+    "overlay-token-contract": {
+      "description": "Governs how overlay tokens (semi-transparent fills used for scrims, image tints, selection highlights) are defined, resolved, and output. Overlay tokens alias a solid primitive and add an alpha channel at the semantic layer \u2014 primitives remain 100% solid at all times.",
+      "syntax": "{ramp-key.stop} @ {opacity%}",
+      "syntax-examples": [
+        "{pg.900} @ 26%  \u2014 dark modal backdrop in light mode",
+        "{pg.50} @ 26%   \u2014 light modal backdrop in dark mode",
+        "{primary.900} @ 15% \u2014 brand tint over imagery in light mode"
+      ],
+      "cross-wiring-rule": {
+        "description": "Overlay tokens are intentionally cross-wired between light and dark modes. In light mode a dark stop is used to create a receding tint. In dark mode a light stop is used to maintain equivalent visual weight.",
+        "light-mode": "Use high-numbered (dark) stops \u2014 e.g. {pg.900} @ 26%",
+        "dark-mode": "Use low-numbered (light) stops \u2014 e.g. {pg.50} @ 26%"
+      },
+      "css-output": {
+        "preferred": "color-mix(in oklch, {resolved-hex} {opacity}%, transparent)",
+        "alternative": "oklch({L} {C} {H} / {opacity}%)",
+        "why-color-mix": "color-mix preserves the perceptual colour identity of the primitive in OKLCH space. Direct oklch() with alpha channel is equivalent but requires decomposed L/C/H variables to be available.",
+        "browser-support": "color-mix(in oklch) requires Chrome 111+, Firefox 113+, Safari 16.2+. Emit a solid hex fallback for older environments.",
+        "fallback-pattern": "background: {resolved-hex}; background: color-mix(in oklch, {resolved-hex} {opacity}%, transparent);"
+      },
+      "figma-output": {
+        "instruction": "In Figma Variables, alias the semantic overlay variable to its solid primitive. Once the alias is set, type the opacity percentage into the opacity box next to the alias \u2014 do NOT create a new solid colour with baked-in alpha. The opacity is scoped to the semantic variable only. The primitive remains 100% solid.",
+        "why": "If the primitive hue is updated later, the overlay automatically inherits the new hue while retaining its opacity. Baking alpha into the primitive hex breaks this chain.",
+        "tokens-studio-note": "Tokens Studio supports opacity on alias references via the 'opacity' modifier field."
+      },
+      "apca-prohibition": {
+        "rule": "Text tokens MUST NEVER be placed directly on an overlay token background.",
+        "reason": "APCA computes contrast between two resolved colours. An overlay token has no resolved background \u2014 it inherits whatever is beneath it at runtime (photo, gradient, another component). The contrast ratio is undefined at token-authoring time and cannot be guaranteed.",
+        "compiler-enforcement": "If any component token pairs a text role with an overlay role as its background, the compiler must emit a HARD BUILD ERROR \u2014 not a warning.",
+        "error-message": "OVERLAY_TEXT_PAIR: '{text-token}' is paired with overlay token '{overlay-token}'. Text must never be placed on an overlay background. Pair text with a solid surface role instead."
+      },
+      "valid-use-cases": [
+        "modal-backdrop \u2014 scrim behind a dialog. Text sits on the solid dialog surface, not the scrim.",
+        "image-tint \u2014 brand or semantic colour wash over a thumbnail or hero image.",
+        "selection-highlight \u2014 list item or text selection at <= 8% opacity. At this opacity the underlying solid surface contrast ratio is not meaningfully impacted.",
+        "drop-zone-highlight \u2014 brand tint over a drag target area."
+      ],
+      "invalid-use-cases": [
+        "text-background \u2014 any token that text is placed directly on top of.",
+        "button-fill \u2014 buttons need solid fills for guaranteed contrast.",
+        "input-fill \u2014 form fields need solid fills for guaranteed contrast.",
+        "card-surface \u2014 surfaces that host content must be solid."
+      ],
+      "opacity-guidelines": {
+        "modal-backdrop": "20\u201330%. Standard is 26%.",
+        "image-tint": "10\u201320%. Validate visually per image.",
+        "selection-highlight": "5\u20138%. Above 8% may impact underlying text contrast.",
+        "brand-wash": "10\u201315%."
+      },
+      "token-validation-rule": {
+        "trigger": "Any token with '@ {opacity}%' syntax",
+        "checks": [
+          "1. Resolve the base primitive alias \u2014 must be a valid solid primitive stop.",
+          "2. Opacity must be a number 1\u201399. 0% and 100% are errors \u2014 use transparent or solid token instead.",
+          "3. No component text token may reference this overlay token as its background pair.",
+          "4. Emit dual variants (P3/sRGB) for the base hex per handoff-routing rules. Apply opacity to both variants.",
+          "5. Log all overlay tokens in build report with their base hex, opacity, and use-case field."
+        ]
+      }
+    },
+    "apca-role-targets": {
+      "description": "Per semantic-role Lc targets. Prefix-matched, first match wins. Replaces the flat Lc 60 used for all text roles. Caption/overline at 12px need Lc 90. Display text at 60px+ can use Lc 45. A flat threshold is a false guarantee at small sizes.",
+      "scientific-basis": "APCA is spatial-frequency aware. Required contrast scales with font size and weight. Lc 60 is correct for ui-label context (>=18px, regular weight). It is dangerously low for caption/overline and unnecessarily strict for display text.",
+      "targets": [
+        {
+          "prefix": "color/text/caption",
+          "lc": 90,
+          "rationale": "Caption is always 12-13px. Small-field tritanopia risk. Highest contrast required."
+        },
+        {
+          "prefix": "color/text/overline",
+          "lc": 90,
+          "rationale": "Overline is always 11-12px. Same as caption."
+        },
+        {
+          "prefix": "color/text/label",
+          "lc": 75,
+          "rationale": "Label at 13-14px. Body-text contrast needed at small size."
+        },
+        {
+          "prefix": "color/text/body",
+          "lc": 75,
+          "rationale": "Running text requires Lc 75 for sustained reading comfort."
+        },
+        {
+          "prefix": "color/text/primary",
+          "lc": 75,
+          "rationale": "Primary text is body reading text."
+        },
+        {
+          "prefix": "color/text/secondary",
+          "lc": 60,
+          "rationale": "Secondary text: supplementary, shorter runs. Lc 60 acceptable."
+        },
+        {
+          "prefix": "color/text/disabled",
+          "lc": 30,
+          "rationale": "Disabled: intentionally low contrast per APCA spec."
+        },
+        {
+          "prefix": "color/text/placeholder",
+          "lc": 30,
+          "rationale": "Placeholder: input hint, not informational."
+        },
+        {
+          "prefix": "color/text/display",
+          "lc": 45,
+          "rationale": "Display text is 60px+. Large format allows lower Lc."
+        },
+        {
+          "prefix": "color/text/heading",
+          "lc": 45,
+          "rationale": "Headings >= 32px. Reduced contrast threshold applies."
+        },
+        {
+          "prefix": "color/text/",
+          "lc": 60,
+          "rationale": "Default text target for unlisted text roles."
+        },
+        {
+          "prefix": "color/on-fill/",
+          "lc": 60,
+          "rationale": "On-fill tokens: ui-label context."
+        },
+        {
+          "prefix": "color/icon/",
+          "lc": 45,
+          "rationale": "Icon contrast. Small icons (<16px) should target Lc 60."
+        },
+        {
+          "prefix": "color/border/",
+          "lc": 15,
+          "rationale": "Border/outline shape contrast minimum."
+        },
+        {
+          "prefix": "color/focus/",
+          "lc": 30,
+          "rationale": "Focus ring: non-text UI component."
+        }
+      ],
+      "fallback-lc": 60
+    },
+    "surface-chroma-policy": {
+      "description": "Surface/bg/subtle tokens must not appear self-luminous (emissive). High chroma at mid-lightness creates a glowing appearance that breaks material metaphor.",
+      "chroma-cap": 0.08,
+      "lightness-range": {
+        "min": 0.35,
+        "max": 0.75
+      },
+      "role-keywords": [
+        "bg",
+        "surface",
+        "subtle"
+      ],
+      "severity": "WARNING",
+      "compiler-check": "STEP 9f in compiler. Emits warning \u2014 not a hard error."
+    },
+    "cvd-guardrail-reference": {
+      "description": "CVD simulation check is defined in Layer 3 cvd-guardrail-policy. Layer 2 registers the pairs to check.",
+      "canonical-location": "layer-3-delta-engine.json > cvd-guardrail-policy",
+      "pairs": [
+        {
+          "a": "color/fill/success",
+          "b": "color/fill/error",
+          "label": "success vs error"
+        },
+        {
+          "a": "color/fill/success",
+          "b": "color/fill/warning",
+          "label": "success vs warning"
+        }
+      ]
+    },
+    "changelog": {
+      "1.8": "Added apca-role-targets (per-role Lc targets replacing flat 60). Added power-curve elevation params. Added surface-chroma-policy and cvd-guardrail-reference."
+    }
+  },
+  "semantic-mapping": {
+    "version": "1.7",
+    "layer": 2,
+    "description": "Maps semantic role names to layer-1 hue-family sources and stop positions. All role names are the contract between design and engineering.",
+    "page-surface-roles": {
+      "direction-rule": "bg-lighter-than-fg",
+      "background": {
+        "stop": "50",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "bg-lighter-than-fg",
+        "paired-with": "text-primary",
+        "$value": "{pg.50}"
+      },
+      "surface": {
+        "stop": "50",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "bg-lighter-than-fg",
+        "paired-with": "text-primary",
+        "$value": "{pg.50}"
+      },
+      "surface-variant": {
+        "stop": "100",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "bg-lighter-than-fg",
+        "paired-with": "text-primary",
+        "$value": "{pg.100}"
+      },
+      "surface-elevated": {
+        "stop": "50",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "bg-lighter-than-fg",
+        "paired-with": "text-primary",
+        "$value": "{pg.50}"
+      },
+      "outline": {
+        "stop": "300",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "border",
+        "paired-with": null,
+        "$value": "{pg.300}"
+      },
+      "outline-variant": {
+        "stop": "200",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "border",
+        "paired-with": null,
+        "$value": "{pg.200}"
+      },
+      "text-primary": {
+        "stop": "900",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "fg-darker-than-bg",
+        "paired-with": "surface",
+        "$value": "{pg.900}"
+      },
+      "text-secondary": {
+        "stop": "800",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "fg-darker-than-bg",
+        "paired-with": "surface",
+        "usage": "Labels, captions, supporting text.",
+        "stop-rationale": "Stop 700 on primary-greyscale gives Lc 42 on background (stop 50) \u2014 fails APCA ui-label minimum of Lc 60. Stop 800 (#373239) gives estimated Lc 68. Corrected per apca-extensions-audit-policy known-failures log.",
+        "$value": "{pg.800}"
+      },
+      "text-disabled": {
+        "stop": "500",
+        "source": "primary-greyscale",
+        "context": "page-surface",
+        "hierarchy-level": "page",
+        "direction": "fg-darker-than-bg",
+        "paired-with": "surface",
+        "disabled-strategy": {
+          "opacity": {
+            "stop": "400",
+            "opacity": 0.38
+          }
+        },
+        "$value": "{pg.500}"
+      }
+    },
+    "component-fill-roles": {
+      "direction-rule": "fill-darker-than-on-color",
+      "primary": {
+        "stop": "500",
+        "source": "primary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-primary",
+        "$value": "{primary.500}"
+      },
+      "on-primary": {
+        "stop": "50",
+        "source": "primary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "primary",
+        "$value": "{primary.50}"
+      },
+      "primary-container": {
+        "stop": "100",
+        "source": "primary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "fill-lighter-than-on-color",
+        "paired-with": "on-primary-container",
+        "$value": "{primary.100}"
+      },
+      "on-primary-container": {
+        "stop": "800",
+        "source": "primary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "on-color-darker-than-fill",
+        "paired-with": "primary-container",
+        "$value": "{primary.800}"
+      },
+      "secondary": {
+        "stop": "300",
+        "source": "secondary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-secondary",
+        "$value": "{secondary.300}"
+      },
+      "on-secondary": {
+        "stop": "900",
+        "source": "secondary",
+        "context": "component-fill",
+        "hierarchy-level": "component",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "secondary",
+        "$value": "{secondary.900}"
+      }
+    },
+    "semantic-state-roles": {
+      "direction-rule": "fill-darker-than-on-color",
+      "semantic-conflict-guardrails": {
+        "proximity-threshold-degrees": 30,
+        "hue-distance-formula": "min(abs(a - b), 360 - abs(a - b))",
+        "compiler-must-use-radial-math": true,
+        "rules": [
+          {
+            "id": "brand-success-proximity",
+            "check": "min(abs(primary-hue - 145), 360 - abs(primary-hue - 145)) < 30",
+            "action": "warn",
+            "message": "Primary within 30\u00b0 of success green."
+          },
+          {
+            "id": "brand-error-proximity",
+            "check": "min(abs(primary-hue - 25),  360 - abs(primary-hue - 25))  < 30",
+            "action": "warn",
+            "message": "Primary within 30\u00b0 of error red."
+          },
+          {
+            "id": "brand-warning-proximity",
+            "check": "min(abs(primary-hue - 55),  360 - abs(primary-hue - 55))  < 30",
+            "action": "warn",
+            "message": "Primary within 30\u00b0 of warning orange."
+          }
+        ],
+        "auto-shift-policy": "false \u2014 emit warnings, require human resolution.",
+        "override-instructions": "To acknowledge a conflict and allow the build to proceed, add an entry to known-exceptions. The 'primary-hex-reviewed' field is REQUIRED and must exactly match the current primary hex in Layer 1 brand-inputs. If the primary hex changes, the override is automatically invalidated and the hard stop fires again \u2014 forcing a fresh review. This prevents stale sign-offs from silently accepting new conflicts.",
+        "known-exceptions": [
+          {
+            "id": "brand-warning-proximity",
+            "acknowledged": true,
+            "primary-hex-reviewed": "#B7812F",
+            "rationale": "Brand primary is intentionally golden-orange. We rely on iconography to distinguish warnings.",
+            "acknowledged-by": "Design Lead",
+            "date": "2026-03-20"
+          }
+        ],
+        "hex-binding-rule": "The compiler checks primary-hex-reviewed against the current Layer 1 primary hex at build time. If they differ the override is REJECTED and the hard stop fires. Changing the brand primary hex always requires a fresh review."
+      },
+      "error": {
+        "stop": "500",
+        "source": "red",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-error",
+        "$value": "{error.500}"
+      },
+      "on-error": {
+        "stop": "50",
+        "source": "red",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "error",
+        "$value": "{error.50}"
+      },
+      "success": {
+        "stop": "600",
+        "source": "true-green",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-success",
+        "$value": "{success.600}",
+        "stop-rationale": "True-green family at stop 500 fails Lc 60 on white (Lc 51.2). Stop 600 (#007E00) gives Lc 71.6 on white (passes ui-label) and Lc 75.7 with on-success (passes body text). Corrected per APCA audit."
+      },
+      "on-success": {
+        "stop": "50",
+        "source": "true-green",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "success",
+        "$value": "{success.50}"
+      },
+      "warning": {
+        "stop": "700",
+        "source": "orange",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-warning",
+        "stop-rationale": "Orange family at stop 500 fails Lc 60 on white (high luminance hue). Stop 700 required to meet ui-components Lc 45 minimum on white backgrounds.",
+        "$value": "{warning.700}"
+      },
+      "on-warning": {
+        "stop": "50",
+        "source": "orange",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "warning",
+        "$value": "{warning.50}"
+      },
+      "info": {
+        "stop": "500",
+        "source": "blue",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "fill-darker-than-on-color",
+        "paired-with": "on-info",
+        "$value": "{info.500}"
+      },
+      "on-info": {
+        "stop": "50",
+        "source": "blue",
+        "context": "semantic-state",
+        "hierarchy-level": "semantic",
+        "direction": "on-color-lighter-than-fill",
+        "paired-with": "info",
+        "$value": "{info.50}"
+      }
+    }
+  },
+  "interaction-tokens": {
+    "version": "1.2",
+    "layer": 2,
+    "delta-source": "layer-3 delta-engine state-delta-rules",
+    "outline-rings": {
+      "primary": {
+        "focus-outline": {
+          "source": "primary",
+          "stop": "500",
+          "opacity": 0.5,
+          "width-px": 2,
+          "offset-px": 2
+        }
+      },
+      "error": {
+        "focus-outline": {
+          "source": "error",
+          "stop": "500",
+          "opacity": 0.5,
+          "width-px": 2,
+          "offset-px": 2
+        }
+      },
+      "focus-ring-tokens": {
+        "description": "Emitted as separate tokens. Subject to dual-variant rule if source hue requires P3.",
+        "token-names": [
+          "--focus-ring-color",
+          "--focus-ring-width",
+          "--focus-ring-offset"
+        ],
+        "dark-mode-note": "Focus ring color must be re-verified for Lc against dark-mode surface stops in mode-mapping."
+      }
+    }
+  },
+  "mode-mapping": {
+    "version": "1.4",
+    "layer": 2,
+    "light-mode": {
+      "background": "{pg.50}",
+      "surface": "{pg.50}",
+      "surface-variant": "{pg.100}",
+      "surface-elevated": "{pg.50}",
+      "outline": "{pg.300}",
+      "outline-variant": "{pg.200}",
+      "text-primary": "{pg.900}",
+      "text-secondary": "{pg.800}",
+      "text-disabled": "{pg.500}",
+      "primary": "{primary.500}",
+      "on-primary": "{primary.50}",
+      "primary-container": "{primary.100}",
+      "on-primary-container": "{primary.800}",
+      "secondary": "{secondary.300}",
+      "on-secondary": "{secondary.900}",
+      "error": "{error.500}",
+      "on-error": "{error.50}",
+      "success": "{success.600}",
+      "on-success": "{success.50}",
+      "warning": "{warning.700}",
+      "on-warning": "{warning.50}",
+      "info": "{info.500}",
+      "on-info": "{info.50}"
+    },
+    "dark-mode": {
+      "background": "{elev.0}",
+      "surface": "{elev.1}",
+      "surface-variant": "{elev.1}",
+      "surface-elevated": "{elev.2}",
+      "outline": "{pg.700}",
+      "outline-variant": "{pg.800}",
+      "text-primary": "{pg.50}",
+      "text-secondary": "{pg.200}",
+      "text-disabled": "{pg.500}",
+      "primary": "{primary.300}",
+      "on-primary": "{primary.900}",
+      "primary-container": "{primary.800}",
+      "on-primary-container": "{primary.100}",
+      "secondary": "{secondary.700}",
+      "on-secondary": "{secondary.50}",
+      "error": "{error.300}",
+      "on-error": "{error.900}",
+      "success": "{success.100}",
+      "on-success": "{success.900}",
+      "warning": "{warning.400}",
+      "on-warning": "{warning.900}",
+      "info": "{info.300}",
+      "on-info": "{info.900}"
+    },
+    "dark-mode-elevation": {
+      "levels": {
+        "0": {
+          "lightness-delta": 0,
+          "usage": "Base surface."
+        },
+        "1": {
+          "lightness-delta": 0.03,
+          "usage": "Cards, list items."
+        },
+        "2": {
+          "lightness-delta": 0.06,
+          "usage": "Menus, dropdowns."
+        },
+        "3": {
+          "lightness-delta": 0.09,
+          "usage": "Dialogs, modals."
+        },
+        "4": {
+          "lightness-delta": 0.12,
+          "usage": "Navigation drawers."
+        }
+      },
+      "computed-tokens": {
+        "description": "First-class primitive ramp. Resolved via primitive-token-naming.ramp-keys.elev. Keys '0'\u2013'4' match {elev.N} pattern. Recomputed when dark-mode-config.floor-stop changes.",
+        "primitive-ramp-key": "elev",
+        "floor-stop-used": "950",
+        "floor-L": 0.12,
+        "step-dL": 0.02,
+        "0": {
+          "hex": "#060508",
+          "L": 0.12,
+          "dL": 0.0,
+          "alias": "{pg.950}",
+          "usage": "Page background \u2014 dark floor"
+        },
+        "1": {
+          "hex": "#0A080C",
+          "L": 0.14,
+          "dL": 0.02,
+          "alias": "{elev.1}",
+          "usage": "Cards, list items, drawers"
+        },
+        "2": {
+          "hex": "#0E0C11",
+          "L": 0.16,
+          "dL": 0.04,
+          "alias": "{elev.2}",
+          "usage": "Menus, dropdowns, tooltips"
+        },
+        "3": {
+          "hex": "#131115",
+          "L": 0.18,
+          "dL": 0.06,
+          "alias": "{elev.3}",
+          "usage": "Dialogs, modals"
+        },
+        "4": {
+          "hex": "#17151A",
+          "L": 0.2,
+          "dL": 0.08,
+          "alias": "{elev.4}",
+          "usage": "Navigation drawers, sheets"
+        },
+        "power-curve-exponent": 1.3,
+        "total-dL": 0.08,
+        "power-curve-note": "Weber-Fechner law correction (concern #20). Linear \u0394L steps feel unequal: early levels too similar, late levels too separated. Power curve: L(i) = FLOOR_L + ((i/4)^1.3) \u00d7 total-dL. Steps: 0\u21921: 0.015, 1\u21922: 0.018, 2\u21923: 0.021, 3\u21924: 0.026. Early steps smaller (reduces Mach Band artefacts at base). Late steps larger (more distinct elevation at dialog/sheet level). Total range preserved at 0.08 matching previous 4 \u00d7 0.02."
+      },
+      "base-stop": "controlled by dark-mode-config.floor-stop",
+      "base-L": "derived at compile time from floor-stop",
+      "correction-note": "Elevation tokens are now fully derived from dark-mode-config.floor-stop. No hardcoded base. Designer changes floor-stop once; compiler regenerates all elevation tokens automatically.",
+      "primitive-promotion-note": "elev is a first-class primitive ramp registered in layer-1 primitive-token-naming.ramp-keys. {elev.N} aliases resolve through the same path as {pg.N}, {primary.N} etc. \u2014 no special handling needed."
+    },
+    "alias-note": "Values are DTCG alias references. {pg.*} = primary-greyscale ramp stops. {elev.*} = dark-mode elevation computed tokens (layer-2 mode-mapping.dark-mode-elevation.computed-tokens). Raw hex must never be substituted here.",
+    "dark-mode-config": {
+      "description": "Designer-controlled dark mode floor. Change floor-stop to any valid stop in valid-floor-stops. The compiler reads this value and derives all elevation tokens and dark-mode surface aliases automatically. No other changes needed.",
+      "floor-stop": "950",
+      "floor-source": "primary-greyscale",
+      "valid-floor-stops": [
+        "700",
+        "800",
+        "900",
+        "950"
+      ],
+      "valid-floor-stops-guide": {
+        "950": "Standard dark mode (L 0.17). Near-black ergonomic surfaces (18.6:1 glare vs white, IBM Carbon / M3 standard). Suitable for most dark UIs.",
+        "900": "Medium dark mode (L 0.20). Charcoal surfaces. Good for editorial or accessible dark themes.",
+        "800": "Light dark mode (L 0.30). Slate surfaces. Suitable for low-contrast dark themes.",
+        "700": "Very light dark mode (L 0.40). Used when dark mode is more of a tinted neutral than a true dark surface."
+      },
+      "compiler-instruction": [
+        "1. Read floor-stop (e.g. '950') and floor-source (e.g. 'primary-greyscale')",
+        "2. Look up floor-stop L value from Layer 1 lightness-behavior standard shadows",
+        "3. Look up the next coarser ramp stop L value (floor-stop - 1 level up the ramp)",
+        "4. Compute elevation stops using power curve: L(i) = floor_L + ((i/4)^power-curve-exponent) \u00d7 total-dL. See dark-mode-elevation.computed-tokens.power-curve-exponent and total-dL.",
+        "5. Derive elev.0 through elev.4 hex values from those computed L values using pg C and H",
+        "6. All mode-mapping dark-mode surface aliases ({elev.0}\u2013{elev.4}) resolve from these derived tokens",
+        "7. If floor-stop changes, ALL elevation tokens recompute automatically \u2014 no other edits needed"
+      ],
+      "oled-reserved": {
+        "stop": "1000",
+        "L": 0.05,
+        "note": "pg.1000 is not part of the elevation ramp. It is an optional override for OLED displays only and requires an explicit product decision."
+      }
+    },
+    "light-mode-cvd-rationale": {
+      "description": "Light mode semantic state fills are intentionally split in lightness (success at L~0.612 vs error at L~0.488) to ensure CVD distinction across deuteranopia and protanopia.",
+      "fix-version": "1.9.0",
+      "pairs-guaranteed": [
+        "success(500) vs error(500): \u0394L\u22480.124 \u2192 \u0394E_CVD\u22480.102 (threshold 0.10) \u2713",
+        "success(500) vs warning(500): \u0394L\u22480.080 \u2192 \u0394E_CVD\u22480.115 \u2713"
+      ],
+      "structural-note": "Guarantees that red and green never collapse to identical luminance in light mode, protecting ~8% of male users without compromising 100% WCAG AA compliance."
+    },
+    "dark-mode-cvd-rationale": {
+      "description": "Dark mode semantic state stops are intentionally offset by 2 stops to ensure CVD lightness separation.",
+      "fix-version": "1.8.1",
+      "pairs-guaranteed": [
+        "success(100) vs error(300): \u0394L\u22480.162 \u2192 \u0394E_CVD\u22480.162 \u2713",
+        "success(100) vs warning(400): \u0394L\u22480.279 \u2192 \u0394E_CVD\u22480.279 \u2713",
+        "error(300) vs warning(400): \u0394L\u22480.117 \u2192 \u0394E_CVD\u22480.117 \u2713"
+      ],
+      "structural-note": "This offset is hex-agnostic. It works because CVD simulation collapses chromatic channels, leaving only lightness as a differentiator. 2-stop separation at this region of the ramp guarantees \u0394E > 0.10 for any hue."
+    }
+  }
+}

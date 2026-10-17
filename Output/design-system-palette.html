@@ -1,0 +1,474 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.shell{padding:.5rem 0}
+.tabs{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:.65rem}
+.tab{font-size:10px;padding:3px 8px;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;font-family:var(--font-sans)}
+.tab:hover{background:var(--color-background-secondary)}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.tab.new{border-color:var(--color-border-success);color:var(--color-text-success)}
+.tab.new.active{background:var(--color-background-success)}
+.tab.ov{border-color:var(--color-border-info);color:var(--color-text-info)}
+.tab.ov.active{background:var(--color-background-info)}
+.note{font-size:10.5px;font-family:var(--font-sans);color:var(--color-text-secondary);padding:.45rem .8rem;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin-bottom:.55rem;line-height:1.6}
+.n-ok{background:var(--color-background-secondary);border-left:2px solid var(--color-border-tertiary)}
+.n-new{background:var(--color-background-success);border-left:2px solid var(--color-border-success)}
+.n-ov{background:var(--color-background-info);border-left:2px solid var(--color-border-info)}
+table{width:100%;border-collapse:collapse;font-size:9.5px;font-family:var(--font-sans);margin-bottom:.75rem}
+th{font-size:8px;font-weight:500;color:var(--color-text-tertiary);text-align:left;padding:4px 5px;border-bottom:.5px solid var(--color-border-secondary);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+td{padding:4px 5px;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);vertical-align:middle;line-height:1.4}
+td:first-child{font-family:var(--font-mono);color:var(--color-text-primary);font-size:9px;white-space:nowrap;min-width:200px}
+tr:hover td{background:var(--color-background-secondary)}
+.gr td{background:var(--color-background-secondary);font-size:8px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.06em;text-transform:uppercase;padding:5px 5px 3px}
+.sw{width:11px;height:11px;border-radius:2px;border:.5px solid var(--color-border-tertiary);display:inline-block;vertical-align:middle;margin-right:2px;flex-shrink:0}
+.sw-ov{border:.5px dashed var(--color-border-info)}
+.chain{display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+.sem{font-family:var(--font-mono);font-size:8px;color:var(--color-text-tertiary);background:var(--color-background-secondary);padding:1px 3px;border-radius:2px;white-space:nowrap}
+.arr{color:var(--color-text-tertiary);font-size:8px}
+.prim{font-family:var(--font-mono);font-size:8.5px;color:var(--color-text-info);white-space:nowrap}
+.hx{font-family:var(--font-mono);font-size:8.5px;color:var(--color-text-primary)}
+.op-badge{font-size:7.5px;padding:1px 4px;border-radius:10px;background:var(--color-background-info);color:var(--color-text-info);font-family:var(--font-sans);font-weight:500;margin-left:2px}
+.badge{font-size:7.5px;padding:1px 3px;border-radius:3px;font-family:var(--font-sans);font-weight:500}
+.b-new{background:var(--color-background-success);color:var(--color-text-success)}
+.b-ov{background:var(--color-background-info);color:var(--color-text-info)}
+.b-fix{background:var(--color-background-danger);color:var(--color-text-danger)}
+.note-cell{font-size:8.5px;color:var(--color-text-tertiary);min-width:100px}
+</style>
+
+<div class="shell">
+<div class="tabs" id="mt">
+  <button class="tab active" onclick="go('overview')">overview</button>
+  <button class="tab" onclick="go('semantic')">semantic roles</button>
+  <button class="tab ov" onclick="go('overlay')">overlays</button>
+  <button class="tab" onclick="go('typography')">typography</button>
+  <button class="tab" onclick="go('surfaces')">surfaces</button>
+  <button class="tab" onclick="go('borders')">borders</button>
+  <button class="tab" onclick="go('icons')">icons</button>
+  <button class="tab" onclick="go('button')">button</button>
+  <button class="tab" onclick="go('input')">input</button>
+  <button class="tab" onclick="go('controls')">controls</button>
+  <button class="tab" onclick="go('navigation')">navigation</button>
+  <button class="tab" onclick="go('feedback')">feedback</button>
+  <button class="tab" onclick="go('containers')">containers</button>
+  <button class="tab" onclick="go('data')">data display</button>
+  <button class="tab new" onclick="go('dataviz')">dataviz ✦</button>
+  <button class="tab new" onclick="go('drawer')">drawer ✦</button>
+  <button class="tab new" onclick="go('command')">command ✦</button>
+  <button class="tab new" onclick="go('datepicker')">date picker ✦</button>
+  <button class="tab new" onclick="go('segmented')">segmented ✦</button>
+  <button class="tab new" onclick="go('fileupload')">file upload ✦</button>
+  <button class="tab new" onclick="go('iconbtn')">icon btn ✦</button>
+  <button class="tab new" onclick="go('splitbtn')">split btn ✦</button>
+  <button class="tab new" onclick="go('rating')">rating ✦</button>
+  <button class="tab new" onclick="go('timeline')">timeline ✦</button>
+  <button class="tab new" onclick="go('utility')">utility ✦</button>
+</div>
+
+<div id="pane-overview">
+<div class="note n-ok">Every token now shows the full resolution chain: <code>component-token → semantic-role → {primitive.stop} → #hex</code> for both light and dark modes. No implicit references.</div>
+<table><thead><tr><th>Resolution chain</th><th>Example</th></tr></thead><tbody>
+<tr><td style="font-family:var(--font-mono);font-size:9px">component → semantic → primitive → hex</td><td><span class="sem">button/primary/bg</span> <span class="arr">→</span> <span class="sem">color/fill/brand</span> <span class="arr">→</span> <span class="prim">{primary.500}</span> <span class="arr">→</span> <span class="hx">#A952DB</span></td></tr>
+<tr><td style="font-family:var(--font-mono);font-size:9px">overlay chain</td><td><span class="sem">modal/backdrop</span> <span class="arr">→</span> <span class="sem">color/surface-overlay</span> <span class="arr">→</span> <span class="prim">{pg.900} @ 26%</span> <span class="arr">→</span> <span class="hx">rgba applied</span></td></tr>
+<tr><td style="font-family:var(--font-mono);font-size:9px">elevation chain</td><td><span class="sem">card/bg/dark</span> <span class="arr">→</span> <span class="sem">color/surface</span> <span class="arr">→</span> <span class="prim">{elev.1}</span> <span class="arr">→</span> <span class="hx">#0A080C</span></td></tr>
+</tbody></table>
+</div>
+
+<div id="pane-semantic" style="display:none"><div class="note n-ok">All semantic roles with explicit primitive aliases and resolved hex.</div><div id="sem-body"></div></div>
+<div id="pane-overlay" style="display:none"><div class="note n-ov">5 overlay tokens. {primitive} @ opacity%. Primitives stay 100% solid. Text MUST NOT be placed on overlays — hard build error.</div><div id="ov-body"></div></div>
+<div id="pane-typography" style="display:none"><div class="note n-ok">Full primitive chain for all text tokens.</div><div id="ty-body"></div></div>
+<div id="pane-surfaces" style="display:none"><div class="note n-ok">Full primitive chain for all surface tokens.</div><div id="su-body"></div></div>
+<div id="pane-borders" style="display:none"><div class="note n-ok">Full primitive chain for all border tokens.</div><div id="bo-body"></div></div>
+<div id="pane-icons" style="display:none"><div class="note n-ok">Full primitive chain for all icon tokens.</div><div id="ic-body"></div></div>
+<div id="pane-button" style="display:none"><div class="note n-ok">5 button variants. State deltas reference Layer 3 engine.</div><div id="bt-body"></div></div>
+<div id="pane-input" style="display:none"><div class="note n-ok">All input states with explicit primitives.</div><div id="in-body"></div></div>
+<div id="pane-controls" style="display:none"><div class="note n-ok">Checkbox, radio, toggle, slider, select/dropdown — all states with explicit primitive chain.</div><div id="ct-body"></div></div>
+<div id="pane-navigation" style="display:none"><div class="note n-ok">Tabs, nav, breadcrumb, pagination, stepper.</div><div id="nv-body"></div></div>
+<div id="pane-feedback" style="display:none"><div class="note n-ok">Alert (bg/border/icon/title), toast, tooltip, popover, badge (subtle + solid variants + text tokens), tag (all states).</div><div id="fb-body"></div></div>
+<div id="pane-containers" style="display:none"><div class="note n-ok">Card, modal, menu, accordion.</div><div id="cn-body"></div></div>
+<div id="pane-data" style="display:none"><div class="note n-ok">Table, list, avatar, progress, skeleton, code-block (full syntax tokens), divider, scrollbar, focus ring, selection highlight, KBD, drag handle, empty state.</div><div id="dd-body"></div></div>
+<div id="pane-dataviz" style="display:none"><div class="note n-new">New. 8 chart series + axis/grid/tooltip/threshold tokens.</div><div id="dv-body"></div></div>
+<div id="pane-drawer" style="display:none"><div class="note n-new">New. Slides from screen edge. All tokens mapped to primitives.</div><div id="dr-body"></div></div>
+<div id="pane-command" style="display:none"><div class="note n-new">New. Command palette / spotlight search.</div><div id="cm-body"></div></div>
+<div id="pane-datepicker" style="display:none"><div class="note n-new">New. Calendar grid — all day states mapped.</div><div id="dp-body"></div></div>
+<div id="pane-segmented" style="display:none"><div class="note n-new">New. Segmented control.</div><div id="sg-body"></div></div>
+<div id="pane-fileupload" style="display:none"><div class="note n-new">New. File upload / dropzone.</div><div id="fu-body"></div></div>
+<div id="pane-iconbtn" style="display:none"><div class="note n-new">New. Icon-only button variants.</div><div id="ib-body"></div></div>
+<div id="pane-splitbtn" style="display:none"><div class="note n-new">New. Split button.</div><div id="sb-body"></div></div>
+<div id="pane-rating" style="display:none"><div class="note n-new">New. Rating component.</div><div id="rt-body"></div></div>
+<div id="pane-timeline" style="display:none"><div class="note n-new">New. Timeline / activity feed.</div><div id="tl-body"></div></div>
+<div id="pane-utility" style="display:none"><div class="note n-new">New. Cross-component utility tokens: divider, scrollbar, focus ring, selection highlight, KBD, drag handle, empty state.</div><div id="ut-body"></div></div>
+</div>
+
+<script>/* DS_CONFIG — injected by compiler */
+window.__DS_CONFIG__ = {
+  "brands": {
+    "primary": "#B7812F",
+    "secondary": "#8C35BE",
+    "info": "#3758BF",
+    "warning": "#B85F38",
+    "success": "#2FA836",
+    "error": "#BA3430"
+  },
+  "pgHue": 73.79,
+  "sgHue": 310.04,
+  "floorStop": 950,
+  "floorL": 0.17,
+  "elevStep": 0.02,
+  "ctaColor": "primary",
+  "elevPg": [
+    "#120F0B",
+    "#15120D",
+    "#191612",
+    "#1F1B17",
+    "#25211C"
+  ],
+  "elevSg": [
+    "#110E13",
+    "#141116",
+    "#18151A",
+    "#1D1B1F",
+    "#232025"
+  ]
+};
+</script>
+<script>
+// ── OKLCH math ──────────────────────────────────────────────────────────────
+function hexToOklch(hex){
+  const rv=parseInt(hex.slice(1,3),16)/255,gv=parseInt(hex.slice(3,5),16)/255,bv=parseInt(hex.slice(5,7),16)/255;
+  const tl=c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4;const rl=tl(rv),gl=tl(gv),bl=tl(bv);
+  const x=.4124564*rl+.3575761*gl+.1804375*bl,y=.2126729*rl+.7151522*gl+.0721750*bl,z=.0193339*rl+.1191920*gl+.9503041*bl;
+  const lm=.8189330101*x+.3618667424*y-.1288597137*z,mm=.0329845436*x+.9293118715*y+.0361456387*z,sm=.0482003018*x+.2643662691*y+.6338517070*z;
+  const lp=Math.cbrt(lm),mp=Math.cbrt(mm),sp=Math.cbrt(sm);
+  const L=.2104542553*lp+.7936177850*mp-.0040720468*sp,av=1.9779984951*lp-2.4285922050*mp+.4505937099*sp,bk=.0259040371*lp+.7827717662*mp-.8086757660*sp;
+  const C=Math.sqrt(av*av+bk*bk);let H=Math.atan2(bk,av)*180/Math.PI;if(H<0)H+=360;
+  return{L,C,H};
+}
+function oklchToHex(L,C,H){
+  const rad=H*Math.PI/180,a=C*Math.cos(rad),b=C*Math.sin(rad);
+  const lp=L+.3963377774*a+.2158037573*b,mp=L-.1055613458*a-.0638541728*b,sp=L-.0894841775*a-1.2914855480*b;
+  const lc=lp**3,mc=mp**3,sc=sp**3;
+  const x=1.2270138511*lc-.5577999807*mc+.2812561490*sc,y=-.0405801784*lc+1.1122568696*mc-.0716766787*sc,z=-.0763812845*lc-.4214819784*mc+1.5861632204*sc;
+  const rl=3.2404542*x-1.5371385*y-.4985314*z,gl=-.9692660*x+1.8760108*y+.0415560*z,bl=.0556434*x-.2040259*y+1.0572252*z;
+  const gam=v=>{const c=Math.max(0,Math.min(1,v));return c<=.0031308?12.92*c:1.055*c**(1/2.4)-.055};
+  const h=v=>Math.round(gam(v)*255).toString(16).padStart(2,'0').toUpperCase();
+  return'#'+h(rl)+h(gl)+h(bl);
+}
+function cbez(t){let lo=0,hi=1,mt=t;for(let i=0;i<10;i++){const ax=3*.4-3*.6+1,bx=3*.6-6*.4,cx=3*.4;const x=((ax*mt+bx)*mt+cx)*mt;x<t?lo=mt:hi=mt;mt=(lo+hi)/2;}const ay=3*0-3*1+1,by=3*1-6*0,cy=3*0;return((ay*mt+by)*mt+cy)*mt;}
+
+const ALL=[50,100,200,300,400,500,600,700,800,900,950,1000];
+const ENV={50:.08,100:.20,200:.40,300:.65,400:.85,500:1,600:1,700:.95,800:.80,900:.60,950:.40,1000:.25};
+const LP={standard:{50:.98,100:.95,200:.90,300:.80,400:.70,600:.50,700:.40,800:.30,900:.20,950:.12,1000:.05},'blue-optimized':{50:.98,100:.95,200:.91,300:.83,400:.73,600:.48,700:.37,800:.27,900:.16,950:.08,1000:.04},'yellow-optimized':{50:.97,100:.93,200:.87,300:.78,400:.68,600:.51,700:.42,800:.32,900:.24,950:.16,1000:.10},'green-optimized':{50:.975,100:.940,200:.885,300:.790,400:.690,600:.505,700:.405,800:.305,900:.210,950:.130,1000:.065}};
+const FAM=[{n:'pink',r:[[335,360],[0,15]],b:'standard',s:.26,p:.32,dL:8,dD:-6,t:.10},{n:'red',r:[[15,45]],b:'standard',s:.25,p:.30,dL:5,dD:-5,t:.08},{n:'orange',r:[[45,65]],b:'standard',s:.22,p:.27,dL:6,dD:-5,t:.08},{n:'yellow',r:[[65,105]],b:'yellow-optimized',s:.17,p:.20,dL:2,dD:-1,t:.08},{n:'chartreuse',r:[[105,130]],b:'yellow-optimized',s:.19,p:.23,dL:3,dD:-2,t:.08},{n:'true-green',r:[[130,160]],b:'green-optimized',s:.22,p:.28,dL:5,dD:-4,t:.08},{n:'teal',r:[[160,185]],b:'green-optimized',s:.20,p:.25,dL:4,dD:-3,t:.08},{n:'cyan',r:[[185,225]],b:'standard',s:.20,p:.25,dL:5,dD:-4,t:.08},{n:'blue',r:[[225,285]],b:'blue-optimized',s:.25,p:.30,dL:3,dD:-2,t:.06},{n:'purple',r:[[285,335]],b:'standard',s:.28,p:.35,dL:10,dD:-8,t:.08}];
+function fam(H){for(const f of FAM)for(const[a,b]of f.r){if(a<=b){if(H>=a&&H<=b)return f;}else{if(H>=a||H<=b)return f;}}return FAM[0];}
+function buildRamp(hex,grey,gh){
+  const base=hexToOklch(hex);const f=fam(base.H);const prof=LP[f.b];const n=ALL.length;
+  return ALL.map((stop,idx)=>{
+    const L=stop===500?base.L:prof[stop];
+    const eV=ALL.map(s=>ENV[s]);const minE=Math.min(...eV),maxE=Math.max(...eV);const bezE=minE+(maxE-minE)*cbez(idx/(n-1));
+    let Hu=grey?(gh||base.H):base.H,Cr=grey?.010:base.C*bezE;
+    if(!grey){const Cf=Math.min(Cr,f.s),dr=base.C-f.t;if(!(Cf<=f.t||dr<=0)){const ft=(Cf-f.t)/dr;if(stop<500)Hu=base.H+f.dL*ft*cbez(idx/(n-1));else if(stop>500)Hu=base.H+f.dD*ft*cbez(1-idx/(n-1));}}
+    return{stop,hex:oklchToHex(L,grey?.010:Math.min(Cr,f.p),Hu)};
+  });
+}
+const R={};
+const BRANDS={primary:'#A952DB',secondary:'#DB7D52',info:'#5272DB',warning:'#DBA452',success:'#4CB33C',error:'#DB5652'};
+Object.entries(BRANDS).forEach(([k,v])=>{R[k]=buildRamp(v,false);});
+R.pg=buildRamp('#A952DB',true,305);
+R.sg=buildRamp('#DB7D52',true,42);
+const ELEV=[0.30,0.325,0.35,0.375,0.40].map(L=>oklchToHex(L,0.010,305));
+
+function sh(ramp,stop){return R[ramp]?.find(x=>x.stop===stop)?.hex||'#888';}
+function ev(i){return ELEV[i]||'#888';}
+function applyDL(hex,dL){const b=hexToOklch(hex);return oklchToHex(Math.max(0,Math.min(1,b.L+dL)),b.C,b.H);}
+function hex2rgba(hex,pct){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`rgba(${r},${g},${b},${pct/100})`;}
+
+// ── Render helpers ──────────────────────────────────────────────────────────
+// Full chain: component → semantic → primitive → hex
+function r(token, sem, lPrim, lHex, dPrim, dHex, note, badge){
+  const lSw=lHex==='transparent'?`<span class="sw" style="background:repeating-linear-gradient(45deg,#ccc,#ccc 1px,transparent 1px,transparent 4px)"></span>`:lPrim&&lPrim.includes('@')?`<span class="sw sw-ov" style="background:${hex2rgba(lHex,parseInt(lPrim.split('@')[1]))}"></span>`:`<span class="sw" style="background:${lHex}"></span>`;
+  const dSw=dHex==='transparent'?`<span class="sw" style="background:repeating-linear-gradient(45deg,#ccc,#ccc 1px,transparent 1px,transparent 4px)"></span>`:dPrim&&dPrim.includes('@')?`<span class="sw sw-ov" style="background:${hex2rgba(dHex,parseInt(dPrim.split('@')[1]))}"></span>`:`<span class="sw" style="background:${dHex}"></span>`;
+  const bdg=badge?`<span class="badge ${badge.c}">${badge.t}</span>`:'';
+  const semHtml=sem?`<span class="sem">${sem}</span> <span class="arr">→</span> `:'';
+  return`<tr><td>${token} ${bdg}</td>
+    <td><div class="chain">${semHtml}<span class="prim">${lPrim||'—'}</span> <span class="arr">→</span> ${lSw}<span class="hx">${lHex}</span></div></td>
+    <td><div class="chain"><span class="prim">${dPrim||'—'}</span> <span class="arr">→</span> ${dSw}<span class="hx">${dHex}</span></div></td>
+    <td class="note-cell">${note||''}</td></tr>`;
+}
+function g(label){return`<tr class="gr"><td colspan="4">${label}</td></tr>`;}
+function tbl(html,id){document.getElementById(id).innerHTML=`<table><thead><tr><th style="min-width:200px">Token</th><th>Light: semantic → primitive → hex</th><th>Dark: primitive → hex</th><th>Notes</th></tr></thead><tbody>${html}</tbody></table>`;}
+
+// ── Semantic roles ──────────────────────────────────────────────────────────
+let s='';
+s+=g('Background · weight 1');
+s+=r('color/bg','background','{pg.50}',sh('pg',50),'{elev.0}',ev(0),'Page canvas');
+s+=r('color/bg-subtle','surface-variant','{pg.100}',sh('pg',100),'{elev.0}',ev(0),'Subtle tint');
+s+=g('Surface · weight 2');
+s+=r('color/surface','surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1),'Cards');
+s+=r('color/surface-raised','surface-elevated','{pg.50}',sh('pg',50),'{elev.2}',ev(2),'Dialogs, menus');
+s+=r('color/surface-subtle','surface-variant','{pg.100}',sh('pg',100),'{elev.1}',ev(1),'Inset');
+s+=r('color/surface-inverse','inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),'Dark in light mode');
+s+=r('color/surface-disabled','disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800),'Disabled fill');
+s+=g('Fill · weight 4');
+s+=r('color/fill/brand','primary','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'Brand CTA');
+s+=r('color/fill/brand-subtle','primary-container','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800),'Brand tint');
+s+=r('color/fill/secondary','secondary','{secondary.300}',sh('secondary',300),'{secondary.700}',sh('secondary',700),'Secondary fill');
+[['error',500,300],['success',600,300],['warning',700,300],['info',500,300]].forEach(([k,l,d])=>{
+  s+=r(`color/fill/${k}`,k,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d));
+  s+=r(`color/fill/${k}-subtle`,`${k}-subtle`,`{${k}.50}`,sh(k,50),`{${k}.900}`,sh(k,900),`${k} banner bg`);
+});
+s+=r('color/fill/control','surface-variant','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700),'Toggle, slider');
+s+=g('Overlay · weight 2 · NO_TEXT');
+s+=r('color/surface-overlay','overlay','{pg.900} @ 26%',sh('pg',900),'{pg.50} @ 26%',sh('pg',50),'Modal backdrop',{c:'b-ov',t:'NO_TEXT'});
+s+=r('color/surface-overlay-brand','overlay-brand','{primary.900} @ 15%',sh('primary',900),'{primary.50} @ 15%',sh('primary',50),'Brand tint',{c:'b-ov',t:'NO_TEXT'});
+s+=r('color/surface-overlay-error','overlay-error','{error.900} @ 15%',sh('error',900),'{error.50} @ 15%',sh('error',50),'Critical scrim',{c:'b-ov',t:'NO_TEXT'});
+s+=r('color/surface-overlay-warning','overlay-warning','{warning.900} @ 12%',sh('warning',900),'{warning.50} @ 12%',sh('warning',50),'Warning tint',{c:'b-ov',t:'NO_TEXT'});
+s+=r('color/surface-overlay-selection','overlay-sel','{primary.900} @ 6%',sh('primary',900),'{primary.50} @ 6%',sh('primary',50),'Row selection',{c:'b-ov',t:'6%'});
+tbl(s,'sem-body');
+
+// ── Overlays ────────────────────────────────────────────────────────────────
+let ov='';
+ov+=g('5 overlay tokens — cross-wired between light/dark');
+const ovs=[['color/surface-overlay','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),26,'Modal backdrop'],['color/surface-overlay-brand','{primary.900}',sh('primary',900),'{primary.50}',sh('primary',50),15,'Brand image tint'],['color/surface-overlay-error','{error.900}',sh('error',900),'{error.50}',sh('error',50),15,'Destructive flash'],['color/surface-overlay-warning','{warning.900}',sh('warning',900),'{warning.50}',sh('warning',50),12,'Warning tint'],['color/surface-overlay-selection','{primary.900}',sh('primary',900),'{primary.50}',sh('primary',50),6,'Row/list selection']];
+ovs.forEach(([t,lp,lh,dp,dh,op,u])=>{ov+=r(t,'',`${lp} @ ${op}%`,lh,`${dp} @ ${op}%`,dh,u,{c:'b-ov',t:`${op}%`});});
+ov+=g('Figma: Alias primitive → type opacity in % box. CSS: color-mix(in oklch, {hex} {op}%, transparent)');
+tbl(ov,'ov-body');
+
+// ── Helpers for repeated patterns ───────────────────────────────────────────
+const PG=(s,d,u)=>({lp:`{pg.${s}}`,lh:sh('pg',s),dp:`{pg.${d}}`,dh:sh('pg',d),u});
+const PR=(s,d,u)=>({lp:`{primary.${s}}`,lh:sh('primary',s),dp:`{primary.${d}}`,dh:sh('primary',d),u});
+const ER=(s,d,u)=>({lp:`{error.${s}}`,lh:sh('error',s),dp:`{error.${d}}`,dh:sh('error',d),u});
+const SC=(s,d,u)=>({lp:`{success.${s}}`,lh:sh('success',s),dp:`{success.${d}}`,dh:sh('success',d),u});
+const WA=(s,d,u)=>({lp:`{warning.${s}}`,lh:sh('warning',s),dp:`{warning.${d}}`,dh:sh('warning',d),u});
+const IN=(s,d,u)=>({lp:`{info.${s}}`,lh:sh('info',s),dp:`{info.${d}}`,dh:sh('info',d),u});
+const EV=(l,dk,u)=>({lp:`{pg.50}`,lh:sh('pg',50),dp:`{elev.${dk}}`,dh:ev(dk),u});
+const TRANS=()=>({lp:'transparent',lh:'transparent',dp:'transparent',dh:'transparent',u:''});
+
+// ── Typography ──────────────────────────────────────────────────────────────
+let ty='';
+ty+=g('Headings');
+[['heading-1','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),''],['heading-2','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),''],['heading-3','{pg.800}',sh('pg',800),'{pg.100}',sh('pg',100),''],['heading-4','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200),'']].forEach(([t,lp,lh,dp,dh,u])=>ty+=r(`color/text/${t}`,'text-primary',lp,lh,dp,dh,u));
+ty+=g('Body');
+ty+=r('color/text/primary','text-primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),'Body text');
+ty+=r('color/text/secondary','text-secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200),'Labels — corrected 700→800');
+ty+=r('color/text/tertiary','text-disabled','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300),'Timestamps');
+ty+=r('color/text/disabled','text-disabled','{pg.400}',sh('pg',400),'{pg.400}',sh('pg',400),'Disabled');
+ty+=r('color/text/placeholder','text-disabled','{pg.400}',sh('pg',400),'{pg.400}',sh('pg',400),'Placeholder');
+ty+=r('color/text/inverse','inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900),'On dark fills');
+ty+=g('Interactive');
+ty+=r('color/text/brand','primary-container','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300),'Brand text, links');
+ty+=r('color/text/link','info','{info.600}',sh('info',600),'{info.300}',sh('info',300),'Hyperlinks');
+ty+=r('color/text/link-visited','primary','{primary.700}',sh('primary',700),'{primary.400}',sh('primary',400),'Visited');
+ty+=r('color/text/code','primary','{primary.700}',sh('primary',700),'{primary.300}',sh('primary',300),'Inline code');
+ty+=g('Semantic');
+ty+=r('color/text/error','error','{error.700}',sh('error',700),'{error.300}',sh('error',300),'Error msg');
+ty+=r('color/text/success','success','{success.700}',sh('success',700),'{success.300}',sh('success',300),'Success msg');
+ty+=r('color/text/warning','warning','{warning.700}',sh('warning',700),'{warning.300}',sh('warning',300),'Warning msg');
+ty+=r('color/text/info','info','{info.700}',sh('info',700),'{info.300}',sh('info',300),'Info msg');
+tbl(ty,'ty-body');
+
+// ── Surfaces ────────────────────────────────────────────────────────────────
+let su='';
+su+=g('Page');su+=r('color/bg','background','{pg.50}',sh('pg',50),'{elev.0}',ev(0),'Canvas');su+=r('color/bg-subtle','surface-variant','{pg.100}',sh('pg',100),'{elev.0}',ev(0),'Subtle');
+su+=g('Component');su+=r('color/surface','surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1),'Cards');su+=r('color/surface-raised','surface-elevated','{pg.50}',sh('pg',50),'{elev.2}',ev(2),'Dialogs');su+=r('color/surface-subtle','surface-variant','{pg.100}',sh('pg',100),'{elev.1}',ev(1),'Inset');su+=r('color/surface-inverse','inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50),'Inverse');su+=r('color/surface-disabled','disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800),'Disabled');
+su+=g('Feedback');[['error',50,900],['success',50,900],['warning',50,900],['info',50,900]].forEach(([k,l,d])=>su+=r(`color/fill/${k}-subtle`,k,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d),`${k} bg`));
+tbl(su,'su-body');
+
+// ── Borders ─────────────────────────────────────────────────────────────────
+let bo='';
+bo+=g('Structural');
+bo+=r('color/border/default','outline','{pg.300}',sh('pg',300),'{pg.600}',sh('pg',600));bo+=r('color/border/strong','outline-variant','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));bo+=r('color/border/subtle','outline-variant','{pg.200}',sh('pg',200),'{pg.600}',sh('pg',600));bo+=r('color/border/inverse','inverse','{pg.50}',sh('pg',50),'{pg.50}',sh('pg',50));bo+=r('color/border/disabled','outline-variant','{pg.200}',sh('pg',200),'{pg.600}',sh('pg',600));
+bo+=g('Interactive');
+bo+=r('color/border/brand','primary','{primary.400}',sh('primary',400),'{primary.500}',sh('primary',500));bo+=r('color/border/brand-strong','primary','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'Focus ring');bo+=r('color/focus/ring','primary','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'2px/2px');bo+=r('color/focus/ring-error','error','{error.500}',sh('error',500),'{error.300}',sh('error',300));
+bo+=g('Semantic');
+[['error',600,400],['success',700,400],['warning',600,400],['info',600,400]].forEach(([k,l,d])=>bo+=r(`color/border/${k}`,k,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+tbl(bo,'bo-body');
+
+// ── Icons ───────────────────────────────────────────────────────────────────
+let ic='';
+ic+=g('Icon');
+ic+=r('color/icon/default','text-primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));ic+=r('color/icon/subtle','text-secondary','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));ic+=r('color/icon/brand','primary','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));ic+=r('color/icon/inverse','inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900));ic+=r('color/icon/disabled','text-disabled','{pg.300}',sh('pg',300),'{pg.600}',sh('pg',600));
+[['error',600,300],['success',600,300],['warning',600,300],['info',600,300]].forEach(([k,l,d])=>ic+=r(`color/icon/${k}`,k,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+ic+=g('On-fill · weight 8');
+ic+=r('color/on-fill/brand','on-primary','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900),'Lc 75');ic+=r('color/on-fill/secondary','on-secondary','{secondary.900}',sh('secondary',900),'{secondary.50}',sh('secondary',50));
+[['error',50,900],['success',50,900],['warning',50,900],['info',50,900]].forEach(([k,l,d])=>ic+=r(`color/on-fill/${k}`,`on-${k}`,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+ic+=r('color/on-fill/inverse','inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900));
+tbl(ic,'ic-body');
+
+// ── Helper to build component tables with full chain ─────────────────────────
+// ── Button ──────────────────────────────────────────────────────────────────
+let bt='';
+const p5=sh('primary',500),p3=sh('primary',300);
+bt+=g('Primary button');
+bt+=r('button/primary/bg/default','color/fill/brand','{primary.500}',p5,'{primary.300}',p3);
+bt+=r('button/primary/bg/hover','L3 ΔL±0.05',`{primary.${sh('primary',500)}}`,applyDL(p5,-0.05),`{primary.300}→δ`,applyDL(p3,0.05),'L3 direction multiplier');
+bt+=r('button/primary/bg/active','L3 ΔL±0.09',`δ`,applyDL(p5,-0.09),`δ`,applyDL(p3,-0.09));
+bt+=r('button/primary/bg/pressed','L3 ΔL±0.12',`δ`,applyDL(p5,-0.12),`δ`,applyDL(p3,-0.12));
+bt+=r('button/primary/bg/disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));
+bt+=r('button/primary/text/default','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));
+bt+=g('Secondary button');
+bt+=r('button/secondary/bg/default','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));
+bt+=r('button/secondary/bg/hover','darken (L>pivot)','{primary.200}',sh('primary',200),'{primary.700}',sh('primary',700),'Light container → darken');
+bt+=r('button/secondary/text/default','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));
+bt+=g('Ghost button');
+bt+=r('button/ghost/bg/default','transparent','transparent','transparent','transparent','transparent');
+bt+=r('button/ghost/bg/hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));
+bt+=r('button/ghost/border/default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));
+bt+=r('button/ghost/border/focus','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+bt+=g('Destructive button');
+bt+=r('button/destructive/bg/default','color/fill/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));
+bt+=r('button/destructive/bg/hover','L3 ΔL','δ',applyDL(sh('error',500),-0.05),'δ',applyDL(sh('error',300),-0.05));
+bt+=r('button/destructive/text','color/on-fill/error','{error.50}',sh('error',50),'{error.900}',sh('error',900));
+bt+=g('Link button');
+bt+=r('button/link/text/default','color/text/link','{info.600}',sh('info',600),'{info.300}',sh('info',300));
+bt+=r('button/link/text/hover','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));
+tbl(bt,'bt-body');
+
+// ── Input ───────────────────────────────────────────────────────────────────
+let inp='';
+inp+=g('Backgrounds');
+inp+=r('input/bg/default','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));inp+=r('input/bg/hover','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));inp+=r('input/bg/error','color/fill/error-subtle','{error.50}',sh('error',50),'{error.900}',sh('error',900));inp+=r('input/bg/disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));inp+=r('input/bg/readonly','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));
+inp+=g('Borders');
+inp+=r('input/border/default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));inp+=r('input/border/hover','color/border/strong','{pg.400}',sh('pg',400),'{pg.600}',sh('pg',600));inp+=r('input/border/focus','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));inp+=r('input/border/error','color/border/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));inp+=r('input/border/disabled','color/border/disabled','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+inp+=g('Text + Labels');
+inp+=r('input/text/value','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));inp+=r('input/text/placeholder','color/text/placeholder','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));inp+=r('input/label/default','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));inp+=r('input/label/focus','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));inp+=r('input/label/error','color/text/error','{error.700}',sh('error',700),'{error.300}',sh('error',300));inp+=r('input/helper/error','color/text/error','{error.700}',sh('error',700),'{error.300}',sh('error',300));inp+=r('input/helper/success','color/text/success','{success.700}',sh('success',700),'{success.300}',sh('success',300));
+tbl(inp,'in-body');
+
+// ── Controls ─────────────────────────────────────────────────────────────────
+let ct='';
+ct+=g('Checkbox');ct+=r('checkbox/box/bg-unchecked','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));ct+=r('checkbox/box/bg-checked','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('checkbox/box/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ct+=r('checkbox/box/bg-error','color/fill/error-subtle','{error.50}',sh('error',50),'{error.900}',sh('error',900));ct+=r('checkbox/box/bg-disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));ct+=r('checkbox/box/border-default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ct+=r('checkbox/box/border-checked','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('checkbox/check/color','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));ct+=r('checkbox/label/default','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));
+ct+=g('Toggle');ct+=r('toggle/track/off','color/fill/control','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));ct+=r('toggle/track/on','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('toggle/thumb/default','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));ct+=r('toggle/thumb/off','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));
+ct+=g('Slider');ct+=r('slider/track/bg','color/fill/control','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));ct+=r('slider/track/fill','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('slider/thumb/bg','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('slider/thumb/bg-hover','color/fill/brand','{primary.500}',applyDL(sh('primary',500),-0.05),'{primary.300}',applyDL(sh('primary',300),0.05),'L3 hover ΔL');ct+=r('slider/thumb/bg-disabled','color/text/disabled','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));
+ct+=g('Radio');ct+=r('radio/bg-unselected','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));ct+=r('radio/bg-selected','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('radio/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ct+=r('radio/bg-disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));ct+=r('radio/border-default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ct+=r('radio/border-selected','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('radio/dot','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));ct+=r('radio/label','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));
+ct+=g('Select');ct+=r('select/bg-default','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));ct+=r('select/bg-hover','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));ct+=r('select/bg-disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));ct+=r('select/border-default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ct+=r('select/border-focus','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ct+=r('select/chevron','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));ct+=r('select/option-list/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));ct+=r('select/option-list/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ct+=r('select/option/bg-default','transparent','transparent','transparent','transparent');ct+=r('select/option/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ct+=r('select/option/bg-selected','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ct+=r('select/option/text-default','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));ct+=r('select/option/text-selected','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));ct+=r('select/option/check-icon','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));ct+=r('select/option/group-label','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));ct+=r('select/option/separator','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+tbl(ct,'ct-body');
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+let nv='';
+nv+=g('Tabs');nv+=r('tabs/bar/bg','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));nv+=r('tabs/tab/text-default','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));nv+=r('tabs/tab/text-active','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));nv+=r('tabs/tab/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));nv+=r('tabs/indicator/color','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+nv+=g('Nav');nv+=r('nav/container/bg','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));nv+=r('nav/item/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));nv+=r('nav/item/text-default','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));nv+=r('nav/item/text-active','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));nv+=r('nav/badge/bg','color/fill/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));
+nv+=g('Breadcrumb');nv+=r('breadcrumb/link','color/text/link','{info.600}',sh('info',600),'{info.300}',sh('info',300));nv+=r('breadcrumb/current','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));
+nv+=g('Pagination');nv+=r('pagination/item/bg-current','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));nv+=r('pagination/item/text-current','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));nv+=r('pagination/item/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));
+nv+=g('Stepper');nv+=r('stepper/step/bg-active','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));nv+=r('stepper/step/bg-complete','color/fill/success','{success.600}',sh('success',600),'{success.300}',sh('success',300));nv+=r('stepper/step/bg-error','color/fill/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));nv+=r('stepper/connector/complete','color/fill/success','{success.600}',sh('success',600),'{success.300}',sh('success',300));
+tbl(nv,'nv-body');
+
+// ── Feedback ─────────────────────────────────────────────────────────────────
+let fb='';
+fb+=g('Alert');[['error',50,900],[' success',50,900],['warning',50,900],['info',50,900]].forEach(([k,l,d])=>fb+=r(`alert/${k.trim()}/bg`,`color/fill/${k.trim()}-subtle`,`{${k.trim()}.${l}}`,sh(k.trim(),l),`{${k.trim()}.${d}}`,sh(k.trim(),d)));
+[['error','border/error',600,400],['success','border/success',700,400],['warning','border/warning',600,400],['info','border/info',600,400]].forEach(([k,sem,l,d])=>fb+=r(`alert/${k}/border`,`color/${sem}`,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+fb+=g('Toast');fb+=r('toast/default/bg','color/surface-inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));[['error',500,300],['success',600,300],['warning',700,300],['info',500,300]].forEach(([k,l,d])=>fb+=r(`toast/${k}/bg`,`color/fill/${k}`,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+fb+=g('Tooltip');fb+=r('tooltip/bg','color/surface-inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));fb+=r('tooltip/text','color/text/inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900));
+fb+=g('Badge');[{k:'neutral',lp:'{pg.100}',lh:sh('pg',100),dp:'{pg.800}',dh:sh('pg',800)},{k:'brand',lp:'{primary.100}',lh:sh('primary',100),dp:'{primary.800}',dh:sh('primary',800)},{k:'error',lp:'{error.50}',lh:sh('error',50),dp:'{error.900}',dh:sh('error',900)},{k:'success',lp:'{success.50}',lh:sh('success',50),dp:'{success.900}',dh:sh('success',900)},{k:'warning',lp:'{warning.50}',lh:sh('warning',50),dp:'{warning.900}',dh:sh('warning',900)},{k:'info',lp:'{info.50}',lh:sh('info',50),dp:'{info.900}',dh:sh('info',900)}].forEach(({k,lp,lh,dp,dh})=>fb+=r(`badge/${k}/bg`,'',lp,lh,dp,dh));
+fb+=r('badge/neutral/text','color/text/secondary','{pg.800}',sh('pg',800),'{pg.100}',sh('pg',100));fb+=r('badge/brand/text','color/text/brand','{primary.700}',sh('primary',700),'{primary.200}',sh('primary',200));[['error',700,200],['success',700,200],['warning',700,200],['info',700,200]].forEach(([k,l,d])=>fb+=r(`badge/${k}/text`,`color/text/${k}`,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+fb+=r('badge/solid-brand/bg','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'Solid variant');fb+=r('badge/solid-brand/text','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));fb+=r('badge/solid-error/bg','color/fill/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));fb+=r('badge/solid-error/text','color/on-fill/error','{error.50}',sh('error',50),'{error.900}',sh('error',900));
+fb+=g('Alert — full token set');[['error',50,900,500,300,600,300,700,300],['success',50,900,600,300,600,300,700,300],['warning',50,900,600,300,600,300,700,300],['info',50,900,500,300,600,300,700,300]].forEach(([k,bgl,bgd,brl,brd,icl,icd,ttl,ttd])=>{fb+=r(`alert/${k}/bg`,`color/fill/${k}-subtle`,`{${k}.${bgl}}`,sh(k,bgl),`{${k}.${bgd}}`,sh(k,bgd));fb+=r(`alert/${k}/border`,`color/border/${k}`,`{${k}.${brl}}`,sh(k,brl),`{${k}.${brd}}`,sh(k,brd));fb+=r(`alert/${k}/icon`,`color/icon/${k}`,`{${k}.${icl}}`,sh(k,icl),`{${k}.${icd}}`,sh(k,icd));fb+=r(`alert/${k}/title`,`color/text/${k}`,`{${k}.${ttl}}`,sh(k,ttl),`{${k}.${ttd}}`,sh(k,ttd));});
+fb+=g('Toast — full token set');fb+=r('toast/default/bg','color/surface-inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));fb+=r('toast/default/text','color/text/inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900));[['error',600,700,50,50],['success',600,700,50,50],['warning',700,700,50,50],['info',600,700,50,50]].forEach(([k,bgl,bgd,txl,txd])=>{fb+=r(`toast/${k}/bg`,`color/fill/${k}`,`{${k}.${bgl}}`,sh(k,bgl),`{${k}.${bgd}}`,sh(k,bgd));fb+=r(`toast/${k}/text`,`color/on-fill/${k}`,`{${k}.${txl}}`,sh(k,txl),`{${k}.${txd}}`,sh(k,txd));});
+fb+=g('Tooltip');fb+=r('tooltip/bg','color/surface-inverse','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));fb+=r('tooltip/text','color/text/inverse','{pg.50}',sh('pg',50),'{pg.900}',sh('pg',900));fb+=r('tooltip/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+fb+=g('Popover');fb+=r('popover/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));fb+=r('popover/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));fb+=r('popover/arrow','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2),'Arrow same as bg');fb+=r('popover/header/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));fb+=r('popover/divider','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+fb+=g('Tag — full states');fb+=r('tag/bg/default','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));fb+=r('tag/bg/hover','color/bg-subtle','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));fb+=r('tag/bg/selected','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));fb+=r('tag/bg/disabled','color/surface-disabled','{pg.100}',sh('pg',100),'{pg.800}',sh('pg',800));fb+=r('tag/border/default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));fb+=r('tag/border/selected','color/border/brand','{primary.400}',sh('primary',400),'{primary.500}',sh('primary',500));fb+=r('tag/text/default','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));fb+=r('tag/text/selected','color/text/brand','{primary.700}',sh('primary',700),'{primary.200}',sh('primary',200));fb+=r('tag/text/disabled','color/text/disabled','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));fb+=r('tag/icon/remove','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));
+tbl(fb,'fb-body');
+
+// ── Containers ───────────────────────────────────────────────────────────────
+let cn='';
+cn+=g('Card');cn+=r('card/bg/default','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));cn+=r('card/border/default','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));cn+=r('card/border/hover','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));cn+=r('card/border/selected','color/border/brand','{primary.400}',sh('primary',400),'{primary.500}',sh('primary',500));
+cn+=g('Modal');cn+=r('modal/backdrop','color/surface-overlay','{pg.900} @ 26%',sh('pg',900),'{pg.50} @ 26%',sh('pg',50),'NO_TEXT',{c:'b-ov',t:'NO_TEXT'});cn+=r('modal/container/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));cn+=r('modal/header/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));
+cn+=g('Menu');cn+=r('menu/container/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));cn+=r('menu/item/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));cn+=r('menu/item/text-destructive','color/text/error','{error.700}',sh('error',700),'{error.300}',sh('error',300));
+cn+=g('Accordion');cn+=r('accordion/header/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));cn+=r('accordion/content/bg','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));
+tbl(cn,'cn-body');
+
+// ── Data display ─────────────────────────────────────────────────────────────
+let dd='';
+dd+=g('Table');dd+=r('table/header/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));dd+=r('table/row/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dd+=r('table/row/bg-selected','color/surface-overlay-selection','{primary.900} @ 6%',sh('primary',900),'{primary.50} @ 6%',sh('primary',50),'Overlay',{c:'b-ov',t:'6%'});dd+=r('table/cell/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+dd+=g('List');dd+=r('list/item/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dd+=r('list/item/bg-selected','color/surface-overlay-selection','{primary.900} @ 6%',sh('primary',900),'{primary.50} @ 6%',sh('primary',50),'Overlay',{c:'b-ov',t:'6%'});
+dd+=g('Avatar');dd+=r('avatar/bg/default','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));dd+=r('avatar/border/stack','color/surface','{pg.50}',sh('pg',50),'{elev.1}',ev(1));
+dd+=g('Progress');dd+=r('progress/track','color/fill/control','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));dd+=r('progress/fill/brand','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));[['success',600,300],['error',500,300],['warning',700,300]].forEach(([k,l,d])=>dd+=r(`progress/fill/${k}`,`color/fill/${k}`,`{${k}.${l}}`,sh(k,l),`{${k}.${d}}`,sh(k,d)));
+dd+=g('Skeleton');dd+=r('skeleton/base','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));dd+=r('skeleton/shimmer','color/bg-subtle','{pg.50}',sh('pg',50),'{elev.0}',ev(0));
+dd+=g('Code block');dd+=r('code-block/bg','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));dd+=r('code-block/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));dd+=r('code-block/text/default','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dd+=r('code-block/text/keyword','color/text/brand','{primary.700}',sh('primary',700),'{primary.300}',sh('primary',300));dd+=r('code-block/text/string','color/text/success','{success.700}',sh('success',700),'{success.300}',sh('success',300));dd+=r('code-block/text/number','color/text/warning','{warning.700}',sh('warning',700),'{warning.300}',sh('warning',300));dd+=r('code-block/text/comment','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));dd+=r('code-block/text/function','color/text/info','{info.700}',sh('info',700),'{info.300}',sh('info',300));dd+=r('code-block/text/variable','color/text/error','{error.700}',sh('error',700),'{error.300}',sh('error',300));dd+=r('code-block/line-number','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));dd+=r('code-block/line-highlight','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));
+dd+=g('Divider');dd+=r('divider/default','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));dd+=r('divider/strong','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));dd+=r('divider/label-text','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));
+dd+=g('Scrollbar');dd+=r('scrollbar/thumb/default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));dd+=r('scrollbar/thumb/hover','color/border/strong','{pg.400}',sh('pg',400),'{pg.600}',sh('pg',600));dd+=r('scrollbar/thumb/active','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+dd+=g('Focus ring');dd+=r('focus/ring/color','color/focus/ring','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'2px width · 2px offset · Layer 2 spec');dd+=r('focus/ring/color-error','color/focus/ring-error','{error.500}',sh('error',500),'{error.300}',sh('error',300),'Error focus ring');
+dd+=g('Selection highlight');dd+=r('selection/highlight','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800),'Text selection bg');
+dd+=g('KBD — keyboard shortcut');dd+=r('kbd/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));dd+=r('kbd/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));dd+=r('kbd/text','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));
+dd+=g('Drag handle');dd+=r('drag/handle/icon-default','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));dd+=r('drag/handle/icon-hover','color/icon/default','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dd+=r('drag/handle/icon-active','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));dd+=r('drag/drop-zone/bg','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dd+=r('drag/drop-zone/border','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+dd+=g('Empty state');dd+=r('empty-state/illustration/bg','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));dd+=r('empty-state/title','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dd+=r('empty-state/body','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));dd+=r('empty-state/icon','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));
+tbl(dd,'dd-body');
+
+// ── Data Viz ─────────────────────────────────────────────────────────────────
+let dv='';
+dv+=g('Chart series — 8 colours from brand stops');
+[[{k:'primary',s:500},{k:'primary',s:300}],[{k:'info',s:500},{k:'info',s:300}],[{k:'success',s:600},{k:'success',s:300}],[{k:'error',s:500},{k:'error',s:300}],[{k:'warning',s:700},{k:'warning',s:300}],[{k:'secondary',s:300},{k:'secondary',s:700}],[{k:'primary',s:200},{k:'primary',s:700}],[{k:'success',s:200},{k:'success',s:700}]].forEach(([l,d],i)=>dv+=r(`dataviz/series-${i+1}`,`color/fill/${l.k}`,`{${l.k}.${l.s}}`,sh(l.k,l.s),`{${d.k}.${d.s}}`,sh(d.k,d.s)));
+dv+=g('Structure');dv+=r('dataviz/axis','color/border/subtle','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));dv+=r('dataviz/grid','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));dv+=r('dataviz/axis-label','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));
+dv+=g('Annotations');dv+=r('dataviz/tooltip/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));dv+=r('dataviz/tooltip/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dv+=r('dataviz/threshold/error','color/border/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));dv+=r('dataviz/threshold/success','color/border/success','{success.600}',sh('success',600),'{success.300}',sh('success',300));
+tbl(dv,'dv-body');
+
+// ── Drawer ───────────────────────────────────────────────────────────────────
+let dr='';
+dr+=g('Drawer / Sheet — all tokens explicitly mapped');
+dr+=r('drawer/backdrop','color/surface-overlay','{pg.900} @ 26%',sh('pg',900),'{pg.50} @ 26%',sh('pg',50),'NO_TEXT',{c:'b-ov',t:'NO_TEXT'});dr+=r('drawer/container/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));dr+=r('drawer/container/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));dr+=r('drawer/header/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));dr+=r('drawer/header/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dr+=r('drawer/header/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));dr+=r('drawer/close/icon','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));dr+=r('drawer/close/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dr+=r('drawer/handle','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700),'Bottom sheet drag handle');dr+=r('drawer/footer/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));dr+=r('drawer/footer/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+tbl(dr,'dr-body');
+
+// ── Command ──────────────────────────────────────────────────────────────────
+let cm='';
+cm+=g('Command palette');
+cm+=r('command/backdrop','color/surface-overlay','{pg.900} @ 26%',sh('pg',900),'{pg.50} @ 26%',sh('pg',50),'NO_TEXT',{c:'b-ov',t:'NO_TEXT'});cm+=r('command/container/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.3}',ev(3),'Deep elevation');cm+=r('command/container/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));cm+=r('command/search/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.2}',ev(2));cm+=r('command/search/border','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'Always focused');cm+=r('command/search/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));cm+=r('command/search/placeholder','color/text/placeholder','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));cm+=r('command/search/icon','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));cm+=r('command/result/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));cm+=r('command/result/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));cm+=r('command/result/text-match','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300),'Highlighted match');cm+=r('command/section-label','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));cm+=r('command/separator','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));
+tbl(cm,'cm-body');
+
+// ── Date picker ──────────────────────────────────────────────────────────────
+let dp='';
+dp+=g('Container');dp+=r('datepicker/container/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));dp+=r('datepicker/container/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));dp+=r('datepicker/header/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dp+=r('datepicker/weekday/text','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));
+dp+=g('Day states');dp+=r('datepicker/day/bg-default','transparent','transparent','transparent','transparent','transparent');dp+=r('datepicker/day/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dp+=r('datepicker/day/bg-today','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));dp+=r('datepicker/day/bg-selected','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));dp+=r('datepicker/day/bg-in-range','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));dp+=r('datepicker/day/bg-disabled','transparent','transparent','transparent','transparent');dp+=r('datepicker/day/text-default','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));dp+=r('datepicker/day/text-today','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));dp+=r('datepicker/day/text-selected','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));dp+=r('datepicker/day/text-disabled','color/text/disabled','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));dp+=r('datepicker/today-dot','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+tbl(dp,'dp-body');
+
+// ── Segmented ────────────────────────────────────────────────────────────────
+let sg='';
+sg+=g('Segmented control');sg+=r('segmented/container/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));sg+=r('segmented/container/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));sg+=r('segmented/segment/bg-default','transparent','transparent','transparent','transparent','transparent');sg+=r('segmented/segment/bg-selected','color/surface','{pg.50}',sh('pg',50),'{elev.2}',ev(2),'Elevated above track');sg+=r('segmented/segment/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));sg+=r('segmented/segment/border-selected','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));sg+=r('segmented/text/default','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));sg+=r('segmented/text/selected','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));sg+=r('segmented/text/disabled','color/text/disabled','{pg.400}',sh('pg',400),'{pg.500}',sh('pg',500));sg+=r('segmented/icon/default','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));sg+=r('segmented/icon/selected','color/icon/default','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));
+tbl(sg,'sg-body');
+
+// ── File upload ───────────────────────────────────────────────────────────────
+let fu='';
+fu+=g('Dropzone states');fu+=r('fileupload/zone/bg-idle','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));fu+=r('fileupload/zone/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));fu+=r('fileupload/zone/bg-dragover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));fu+=r('fileupload/zone/bg-success','color/fill/success-subtle','{success.50}',sh('success',50),'{success.900}',sh('success',900));fu+=r('fileupload/zone/bg-error','color/fill/error-subtle','{error.50}',sh('error',50),'{error.900}',sh('error',900));fu+=r('fileupload/zone/border-idle','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));fu+=r('fileupload/zone/border-dragover','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));fu+=r('fileupload/zone/border-error','color/border/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));fu+=r('fileupload/icon/idle','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));fu+=r('fileupload/text/label','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));fu+=r('fileupload/text/error','color/text/error','{error.700}',sh('error',700),'{error.300}',sh('error',300));
+fu+=g('File item');fu+=r('fileupload/item/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));fu+=r('fileupload/item/border','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));fu+=r('fileupload/item/progress','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+tbl(fu,'fu-body');
+
+// ── Icon button ───────────────────────────────────────────────────────────────
+let ib='';
+ib+=g('Ghost (default)');ib+=r('icon-btn/ghost/bg-default','transparent','transparent','transparent','transparent','transparent');ib+=r('icon-btn/ghost/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ib+=r('icon-btn/ghost/icon-default','color/icon/default','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));ib+=r('icon-btn/ghost/icon-hover','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));ib+=r('icon-btn/ghost/icon-disabled','color/icon/disabled','{pg.300}',sh('pg',300),'{pg.600}',sh('pg',600));
+ib+=g('Filled');ib+=r('icon-btn/filled/bg','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));ib+=r('icon-btn/filled/icon','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));
+ib+=g('Subtle');ib+=r('icon-btn/subtle/bg','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ib+=r('icon-btn/subtle/icon','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));
+ib+=g('Destructive');ib+=r('icon-btn/destructive/bg-hover','color/fill/error-subtle','{error.50}',sh('error',50),'{error.900}',sh('error',900));ib+=r('icon-btn/destructive/icon','color/icon/error','{error.600}',sh('error',600),'{error.300}',sh('error',300));
+tbl(ib,'ib-body');
+
+// ── Split button ──────────────────────────────────────────────────────────────
+let sb='';
+sb+=g('Split button');sb+=r('split-btn/main/bg','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));sb+=r('split-btn/main/text','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));sb+=r('split-btn/divider','color/on-fill/brand','{primary.50} @ 30%',sh('primary',50),'{primary.900} @ 30%',sh('primary',900),'Vertical divider',{c:'b-ov',t:'30%'});sb+=r('split-btn/trigger/bg','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));sb+=r('split-btn/trigger/icon','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));sb+=r('split-btn/dropdown/bg','color/surface-raised','{pg.50}',sh('pg',50),'{elev.2}',ev(2));sb+=r('split-btn/dropdown/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));
+tbl(sb,'sb-body');
+
+// ── Rating ────────────────────────────────────────────────────────────────────
+let rt='';
+rt+=g('Rating');rt+=r('rating/star/filled','color/fill/warning','{warning.700}',sh('warning',700),'{warning.300}',sh('warning',300),'Amber');rt+=r('rating/star/empty','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));rt+=r('rating/star/hover','color/fill/warning','{warning.500}',sh('warning',500),'{warning.400}',sh('warning',400));rt+=r('rating/star/partial','color/fill/warning','{warning.700}',sh('warning',700),'{warning.300}',sh('warning',300));rt+=r('rating/star/disabled','color/border/disabled','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));rt+=r('rating/label/value','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));rt+=r('rating/label/count','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));rt+=r('rating/bar/fill','color/fill/warning','{warning.600}',sh('warning',600),'{warning.300}',sh('warning',300),'Histogram bar');rt+=r('rating/bar/track','color/fill/control','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));
+tbl(rt,'rt-body');
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+let tl='';
+tl+=g('Connector');tl+=r('timeline/connector','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800));tl+=r('timeline/connector-complete','color/fill/success','{success.600}',sh('success',600),'{success.300}',sh('success',300));
+tl+=g('Nodes');tl+=r('timeline/node/bg-default','color/fill/control','{pg.200}',sh('pg',200),'{pg.700}',sh('pg',700));tl+=r('timeline/node/bg-active','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));tl+=r('timeline/node/bg-complete','color/fill/success','{success.600}',sh('success',600),'{success.300}',sh('success',300));tl+=r('timeline/node/bg-error','color/fill/error','{error.500}',sh('error',500),'{error.300}',sh('error',300));tl+=r('timeline/node/bg-warning','color/fill/warning','{warning.700}',sh('warning',700),'{warning.300}',sh('warning',300));tl+=r('timeline/node/icon','color/on-fill/brand','{primary.50}',sh('primary',50),'{primary.900}',sh('primary',900));tl+=r('timeline/node/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));
+tl+=g('Content');tl+=r('timeline/content/bg-hover','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));tl+=r('timeline/content/border-left','color/border/brand','{primary.400}',sh('primary',400),'{primary.500}',sh('primary',500),'Active event accent');tl+=r('timeline/title/text','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));tl+=r('timeline/body/text','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));tl+=r('timeline/timestamp/text','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400));tl+=r('timeline/author/text','color/text/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));
+tbl(tl,'tl-body');
+
+// ── Utility ──────────────────────────────────────────────────────────────────
+let ut='';
+ut+=g('Divider');ut+=r('divider/default','color/border/subtle','{pg.200}',sh('pg',200),'{pg.800}',sh('pg',800),'Horizontal/vertical');ut+=r('divider/strong','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700),'Section break');ut+=r('divider/label-text','color/text/tertiary','{pg.600}',sh('pg',600),'{pg.400}',sh('pg',400),'Divider with label');
+ut+=g('Scrollbar');ut+=r('scrollbar/thumb/default','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ut+=r('scrollbar/thumb/hover','color/border/strong','{pg.400}',sh('pg',400),'{pg.600}',sh('pg',600));ut+=r('scrollbar/thumb/active','color/fill/brand','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+ut+=g('Focus ring — Layer 2 interaction-tokens');ut+=r('focus/ring/color','color/focus/ring','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300),'2px width · 2px offset');ut+=r('focus/ring/color-error','color/focus/ring-error','{error.500}',sh('error',500),'{error.300}',sh('error',300),'Error context');
+ut+=g('Selection highlight');ut+=r('selection/highlight','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800),'Text selection background');
+ut+=g('KBD — keyboard shortcut');ut+=r('kbd/bg','color/surface-subtle','{pg.100}',sh('pg',100),'{elev.1}',ev(1));ut+=r('kbd/border','color/border/default','{pg.300}',sh('pg',300),'{pg.700}',sh('pg',700));ut+=r('kbd/text','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));
+ut+=g('Drag handle');ut+=r('drag/handle/icon-default','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));ut+=r('drag/handle/icon-hover','color/icon/default','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));ut+=r('drag/handle/icon-active','color/icon/brand','{primary.600}',sh('primary',600),'{primary.300}',sh('primary',300));ut+=r('drag/drop-zone/bg','color/fill/brand-subtle','{primary.100}',sh('primary',100),'{primary.800}',sh('primary',800));ut+=r('drag/drop-zone/border','color/border/brand-strong','{primary.500}',sh('primary',500),'{primary.300}',sh('primary',300));
+ut+=g('Empty state');ut+=r('empty-state/illustration/bg','color/bg-subtle','{pg.100}',sh('pg',100),'{elev.0}',ev(0));ut+=r('empty-state/title','color/text/primary','{pg.900}',sh('pg',900),'{pg.50}',sh('pg',50));ut+=r('empty-state/body','color/text/secondary','{pg.800}',sh('pg',800),'{pg.200}',sh('pg',200));ut+=r('empty-state/icon','color/icon/subtle','{pg.600}',sh('pg',600),'{pg.300}',sh('pg',300));
+tbl(ut,'ut-body');
+
+function go(id){
+  document.querySelectorAll('[id^="pane-"]').forEach(p=>p.style.display='none');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pane-'+id).style.display='';
+  document.querySelector(`[onclick="go('${id}')"]`)?.classList.add('active');
+}
+</script>
