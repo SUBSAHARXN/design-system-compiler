@@ -3,19 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chroma Envelope Recalibration · Before vs After</title>
+  <title>Skillbeek Design System · Chroma Envelope Recalibration</title>
+  <!-- Skillbeek Typography: Nunito + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* -------------------------------------------------------------
+       SKILLBEEK DESIGN SYSTEM TOKENS (from Skillbeek-App index.css)
+       ------------------------------------------------------------- */
     :root {
-      --bg: #0B0E14;
-      --card-bg: #141923;
-      --border: #222B3D;
-      --text-main: #F1F5F9;
-      --text-muted: #94A3B8;
-      --danger: #EF4444;
-      --success: #10B981;
+      /* Base Typography */
+      --Typeface-Nunito: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      --Typeface-Mono: 'JetBrains Mono', monospace;
+
+      /* Neutrals */
+      --Neutral-50: #FAF7FE;
+      --Neutral-100: #F0EDF4;
+      --Neutral-200: #E0DCE3;
+      --Neutral-300: #C0BCC3;
+      --Neutral-400: #A09DA3;
+      --Neutral-500: #737076;
+      --Neutral-600: #656268;
+      --Neutral-700: #49464C;
+      --Neutral-800: #2F2C32;
+      --Neutral-900: #171519;
+      --Neutral-950: #070508;
+
+      /* Primary (Royal Purple) */
+      --Primary-50: #FBF6FF;
+      --Primary-100: #F8EFFF;
+      --Primary-200: #EACFFF;
+      --Primary-300: #D5A0FA;
+      --Primary-400: #B76EDF;
+      --Primary-500: #8C35BE;
+      --Primary-600: #5F0193;
+
+      /* Illustration Brown / Ochre Gold (Brand Secondary) */
+      --Brown-50: #FDF4E9;
+      --Brown-100: #FFEEDA;
+      --Brown-200: #FCDAAF;
+      --Brown-300: #EDC086;
+      --Brown-400: #D5A25E;
+      --Brown-500: #B7812F;
+      --Brown-600: #865300;
+      --Brown-700: #573001;
+
+      /* Status */
+      --Error-500: #BA3430;
+      --Error-bg: rgba(186, 52, 48, 0.16);
+      --Success-500: #2FA836;
+      --Success-bg: rgba(47, 168, 54, 0.16);
+
+      /* Skillbeek Elevation Shadows */
+      --skillbeek-sm: 0px 4px 12px 0px rgba(18, 9, 0, 0.25), 0px 12px 24px -8px rgba(18, 9, 0, 0.45);
+      --skillbeek-xs: 0px 1px 3px 0px rgba(18, 9, 0, 0.2);
     }
 
     * {
@@ -25,284 +67,422 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--Neutral-950);
+      color: var(--Neutral-50);
+      font-family: var(--Typeface-Nunito);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
+    /* Outer Shell: Skillbeek Colophon Card */
+    .skillbeek-card {
       width: 100%;
-      max-width: 760px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+      max-width: 800px;
+      background: var(--Neutral-900);
+      border: 1px solid rgba(224, 220, 227, 0.12);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: var(--skillbeek-sm);
+      position: relative;
+      overflow: hidden;
     }
 
+    /* Ambient Brand Glow */
+    .skillbeek-card::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(140, 53, 190, 0.2) 0%, rgba(140, 53, 190, 0) 70%);
+      pointer-events: none;
+    }
+
+    .skillbeek-card::after {
+      content: "";
+      position: absolute;
+      bottom: -120px;
+      left: -80px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(183, 129, 47, 0.18) 0%, rgba(183, 129, 47, 0) 70%);
+      pointer-events: none;
+    }
+
+    /* Header */
     .header {
+      position: relative;
+      z-index: 1;
       margin-bottom: 24px;
     }
 
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(245, 158, 11, 0.12);
-      color: #F59E0B;
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      margin-bottom: 10px;
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    h2 {
-      font-size: 20px;
-      font-weight: 700;
+    .chip-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(140, 53, 190, 0.18);
+      border: 1px solid rgba(140, 53, 190, 0.35);
+      color: var(--Primary-200);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .chip-brand svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .chip-meta {
+      font-family: var(--Typeface-Mono);
+      font-size: 11px;
+      color: var(--Neutral-400);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    h2.title {
+      font-size: 22px;
+      font-weight: 900;
       letter-spacing: -0.02em;
+      color: var(--Neutral-50);
       margin-bottom: 6px;
     }
 
-    p.sub {
-      font-size: 13px;
-      color: var(--text-muted);
+    p.subtitle {
+      font-size: 14px;
       line-height: 1.5;
+      color: var(--Neutral-300);
+      max-width: 640px;
     }
 
-    .comparison-grid {
+    /* Comparison Grid */
+    .grid {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 18px;
     }
 
-    @media (max-width: 620px) {
-      .comparison-grid {
+    @media (max-width: 660px) {
+      .grid {
         grid-template-columns: 1fr;
       }
     }
 
+    /* Column Container */
     .column {
-      background: rgba(11, 14, 20, 0.6);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+      background: var(--Neutral-800);
+      border: 1px solid rgba(224, 220, 227, 0.1);
+      border-radius: 16px;
+      padding: 20px 18px;
+      transition: border-color 0.2s ease;
     }
 
-    .col-header {
+    .column:hover {
+      border-color: rgba(224, 220, 227, 0.2);
+    }
+
+    .column-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(224, 220, 227, 0.08);
+    }
+
+    .col-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-dot.danger {
+      background: var(--Error-500);
+      box-shadow: 0 0 8px rgba(186, 52, 48, 0.6);
+    }
+
+    .status-dot.success {
+      background: var(--Success-500);
+      box-shadow: 0 0 8px rgba(47, 168, 54, 0.6);
     }
 
     .col-title {
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--Neutral-50);
     }
 
-    .col-tag {
+    .col-pill {
+      font-family: var(--Typeface-Mono);
       font-size: 10px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 9999px;
     }
 
-    .tag-danger {
-      background: rgba(239, 68, 68, 0.15);
-      color: #F87171;
+    .col-pill.danger {
+      background: var(--Error-bg);
+      color: #FF8784;
+      border: 1px solid rgba(186, 52, 48, 0.35);
     }
 
-    .tag-success {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34D399;
+    .col-pill.success {
+      background: var(--Success-bg);
+      color: #6CE374;
+      border: 1px solid rgba(47, 168, 54, 0.35);
     }
 
-    .swatch-list {
+    /* Swatch Item */
+    .swatch-group {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .swatch-item {
+    .swatch-card {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
+      gap: 14px;
+      padding: 10px 12px;
+      background: rgba(23, 21, 25, 0.55);
+      border: 1px solid rgba(224, 220, 227, 0.06);
+      border-radius: 12px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .swatch-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-      transform: translateX(2px);
+    .swatch-card:hover {
+      background: rgba(23, 21, 25, 0.9);
+      border-color: rgba(224, 220, 227, 0.18);
+      transform: translateY(-1px);
+      box-shadow: var(--skillbeek-xs);
     }
 
-    .swatch-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
+    .swatch-chip {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
       flex-shrink: 0;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15), 0 2px 6px rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: #1E293B;
+      font-family: var(--Typeface-Nunito);
+      font-size: 11px;
+      font-weight: 900;
+      color: #171519;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.25);
     }
 
-    .swatch-details {
+    .swatch-info {
       flex: 1;
       min-width: 0;
     }
 
-    .swatch-name-row {
+    .swatch-row-main {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
-    .swatch-name {
+    .swatch-token-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--Neutral-50);
+    }
+
+    .swatch-hex-code {
+      font-family: var(--Typeface-Mono);
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--Neutral-200);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 6px;
+      border-radius: 4px;
     }
 
-    .swatch-hex {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: #E2E8F0;
-    }
-
-    .swatch-meta {
-      font-family: 'JetBrains Mono', monospace;
+    .swatch-row-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      gap: 10px;
     }
 
-    .defect-badge {
-      font-size: 10px;
-      color: #F87171;
-      font-weight: 600;
-      display: flex;
+    .env-stat {
+      font-family: var(--Typeface-Mono);
+      color: var(--Neutral-400);
+      font-size: 11px;
+    }
+
+    .status-tag {
+      font-weight: 700;
+      font-size: 11px;
+      display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
     }
 
-    .remedy-badge {
-      font-size: 10px;
-      color: #34D399;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 3px;
+    .status-tag.danger {
+      color: #FF8784;
     }
 
+    .status-tag.success {
+      color: #6CE374;
+    }
+
+    .status-tag.neutral {
+      color: var(--Neutral-300);
+    }
+
+    /* Footer / Telemetry */
     .footer {
-      margin-top: 20px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(224, 220, 227, 0.1);
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      font-family: var(--Typeface-Mono);
       font-size: 11px;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
+      color: var(--Neutral-400);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--Primary-200);
+    }
+
+    .dot-pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--Success-500);
+      border-radius: 50%;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="skillbeek-card">
+    <!-- Header -->
     <div class="header">
-      <div class="badge">Layer 1 Engine Telemetry</div>
-      <h2>Highlight Chroma Envelope Recalibration</h2>
-      <p class="sub">Side-by-side comparison of Skillbeek’s ochre brand ramp (50–300) before vs after resolving the 8-bit quantization collapse.</p>
+      <div class="badge-row">
+        <span class="chip-brand">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Skillbeek Design System
+        </span>
+        <span class="chip-meta">Token Ramp: --illustration-brown</span>
+      </div>
+      <h2 class="title">Highlight Chroma Envelope Recalibration</h2>
+      <p class="subtitle">Real-world production comparison of stops 50–300 in Skillbeek's ochre brand ladder before vs after resolving the 8-bit quantization collapse.</p>
     </div>
 
-    <div class="comparison-grid">
+    <!-- Comparison Grid -->
+    <div class="grid">
       <!-- BEFORE -->
       <div class="column">
-        <div class="col-header">
-          <span class="col-title" style="color: #F87171;">✕ Before (Crushed Chroma)</span>
-          <span class="col-tag tag-danger">C_env = 0.08–0.65</span>
+        <div class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot danger"></span>
+            <span class="col-title">Before (Crushed Chroma)</span>
+          </div>
+          <span class="col-pill danger">Envelope 0.08–0.65</span>
         </div>
-        <div class="swatch-list">
+
+        <div class="swatch-group">
           <!-- Stop 50 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #F9F4EE;">50</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 50</span>
-                <span class="swatch-hex">#F9F4EE</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #F9F4EE;">50</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 50</span>
+                <span class="swatch-hex-code">#F9F4EE</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.08</span>
-                <span class="defect-badge">⚠️ Duplicate hex</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.08</span>
+                <span class="status-tag danger">⚠️ Duplicate Hex</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 100 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #F9F4EE;">100</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 100</span>
-                <span class="swatch-hex">#F9F4EE</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #F9F4EE;">100</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 100</span>
+                <span class="swatch-hex-code">#F9F4EE</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.20</span>
-                <span class="defect-badge">⛔ 0 ΔL Collapse</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.20</span>
+                <span class="status-tag danger">⛔ 0 ΔL Collapse</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 200 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #F4DCBF;">200</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 200</span>
-                <span class="swatch-hex">#F4DCBF</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #F4DCBF;">200</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 200</span>
+                <span class="swatch-hex-code">#F4DCBF</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.40</span>
-                <span>Chalky sand</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.40</span>
+                <span class="status-tag neutral">Chalky Desert Sand</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 300 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #E7C292;">300</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 300</span>
-                <span class="swatch-hex">#E7C292</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #E7C292;">300</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 300</span>
+                <span class="swatch-hex-code">#E7C292</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.65</span>
-                <span>Muted tan</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.65</span>
+                <span class="status-tag neutral">Muted Dull Ochre</span>
               </div>
             </div>
           </div>
@@ -311,67 +491,71 @@
 
       <!-- AFTER -->
       <div class="column">
-        <div class="col-header">
-          <span class="col-title" style="color: #34D399;">✓ After (Recalibrated)</span>
-          <span class="col-tag tag-success">C_env = 0.15–0.78</span>
+        <div class="column-header">
+          <div class="col-title-wrap">
+            <span class="status-dot success"></span>
+            <span class="col-title">After (Fixed Engine)</span>
+          </div>
+          <span class="col-pill success">Envelope 0.15–0.78</span>
         </div>
-        <div class="swatch-list">
+
+        <div class="swatch-group">
           <!-- Stop 50 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #FDF4E9;">50</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 50</span>
-                <span class="swatch-hex">#FDF4E9</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #FDF4E9;">50</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 50</span>
+                <span class="swatch-hex-code">#FDF4E9</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.15</span>
-                <span class="remedy-badge">✓ Warm cream wash</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.15</span>
+                <span class="status-tag success">✓ Warm Cream Wash</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 100 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #FFEEDA;">100</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 100</span>
-                <span class="swatch-hex">#FFEEDA</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #FFEEDA;">100</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 100</span>
+                <span class="swatch-hex-code">#FFEEDA</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.35</span>
-                <span class="remedy-badge">✓ Crisp badge glow</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.35</span>
+                <span class="status-tag success">✓ Luminous Badge Glow</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 200 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #FCDAAF;">200</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 200</span>
-                <span class="swatch-hex">#FCDAAF</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #FCDAAF;">200</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 200</span>
+                <span class="swatch-hex-code">#FCDAAF</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.58</span>
-                <span class="remedy-badge">✓ Peach-gold tint</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.58</span>
+                <span class="status-tag success">✓ Warm Peach Gold</span>
               </div>
             </div>
           </div>
 
           <!-- Stop 300 -->
-          <div class="swatch-item">
-            <div class="swatch-box" style="background: #EDC086;">300</div>
-            <div class="swatch-details">
-              <div class="swatch-name-row">
-                <span class="swatch-name">Stop 300</span>
-                <span class="swatch-hex">#EDC086</span>
+          <div class="swatch-card">
+            <div class="swatch-chip" style="background: #EDC086;">300</div>
+            <div class="swatch-info">
+              <div class="swatch-row-main">
+                <span class="swatch-token-label">Stop 300</span>
+                <span class="swatch-hex-code">#EDC086</span>
               </div>
-              <div class="swatch-meta">
-                <span>Env: 0.78</span>
-                <span class="remedy-badge">✓ Rich golden honey</span>
+              <div class="swatch-row-meta">
+                <span class="env-stat">Env: 0.78</span>
+                <span class="status-tag success">✓ Rich Golden Honey</span>
               </div>
             </div>
           </div>
@@ -379,9 +563,16 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
-      <span>GATE: CONCERN #28 (QUANTIZATION COLLAPSE)</span>
-      <span>STATUS: 0 ERRORS · APCA PASS</span>
+      <div class="footer-left">
+        <span class="dot-pulse"></span>
+        <span>CI GATE: CONCERN #28 (QUANTIZATION COLLAPSE)</span>
+      </div>
+      <div class="footer-right">
+        <span>BRAND ANCHOR: #B7812F</span>
+        <span>STATUS: 0 ERRORS · 100% APCA</span>
+      </div>
     </div>
   </div>
 
