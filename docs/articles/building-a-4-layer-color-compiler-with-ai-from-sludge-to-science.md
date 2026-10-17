@@ -73,6 +73,10 @@ We fixed this directly in the engine on October 1:
 
 Skillbeek's stops 50 and 100 immediately separated into distinct, luminous tones: `#FDF4E9` (warm cream surface wash) and `#FFEEDA` (crisp badge highlight).
 
+> 🔗 **[LIVE CODEPEN EMBED: Interactive Highlight Chroma Recalibration]**  
+> *Paste CodePen URL here for the live interactive widget. Readers can toggle between Skillbeek's light mode and dark mode to test the stops on both surfaces.*  
+> Source code: [`docs/embeds/chroma-envelope-codepen.html`](https://github.com/SUBSAHARXN/design-system-compiler/blob/master/docs/embeds/chroma-envelope-codepen.html)
+
 ---
 
 ## 3. The Yellow Mud Trap: Born from Accessibility Overcompensation
