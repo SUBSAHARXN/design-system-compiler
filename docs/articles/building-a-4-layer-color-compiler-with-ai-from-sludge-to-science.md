@@ -38,7 +38,7 @@ We expected pure math to handle every edge case out of the box, but real product
 
 ## 1. The Skillbeek Revolt: When Our Own Compiler Caused the Mud
 
-The first production trial for the compiler was Skillbeek, an education platform I recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity used a bright purple primary (`#A952DB`) and green (`#4CB33C`).
+The first production trial for the compiler was Skillbeek, an education platform I recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
 
 We ran the compiler, generated the tokens, and handed them to the development team to wire into the live React components. 
 
@@ -47,8 +47,8 @@ When we inspected the Skillbeek codebase weeks later, we discovered over 39 hard
 When automated cleanup scripts later attempted to force those rogue hexes back into the compiler's tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
 
 > 📷 **[IMAGE STOP 2: Skillbeek Live Production UI]**  
-> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the purple primary navigation/CTAs, green success tags, or session cards where developers rebelled against dull tokens.  
-> **Caption:** *Figure 2: Skillbeek running in production on Vercel. When the early compiler generated dull, muddy tokens, developers bypassed the design system and hardcoded 39+ raw hexes directly into the UI.*
+> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown primary navigation/CTAs, purple badges, or session cards where developers rebelled against dull tokens.  
+> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Built on an ochre gold/brown (`#B7812F`) and purple (`#8C35BE`) brand palette. When the early compiler generated dull, muddy tokens, developers bypassed the design system and hardcoded 39+ raw hexes directly into the UI.*
 
 ---
 
