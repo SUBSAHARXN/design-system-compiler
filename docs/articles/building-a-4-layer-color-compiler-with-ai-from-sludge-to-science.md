@@ -40,35 +40,38 @@ We expected pure math to handle every edge case out of the box, but real product
 
 The first production trial for the compiler was Skillbeek, an education platform I built and recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
 
-I used MCP to bring the compiler's generated tokens into the Skillbeek codebase and wire them into the live React components.
+I wired the compiler's generated tokens into the Skillbeek codebase as `--illustration-brown`.
 
-That was when the real defect hit: on actual screens, the compiler's tokens looked dull, muddy, and lifeless. The gold and amber tones rotted into murky swamp water whenever they were applied to buttons, active chips, and badges.
+That was when the real defect hit: on actual screens, the compiler's tokens looked dull, earthy, and rotted into mud. The gold and amber tones rotted into murky swamp water whenever they were applied to buttons, active chips, and badges.
 
-I brought the issue straight into our AI pairing session with a direct question: *Is the compiler over-optimizing for accessibility at the expense of vividness? Is that why it becomes muddy?*
+On October 1, I brought the issue straight into our AI pairing session with a direct challenge:
+> *"Its determinism is detrimental to design because for each input the saturation is bound to be in a certain range making it dull and earthy. You can run calculations to confirm or deny this."*
 
-We opened the logs and investigated the engine. The answer was yes. The compiler had been designed with dogmatic contrast gates: to pass strict WCAG AA (4.5:1) and APCA Lc 60 against white backgrounds, it aggressively forced lightness down. But in color physics, yellow and gold only possess high chroma at high lightness. Crushing lightness while keeping hue locked turned vibrant gold into olive mud.
+We opened the compiler code, ran the telemetry, and verified the flaw. The compiler had been designed with dogmatic contrast gates: to pass strict WCAG AA (4.5:1) and APCA Lc 60 against white backgrounds, it aggressively forced lightness down. But in color physics, yellow and gold only possess high chroma at high lightness. Crushing lightness while keeping hue locked turned vibrant gold into olive mud.
 
 > 📷 **[IMAGE STOP 2: Skillbeek Live Production UI]**  
 > **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the buttons, badges, or card components where the dullness was first caught.  
-> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Testing the compiler's tokens in live React components exposed the muddy color defect and led us to uncover the contrast-versus-vividness trap.*
+> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Testing the compiler's tokens in live React components exposed the dull and earthy token defect, sparking the Oct 1 recalibration.*
 
 ---
 
-## 2. The 100–200 Collapse: When Math Disappears in 8-Bit Space
+## 2. The Quantization Collapse: When Math Disappears in 8-Bit Space
 
-The mud was only half the problem. When we tested interactive components in Skillbeek, we ran into an even weirder defect: hovering over secondary buttons and active tags did nothing. The state transition was invisible.
+The mud was only half the problem. When inspecting Skillbeek's `--illustration-brown` ramp, we ran into an even weirder defect: stop 50 and stop 100 were literally identical colors (`#F9F4EE`). Light-mode card surfaces and badge tints had zero visual separation.
 
-When we inspected the generated tokens, stop 100 and stop 200 were literally identical colors.
+This happened because of two flaws in the engine:
+1. **Crushed Chroma Envelope:** In `layer-1-generation-engine.json`, the hardcoded envelope clamped stop 50 down to `0.08`, stop 100 to `0.20`, and stop 200 to `0.40`. This stripped up to 80% of color purity, turning badge backgrounds and active tints into chalky, greyish paste.
+2. **8-Bit Quantization Step:** Computer screens display color using 8 bits per channel (0 to 255). A step of 1/255 is roughly 0.0039. When the highlight delta-L between adjacent stops was too shallow, `round(channel * 255)` rounded both stops to the exact same hex code (`#F9F4EE`).
 
-This happened because of how floating-point color math interacts with standard 8-bit displays:
-1. Early versions of Layer 1 had an over-protective chroma envelope. To prevent bright pastels from blowing out contrast, the compiler clamped stop 100 down to 0.20 chroma and stop 200 to 0.40.
-2. The highlight lightness curve was also too shallow. Between stop 100 and stop 200, the lightness difference was less than 0.004 in OKLCH.
-3. Computer screens display color using 8 bits per channel (0 to 255). A step of 1/255 is roughly 0.0039.
+We fixed this directly in the engine on October 1:
+- **Restored Highlight Chroma:** Raised the envelope curve in `layer-1-generation-engine.json` and `design_system_compiler.py`:
+  - Stop 50: `0.08 -> 0.15`
+  - Stop 100: `0.20 -> 0.35`
+  - Stop 200: `0.40 -> 0.58`
+  - Stop 300: `0.65 -> 0.78`
+- **Added Automated CI Gate:** Built **Concern #28: 8-Bit Quantization Collapse** into `design_system_compiler.py`. If any two adjacent deployable stops round to the same hex code, the compiler halts the build with an error instead of silently shipping dead hover states.
 
-Because the lightness and chroma deltas between stop 100 and 200 were smaller than a single 8-bit integer step, `round(channel * 255)` rounded both stops to the exact same hex code (`#F0EDF4`). The compiler thought it was outputting two distinct states with fine mathematical nuance. In the browser, it shipped duplicate hexes.
-
-We fixed this in two places:
-First, we raised the highlight chroma envelope in Layer 1 so light tints retain real color identity (stop 100 went from 0.20 to 0.35, stop 200 went from 0.40 to 0.58). Second, we added an automated CI gate in `design_system_compiler.py` called **Concern #28: 8-Bit Quantization Collapse**. If any two adjacent deployable stops round to the same hex code, the compiler halts the build with an error instead of silently shipping dead hover states.
+Skillbeek's stops 50 and 100 immediately separated into distinct, luminous tones: `#FDF4E9` (warm cream surface wash) and `#FFEEDA` (crisp badge highlight).
 
 ---
 
