@@ -40,15 +40,17 @@ We expected pure math to handle every edge case out of the box, but real product
 
 The first production trial for the compiler was Skillbeek, an education platform I built and recently published on Binance (open-source on GitHub at [SUBSAHARXN/Skillbeek-App](https://github.com/SUBSAHARXN/Skillbeek-App) and deployed live on Vercel at [skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)). Its brand identity was built around an ochre gold/brown primary (`#B7812F`) paired with purple (`#8C35BE`).
 
-I generated the tokens with the compiler and started wiring them directly into my live React components.
+I used MCP to bring the compiler's generated tokens into the codebase and wire them into the live React components.
 
-That was when the cracks appeared. On real screens, the generated output looked dull, earthy, and rotted into mud. When I needed an amber warning button, an active chip, or a clean tag background, the compiler handed me swamp water. I ended up hardcoding over 39 raw hex values (`#2563eb`, `#e67e22`, `#00832D`) across star ratings, badges, and card borders just to stop the live app from looking terrible.
+That was when the cracks appeared. On real screens, the generated output looked dull, earthy, and rotted into mud. When I checked amber warning buttons, active chips, and tag backgrounds, the compiler handed me swamp water. Even worse, instead of adhering strictly to the token contract, the AI had hallucinated random raw hex values across star ratings, badges, and card borders. 
 
-I stopped and brought the issue straight into our AI pairing session: why was an automated system designed for mathematical perfection generating sludge on actual screens? When we tried to script those rogue hexes back into the compiler's tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
+When we attempted to clean that up and bind everything to strict compiler tokens, the build blew up with eight structural errors and failed APCA contrast tests. Dark mode surfaces had turned completely flat.
+
+I stopped and brought the issue straight into our AI pairing session: why was an automated system designed for mathematical perfection generating sludge on actual screens?
 
 > 📷 **[IMAGE STOP 2: Skillbeek Live Production UI]**  
-> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the badges, star ratings, or card components where mud was caught.  
-> **Caption:** *Figure 2: Skillbeek running in production on Vercel. While building the interface, the early compiler's muddy output forced me to bypass the tokens with raw hexes before we fixed the underlying math.*
+> **What to capture:** A screenshot of the Skillbeek live web app ([skillbeek-app.vercel.app](https://skillbeek-app.vercel.app)) showing the gold/brown and purple brand palette in action, highlighting the badges, star ratings, or card components where the mud was caught.  
+> **Caption:** *Figure 2: Skillbeek running in production on Vercel. Testing the compiler's tokens in live React components exposed the muddy color defect and token mapping failures before we corrected the math.*
 
 ---
 
