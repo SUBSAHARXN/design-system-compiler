@@ -121,19 +121,21 @@ body {
   gap: 12px;
 }
 
-.brand-logo-icon {
+.brand-logo-img {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #61F300 0%, #F3A600 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: #0d100c;
-  font-family: var(--font-display);
-  font-size: 18px;
+  border-radius: 9px;
+  object-fit: cover;
   box-shadow: 0 0 16px var(--brand-primary-glow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #F5F5F4;
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+  flex-shrink: 0;
+}
+
+.brand-badge:hover .brand-logo-img {
+  transform: scale(1.06);
+  box-shadow: 0 0 24px rgba(97, 243, 0, 0.6);
 }
 
 .brand-text h1 {
@@ -233,7 +235,50 @@ body {
   font-size: 17px;
   color: var(--app-text-secondary);
   line-height: 1.6;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+.hero-poster-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--app-text-secondary);
+  font-size: 13px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  transition: all var(--trans-fast);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hero-poster-pill:hover {
+  background: rgba(97, 243, 0, 0.08);
+  border-color: rgba(97, 243, 0, 0.4);
+  color: var(--brand-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--brand-primary-glow);
+}
+
+.hero-poster-pill .pill-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: cover;
+  background: #F5F5F4;
+}
+
+.testbench-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #F5F5F4;
+  box-shadow: 0 0 12px rgba(97, 243, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
 }
 
 .hero-stats-row {
@@ -491,11 +536,15 @@ body {
   color: var(--color-text-primary, var(--app-text-primary));
 }
 
-.app-mock-nav .logo-pill {
-  width: 24px;
-  height: 24px;
+.mock-nav-logo {
+  width: 22px;
+  height: 22px;
   border-radius: 6px;
-  background: var(--color-fill-brand, #61F300);
+  object-fit: cover;
+  background: #F5F5F4;
+  box-shadow: 0 0 8px rgba(97, 243, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
 }
 
 /* Metric Cards Grid */
@@ -946,6 +995,78 @@ body {
 .toast-notice.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* Footer Section */
+.app-footer {
+  margin-top: 80px;
+  padding: 36px 0 28px;
+  border-top: 1px solid var(--app-surface-border);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #F5F5F4;
+  box-shadow: 0 0 16px var(--brand-primary-glow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.footer-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.footer-sub {
+  font-size: 12px;
+  color: var(--app-text-muted);
+  margin-top: 2px;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--app-text-muted);
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+}
+
+.footer-meta code {
+  color: var(--brand-primary);
+  background: var(--app-surface-active);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.footer-link {
+  color: var(--brand-primary);
+  text-decoration: none;
+  transition: color var(--trans-fast);
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }
 
 /* Responsive adjustments */
