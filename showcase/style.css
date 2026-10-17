@@ -274,37 +274,6 @@ body {
   margin-bottom: 24px;
 }
 
-.hero-poster-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px 8px 10px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--app-text-secondary);
-  font-size: 13px;
-  text-decoration: none;
-  font-family: var(--font-mono);
-  transition: all var(--trans-fast);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.hero-poster-pill:hover {
-  background: rgba(97, 243, 0, 0.08);
-  border-color: rgba(97, 243, 0, 0.4);
-  color: var(--brand-primary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-}
-
-.hero-poster-pill .pill-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
-  object-fit: cover;
-  background: #F5F5F4;
-}
 
 .testbench-logo {
   width: 36px;
