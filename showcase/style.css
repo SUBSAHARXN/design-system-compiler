@@ -1090,9 +1090,21 @@ body {
   border-bottom: 1px solid var(--app-surface-border);
 }
 
+.benchmark-note-box {
+  padding: 12px 16px;
+  background: var(--app-bg-subtle);
+  border: 1px solid var(--app-surface-border);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  color: var(--app-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
 .bench-row-featured {
   background: rgba(97, 243, 0, 0.05);
   font-weight: 700;
+  border-left: 3px solid var(--brand-primary);
 }
 
 .bench-row-featured td:first-child {
@@ -1103,12 +1115,61 @@ body {
 }
 
 .badge-rank-1 {
-  background: var(--brand-primary);
+  background: #0f62fe;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-rank-2 {
+  background: #6750a4;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-rank-3 {
+  background: var(--brand-primary, #61F300);
   color: #0d100c;
   font-size: 10px;
   font-weight: 800;
+  font-family: var(--font-mono);
   padding: 2px 6px;
   border-radius: 4px;
+}
+
+.badge-rank-other {
+  background: var(--app-surface-raised);
+  color: var(--app-text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--app-surface-border);
+}
+
+.sub-win-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  background: rgba(97, 243, 0, 0.15);
+  color: var(--brand-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(97, 243, 0, 0.3);
+  margin-left: 6px;
+}
+
+.stat-highlight {
+  color: var(--brand-primary);
+  font-weight: 800;
 }
 
 /* Layer Architecture Explainer */
