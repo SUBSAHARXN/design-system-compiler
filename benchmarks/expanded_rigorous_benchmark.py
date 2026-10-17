@@ -76,7 +76,8 @@ def simulate_protanopia(r, g, b):
 # 2. SYSTEM RAMPS LOADER
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. 4-Layer Compiler (Load generated tokens-primitives.json)
-with open(r'C:\Users\austi\OneDrive\Documents\Compiler\Design-system\Output\tokens-primitives.json', encoding='utf-8') as f:
+REPO_ROOT = Path(__file__).resolve().parent.parent
+with open(REPO_ROOT / 'Output' / 'tokens-primitives.json', encoding='utf-8') as f:
     comp_json = json.load(f)
 compiler_ramps = {}
 for name, key in [('amber', 'primary'), ('blue', 'info'), ('green', 'success'), ('red', 'error'), ('slate', 'pg')]:

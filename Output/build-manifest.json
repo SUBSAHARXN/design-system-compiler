@@ -1,12 +1,12 @@
 {
-  "generated": "2026-10-17T11:11:44.124284+00:00",
+  "generated": "2026-10-17T11:18:18.314285+00:00",
   "build-config": {
     "floor-stop": 950,
     "cta-color": "primary",
     "mode": "both",
     "strict": false,
-    "no-contrast": false,
-    "no-css": false
+    "no-contrast": true,
+    "no-css": true
   },
   "layer-versions": {
     "L1": "10.5",
@@ -45,11 +45,7 @@
     "semantic-roles": 80,
     "component-tokens": 407
   },
-  "contrast-summary": {
-    "pass": 0,
-    "fail": 0,
-    "skipped": 60
-  },
+  "contrast-summary": "skipped",
   "validation-summary": {
     "fill-border-conflicts": 0,
     "cvd-conflicts": 0,

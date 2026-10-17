@@ -2,11 +2,12 @@ import json, math, sys
 from pathlib import Path
 
 # Setup paths and environment
+REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.argv = ['design_system_compiler.py', '--floor-stop', '950', '--cta-color', 'primary', '--no-css', '--no-contrast']
-sys.path.append(r'C:\Users\austi\OneDrive\Documents\Compiler\Design-system')
+sys.path.append(str(REPO_ROOT))
 from design_system_compiler import build_ramp, hex_to_oklch, gamut_safe_oklch_to_hex, _is_muddy_zone
 
-sys.path.append(r'C:\Users\austi\tools')
+sys.path.append(str(REPO_ROOT / 'benchmarks'))
 from expanded_rigorous_benchmark import (
     hex_to_srgb, srgb_to_oklab, srgb_to_oklch, wcag_contrast, 
     apca_contrast, delta_e_oklab, simulate_deuteranopia, simulate_protanopia
@@ -33,7 +34,7 @@ print("="*110)
 print("PART 1: REAL-WORLD KNOCKED-REALITY AUDIT — SKILLBEEK SPREADSHEET TOKENS")
 print("="*110)
 
-with open(r'C:\Users\austi\OneDrive\Documents\Compiler\Design-system\Output\tokens-primitives.json', encoding='utf-8') as f:
+with open(REPO_ROOT / 'Output' / 'tokens-primitives.json', encoding='utf-8') as f:
     prims = json.load(f)['ramps']
 
 skillbeek_pairs = [
