@@ -1,0 +1,5050 @@
+{
+  "$meta": {
+    "generated": "2026-10-17T11:46:08.461338+00:00",
+    "layer-4-version": "1.2",
+    "cta-color": "primary",
+    "description": "Layer 4 output. Component tokens resolved through full chain.",
+    "chain": "component-token \u2192 semantic-role \u2192 {primitive.stop} \u2192 hex"
+  },
+  "components": {
+    "accordion": {
+      "header/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "header/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Header hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "header/bg-expanded": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Expanded header",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "header/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Header label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "header/icon": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Chevron icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "header/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Header bottom border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "content/bg": {
+        "semantic-role": "color/surface",
+        "desc": "Content area",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "content/text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Content text",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      }
+    },
+    "alert": {
+      "error": {
+        "bg": {
+          "semantic-role": "color/fill/error-subtle",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/error",
+          "light": {
+            "alias": "{error.600}",
+            "$value": "#940112"
+          },
+          "dark": {
+            "alias": "{error.400}",
+            "$value": "#DB6156"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/icon/error",
+          "light": {
+            "alias": "{error.600}",
+            "$value": "#940112"
+          },
+          "dark": {
+            "alias": "{error.200}",
+            "$value": "#FFBBB2"
+          }
+        },
+        "title": {
+          "semantic-role": "color/text/error",
+          "light": {
+            "alias": "{error.700}",
+            "$value": "#63010B"
+          },
+          "dark": {
+            "alias": "{error.200}",
+            "$value": "#FFBBB2"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/primary",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        }
+      },
+      "success": {
+        "bg": {
+          "semantic-role": "color/fill/success-subtle",
+          "light": {
+            "alias": "{success.50}",
+            "$value": "#EEFEEC"
+          },
+          "dark": {
+            "alias": "{success.900}",
+            "$value": "#000E02"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/success",
+          "light": {
+            "alias": "{success.700}",
+            "$value": "#005115"
+          },
+          "dark": {
+            "alias": "{success.400}",
+            "$value": "#5EC15C"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/icon/success",
+          "light": {
+            "alias": "{success.600}",
+            "$value": "#027C1E"
+          },
+          "dark": {
+            "alias": "{success.200}",
+            "$value": "#AFECAA"
+          }
+        },
+        "title": {
+          "semantic-role": "color/text/success",
+          "light": {
+            "alias": "{success.700}",
+            "$value": "#005115"
+          },
+          "dark": {
+            "alias": "{success.200}",
+            "$value": "#AFECAA"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/primary",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        }
+      },
+      "warning": {
+        "bg": {
+          "semantic-role": "color/fill/warning-subtle",
+          "light": {
+            "alias": "{warning.50}",
+            "$value": "#FFF6F3"
+          },
+          "dark": {
+            "alias": "{warning.900}",
+            "$value": "#150300"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/warning",
+          "light": {
+            "alias": "{warning.600}",
+            "$value": "#933809"
+          },
+          "dark": {
+            "alias": "{warning.500}",
+            "$value": "#B85F38"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/icon/warning",
+          "light": {
+            "alias": "{warning.600}",
+            "$value": "#933809"
+          },
+          "dark": {
+            "alias": "{warning.400}",
+            "$value": "#D4815D"
+          }
+        },
+        "title": {
+          "semantic-role": "color/text/warning",
+          "light": {
+            "alias": "{warning.700}",
+            "$value": "#642100"
+          },
+          "dark": {
+            "alias": "{warning.400}",
+            "$value": "#D4815D"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/primary",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        }
+      },
+      "info": {
+        "bg": {
+          "semantic-role": "color/fill/info-subtle",
+          "light": {
+            "alias": "{info.50}",
+            "$value": "#F6F8FF"
+          },
+          "dark": {
+            "alias": "{info.900}",
+            "$value": "#000020"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/info",
+          "light": {
+            "alias": "{info.600}",
+            "$value": "#1A37A1"
+          },
+          "dark": {
+            "alias": "{info.400}",
+            "$value": "#5E7FDF"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/icon/info",
+          "light": {
+            "alias": "{info.600}",
+            "$value": "#1A37A1"
+          },
+          "dark": {
+            "alias": "{info.300}",
+            "$value": "#86A5FB"
+          }
+        },
+        "title": {
+          "semantic-role": "color/text/info",
+          "light": {
+            "alias": "{info.700}",
+            "$value": "#06197B"
+          },
+          "dark": {
+            "alias": "{info.300}",
+            "$value": "#86A5FB"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/primary",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        }
+      },
+      "close/icon": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Dismiss button",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "avatar": {
+      "bg/default": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Placeholder background",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "bg/brand": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Brand-tinted placeholder",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "text/default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Initials on neutral",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "text/brand": {
+        "semantic-role": "color/text/brand",
+        "desc": "Initials on brand",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "border/stack": {
+        "semantic-role": "color/surface",
+        "desc": "Ring for stacked avatars",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "status/online": {
+        "semantic-role": "color/fill/success",
+        "desc": "Online indicator",
+        "light": {
+          "alias": "{success.500}",
+          "$value": "#2FA836"
+        },
+        "dark": {
+          "alias": "{success.100}",
+          "$value": "#D7FBD3"
+        }
+      },
+      "status/away": {
+        "semantic-role": "color/fill/warning",
+        "desc": "Away indicator",
+        "light": {
+          "alias": "{warning.700}",
+          "$value": "#642100"
+        },
+        "dark": {
+          "alias": "{warning.400}",
+          "$value": "#D4815D"
+        }
+      },
+      "status/offline": {
+        "semantic-role": "color/border/default",
+        "desc": "Offline indicator",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "status/busy": {
+        "semantic-role": "color/fill/error",
+        "desc": "Busy indicator",
+        "light": {
+          "alias": "{error.500}",
+          "$value": "#BA3430"
+        },
+        "dark": {
+          "alias": "{error.300}",
+          "$value": "#F78B7E"
+        }
+      }
+    },
+    "badge": {
+      "neutral": {
+        "bg": {
+          "semantic-role": "color/bg-subtle",
+          "light": {
+            "alias": "{pg.100}",
+            "$value": "#EBF0EA"
+          },
+          "dark": {
+            "alias": "{elev.0}",
+            "$value": "#0D100C"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/secondary",
+          "light": {
+            "alias": "{pg.800}",
+            "$value": "#2B2F2A"
+          },
+          "dark": {
+            "alias": "{pg.200}",
+            "$value": "#DBE0D9"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/default",
+          "light": {
+            "alias": "{pg.300}",
+            "$value": "#BBBFB9"
+          },
+          "dark": {
+            "alias": "{pg.600}",
+            "$value": "#60655F"
+          }
+        }
+      },
+      "brand": {
+        "bg": {
+          "semantic-role": "color/fill/brand-subtle",
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9"
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/brand",
+          "light": {
+            "alias": "{primary.600}",
+            "$value": "#3DB102"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/brand",
+          "light": {
+            "alias": "{primary.400}",
+            "$value": "#80FB48"
+          },
+          "dark": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          }
+        }
+      },
+      "error": {
+        "bg": {
+          "semantic-role": "color/fill/error-subtle",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/error",
+          "light": {
+            "alias": "{error.700}",
+            "$value": "#63010B"
+          },
+          "dark": {
+            "alias": "{error.200}",
+            "$value": "#FFBBB2"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/error",
+          "light": {
+            "alias": "{error.600}",
+            "$value": "#940112"
+          },
+          "dark": {
+            "alias": "{error.400}",
+            "$value": "#DB6156"
+          }
+        }
+      },
+      "success": {
+        "bg": {
+          "semantic-role": "color/fill/success-subtle",
+          "light": {
+            "alias": "{success.50}",
+            "$value": "#EEFEEC"
+          },
+          "dark": {
+            "alias": "{success.900}",
+            "$value": "#000E02"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/success",
+          "light": {
+            "alias": "{success.700}",
+            "$value": "#005115"
+          },
+          "dark": {
+            "alias": "{success.200}",
+            "$value": "#AFECAA"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/success",
+          "light": {
+            "alias": "{success.700}",
+            "$value": "#005115"
+          },
+          "dark": {
+            "alias": "{success.400}",
+            "$value": "#5EC15C"
+          }
+        }
+      },
+      "warning": {
+        "bg": {
+          "semantic-role": "color/fill/warning-subtle",
+          "light": {
+            "alias": "{warning.50}",
+            "$value": "#FFF6F3"
+          },
+          "dark": {
+            "alias": "{warning.900}",
+            "$value": "#150300"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/warning",
+          "light": {
+            "alias": "{warning.700}",
+            "$value": "#642100"
+          },
+          "dark": {
+            "alias": "{warning.400}",
+            "$value": "#D4815D"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/warning",
+          "light": {
+            "alias": "{warning.600}",
+            "$value": "#933809"
+          },
+          "dark": {
+            "alias": "{warning.500}",
+            "$value": "#B85F38"
+          }
+        }
+      },
+      "info": {
+        "bg": {
+          "semantic-role": "color/fill/info-subtle",
+          "light": {
+            "alias": "{info.50}",
+            "$value": "#F6F8FF"
+          },
+          "dark": {
+            "alias": "{info.900}",
+            "$value": "#000020"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/info",
+          "light": {
+            "alias": "{info.700}",
+            "$value": "#06197B"
+          },
+          "dark": {
+            "alias": "{info.300}",
+            "$value": "#86A5FB"
+          }
+        },
+        "border": {
+          "semantic-role": "color/border/info",
+          "light": {
+            "alias": "{info.600}",
+            "$value": "#1A37A1"
+          },
+          "dark": {
+            "alias": "{info.400}",
+            "$value": "#5E7FDF"
+          }
+        }
+      },
+      "solid-brand": {
+        "bg": {
+          "semantic-role": "color/fill/brand",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/brand",
+          "light": {
+            "alias": "{primary.50}",
+            "$value": "#EDFFE6"
+          },
+          "dark": {
+            "alias": "{primary.900}",
+            "$value": "#011600"
+          }
+        },
+        "border": {
+          "semantic-role": "color/fill/brand",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        }
+      },
+      "solid-error": {
+        "bg": {
+          "semantic-role": "color/fill/error",
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430"
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/error",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        },
+        "border": {
+          "semantic-role": "color/fill/error",
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430"
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E"
+          }
+        }
+      }
+    },
+    "breadcrumb": {
+      "link/text": {
+        "semantic-role": "color/text/link",
+        "desc": "Breadcrumb link",
+        "light": {
+          "alias": "{info.600}",
+          "$value": "#1A37A1"
+        },
+        "dark": {
+          "alias": "{info.300}",
+          "$value": "#86A5FB"
+        }
+      },
+      "link/hover": {
+        "semantic-role": "color/text/brand",
+        "desc": "Link hover",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "current/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Current page",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "separator/icon": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Separator chevron",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "button": {
+      "primary": {
+        "bg/default": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Primary button fill",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "bg/hover": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Hover \u2014 L3 direction multiplier",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D",
+            "base-hex": "#6BF12D",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7E",
+            "base-hex": "#A3FF7D",
+            "delta-resolved": true
+          }
+        },
+        "bg/active": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Active",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.active-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D",
+            "base-hex": "#6BF12D",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7E",
+            "base-hex": "#A3FF7D",
+            "delta-resolved": true
+          }
+        },
+        "bg/pressed": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Pressed",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.pressed-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D",
+            "base-hex": "#6BF12D",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7E",
+            "base-hex": "#A3FF7D",
+            "delta-resolved": true
+          }
+        },
+        "bg/focus": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Focus \u2014 ring applied via focus tokens",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "bg/selected": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Selected",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.selected-delta}"
+          },
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D",
+            "base-hex": "#6BF12D",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7E",
+            "base-hex": "#A3FF7D",
+            "delta-resolved": true
+          }
+        },
+        "bg/loading": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Loading",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.loading-delta}"
+          },
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D",
+            "base-hex": "#6BF12D",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7E",
+            "base-hex": "#A3FF7D",
+            "delta-resolved": true
+          }
+        },
+        "bg/disabled": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "text/default": {
+          "semantic-role": "color/on-fill/brand",
+          "desc": "Label on primary",
+          "light": {
+            "alias": "{primary.50}",
+            "$value": "#EDFFE6"
+          },
+          "dark": {
+            "alias": "{primary.900}",
+            "$value": "#011600"
+          }
+        },
+        "text/disabled": {
+          "semantic-role": "color/on-fill/brand",
+          "desc": "Disabled label",
+          "light": {
+            "alias": "{primary.50}",
+            "$value": "#EDFFE6"
+          },
+          "dark": {
+            "alias": "{primary.900}",
+            "$value": "#011600"
+          }
+        },
+        "icon/default": {
+          "semantic-role": "color/on-fill/brand",
+          "desc": "Icon on primary",
+          "light": {
+            "alias": "{primary.50}",
+            "$value": "#EDFFE6"
+          },
+          "dark": {
+            "alias": "{primary.900}",
+            "$value": "#011600"
+          }
+        }
+      },
+      "secondary": {
+        "bg/default": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Secondary button fill \u2014 tinted",
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9"
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201"
+          }
+        },
+        "bg/hover": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Hover \u2014 lightness above 0.6 so darken",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas.darken}",
+            "note": "Source is always a light container (L >= pivot). Apply darken only."
+          },
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9",
+            "base-hex": "#E3FFD9",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201",
+            "base-hex": "#084201",
+            "delta-resolved": true
+          }
+        },
+        "bg/active": {
+          "semantic-role": "color/fill/brand",
+          "desc": "Active \u2014 steps up to primary fill",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "bg/focus": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Focus",
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9"
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201"
+          }
+        },
+        "bg/selected": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Selected",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+          },
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9",
+            "base-hex": "#E3FFD9",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201",
+            "base-hex": "#084201",
+            "delta-resolved": true
+          }
+        },
+        "bg/loading": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Loading",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.loading-delta}"
+          },
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9",
+            "base-hex": "#E3FFD9",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201",
+            "base-hex": "#084201",
+            "delta-resolved": true
+          }
+        },
+        "bg/disabled": {
+          "semantic-role": "color/surface-disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.100}",
+            "$value": "#EBF0EA"
+          },
+          "dark": {
+            "alias": "{pg.800}",
+            "$value": "#2B2F2A"
+          }
+        },
+        "text/default": {
+          "semantic-role": "color/text/brand",
+          "desc": "Label on secondary",
+          "light": {
+            "alias": "{primary.600}",
+            "$value": "#3DB102"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "text/disabled": {
+          "semantic-role": "color/text/disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          },
+          "dark": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          }
+        },
+        "icon/default": {
+          "semantic-role": "color/icon/brand",
+          "desc": "Icon on secondary",
+          "light": {
+            "alias": "{primary.600}",
+            "$value": "#3DB102"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        }
+      },
+      "ghost": {
+        "bg/default": {
+          "semantic-role": "transparent",
+          "light": {
+            "$value": "transparent",
+            "alias": "transparent"
+          },
+          "dark": {
+            "$value": "transparent",
+            "alias": "transparent"
+          }
+        },
+        "bg/hover": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Hover \u2014 shows subtle fill",
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9"
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201"
+          }
+        },
+        "bg/active": {
+          "semantic-role": "color/fill/brand-subtle",
+          "desc": "Active",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.ghost-active-delta}"
+          },
+          "light": {
+            "alias": "{primary.100}",
+            "$value": "#E3FFD9",
+            "base-hex": "#E3FFD9",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{primary.800}",
+            "$value": "#084201",
+            "base-hex": "#084201",
+            "delta-resolved": true
+          }
+        },
+        "bg/disabled": {
+          "semantic-role": "transparent",
+          "light": {
+            "$value": "transparent",
+            "alias": "transparent"
+          },
+          "dark": {
+            "$value": "transparent",
+            "alias": "transparent"
+          }
+        },
+        "border/default": {
+          "semantic-role": "color/border/default",
+          "desc": "Ghost border",
+          "light": {
+            "alias": "{pg.300}",
+            "$value": "#BBBFB9"
+          },
+          "dark": {
+            "alias": "{pg.600}",
+            "$value": "#60655F"
+          }
+        },
+        "border/hover": {
+          "semantic-role": "color/border/strong",
+          "desc": "Hover border",
+          "light": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          },
+          "dark": {
+            "alias": "{pg.500}",
+            "$value": "#6F736D"
+          }
+        },
+        "border/focus": {
+          "semantic-role": "color/border/brand-strong",
+          "desc": "Focus border",
+          "light": {
+            "alias": "{primary.500}",
+            "$value": "#6BF12D"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "border/disabled": {
+          "semantic-role": "color/border/disabled",
+          "desc": "Disabled border",
+          "light": {
+            "alias": "{pg.200}",
+            "$value": "#DBE0D9"
+          },
+          "dark": {
+            "alias": "{pg.600}",
+            "$value": "#60655F"
+          }
+        },
+        "text/default": {
+          "semantic-role": "color/text/primary",
+          "desc": "Ghost label",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        },
+        "text/disabled": {
+          "semantic-role": "color/text/disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          },
+          "dark": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          }
+        }
+      },
+      "destructive": {
+        "bg/default": {
+          "semantic-role": "color/fill/error",
+          "desc": "Destructive fill",
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430"
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E"
+          }
+        },
+        "bg/hover": {
+          "semantic-role": "color/fill/error",
+          "desc": "Hover",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.hover-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430",
+            "base-hex": "#BA3430",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E",
+            "base-hex": "#F78B7E",
+            "delta-resolved": true
+          }
+        },
+        "bg/active": {
+          "semantic-role": "color/fill/error",
+          "desc": "Active",
+          "delta": {
+            "rule": "{layer-3.interaction-physics.active-deltas}",
+            "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+          },
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430",
+            "base-hex": "#BA3430",
+            "delta-resolved": true
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E",
+            "base-hex": "#F78B7E",
+            "delta-resolved": true
+          }
+        },
+        "bg/focus": {
+          "semantic-role": "color/fill/error",
+          "desc": "Focus \u2014 error ring",
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430"
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E"
+          }
+        },
+        "bg/disabled": {
+          "semantic-role": "color/surface-disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.100}",
+            "$value": "#EBF0EA"
+          },
+          "dark": {
+            "alias": "{pg.800}",
+            "$value": "#2B2F2A"
+          }
+        },
+        "text/default": {
+          "semantic-role": "color/on-fill/error",
+          "desc": "Label on destructive",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        },
+        "text/disabled": {
+          "semantic-role": "color/text/disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          },
+          "dark": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          }
+        },
+        "icon/default": {
+          "semantic-role": "color/on-fill/error",
+          "desc": "Icon on destructive",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        }
+      },
+      "link": {
+        "text/default": {
+          "semantic-role": "color/text/link",
+          "desc": "Link button text",
+          "light": {
+            "alias": "{info.600}",
+            "$value": "#1A37A1"
+          },
+          "dark": {
+            "alias": "{info.300}",
+            "$value": "#86A5FB"
+          }
+        },
+        "text/hover": {
+          "semantic-role": "color/text/brand",
+          "desc": "Hover",
+          "light": {
+            "alias": "{primary.600}",
+            "$value": "#3DB102"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "text/visited": {
+          "semantic-role": "color/text/link-visited",
+          "desc": "Visited",
+          "light": {
+            "alias": "{primary.700}",
+            "$value": "#1E7602"
+          },
+          "dark": {
+            "alias": "{primary.400}",
+            "$value": "#80FB48"
+          }
+        },
+        "text/disabled": {
+          "semantic-role": "color/text/disabled",
+          "desc": "Disabled",
+          "light": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          },
+          "dark": {
+            "alias": "{pg.400}",
+            "$value": "#9BA09A"
+          }
+        }
+      }
+    },
+    "card": {
+      "bg/default": {
+        "semantic-role": "color/surface",
+        "desc": "Card background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/hover": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Interactive card hover",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Selected card",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "bg/disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled card",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "border/default": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Card border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/hover": {
+        "semantic-role": "color/border/default",
+        "desc": "Card hover border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/selected": {
+        "semantic-role": "color/border/brand",
+        "desc": "Selected card border",
+        "light": {
+          "alias": "{primary.400}",
+          "$value": "#80FB48"
+        },
+        "dark": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        }
+      },
+      "header/bg": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Card header area",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "divider": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Internal card divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      }
+    },
+    "checkbox": {
+      "box/bg-unchecked": {
+        "semantic-role": "color/surface",
+        "desc": "Unchecked background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "box/bg-checked": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Checked background",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "box/bg-indeterminate": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Indeterminate background",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "box/bg-disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled background",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "box/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Hover (unchecked)",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "box/bg-error": {
+        "semantic-role": "color/fill/error-subtle",
+        "desc": "Error state",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "box/border-unchecked": {
+        "semantic-role": "color/border/default",
+        "desc": "Unchecked border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "box/border-checked": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Checked border",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "box/border-hover": {
+        "semantic-role": "color/border/brand",
+        "desc": "Hover border",
+        "light": {
+          "alias": "{primary.400}",
+          "$value": "#80FB48"
+        },
+        "dark": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        }
+      },
+      "box/border-error": {
+        "semantic-role": "color/border/error",
+        "desc": "Error border",
+        "light": {
+          "alias": "{error.600}",
+          "$value": "#940112"
+        },
+        "dark": {
+          "alias": "{error.400}",
+          "$value": "#DB6156"
+        }
+      },
+      "box/border-disabled": {
+        "semantic-role": "color/border/disabled",
+        "desc": "Disabled border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "check/color": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Checkmark icon",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "check/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled checkmark",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "label/default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Checkbox label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "label/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled label",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "label/error": {
+        "semantic-role": "color/text/error",
+        "desc": "Error label",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      }
+    },
+    "code-block": {
+      "bg": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Code block background",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Code block border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "text/default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Plain code text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "text/keyword": {
+        "semantic-role": "color/text/brand",
+        "desc": "Keywords \u2014 if, for, return",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "text/string": {
+        "semantic-role": "color/text/success",
+        "desc": "String literals",
+        "light": {
+          "alias": "{success.700}",
+          "$value": "#005115"
+        },
+        "dark": {
+          "alias": "{success.200}",
+          "$value": "#AFECAA"
+        }
+      },
+      "text/number": {
+        "semantic-role": "color/text/warning",
+        "desc": "Number literals",
+        "light": {
+          "alias": "{warning.700}",
+          "$value": "#642100"
+        },
+        "dark": {
+          "alias": "{warning.400}",
+          "$value": "#D4815D"
+        }
+      },
+      "text/comment": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Comments",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "text/function": {
+        "semantic-role": "color/text/info",
+        "desc": "Function names",
+        "light": {
+          "alias": "{info.700}",
+          "$value": "#06197B"
+        },
+        "dark": {
+          "alias": "{info.300}",
+          "$value": "#86A5FB"
+        }
+      },
+      "text/variable": {
+        "semantic-role": "color/text/error",
+        "desc": "Variables/properties",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      },
+      "header/bg": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Header bar (language label)",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "header/text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Language label",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "copy-btn/text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Copy button",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "line-highlight/bg": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Highlighted line",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "line-number/text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Gutter line numbers",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "divider": {
+      "default": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Horizontal/vertical divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "strong": {
+        "semantic-role": "color/border/default",
+        "desc": "Stronger section break",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "with-label/text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Divider with label text",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "drag": {
+      "handle/icon-default": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Drag handle icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "handle/icon-hover": {
+        "semantic-role": "color/icon/default",
+        "desc": "Hover",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "handle/icon-active": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Active drag",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "drop-zone/bg": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Drop target highlight",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "drop-zone/border": {
+        "semantic-role": "color/border/brand-strong",
+        "desc": "Drop target border",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      }
+    },
+    "empty-state": {
+      "illustration/bg": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Illustration container",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "title/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Empty state heading",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "body/text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Supporting text",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "icon/color": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Decorative icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "focus": {
+      "ring/color": {
+        "semantic-role": "color/focus/ring",
+        "desc": "Focus ring \u2014 2px, 2px offset. Source: Layer 2 interaction-tokens.",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "ring/color-error": {
+        "semantic-role": "color/focus/ring-error",
+        "desc": "Error focus ring",
+        "light": {
+          "alias": "{error.500}",
+          "$value": "#BA3430"
+        },
+        "dark": {
+          "alias": "{error.300}",
+          "$value": "#F78B7E"
+        }
+      }
+    },
+    "input": {
+      "bg/default": {
+        "semantic-role": "color/surface",
+        "desc": "Input background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/hover": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Hover background",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/focus": {
+        "semantic-role": "color/surface",
+        "desc": "Focus \u2014 border changes",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/filled": {
+        "semantic-role": "color/surface",
+        "desc": "Has value",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "bg/error": {
+        "semantic-role": "color/fill/error-subtle",
+        "desc": "Error state background",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "bg/readonly": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Read-only field",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "border/default": {
+        "semantic-role": "color/border/default",
+        "desc": "Default border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/hover": {
+        "semantic-role": "color/border/strong",
+        "desc": "Hover border",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.500}",
+          "$value": "#6F736D"
+        }
+      },
+      "border/focus": {
+        "semantic-role": "color/border/brand-strong",
+        "desc": "Focus border",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "border/filled": {
+        "semantic-role": "color/border/default",
+        "desc": "Has value border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/disabled": {
+        "semantic-role": "color/border/disabled",
+        "desc": "Disabled border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/error": {
+        "semantic-role": "color/border/error",
+        "desc": "Error border",
+        "light": {
+          "alias": "{error.600}",
+          "$value": "#940112"
+        },
+        "dark": {
+          "alias": "{error.400}",
+          "$value": "#DB6156"
+        }
+      },
+      "border/readonly": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Read-only border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "text/value": {
+        "semantic-role": "color/text/primary",
+        "desc": "Input text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "text/placeholder": {
+        "semantic-role": "color/text/placeholder",
+        "desc": "Placeholder",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "text/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled value",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "text/readonly": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Read-only value",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "label/default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Field label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "label/focus": {
+        "semantic-role": "color/text/brand",
+        "desc": "Label on focus",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "label/error": {
+        "semantic-role": "color/text/error",
+        "desc": "Error label",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      },
+      "label/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled label",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "helper/default": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Helper text below field",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "helper/error": {
+        "semantic-role": "color/text/error",
+        "desc": "Error message",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      },
+      "helper/success": {
+        "semantic-role": "color/text/success",
+        "desc": "Success message",
+        "light": {
+          "alias": "{success.700}",
+          "$value": "#005115"
+        },
+        "dark": {
+          "alias": "{success.200}",
+          "$value": "#AFECAA"
+        }
+      },
+      "icon/leading": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Leading icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "icon/trailing": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Trailing icon / clear / chevron",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "icon/error": {
+        "semantic-role": "color/icon/error",
+        "desc": "Error indicator icon",
+        "light": {
+          "alias": "{error.600}",
+          "$value": "#940112"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      }
+    },
+    "kbd": {
+      "bg": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Keyboard key background",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "border": {
+        "semantic-role": "color/border/default",
+        "desc": "Key border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Key label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      }
+    },
+    "list": {
+      "item/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Selected",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-active": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Active/pressed",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+        },
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9",
+          "base-hex": "#E3FFD9",
+          "delta-resolved": true
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201",
+          "base-hex": "#084201",
+          "delta-resolved": true
+        }
+      },
+      "item/bg-disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-destructive": {
+        "semantic-role": "color/fill/error-subtle",
+        "desc": "Destructive action",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "item/text-default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Item label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "item/text-secondary": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Item sublabel",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "item/text-selected": {
+        "semantic-role": "color/text/brand",
+        "desc": "Selected item text",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "item/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled text",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "item/text-destructive": {
+        "semantic-role": "color/text/error",
+        "desc": "Destructive text",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      },
+      "item/icon-leading": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Leading icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "item/icon-trailing": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Trailing icon/chevron",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "item/icon-selected": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Selection checkmark",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "separator": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Section separator",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "section-header": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Section group label",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "menu": {
+      "container/bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Menu container",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "container/border": {
+        "semantic-role": "color/border/default",
+        "desc": "Menu border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "item/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Menu item hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-active": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Item active/pressed",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.subtle-press-delta}"
+        },
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9",
+          "base-hex": "#E3FFD9",
+          "delta-resolved": true
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201",
+          "base-hex": "#084201",
+          "delta-resolved": true
+        }
+      },
+      "item/bg-selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Checked/selected item",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-destructive-hover": {
+        "semantic-role": "color/fill/error-subtle",
+        "desc": "Destructive item hover",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "item/text-default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Item text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "item/text-selected": {
+        "semantic-role": "color/text/brand",
+        "desc": "Selected item text",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "item/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled text",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "item/text-destructive": {
+        "semantic-role": "color/text/error",
+        "desc": "Destructive item text",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      },
+      "item/icon-default": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Item icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "item/icon-selected": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Selected item icon",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "item/shortcut-text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Keyboard shortcut label",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "separator": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Menu section separator",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "section-label": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Section header text",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "modal": {
+      "backdrop/bg": {
+        "semantic-role": "color/surface-overlay",
+        "desc": "Modal backdrop",
+        "light": {
+          "alias": "{pg.900} @ 26%",
+          "$value": null,
+          "overlay": true
+        },
+        "dark": {
+          "alias": "{pg.50} @ 26%",
+          "$value": null,
+          "overlay": true
+        }
+      },
+      "container/bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Modal background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "container/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Modal border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "header/bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Modal header",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "header/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Modal title",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "header/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Header bottom divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "footer/bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Modal footer",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "footer/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Footer top divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "close/icon-default": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Close button icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "close/icon-hover": {
+        "semantic-role": "color/icon/default",
+        "desc": "Close button hover",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "close/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Close button hover bg",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      }
+    },
+    "nav": {
+      "container/bg": {
+        "semantic-role": "color/surface",
+        "desc": "Nav container",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "container/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Nav border/divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "item/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Nav item hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-active": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Active/current item",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Selected item",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/text-default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Nav item text",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "item/text-active": {
+        "semantic-role": "color/text/brand",
+        "desc": "Active item text",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "item/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled item",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "item/icon-default": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Nav icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "item/icon-active": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Active icon",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "indicator/color": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Active indicator dot/bar",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "badge/bg": {
+        "semantic-role": "color/fill/error",
+        "desc": "Nav badge (notification dot)",
+        "light": {
+          "alias": "{error.500}",
+          "$value": "#BA3430"
+        },
+        "dark": {
+          "alias": "{error.300}",
+          "$value": "#F78B7E"
+        }
+      },
+      "badge/text": {
+        "semantic-role": "color/on-fill/error",
+        "desc": "Nav badge text",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "section-label/text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Nav section heading",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "pagination": {
+      "item/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "item/bg-current": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Current page",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "item/bg-disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "item/text-default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Page number",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "item/text-current": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Current page text",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "item/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "item/border": {
+        "semantic-role": "color/border/default",
+        "desc": "Item border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "ellipsis/text": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "... separator",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "popover": {
+      "bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Popover background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "border": {
+        "semantic-role": "color/border/default",
+        "desc": "Popover border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "arrow": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Arrow",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "header/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Popover heading",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "divider": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Internal divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      }
+    },
+    "progress": {
+      "track/bg": {
+        "semantic-role": "color/fill/control",
+        "desc": "Track background",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.700}",
+          "$value": "#454944"
+        }
+      },
+      "fill/brand": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Default progress fill",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "fill/success": {
+        "semantic-role": "color/fill/success",
+        "desc": "Success state",
+        "light": {
+          "alias": "{success.500}",
+          "$value": "#2FA836"
+        },
+        "dark": {
+          "alias": "{success.100}",
+          "$value": "#D7FBD3"
+        }
+      },
+      "fill/error": {
+        "semantic-role": "color/fill/error",
+        "desc": "Error/critical",
+        "light": {
+          "alias": "{error.500}",
+          "$value": "#BA3430"
+        },
+        "dark": {
+          "alias": "{error.300}",
+          "$value": "#F78B7E"
+        }
+      },
+      "fill/warning": {
+        "semantic-role": "color/fill/warning",
+        "desc": "Warning",
+        "light": {
+          "alias": "{warning.700}",
+          "$value": "#642100"
+        },
+        "dark": {
+          "alias": "{warning.400}",
+          "$value": "#D4815D"
+        }
+      },
+      "label/value": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Percentage label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "label/description": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Supporting text",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "radio": {
+      "dot/color": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Selected dot",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "dot/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled dot",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      }
+    },
+    "scrollbar": {
+      "track/bg": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "thumb/bg-default": {
+        "semantic-role": "color/border/default",
+        "desc": "Thumb default",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "thumb/bg-hover": {
+        "semantic-role": "color/border/strong",
+        "desc": "Thumb hover",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.500}",
+          "$value": "#6F736D"
+        }
+      },
+      "thumb/bg-active": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Thumb active/drag",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      }
+    },
+    "select": {
+      "option-list/bg": {
+        "semantic-role": "color/surface-raised",
+        "desc": "Option list background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.2}",
+          "$value": "#141813"
+        }
+      },
+      "option-list/border": {
+        "semantic-role": "color/border/default",
+        "desc": "Option list border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "option/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "option/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Option hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "option/bg-selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Option selected",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "option/bg-disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "option/text-default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Option text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "option/text-selected": {
+        "semantic-role": "color/text/brand",
+        "desc": "Selected option text",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "option/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled option",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "option/icon-check": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Checkmark on selected",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "option/separator": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Option group separator",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "option/group-label": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Option group heading",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "selection": {
+      "highlight/bg": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Text selection highlight",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "highlight/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Selected text colour",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      }
+    },
+    "skeleton": {
+      "base": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Skeleton base",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "shimmer": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Shimmer highlight",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      }
+    },
+    "slider": {
+      "track/bg": {
+        "semantic-role": "color/fill/control",
+        "desc": "Track background",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.700}",
+          "$value": "#454944"
+        }
+      },
+      "track/fill": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Active portion fill",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "track/disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled track",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "thumb/bg-default": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Thumb default",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "thumb/bg-hover": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Thumb hover",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.hover-deltas}",
+          "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+        },
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D",
+          "base-hex": "#6BF12D",
+          "delta-resolved": true
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7E",
+          "base-hex": "#A3FF7D",
+          "delta-resolved": true
+        }
+      },
+      "thumb/bg-pressed": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Thumb pressed",
+        "delta": {
+          "rule": "{layer-3.interaction-physics.pressed-deltas}",
+          "pivot": "{layer-3.interaction-physics.lightness-pivot-threshold}"
+        },
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D",
+          "base-hex": "#6BF12D",
+          "delta-resolved": true
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7E",
+          "base-hex": "#A3FF7D",
+          "delta-resolved": true
+        }
+      },
+      "thumb/bg-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled thumb",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "thumb/border": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Thumb border ring",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "label/value": {
+        "semantic-role": "color/text/primary",
+        "desc": "Slider value label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "label/min-max": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Min/max labels",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      }
+    },
+    "stepper": {
+      "step/bg-upcoming": {
+        "semantic-role": "color/fill/control",
+        "desc": "Not yet reached",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.700}",
+          "$value": "#454944"
+        }
+      },
+      "step/bg-active": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Current step",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "step/bg-complete": {
+        "semantic-role": "color/fill/success",
+        "desc": "Completed step",
+        "light": {
+          "alias": "{success.500}",
+          "$value": "#2FA836"
+        },
+        "dark": {
+          "alias": "{success.100}",
+          "$value": "#D7FBD3"
+        }
+      },
+      "step/bg-error": {
+        "semantic-role": "color/fill/error",
+        "desc": "Error step",
+        "light": {
+          "alias": "{error.500}",
+          "$value": "#BA3430"
+        },
+        "dark": {
+          "alias": "{error.300}",
+          "$value": "#F78B7E"
+        }
+      },
+      "step/border-upcoming": {
+        "semantic-role": "color/border/default",
+        "desc": "Upcoming border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "step/border-active": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Active border",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "step/icon-upcoming": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Step number",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "step/icon-active": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Active step icon",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "step/icon-complete": {
+        "semantic-role": "color/on-fill/success",
+        "desc": "Check icon",
+        "light": {
+          "alias": "{success.50}",
+          "$value": "#EEFEEC"
+        },
+        "dark": {
+          "alias": "{success.900}",
+          "$value": "#000E02"
+        }
+      },
+      "step/icon-error": {
+        "semantic-role": "color/on-fill/error",
+        "desc": "Error icon",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "connector/upcoming": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Connector line",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "connector/complete": {
+        "semantic-role": "color/fill/success",
+        "desc": "Completed connector",
+        "light": {
+          "alias": "{success.500}",
+          "$value": "#2FA836"
+        },
+        "dark": {
+          "alias": "{success.100}",
+          "$value": "#D7FBD3"
+        }
+      },
+      "label/upcoming": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Upcoming label",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "label/active": {
+        "semantic-role": "color/text/primary",
+        "desc": "Active label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "label/complete": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Complete label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "label/error": {
+        "semantic-role": "color/text/error",
+        "desc": "Error label",
+        "light": {
+          "alias": "{error.700}",
+          "$value": "#63010B"
+        },
+        "dark": {
+          "alias": "{error.200}",
+          "$value": "#FFBBB2"
+        }
+      }
+    },
+    "table": {
+      "container/bg": {
+        "semantic-role": "color/surface",
+        "desc": "Table background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "container/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Table outer border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "header/bg": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Header row",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "header/text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Header label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "header/icon-sort": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Sort chevron",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "header/icon-sort-active": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Active sort",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "header/border": {
+        "semantic-role": "color/border/default",
+        "desc": "Header bottom",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "row/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "row/bg-stripe": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Alternating stripe",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "row/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Row hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "row/bg-selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Selected row",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "row/bg-disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled row",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "row/bg-error": {
+        "semantic-role": "color/fill/error-subtle",
+        "desc": "Error row",
+        "light": {
+          "alias": "{error.50}",
+          "$value": "#FEF6F5"
+        },
+        "dark": {
+          "alias": "{error.900}",
+          "$value": "#160001"
+        }
+      },
+      "cell/text": {
+        "semantic-role": "color/text/primary",
+        "desc": "Cell text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "cell/text-secondary": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Secondary cell data",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "cell/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Cell divider",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "footer/bg": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Footer row",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "footer/text": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Footer text",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      }
+    },
+    "tabs": {
+      "bar/bg": {
+        "semantic-role": "color/surface",
+        "desc": "Tab bar background",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bar/border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Tab bar bottom border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "tab/bg-default": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "tab/bg-hover": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Tab hover",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "tab/bg-active": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Active tab fill",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "tab/bg-disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      },
+      "tab/text-default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Tab label",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "tab/text-active": {
+        "semantic-role": "color/text/brand",
+        "desc": "Active tab label",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "tab/text-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled label",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "tab/icon-default": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Tab icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "tab/icon-active": {
+        "semantic-role": "color/icon/brand",
+        "desc": "Active tab icon",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "indicator/color": {
+        "semantic-role": "color/fill/brand",
+        "desc": "Active tab indicator line",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "indicator/disabled": {
+        "semantic-role": "transparent",
+        "light": {
+          "$value": "transparent",
+          "alias": "transparent"
+        },
+        "dark": {
+          "$value": "transparent",
+          "alias": "transparent"
+        }
+      }
+    },
+    "tag": {
+      "bg/default": {
+        "semantic-role": "color/surface-subtle",
+        "desc": "Tag default bg",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "bg/hover": {
+        "semantic-role": "color/bg-subtle",
+        "desc": "Tag hover",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{elev.0}",
+          "$value": "#0D100C"
+        }
+      },
+      "bg/selected": {
+        "semantic-role": "color/fill/brand-subtle",
+        "desc": "Selected/active tag",
+        "light": {
+          "alias": "{primary.100}",
+          "$value": "#E3FFD9"
+        },
+        "dark": {
+          "alias": "{primary.800}",
+          "$value": "#084201"
+        }
+      },
+      "bg/disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled tag",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "border/default": {
+        "semantic-role": "color/border/default",
+        "desc": "Tag border",
+        "light": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "border/selected": {
+        "semantic-role": "color/border/brand",
+        "desc": "Selected border",
+        "light": {
+          "alias": "{primary.400}",
+          "$value": "#80FB48"
+        },
+        "dark": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        }
+      },
+      "text/default": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Tag text",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "text/selected": {
+        "semantic-role": "color/text/brand",
+        "desc": "Selected tag text",
+        "light": {
+          "alias": "{primary.600}",
+          "$value": "#3DB102"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "text/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled text",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "icon/remove": {
+        "semantic-role": "color/icon/subtle",
+        "desc": "Remove/dismiss icon",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "icon/remove-hover": {
+        "semantic-role": "color/icon/default",
+        "desc": "Remove icon hover",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      }
+    },
+    "toast": {
+      "default": {
+        "bg": {
+          "semantic-role": "color/surface-inverse",
+          "light": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          },
+          "dark": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          }
+        },
+        "text": {
+          "semantic-role": "color/text/inverse",
+          "light": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          },
+          "dark": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/icon/inverse",
+          "light": {
+            "alias": "{pg.50}",
+            "$value": "#F5FAF4"
+          },
+          "dark": {
+            "alias": "{pg.900}",
+            "$value": "#141713"
+          }
+        }
+      },
+      "error": {
+        "bg": {
+          "semantic-role": "color/fill/error",
+          "light": {
+            "alias": "{error.500}",
+            "$value": "#BA3430"
+          },
+          "dark": {
+            "alias": "{error.300}",
+            "$value": "#F78B7E"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/error",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/on-fill/error",
+          "light": {
+            "alias": "{error.50}",
+            "$value": "#FEF6F5"
+          },
+          "dark": {
+            "alias": "{error.900}",
+            "$value": "#160001"
+          }
+        }
+      },
+      "success": {
+        "bg": {
+          "semantic-role": "color/fill/success",
+          "light": {
+            "alias": "{success.500}",
+            "$value": "#2FA836"
+          },
+          "dark": {
+            "alias": "{success.100}",
+            "$value": "#D7FBD3"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/success",
+          "light": {
+            "alias": "{success.50}",
+            "$value": "#EEFEEC"
+          },
+          "dark": {
+            "alias": "{success.900}",
+            "$value": "#000E02"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/on-fill/success",
+          "light": {
+            "alias": "{success.50}",
+            "$value": "#EEFEEC"
+          },
+          "dark": {
+            "alias": "{success.900}",
+            "$value": "#000E02"
+          }
+        }
+      },
+      "warning": {
+        "bg": {
+          "semantic-role": "color/fill/warning",
+          "light": {
+            "alias": "{warning.700}",
+            "$value": "#642100"
+          },
+          "dark": {
+            "alias": "{warning.400}",
+            "$value": "#D4815D"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/warning",
+          "light": {
+            "alias": "{warning.50}",
+            "$value": "#FFF6F3"
+          },
+          "dark": {
+            "alias": "{warning.900}",
+            "$value": "#150300"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/on-fill/warning",
+          "light": {
+            "alias": "{warning.50}",
+            "$value": "#FFF6F3"
+          },
+          "dark": {
+            "alias": "{warning.900}",
+            "$value": "#150300"
+          }
+        }
+      },
+      "info": {
+        "bg": {
+          "semantic-role": "color/fill/info",
+          "light": {
+            "alias": "{info.500}",
+            "$value": "#3758BF"
+          },
+          "dark": {
+            "alias": "{info.300}",
+            "$value": "#86A5FB"
+          }
+        },
+        "text": {
+          "semantic-role": "color/on-fill/info",
+          "light": {
+            "alias": "{info.50}",
+            "$value": "#F6F8FF"
+          },
+          "dark": {
+            "alias": "{info.900}",
+            "$value": "#000020"
+          }
+        },
+        "icon": {
+          "semantic-role": "color/on-fill/info",
+          "light": {
+            "alias": "{info.50}",
+            "$value": "#F6F8FF"
+          },
+          "dark": {
+            "alias": "{info.900}",
+            "$value": "#000020"
+          }
+        }
+      },
+      "close/icon": {
+        "semantic-role": "color/icon/inverse",
+        "desc": "Dismiss",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        }
+      }
+    },
+    "toggle": {
+      "track/bg-off": {
+        "semantic-role": "color/fill/control",
+        "desc": "Off track",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.700}",
+          "$value": "#454944"
+        }
+      },
+      "track/bg-on": {
+        "semantic-role": "color/fill/brand",
+        "desc": "On track",
+        "light": {
+          "alias": "{primary.500}",
+          "$value": "#6BF12D"
+        },
+        "dark": {
+          "alias": "{primary.300}",
+          "$value": "#A3FF7D"
+        }
+      },
+      "track/bg-disabled": {
+        "semantic-role": "color/surface-disabled",
+        "desc": "Disabled track",
+        "light": {
+          "alias": "{pg.100}",
+          "$value": "#EBF0EA"
+        },
+        "dark": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        }
+      },
+      "track/bg-hover-off": {
+        "semantic-role": "color/border/strong",
+        "desc": "Hover off track",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.500}",
+          "$value": "#6F736D"
+        }
+      },
+      "thumb/bg-default": {
+        "semantic-role": "color/on-fill/brand",
+        "desc": "Thumb (uses on-fill for contrast)",
+        "light": {
+          "alias": "{primary.50}",
+          "$value": "#EDFFE6"
+        },
+        "dark": {
+          "alias": "{primary.900}",
+          "$value": "#011600"
+        }
+      },
+      "thumb/bg-off": {
+        "semantic-role": "color/surface",
+        "desc": "Thumb on off track",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{elev.1}",
+          "$value": "#10130F"
+        }
+      },
+      "thumb/bg-disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled thumb",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "label/default": {
+        "semantic-role": "color/text/primary",
+        "desc": "Toggle label",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "label/disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled label",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      }
+    },
+    "tooltip": {
+      "bg": {
+        "semantic-role": "color/surface-inverse",
+        "desc": "Tooltip background",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "text": {
+        "semantic-role": "color/text/inverse",
+        "desc": "Tooltip text",
+        "light": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        },
+        "dark": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        }
+      },
+      "border": {
+        "semantic-role": "color/border/subtle",
+        "desc": "Tooltip border",
+        "light": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        },
+        "dark": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        }
+      },
+      "arrow": {
+        "semantic-role": "color/surface-inverse",
+        "desc": "Arrow same as bg",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      }
+    },
+    "typography": {
+      "heading-1": {
+        "semantic-role": "color/text/primary",
+        "desc": "Page title, hero",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "heading-2": {
+        "semantic-role": "color/text/primary",
+        "desc": "Section heading",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "heading-3": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Card title, sub-heading",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "heading-4": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Minor heading",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "body": {
+        "semantic-role": "color/text/primary",
+        "desc": "Main body text",
+        "light": {
+          "alias": "{pg.900}",
+          "$value": "#141713"
+        },
+        "dark": {
+          "alias": "{pg.50}",
+          "$value": "#F5FAF4"
+        }
+      },
+      "body-secondary": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Supporting body",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "caption": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "Small labels, timestamps",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "overline": {
+        "semantic-role": "color/text/tertiary",
+        "desc": "All-caps category label",
+        "light": {
+          "alias": "{pg.600}",
+          "$value": "#60655F"
+        },
+        "dark": {
+          "alias": "{pg.300}",
+          "$value": "#BBBFB9"
+        }
+      },
+      "label": {
+        "semantic-role": "color/text/secondary",
+        "desc": "Form field labels",
+        "light": {
+          "alias": "{pg.800}",
+          "$value": "#2B2F2A"
+        },
+        "dark": {
+          "alias": "{pg.200}",
+          "$value": "#DBE0D9"
+        }
+      },
+      "placeholder": {
+        "semantic-role": "color/text/placeholder",
+        "desc": "Input placeholder",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      },
+      "link": {
+        "semantic-role": "color/text/link",
+        "desc": "Hyperlink",
+        "light": {
+          "alias": "{info.600}",
+          "$value": "#1A37A1"
+        },
+        "dark": {
+          "alias": "{info.300}",
+          "$value": "#86A5FB"
+        }
+      },
+      "link-visited": {
+        "semantic-role": "color/text/link-visited",
+        "desc": "Visited link",
+        "light": {
+          "alias": "{primary.700}",
+          "$value": "#1E7602"
+        },
+        "dark": {
+          "alias": "{primary.400}",
+          "$value": "#80FB48"
+        }
+      },
+      "code-inline": {
+        "color": {
+          "semantic-role": "color/text/code",
+          "light": {
+            "alias": "{primary.700}",
+            "$value": "#1E7602"
+          },
+          "dark": {
+            "alias": "{primary.300}",
+            "$value": "#A3FF7D"
+          }
+        },
+        "bg": {
+          "semantic-role": "color/bg-subtle",
+          "light": {
+            "alias": "{pg.100}",
+            "$value": "#EBF0EA"
+          },
+          "dark": {
+            "alias": "{elev.0}",
+            "$value": "#0D100C"
+          }
+        }
+      },
+      "disabled": {
+        "semantic-role": "color/text/disabled",
+        "desc": "Disabled text",
+        "light": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        },
+        "dark": {
+          "alias": "{pg.400}",
+          "$value": "#9BA09A"
+        }
+      }
+    }
+  }
+}
