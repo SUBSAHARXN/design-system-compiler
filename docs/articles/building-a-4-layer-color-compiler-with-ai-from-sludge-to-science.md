@@ -1,20 +1,54 @@
 # From Olive Sludge to First Principles: How I Built an Autonomous OKLCH Color Compiler with Claude and Antigravity
 
-*Why our color palettes looked like dirty mud, why our initial benchmark failed due to accessibility bias, and how mathematical color physics fixed it.*
+*The journey from April with Figma plugins like HSL Shader to an autonomous 4-layer compiler that solved the yellow mud trap, fixed our accessibility bias, and surged into the industry top 3.*
 
 ---
 
-If you’ve ever built a design system, you know the dirty secret of modern web palettes: **almost everyone picks their colors by hand in Figma and prays they pass WCAG contrast.**
+This project didn't start a few weeks ago. It started back in **April**.
 
-When you stick to Tailwind’s pre-packaged slate-500 or emerald-600, life feels simple. But the second a client, founder, or marketing team hands you a custom brand hex code—say, an electric purple (`#A952DB`) or a hyper-saturated neon lime (`#61F300`)—the whole illusion collapses. 
+And contrary to what most design system guides tell you, I never handpicked 11-stop color scales in Figma. Nobody has the patience or visual precision to manually tweak 50 through 1000 lightness steps and somehow guarantee they pass WCAG 2.2 AA contrast across both light and dark themes. 
 
-Tailwind can’t help you. It has one fixed set of ramps. Material Design 3 gets closer with tonal palettes, but forces you into Google’s component taxonomy and opinionated elevation model. 
+**The only color I ever handpicked was the primary 500.**
 
-Over the past few weeks, I set out to build an autonomous, deterministic **color compiler**—a tool where you feed in your raw brand hex seeds, and it generates an entire mathematical 11-stop color system with 100% WCAG 2.2 AA pass rates, APCA readability verification, and zero manual tweaking.
+To build out the rest of the palette, I was relying on Figma plugins—specifically tools like **HSL Shader** and similar palette generators. If you’ve ever used HSL Shader, you know how seductive the workflow is: you select a single target hex anchor (your 500), and the plugin immediately calculates:
+1. A **lighting ramp** (chromatic steps stepping from 1000 down to 50)
+2. A **paired grayscale ramp** (showing the luminance distribution of each step)
 
-I built this system pairing with **Claude** and **Antigravity** (Google DeepMind’s agentic coding environment). 
+Here is an actual screenshot from my Figma canvas during those early April experiments:
 
-This wasn’t a one-prompt "vibe coding" parlor trick. It was a gritty, multi-week engineering battle against human optical biology, color spaces, and our own stubborn design biases. Here is everything we learned, the mistakes that humbled us, and how we ended up ranking #3 against nine of the tech industry’s biggest design systems.
+![Figma HSL Shader Lighting and Grayscale Ramp](../assets/figma-hsl-shader-ramp.png)
+
+*Figure 1: My original Figma exploration in April using HSL Shader. Top: The chromatic lighting ramp from 1000 to 50. Bottom: The paired grayscale luminance ramp.*
+
+On paper, HSL Shader works on the exact same premise as this compiler: **one seed in, an entire lighting ramp out.**
+
+But as soon as you look closely at that screenshot, you see the catastrophic flaw that has plagued design systems for a decade.
+
+Look at stops **700, 800, 900, 950, and 1000** on that top lime/green ramp. 
+
+They don't look like deep, rich brand shadows. **They look like dirty, swampy army-green sludge.**
+
+### Why Palette Plugins Hit an Unavoidable Wall
+
+1. **HSL is mathematically non-perceptual:** HSL treats all hues equally. In HSL math, yellow at 50% lightness is treated as having the exact same luminosity as blue at 50% lightness—even though human photoreceptors perceive yellow as emitting over four times more light.
+2. **The static hue trap:** When HSL Shader steps down lightness, it keeps the hue angle locked in place. Pulling lightness down on a green or yellow without rotating the hue forces the color directly into human vision's brown/olive sensitivity trap.
+3. **Static pixels vs. living software:** A Figma plugin draws rectangles on a canvas. It doesn't validate contrast. It doesn't know if your button text will be legible on an OLED screen. It doesn't generate CSS variables, Tailwind tokens, or Figma DTCG design tokens.
+
+I realized that plugins weren't enough. What we needed wasn't another Figma widget—we needed an autonomous, deterministic **color compiler** built on first principles. A system where:
+- You feed in a brand hex 500 anchor.
+- It operates in **OKLCH** (perceptually uniform color space).
+- It enforces strict mathematical CI gates that refuse to compile if contrast fails.
+- It maps abstract ramps into 36 concrete UI component tokens without manual tweaking.
+
+To build it, I paired with **Claude** and **Antigravity** (Google DeepMind's agentic coding environment). 
+
+We designed a formal four-layer decoupled JSON architecture:
+- **Layer 1:** Generation Engine (pure color physics & OKLCH math)
+- **Layer 2:** Compiler Contract & CI Gates (accessibility thresholds & validation)
+- **Layer 3:** Interaction Physics (hover states, focus rings, shadow physics)
+- **Layer 4:** Semantic Taxonomy (mapping primitives to 36 concrete UI component roles)
+
+Then came the first real production trial: **The Skillbeek Test.**
 
 ---
 
@@ -22,13 +56,7 @@ This wasn’t a one-prompt "vibe coding" parlor trick. It was a gritty, multi-we
 
 The system didn't start with high-minded theory. It started in the middle of a mess.
 
-I had authored a four-layer JSON architecture designed to decouple color math from semantic UI tokens:
-- **Layer 1:** Generation Engine (pure color physics & OKLCH math)
-- **Layer 2:** Compiler Contract & CI Gates (accessibility thresholds & validation)
-- **Layer 3:** Interaction Physics (hover states, focus rings, shadow physics)
-- **Layer 4:** Semantic Taxonomy (mapping primitives to 36 concrete UI component roles)
-
-To test it, I fed in the brand anchors for **Skillbeek**, an education platform I was working with. Its primary identity was built around `#A952DB` (a vivid violet) and `#4CB33C` (a sharp green).
+To test our first compiler contracts, I fed in the brand anchors for **Skillbeek**, an education platform I was working with. Its primary identity was built around `#A952DB` (a vivid violet) and `#4CB33C` (a sharp green).
 
 The output was an immediate wake-up call:
 1. **Lightness inversion:** Tonal steps were jumping erratically. A 600 button had less perceptual contrast against text than a 500 button.
