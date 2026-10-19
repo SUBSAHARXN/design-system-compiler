@@ -1,0 +1,1065 @@
+{
+  "$meta": {
+    "generated": "2026-10-17T11:46:08.459816+00:00",
+    "layer-2-version": "1.9",
+    "layer-4-version": "1.2",
+    "description": "Layer 2+4 output. Semantic roles resolved to primitive aliases and hex."
+  },
+  "roles": {
+    "color/bg": {
+      "$type": "color",
+      "weight": 1,
+      "desc": "Page canvas",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{elev.0}",
+        "$value": "#0D100C"
+      }
+    },
+    "color/bg-subtle": {
+      "$type": "color",
+      "weight": 1,
+      "desc": "Subtle page tint",
+      "light": {
+        "alias": "{pg.100}",
+        "$value": "#EBF0EA"
+      },
+      "dark": {
+        "alias": "{elev.0}",
+        "$value": "#0D100C"
+      }
+    },
+    "color/surface": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Card, panel surface",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{elev.1}",
+        "$value": "#10130F"
+      }
+    },
+    "color/surface-raised": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Elevated surface \u2014 dialogs, menus",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{elev.2}",
+        "$value": "#141813"
+      }
+    },
+    "color/surface-subtle": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Inset, alternate surface",
+      "light": {
+        "alias": "{pg.100}",
+        "$value": "#EBF0EA"
+      },
+      "dark": {
+        "alias": "{elev.1}",
+        "$value": "#10130F"
+      }
+    },
+    "color/surface-inverse": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Dark surface in light mode",
+      "light": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/surface-overlay": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Standard modal/dialog backdrop. Text must NOT be placed on this token.",
+      "light": {
+        "alias": "{pg.900} @ 26%",
+        "$value": "#BABFBA"
+      },
+      "dark": {
+        "alias": "{pg.50} @ 26%",
+        "$value": "#494D48"
+      },
+      "overlay": true,
+      "apca-rule": "NO_TEXT \u2014 overlay background. Pairs with solid surface-raised for dialog content.",
+      "blend-note": "Blended over color/bg. Real appearance depends on content underneath."
+    },
+    "color/surface-disabled": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Disabled component fill",
+      "light": {
+        "alias": "{pg.100}",
+        "$value": "#EBF0EA"
+      },
+      "dark": {
+        "alias": "{pg.800}",
+        "$value": "#2B2F2A"
+      }
+    },
+    "color/fill/brand": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Primary brand fill \u2014 CTAs, active states",
+      "light": {
+        "alias": "{primary.500}",
+        "$value": "#6BF12D"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/fill/brand-subtle": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "Brand tint \u2014 chips, tags, selection",
+      "light": {
+        "alias": "{primary.100}",
+        "$value": "#E3FFD9"
+      },
+      "dark": {
+        "alias": "{primary.800}",
+        "$value": "#084201"
+      }
+    },
+    "color/fill/secondary": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Secondary brand fill",
+      "light": {
+        "alias": "{secondary.300}",
+        "$value": "#FFCC84"
+      },
+      "dark": {
+        "alias": "{secondary.700}",
+        "$value": "#8D4801"
+      }
+    },
+    "color/fill/error": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Error fill",
+      "light": {
+        "alias": "{error.500}",
+        "$value": "#BA3430"
+      },
+      "dark": {
+        "alias": "{error.300}",
+        "$value": "#F78B7E"
+      }
+    },
+    "color/fill/error-subtle": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "Error tint \u2014 banner bg, field bg",
+      "light": {
+        "alias": "{error.50}",
+        "$value": "#FEF6F5"
+      },
+      "dark": {
+        "alias": "{error.900}",
+        "$value": "#160001"
+      }
+    },
+    "color/fill/success": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Success fill [light and dark stops updated for CVD lightness separation]",
+      "light": {
+        "alias": "{success.500}",
+        "$value": "#2FA836"
+      },
+      "dark": {
+        "alias": "{success.100}",
+        "$value": "#D7FBD3"
+      }
+    },
+    "color/fill/success-subtle": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "Success tint \u2014 banner bg",
+      "light": {
+        "alias": "{success.50}",
+        "$value": "#EEFEEC"
+      },
+      "dark": {
+        "alias": "{success.900}",
+        "$value": "#000E02"
+      }
+    },
+    "color/fill/warning": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Warning fill [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{warning.700}",
+        "$value": "#642100"
+      },
+      "dark": {
+        "alias": "{warning.400}",
+        "$value": "#D4815D"
+      }
+    },
+    "color/fill/warning-subtle": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "Warning tint \u2014 banner bg",
+      "light": {
+        "alias": "{warning.50}",
+        "$value": "#FFF6F3"
+      },
+      "dark": {
+        "alias": "{warning.900}",
+        "$value": "#150300"
+      }
+    },
+    "color/fill/info": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Info fill",
+      "light": {
+        "alias": "{info.500}",
+        "$value": "#3758BF"
+      },
+      "dark": {
+        "alias": "{info.300}",
+        "$value": "#86A5FB"
+      }
+    },
+    "color/fill/info-subtle": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "Info tint \u2014 banner bg",
+      "light": {
+        "alias": "{info.50}",
+        "$value": "#F6F8FF"
+      },
+      "dark": {
+        "alias": "{info.900}",
+        "$value": "#000020"
+      }
+    },
+    "color/fill/control": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Toggle track, slider rail, control bg",
+      "light": {
+        "alias": "{pg.200}",
+        "$value": "#DBE0D9"
+      },
+      "dark": {
+        "alias": "{pg.700}",
+        "$value": "#454944"
+      }
+    },
+    "color/fill/inverse": {
+      "$type": "color",
+      "weight": 4,
+      "desc": "Inverse fill \u2014 dark chips in light, light in dark",
+      "light": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/border/default": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Default border \u2014 inputs, cards",
+      "light": {
+        "alias": "{pg.300}",
+        "$value": "#BBBFB9"
+      },
+      "dark": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      }
+    },
+    "color/border/strong": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Emphasis border \u2014 hover states",
+      "light": {
+        "alias": "{pg.400}",
+        "$value": "#9BA09A"
+      },
+      "dark": {
+        "alias": "{pg.500}",
+        "$value": "#6F736D"
+      }
+    },
+    "color/border/subtle": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Dividers, table lines",
+      "light": {
+        "alias": "{pg.200}",
+        "$value": "#DBE0D9"
+      },
+      "dark": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      }
+    },
+    "color/border/inverse": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Border on dark fills",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/border/brand": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Brand-coloured interactive border",
+      "light": {
+        "alias": "{primary.400}",
+        "$value": "#80FB48"
+      },
+      "dark": {
+        "alias": "{primary.500}",
+        "$value": "#6BF12D"
+      }
+    },
+    "color/border/brand-strong": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Focus ring, active input border",
+      "light": {
+        "alias": "{primary.500}",
+        "$value": "#6BF12D"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/border/error": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Error border",
+      "light": {
+        "alias": "{error.600}",
+        "$value": "#940112"
+      },
+      "dark": {
+        "alias": "{error.400}",
+        "$value": "#DB6156"
+      }
+    },
+    "color/border/success": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Success border",
+      "light": {
+        "alias": "{success.700}",
+        "$value": "#005115"
+      },
+      "dark": {
+        "alias": "{success.400}",
+        "$value": "#5EC15C"
+      }
+    },
+    "color/border/warning": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Warning border",
+      "light": {
+        "alias": "{warning.600}",
+        "$value": "#933809"
+      },
+      "dark": {
+        "alias": "{warning.500}",
+        "$value": "#B85F38"
+      }
+    },
+    "color/border/info": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Info border",
+      "light": {
+        "alias": "{info.600}",
+        "$value": "#1A37A1"
+      },
+      "dark": {
+        "alias": "{info.400}",
+        "$value": "#5E7FDF"
+      }
+    },
+    "color/border/disabled": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Disabled border",
+      "light": {
+        "alias": "{pg.200}",
+        "$value": "#DBE0D9"
+      },
+      "dark": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      }
+    },
+    "color/text/primary": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Primary text \u2014 body, headings",
+      "light": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/text/secondary": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Supporting text \u2014 labels, captions",
+      "light": {
+        "alias": "{pg.800}",
+        "$value": "#2B2F2A"
+      },
+      "dark": {
+        "alias": "{pg.200}",
+        "$value": "#DBE0D9"
+      }
+    },
+    "color/text/tertiary": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Tertiary text \u2014 timestamps, overlines",
+      "light": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      },
+      "dark": {
+        "alias": "{pg.300}",
+        "$value": "#BBBFB9"
+      }
+    },
+    "color/text/disabled": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Disabled text",
+      "light": {
+        "alias": "{pg.400}",
+        "$value": "#9BA09A"
+      },
+      "dark": {
+        "alias": "{pg.400}",
+        "$value": "#9BA09A"
+      }
+    },
+    "color/text/placeholder": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Input placeholder",
+      "light": {
+        "alias": "{pg.400}",
+        "$value": "#9BA09A"
+      },
+      "dark": {
+        "alias": "{pg.400}",
+        "$value": "#9BA09A"
+      }
+    },
+    "color/text/inverse": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Text on dark/inverse fills",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      }
+    },
+    "color/text/brand": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Brand-coloured text, links",
+      "light": {
+        "alias": "{primary.600}",
+        "$value": "#3DB102"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/text/brand-subtle": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Muted brand text",
+      "light": {
+        "alias": "{primary.500}",
+        "$value": "#6BF12D"
+      },
+      "dark": {
+        "alias": "{primary.400}",
+        "$value": "#80FB48"
+      }
+    },
+    "color/text/link": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Standard hyperlinks",
+      "light": {
+        "alias": "{info.600}",
+        "$value": "#1A37A1"
+      },
+      "dark": {
+        "alias": "{info.300}",
+        "$value": "#86A5FB"
+      }
+    },
+    "color/text/link-visited": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Visited hyperlinks",
+      "light": {
+        "alias": "{primary.700}",
+        "$value": "#1E7602"
+      },
+      "dark": {
+        "alias": "{primary.400}",
+        "$value": "#80FB48"
+      }
+    },
+    "color/text/error": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Error message text [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{error.700}",
+        "$value": "#63010B"
+      },
+      "dark": {
+        "alias": "{error.200}",
+        "$value": "#FFBBB2"
+      }
+    },
+    "color/text/success": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Success message text [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{success.700}",
+        "$value": "#005115"
+      },
+      "dark": {
+        "alias": "{success.200}",
+        "$value": "#AFECAA"
+      }
+    },
+    "color/text/warning": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Warning message text [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{warning.700}",
+        "$value": "#642100"
+      },
+      "dark": {
+        "alias": "{warning.400}",
+        "$value": "#D4815D"
+      }
+    },
+    "color/text/info": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Info message text",
+      "light": {
+        "alias": "{info.700}",
+        "$value": "#06197B"
+      },
+      "dark": {
+        "alias": "{info.300}",
+        "$value": "#86A5FB"
+      }
+    },
+    "color/text/code": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Inline code text",
+      "light": {
+        "alias": "{primary.700}",
+        "$value": "#1E7602"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/icon/default": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Default icon",
+      "light": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/icon/subtle": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Muted icon",
+      "light": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      },
+      "dark": {
+        "alias": "{pg.300}",
+        "$value": "#BBBFB9"
+      }
+    },
+    "color/icon/brand": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Brand icon",
+      "light": {
+        "alias": "{primary.600}",
+        "$value": "#3DB102"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/icon/inverse": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Icon on dark fill",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      }
+    },
+    "color/icon/disabled": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Disabled icon",
+      "light": {
+        "alias": "{pg.300}",
+        "$value": "#BBBFB9"
+      },
+      "dark": {
+        "alias": "{pg.600}",
+        "$value": "#60655F"
+      }
+    },
+    "color/icon/error": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Error icon [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{error.600}",
+        "$value": "#940112"
+      },
+      "dark": {
+        "alias": "{error.200}",
+        "$value": "#FFBBB2"
+      }
+    },
+    "color/icon/success": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Success icon [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{success.600}",
+        "$value": "#027C1E"
+      },
+      "dark": {
+        "alias": "{success.200}",
+        "$value": "#AFECAA"
+      }
+    },
+    "color/icon/warning": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Warning icon [dark mode stop updated for CVD lightness separation]",
+      "light": {
+        "alias": "{warning.600}",
+        "$value": "#933809"
+      },
+      "dark": {
+        "alias": "{warning.400}",
+        "$value": "#D4815D"
+      }
+    },
+    "color/icon/info": {
+      "$type": "color",
+      "weight": 7,
+      "desc": "Info icon",
+      "light": {
+        "alias": "{info.600}",
+        "$value": "#1A37A1"
+      },
+      "dark": {
+        "alias": "{info.300}",
+        "$value": "#86A5FB"
+      }
+    },
+    "color/on-fill/brand-subtle": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on brand-subtle fill",
+      "light": {
+        "alias": "{primary.900}",
+        "$value": "#011600"
+      },
+      "dark": {
+        "alias": "{primary.50}",
+        "$value": "#EDFFE6"
+      }
+    },
+    "color/on-fill/error-subtle": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on error-subtle fill",
+      "light": {
+        "alias": "{error.900}",
+        "$value": "#160001"
+      },
+      "dark": {
+        "alias": "{error.50}",
+        "$value": "#FEF6F5"
+      }
+    },
+    "color/on-fill/success-subtle": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on success-subtle fill",
+      "light": {
+        "alias": "{success.900}",
+        "$value": "#000E02"
+      },
+      "dark": {
+        "alias": "{success.50}",
+        "$value": "#EEFEEC"
+      }
+    },
+    "color/on-fill/warning-subtle": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on warning-subtle fill",
+      "light": {
+        "alias": "{warning.900}",
+        "$value": "#150300"
+      },
+      "dark": {
+        "alias": "{warning.50}",
+        "$value": "#FFF6F3"
+      }
+    },
+    "color/on-fill/info-subtle": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on info-subtle fill",
+      "light": {
+        "alias": "{info.900}",
+        "$value": "#000020"
+      },
+      "dark": {
+        "alias": "{info.50}",
+        "$value": "#F6F8FF"
+      }
+    },
+    "color/on-fill/control": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on control fill",
+      "light": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      },
+      "dark": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      }
+    },
+    "color/on-fill/brand": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on primary brand fill. Must pass Lc 75.",
+      "light": {
+        "alias": "{primary.50}",
+        "$value": "#EDFFE6"
+      },
+      "dark": {
+        "alias": "{primary.900}",
+        "$value": "#011600"
+      }
+    },
+    "color/on-fill/secondary": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on secondary fill",
+      "light": {
+        "alias": "{secondary.900}",
+        "$value": "#281100"
+      },
+      "dark": {
+        "alias": "{secondary.50}",
+        "$value": "#FFF3E4"
+      }
+    },
+    "color/on-fill/error": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on error fill. Must pass Lc 75.",
+      "light": {
+        "alias": "{error.50}",
+        "$value": "#FEF6F5"
+      },
+      "dark": {
+        "alias": "{error.900}",
+        "$value": "#160001"
+      }
+    },
+    "color/on-fill/success": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on success fill. Must pass Lc 75.",
+      "light": {
+        "alias": "{success.50}",
+        "$value": "#EEFEEC"
+      },
+      "dark": {
+        "alias": "{success.900}",
+        "$value": "#000E02"
+      }
+    },
+    "color/on-fill/warning": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on warning fill. Must pass Lc 75.",
+      "light": {
+        "alias": "{warning.50}",
+        "$value": "#FFF6F3"
+      },
+      "dark": {
+        "alias": "{warning.900}",
+        "$value": "#150300"
+      }
+    },
+    "color/on-fill/info": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on info fill. Must pass Lc 75.",
+      "light": {
+        "alias": "{info.50}",
+        "$value": "#F6F8FF"
+      },
+      "dark": {
+        "alias": "{info.900}",
+        "$value": "#000020"
+      }
+    },
+    "color/on-fill/inverse": {
+      "$type": "color",
+      "weight": 8,
+      "desc": "Text on inverse fill",
+      "light": {
+        "alias": "{pg.50}",
+        "$value": "#F5FAF4"
+      },
+      "dark": {
+        "alias": "{pg.900}",
+        "$value": "#141713"
+      }
+    },
+    "color/focus/ring": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Focus ring colour. 2px width, 2px offset.",
+      "light": {
+        "alias": "{primary.500}",
+        "$value": "#6BF12D"
+      },
+      "dark": {
+        "alias": "{primary.300}",
+        "$value": "#A3FF7D"
+      }
+    },
+    "color/focus/ring-error": {
+      "$type": "color",
+      "weight": 6,
+      "desc": "Error focus ring",
+      "light": {
+        "alias": "{error.500}",
+        "$value": "#BA3430"
+      },
+      "dark": {
+        "alias": "{error.300}",
+        "$value": "#F78B7E"
+      }
+    },
+    "color/elevation/0": {
+      "$type": "color",
+      "weight": 1,
+      "desc": "Dark mode bg floor",
+      "light": {
+        "alias": null,
+        "$value": null
+      },
+      "dark": {
+        "alias": "{elev.0}",
+        "$value": "#0D100C"
+      }
+    },
+    "color/elevation/1": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Dark mode cards, lists",
+      "light": {
+        "alias": null,
+        "$value": null
+      },
+      "dark": {
+        "alias": "{elev.1}",
+        "$value": "#10130F"
+      }
+    },
+    "color/elevation/2": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Dark mode menus, tooltips",
+      "light": {
+        "alias": null,
+        "$value": null
+      },
+      "dark": {
+        "alias": "{elev.2}",
+        "$value": "#141813"
+      }
+    },
+    "color/elevation/3": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Dark mode dialogs",
+      "light": {
+        "alias": null,
+        "$value": null
+      },
+      "dark": {
+        "alias": "{elev.3}",
+        "$value": "#191D18"
+      }
+    },
+    "color/elevation/4": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Dark mode nav drawers",
+      "light": {
+        "alias": null,
+        "$value": null
+      },
+      "dark": {
+        "alias": "{elev.4}",
+        "$value": "#1F231E"
+      }
+    },
+    "color/surface-overlay-brand": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Brand-tinted highlight over images or selected list items.",
+      "light": {
+        "alias": "{primary.900} @ 15%",
+        "$value": "#D0D8CF"
+      },
+      "dark": {
+        "alias": "{primary.50} @ 15%",
+        "$value": "#2F342D"
+      },
+      "overlay": true,
+      "apca-rule": "NO_TEXT \u2014 overlay background.",
+      "blend-note": "Blended over color/bg. Real appearance depends on content underneath."
+    },
+    "color/surface-overlay-error": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Destructive flash or critical scrim over content.",
+      "light": {
+        "alias": "{error.900} @ 15%",
+        "$value": "#D4D4D0"
+      },
+      "dark": {
+        "alias": "{error.50} @ 15%",
+        "$value": "#31322F"
+      },
+      "overlay": true,
+      "apca-rule": "NO_TEXT \u2014 overlay background.",
+      "blend-note": "Blended over color/bg. Real appearance depends on content underneath."
+    },
+    "color/surface-overlay-warning": {
+      "$type": "color",
+      "weight": 2,
+      "desc": "Warning tint over content \u2014 degraded state indication.",
+      "light": {
+        "alias": "{warning.900} @ 12%",
+        "$value": "#DADCD7"
+      },
+      "dark": {
+        "alias": "{warning.50} @ 12%",
+        "$value": "#2A2C28"
+      },
+      "overlay": true,
+      "apca-rule": "NO_TEXT \u2014 overlay background.",
+      "blend-note": "Blended over color/bg. Real appearance depends on content underneath."
+    },
+    "color/surface-overlay-selection": {
+      "$type": "color",
+      "weight": 5,
+      "desc": "List item selection highlight. 6% opacity preserves underlying text contrast.",
+      "light": {
+        "alias": "{primary.900} @ 6%",
+        "$value": "#E6ECE5"
+      },
+      "dark": {
+        "alias": "{primary.50} @ 6%",
+        "$value": "#1A1E19"
+      },
+      "overlay": true,
+      "apca-rule": "LOW_OPACITY_EXCEPTION \u2014 opacity <= 8% does not meaningfully impact underlying solid surface contrast. Verify empirically.",
+      "blend-note": "Blended over color/bg. Real appearance depends on content underneath."
+    }
+  }
+}
