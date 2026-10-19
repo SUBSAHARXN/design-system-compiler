@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Yellow Mud Trap vs. Convective Drift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0C0A0E;
+      --card-bg: #16141A;
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #FAF7FE;
+      --text-muted: #8E8A94;
+      --font-ui: 'Nunito', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      padding: 24px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .wrapper {
+      max-width: 820px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    }
+    .header { margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #FFDA1E;
+      background: rgba(255, 218, 30, 0.12);
+      border: 1px solid rgba(255, 218, 30, 0.3);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h2 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+    p.desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 680px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: #0F0E12;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-title { font-size: 14px; font-weight: 800; }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 9999px;
+    }
+    .tag.bad { background: rgba(220, 38, 38, 0.15); color: #F87171; border: 1px solid rgba(220, 38, 38, 0.3); }
+    .tag.good { background: rgba(34, 197, 94, 0.15); color: #4ADE80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    
+    .swatches { display: flex; flex-direction: column; gap: 8px; }
+    .swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    .box {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: #000;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
+    }
+    .info { flex: 1; min-width: 0; }
+    .info-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .stop-name { font-size: 13px; font-weight: 700; }
+    .hex { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+    .info-bottom { display: flex; justify-content: space-between; font-size: 11px; }
+    .coords { font-family: var(--font-mono); color: var(--text-muted); font-size: 10px; }
+    .label { font-weight: 700; font-size: 11px; }
+    .label.bad { color: #F87171; }
+    .label.good { color: #4ADE80; }
+    
+    /* Live UI Component Test */
+    .btn-preview-wrap {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .btn-label { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-family: var(--font-mono); }
+    .demo-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #FFFFFF;
+      transition: all 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="badge">Perceptual Optical Biology · OKLCH</div>
+      <h2>The Yellow Mud Trap vs. Convective Drift</h2>
+      <p class="desc">What happens when accessibility math forces yellow down to pass 4.5:1 contrast on white: locked static hue produces decaying olive sludge, while convective drift preserves natural amber warmth.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- Naive Static Hue -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">1. Naive Accessibility (Static Hue 94°)</span>
+          <span class="tag bad">Rotting Sludge</span>
+        </div>
+        <div class="swatches">
+          <div class="swatch-row">
+            <div class="box" style="background: #FFDA1E; color: #000;">500</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 500 (Base)</span><span class="hex">#FFDA1E</span></div>
+              <div class="info-bottom"><span class="coords">L:0.90 H:94°</span><span class="label">Saturated Yellow</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #D4A900; color: #000;">600</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 600</span><span class="hex">#D4A900</span></div>
+              <div class="info-bottom"><span class="coords">L:0.75 H:94°</span><span class="label bad">Mustard Tint</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #9D7D00; color: #fff;">700</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 700</span><span class="hex">#9D7D00</span></div>
+              <div class="info-bottom"><span class="coords">L:0.60 H:94°</span><span class="label bad">Swampy Olive</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #695300; color: #fff;">800</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 800 (WCAG Pass)</span><span class="hex">#695300</span></div>
+              <div class="info-bottom"><span class="coords">L:0.45 H:94°</span><span class="label bad">⚠️ Army Mud</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-preview-wrap">
+          <div class="btn-label">Live Button with Stop 800 (Static Hue):</div>
+          <button class="demo-btn" style="background: #695300;">Confirm Booking</button>
+        </div>
+      </div>
+
+      <!-- Convective Drift -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">2. Convective Hue Drift (94° → 45°)</span>
+          <span class="tag good">Natural Cognac</span>
+        </div>
+        <div class="swatches">
+          <div class="swatch-row">
+            <div class="box" style="background: #FFDA1E; color: #000;">500</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 500 (Base)</span><span class="hex">#FFDA1E</span></div>
+              <div class="info-bottom"><span class="coords">L:0.90 H:94°</span><span class="label">Saturated Yellow</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #E79E00; color: #000;">600</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 600</span><span class="hex">#E79E00</span></div>
+              <div class="info-bottom"><span class="coords">L:0.75 H:81°</span><span class="label good">Golden Honey</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #B86B00; color: #fff;">700</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 700</span><span class="hex">#B86B00</span></div>
+              <div class="info-bottom"><span class="coords">L:0.60 H:67°</span><span class="label good">Rich Amber</span></div>
+            </div>
+          </div>
+          <div class="swatch-row">
+            <div class="box" style="background: #834105; color: #fff;">800</div>
+            <div class="info">
+              <div class="info-top"><span class="stop-name">Stop 800 (WCAG Pass)</span><span class="hex">#834105</span></div>
+              <div class="info-bottom"><span class="coords">L:0.45 H:54°</span><span class="label good">✓ Warm Cognac</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-preview-wrap">
+          <div class="btn-label">Live Button with Stop 800 (Convective Drift):</div>
+          <button class="demo-btn" style="background: #834105;">Confirm Booking</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
