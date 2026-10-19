@@ -1,0 +1,99 @@
+{
+  "generated": "2026-10-17T11:46:08.474107+00:00",
+  "build-config": {
+    "floor-stop": 950,
+    "cta-color": "primary",
+    "mode": "both",
+    "strict": false,
+    "no-contrast": false,
+    "no-css": false
+  },
+  "layer-versions": {
+    "L1": "10.5",
+    "L2": "1.9",
+    "L3": "1.5",
+    "L4": "1.2"
+  },
+  "brand-inputs": {
+    "primary": "#61F300",
+    "secondary": "#F3A600",
+    "info": "#3758BF",
+    "warning": "#B85F38",
+    "success": "#2FA836",
+    "error": "#BA3430"
+  },
+  "elevation": {
+    "elev-pg (purple-tinted)": {
+      "0": "#0D100C",
+      "1": "#10130F",
+      "2": "#141813",
+      "3": "#191D18",
+      "4": "#1F231E"
+    },
+    "elev-sg (orange-tinted)": {
+      "0": "#120F0B",
+      "1": "#15120D",
+      "2": "#191612",
+      "3": "#1F1B17",
+      "4": "#24211C"
+    },
+    "spacing-note": "Power-curve exponent=1.3, total-dL=0.08. Weber-Fechner corrected."
+  },
+  "token-counts": {
+    "primitive-ramps": 8,
+    "primitive-stops": 96,
+    "semantic-roles": 80,
+    "component-tokens": 407
+  },
+  "contrast-summary": {
+    "pass": 0,
+    "fail": 0,
+    "skipped": 60
+  },
+  "validation-summary": {
+    "fill-border-conflicts": 0,
+    "cvd-conflicts": 0,
+    "oled-halation-risks": 0,
+    "chromostereopsis-risks": 0,
+    "surface-emissive-risks": 0,
+    "overlay-gamut-risks": 0,
+    "categorical-drift-crossings": 0,
+    "quantization-collapses": 0
+  },
+  "melanopic-annotations": {
+    "description": "Dark-mode tokens with H 200-280\u00b0 and C > 0.12 may contribute to circadian disruption in high-dwell-time night contexts. Use Night-Safe variants for these roles in sleep-sensitive products.",
+    "flagged-tokens": [
+      "color/fill/info (H=268\u00b0, C=0.130)",
+      "color/border/info (H=268\u00b0, C=0.150)",
+      "color/text/link (H=268\u00b0, C=0.130)",
+      "color/text/info (H=268\u00b0, C=0.130)",
+      "color/icon/info (H=268\u00b0, C=0.130)"
+    ]
+  },
+  "outputs": [
+    {
+      "file": "contrast-report.txt",
+      "bytes": 232
+    },
+    {
+      "file": "tokens-component.css",
+      "bytes": 46368
+    },
+    {
+      "file": "tokens-component.json",
+      "bytes": 132615
+    },
+    {
+      "file": "tokens-primitives.json",
+      "bytes": 25395
+    },
+    {
+      "file": "tokens-semantic.json",
+      "bytes": 26123
+    },
+    {
+      "file": "tokens.css",
+      "bytes": 9737
+    }
+  ]
+}

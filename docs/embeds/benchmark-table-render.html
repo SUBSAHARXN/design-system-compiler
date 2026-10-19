@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industry Benchmark Audit Matrix</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #0C0A0E;
+      color: #FAF7FE;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .benchmark-container {
+      width: 1020px;
+      background: #141217;
+      border: 1px solid #2B2633;
+      border-radius: 14px;
+      padding: 26px 30px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+    .header-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #E79E00;
+      background: rgba(231, 158, 0, 0.12);
+      border: 1px solid rgba(231, 158, 0, 0.28);
+      padding: 3px 9px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+    }
+    .header-tag::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #E79E00;
+    }
+    .title {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+    .desc {
+      font-size: 13px;
+      color: #A09BAA;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+    .desc code {
+      font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+      font-size: 11.5px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #FAF7FE;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .note-box {
+      background: #1A1720;
+      border: 1px solid #332E3E;
+      border-left: 3.5px solid #E79E00;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #C7C2D1;
+      line-height: 1.45;
+      margin-bottom: 18px;
+    }
+    .note-box strong {
+      color: #FFFFFF;
+    }
+    .note-box .highlight {
+      color: #FFDA55;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #8C8697;
+      padding: 9px 12px;
+      border-bottom: 1px solid #2B2633;
+    }
+    th.num, td.num {
+      text-align: right;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #221F28;
+      color: #D6D2DF;
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .system-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #FAF7FE;
+    }
+    .rank-badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      min-width: 24px;
+      text-align: center;
+    }
+    .rank-1 {
+      background: rgba(255, 215, 0, 0.15);
+      color: #FFD700;
+      border: 1px solid rgba(255, 215, 0, 0.35);
+    }
+    .rank-2 {
+      background: rgba(192, 192, 192, 0.15);
+      color: #E2E2E8;
+      border: 1px solid rgba(192, 192, 192, 0.35);
+    }
+    .rank-3 {
+      background: rgba(231, 158, 0, 0.22);
+      color: #FFAE1A;
+      border: 1px solid rgba(231, 158, 0, 0.45);
+    }
+    .rank-other {
+      background: rgba(255, 255, 255, 0.05);
+      color: #8C8697;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .row-compiler {
+      background: linear-gradient(90deg, rgba(231, 158, 0, 0.12) 0%, rgba(231, 158, 0, 0.04) 100%);
+      position: relative;
+    }
+    .row-compiler td {
+      border-top: 1px solid rgba(231, 158, 0, 0.4);
+      border-bottom: 1px solid rgba(231, 158, 0, 0.4);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .row-compiler td:first-child {
+      border-left: 3px solid #E79E00;
+    }
+    .row-compiler td:last-child {
+      border-right: 1px solid rgba(231, 158, 0, 0.4);
+    }
+    .tag-winner {
+      font-size: 10.5px;
+      font-weight: 700;
+      background: #E79E00;
+      color: #0C0A0E;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      letter-spacing: 0.02em;
+    }
+    .tag-mud-alert {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(239, 68, 68, 0.18);
+      color: #F87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .tag-mud-zero {
+      color: #8C8697;
+      font-size: 12px;
+    }
+    .score-cell {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .score-compiler {
+      color: #FFAE1A;
+    }
+    .score-first {
+      color: #FFD700;
+    }
+    .score-other {
+      color: #FAF7FE;
+    }
+    .meta-footer {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid #221F28;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: #797384;
+    }
+    .meta-footer span strong {
+      color: #A09BAA;
+    }
+  </style>
+</head>
+<body>
+  <div class="benchmark-container" id="benchmark-card">
+    <h2 class="title">Peer-Reproducible Industry Benchmark</h2>
+    <p class="desc">Automated mathematical audit across 9 design system token architectures executed under identical tests via <code>benchmarks/expanded_rigorous_benchmark.py</code>.</p>
+
+    <div class="note-box">
+      <strong>Scoring Breakdown:</strong> Ranked by composite score across 6 weighted dimensions. <strong>IBM Carbon ranks #1 overall (83.6)</strong> due to its strict mathematical linearity (0.0133). <strong>4-Layer Compiler ranks #3 overall (78.5)</strong>, but takes <span class="highlight"><strong>#1 in APCA Human Readability (101.9 Lc)</strong></span>, <span class="highlight"><strong>#1 in WCAG 2.2 AA Pass Rate (100.0%)</strong></span>, and <strong>#1 in CVD Colorblind Safety</strong>.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Rank & Design System</th>
+          <th class="num">WCAG 2.2 AA</th>
+          <th class="num">APCA Mean Lc</th>
+          <th class="num">Linearity Error (StdDev)</th>
+          <th class="num">Muddy Stops</th>
+          <th class="num">Overall Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-1">#1</span>
+              <span>IBM Carbon Design System</span>
+            </div>
+          </td>
+          <td class="num">100.0%</td>
+          <td class="num">86.7 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0133 <span style="font-size:11px;color:#797384;">(Ultra-linear)</span></td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-first">83.6 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-2">#2</span>
+              <span>Google Material Design 3 (M3)</span>
+            </div>
+          </td>
+          <td class="num">75.0%</td>
+          <td class="num">94.5 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0185</td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-other">81.7 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr class="row-compiler">
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-3">#3</span>
+              <span>4-Layer Compiler (Subtle Shoppers)</span>
+            </div>
+          </td>
+          <td class="num" style="color:#FFDA55; font-weight:700;">100.0%</td>
+          <td class="num" style="color:#FFDA55; font-weight:700;">101.9 Lc <span class="tag-winner">#1 READABILITY</span></td>
+          <td class="num" style="color:#FFF;">0.0333 <span style="font-size:11px;color:#D6D2DF;">(1.15 Power Curve)</span></td>
+          <td class="num"><span class="tag-mud-zero" style="color:#FFF;">0</span></td>
+          <td class="num score-cell score-compiler">78.5 <span style="font-size:11px;font-weight:600;color:#FFAE1A;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#4</span>
+              <span>GitHub Primer</span>
+            </div>
+          </td>
+          <td class="num">85.0%</td>
+          <td class="num">77.7 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0265</td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-other">78.3 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#5</span>
+              <span>Microsoft Fluent 2</span>
+            </div>
+          </td>
+          <td class="num">85.0%</td>
+          <td class="num">89.8 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0359</td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-other">77.4 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#6</span>
+              <span>Adobe Spectrum</span>
+            </div>
+          </td>
+          <td class="num">65.0%</td>
+          <td class="num">86.1 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0307</td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-other">76.4 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#7</span>
+              <span>Tailwind CSS</span>
+            </div>
+          </td>
+          <td class="num">80.0%</td>
+          <td class="num">88.0 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0300</td>
+          <td class="num"><span class="tag-mud-alert">1 (Yellow 700)</span></td>
+          <td class="num score-cell score-other">76.3 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#8</span>
+              <span>Apple Human Interface Guidelines (HIG)</span>
+            </div>
+          </td>
+          <td class="num">60.0%</td>
+          <td class="num">81.7 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0540</td>
+          <td class="num"><span class="tag-mud-alert">1 Stop</span></td>
+          <td class="num score-cell score-other">66.1 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="system-cell">
+              <span class="rank-badge rank-other">#9</span>
+              <span>Radix Colors</span>
+            </div>
+          </td>
+          <td class="num">40.0%</td>
+          <td class="num">74.3 Lc</td>
+          <td class="num" style="color:#A09BAA;">0.0651</td>
+          <td class="num"><span class="tag-mud-zero">0</span></td>
+          <td class="num score-cell score-other">46.9 <span style="font-size:11px;font-weight:500;color:#797384;">/ 100</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="meta-footer">
+      <span>Audit Suite: <strong>benchmarks/expanded_rigorous_benchmark.py</strong></span>
+      <span>Color Space: <strong>Oklch / APCA / WCAG 2.2</strong></span>
+      <span>Reproducibility: <strong>Deterministic CLI Pass</strong></span>
+    </div>
+  </div>
+</body>
+</html>

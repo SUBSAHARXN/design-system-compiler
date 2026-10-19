@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Benchmark Methodology Matrix</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background: #0C0A0E;
+      color: #FAF7FE;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      padding: 24px;
+      display: inline-block;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .sheet-card {
+      width: 1040px;
+      background: #141217;
+      border: 1px solid #2E2938;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+    }
+    .sheet-header {
+      padding: 16px 22px;
+      background: #1A1722;
+      border-bottom: 1px solid #2B2633;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sheet-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sheet-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(231, 158, 0, 0.16);
+      color: #FFAE1A;
+      font-size: 12px;
+      border: 1px solid rgba(231, 158, 0, 0.3);
+    }
+    .sheet-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #A09BAA;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th {
+      background: #18151F;
+      color: #8C8697;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 12px 18px;
+      text-align: left;
+      border-bottom: 1px solid #2B2633;
+      border-right: 1px solid #221F2B;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    th.th-center, td.td-center {
+      text-align: center;
+    }
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #221F2A;
+      border-right: 1px solid #1E1A26;
+      color: #D6D2DF;
+      line-height: 1.5;
+      vertical-align: middle;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .col-dim {
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 14.5px;
+      width: 230px;
+    }
+    .col-weight {
+      width: 100px;
+    }
+    .weight-pill {
+      background: rgba(231, 158, 0, 0.16);
+      border: 1px solid rgba(231, 158, 0, 0.35);
+      color: #FFDA55;
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .col-metrics {
+      width: 350px;
+      color: #FAF7FE;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .col-metrics .sub-val {
+      color: #FFAE1A;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .col-obj {
+      color: #A09BAA;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet-card" id="sheet-card">
+    <div class="sheet-header">
+      <div class="sheet-title">
+        <span class="sheet-icon">⚖</span>
+        Benchmark Criteria & Scoring Weight Distribution
+      </div>
+      <div class="sheet-badge">10 Empirical Tests · 5 Weighted Dimensions</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th class="th-center">Weight</th>
+          <th>Metrics Tested</th>
+          <th>Scientific Objective</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-dim">Core Accessibility</td>
+          <td class="td-center col-weight"><span class="weight-pill">25%</span></td>
+          <td class="col-metrics">WCAG 2.2 AA Pass Rate <span class="sub-val">(12.5%)</span><br>+ APCA Mean Readability Lc <span class="sub-val">(12.5%)</span></td>
+          <td class="col-obj">Guaranteed legal contrast without relying on developer guesswork.</td>
+        </tr>
+        <tr>
+          <td class="col-dim">Colorblind Inclusion (CVD)</td>
+          <td class="td-center col-weight"><span class="weight-pill">20%</span></td>
+          <td class="col-metrics">Deuteranopia Delta-E <span class="sub-val">(10%)</span><br>+ Protanopia Delta-E <span class="sub-val">(10%)</span></td>
+          <td class="col-obj">Prevent critical Red (Error) vs Green (Success) collision for 8% of male population.</td>
+        </tr>
+        <tr>
+          <td class="col-dim">Visual Science & Linearity</td>
+          <td class="td-center col-weight"><span class="weight-pill">20%</span></td>
+          <td class="col-metrics">Perceptual OKLCH Linearity <span class="sub-val">(10%)</span><br>+ Step Contrast Monotonicity <span class="sub-val">(10%)</span></td>
+          <td class="col-obj">Prevent erratic jumps between adjacent stops across all hues.</td>
+        </tr>
+        <tr>
+          <td class="col-dim">Visual Ergonomics & Mud Resistance</td>
+          <td class="td-center col-weight"><span class="weight-pill">20%</span></td>
+          <td class="col-metrics">OLED Halation Ratio <span class="sub-val">(10%)</span><br>+ Mid-Dark Warm Chroma Retention <span class="sub-val">(10%)</span></td>
+          <td class="col-obj">Prevent astigmatic eye-strain from pitch black, and prevent yellow from turning into olive mud.</td>
+        </tr>
+        <tr>
+          <td class="col-dim">Interaction UI Physics</td>
+          <td class="td-center col-weight"><span class="weight-pill">15%</span></td>
+          <td class="col-metrics">Hover State Uniformity Delta-E <span class="sub-val">(7.5%)</span><br>+ Peak Gamut Utilization <span class="sub-val">(7.5%)</span></td>
+          <td class="col-obj">Tactile feedback consistency and vibrant display without gamut clipping.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
