@@ -2,6 +2,8 @@
 
 *How overcompensating for accessibility contrast in an autonomous color compiler backfired into olive mud, alienated our developers, and what it took to fix the math.*
 
+👉 **Read on Medium:** [https://medium.com/@austinishubel/from-olive-sludge-to-first-principles-building-an-autonomous-oklch-color-compiler-with-ai-65668e21f1f8](https://medium.com/@austinishubel/from-olive-sludge-to-first-principles-building-an-autonomous-oklch-color-compiler-with-ai-65668e21f1f8)
+
 ---
 
 This project didn't start a few weeks ago. It started back in April.
