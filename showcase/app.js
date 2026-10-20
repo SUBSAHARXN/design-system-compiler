@@ -615,6 +615,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Smooth Scrolling for in-page anchor links (works even when hash already set)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const hash = this.getAttribute('href');
+      if (hash && hash.length > 1) {
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, null, hash);
+        }
+      }
+    });
+  });
+
   // Initial Compile
   document.body.setAttribute('data-theme', STATE.theme);
   recompileDesignSystem();
