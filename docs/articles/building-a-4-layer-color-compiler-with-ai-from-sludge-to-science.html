@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Olive Sludge to First Principles: Building a 4-Layer Color Compiler</title>
+  <meta name="description" content="The authentic production story of building an autonomous OKLCH color compiler with Claude and Antigravity, tested live on Skillbeek.">
+  <link rel="icon" type="image/svg+xml" href="../assets/subtleshoppers-icon.svg">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Article Reader Styles */
+    .article-container {
+      max-width: 820px;
+      margin: 40px auto 100px;
+      padding: 0 24px;
+    }
+
+    .article-header {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--app-surface-border);
+    }
+
+    .back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--brand-secondary);
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color var(--trans-fast);
+    }
+
+    .back-nav:hover {
+      text-decoration: underline;
+      color: #ffc44d;
+    }
+
+    .story-badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge-verified-story {
+      background: linear-gradient(90deg, #F3A600, #B7812F);
+      color: #0d100c;
+      font-weight: 800;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.05em;
+    }
+
+    .badge-pill-tag {
+      background: var(--app-surface-raised);
+      border: 1px solid var(--app-surface-border);
+      color: var(--app-text-muted);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .story-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--app-text-primary);
+      margin-bottom: 16px;
+    }
+
+    .story-subtitle {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--app-text-secondary);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .story-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--app-text-muted);
+      padding: 12px 16px;
+      background: var(--app-surface);
+      border: 1px solid var(--app-surface-border);
+      border-radius: var(--radius-md);
+    }
+
+    .story-content {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--app-text-secondary);
+    }
+
+    .story-content p {
+      margin-bottom: 22px;
+    }
+
+    .story-content h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--app-text-primary);
+      margin-top: 48px;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid var(--app-surface-border);
+      padding-bottom: 8px;
+    }
+
+    .story-content h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--app-text-primary);
+      margin-top: 32px;
+      margin-bottom: 14px;
+    }
+
+    .story-content ul, .story-content ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+    }
+
+    .story-content li {
+      margin-bottom: 8px;
+    }
+
+    .story-content strong {
+      color: var(--app-text-primary);
+    }
+
+    .story-content blockquote {
+      border-left: 3px solid var(--brand-secondary);
+      background: var(--app-surface);
+      padding: 16px 20px;
+      margin: 28px 0;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: italic;
+      color: var(--app-text-primary);
+    }
+
+    .story-content pre {
+      background: var(--app-code-bg);
+      border: 1px solid var(--app-surface-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #a7f3d0;
+      margin: 24px 0;
+    }
+
+    .story-content code {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      background: var(--app-surface-raised);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--brand-secondary);
+    }
+
+    .story-content pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    .callout-box {
+      border: 1px solid rgba(243, 166, 0, 0.35);
+      background: rgba(243, 166, 0, 0.05);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin: 28px 0;
+    }
+
+    .callout-box.real-proof {
+      border-color: rgba(97, 243, 0, 0.35);
+      background: rgba(97, 243, 0, 0.05);
+    }
+
+    .callout-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--brand-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .real-proof .callout-title {
+      color: var(--brand-primary);
+    }
+
+    /* Comparison Swatch Bar */
+    .visual-comparison-box {
+      background: var(--app-surface);
+      border: 1px solid var(--app-surface-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin: 28px 0;
+    }
+
+    .swatch-demo-row {
+      margin-bottom: 16px;
+    }
+
+    .swatch-demo-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .swatch-demo-strip {
+      display: flex;
+      height: 38px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .swatch-demo-strip span {
+      flex: 1;
+      height: 100%;
+    }
+
+    /* Benchmark Table */
+    .benchmark-table-wrapper {
+      overflow-x: auto;
+      margin: 28px 0;
+      border: 1px solid var(--app-surface-border);
+      border-radius: var(--radius-md);
+      background: var(--app-surface);
+    }
+
+    .benchmark-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      font-family: var(--font-sans);
+    }
+
+    .benchmark-table th {
+      background: var(--app-surface-raised);
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--app-text-muted);
+      border-bottom: 1px solid var(--app-surface-border);
+      text-align: left;
+    }
+
+    .benchmark-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--app-surface-border);
+      color: var(--app-text-secondary);
+    }
+
+    .benchmark-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .benchmark-table tr.highlight-compiler {
+      background: rgba(243, 166, 0, 0.08);
+      font-weight: 600;
+    }
+
+    .benchmark-table tr.highlight-compiler td {
+      color: var(--app-text-primary);
+    }
+
+    .pill-win {
+      background: rgba(97, 243, 0, 0.15);
+      color: var(--brand-primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <div class="article-container">
+    <a href="../../index.html#true-case-study" class="back-nav">← Return to 4-Layer Compiler Test Bench</a>
+
+    <header class="article-header">
+      <div class="story-badge-strip">
+        <span class="badge-verified-story">★ VERIFIED TRUE STORY · PRODUCTION MEMOIR</span>
+        <span class="badge-pill-tag">Skillbeek Production App</span>
+        <span class="badge-pill-tag">Claude &amp; Antigravity</span>
+        <span class="badge-pill-tag">Color Physics</span>
+      </div>
+
+      <h1 class="story-title">From Olive Sludge to First Principles: How I Built an Autonomous OKLCH Color Compiler with Claude and Antigravity</h1>
+      <p class="story-subtitle">How overcompensating for accessibility contrast in an autonomous color compiler backfired into olive mud, alienated our developers, and what it took to fix the math.</p>
+
+      <div class="story-meta-bar">
+        <div>
+          <span>Published in <strong>Subtle Shoppers &amp; Skillbeek Engineering</strong></span>
+        </div>
+        <div>
+          <span>7 min read · Production Verified Case Study</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="story-content">
+      <div class="callout-box real-proof">
+        <div class="callout-title">★ AUTHENTIC SYSTEM ARTIFACT &amp; CODEBASE ROOTS</div>
+        <p style="margin: 0; font-size: 14px;">This manuscript records the actual production development of the 4-Layer OKLCH Compiler between April and October. It documents live integration with our production app <a href="https://skillbeek-app.vercel.app" target="_blank" style="color: var(--brand-primary);">Skillbeek</a> (<a href="https://github.com/SUBSAHARXN/Skillbeek-App" target="_blank" style="color: var(--brand-primary);">SUBSAHARXN/Skillbeek-App</a>), the October 1 bug report, and the invention of convective hue drift in Layer 3.</p>
+      </div>
+
+      <p>This project didn't start a few weeks ago. It started back in April.</p>
+      <p>I never handpicked 11-stop color scales in Figma. Nobody has the patience or visual precision to manually tweak 50 through 1000 lightness steps and somehow guarantee they pass WCAG 2.2 AA contrast across both light and dark themes.</p>
+      <p>The only color I ever handpicked was the primary 500.</p>
+      <p>To get the rest of the palette, I used Figma plugins like HSL Shader. You select a single target hex (your 500), and the plugin generates:</p>
+      <ol>
+        <li>A lighting ramp (stepping from 1000 down to 50)</li>
+        <li>A paired grayscale ramp showing the lightness distribution of each step</li>
+      </ol>
+
+      <p>HSL Shader was great, and plugins can obviously spit out tokens and Figma variables. The catch was what happened when you actually tried to build with them. HSL doesn't care about human eyes; it treats a 50% yellow as if it has the exact same brightness as a 50% blue, even though yellow blazes on your screen. Once a plugin generates those variables, you're on your own. If a button fails contrast or a dark mode border causes glare on an OLED screen, the plugin won't warn you. It just hands you the tokens and lets you ship broken UI.</p>
+
+      <p>I didn't want to keep checking contrast tools and tweaking variables by hand. I wanted a compiler: something that takes brand hexes, uses real color physics (OKLCH), and refuses to build if the contrast is broken.</p>
+
+      <p>To build it, I paired with Claude and Antigravity (Google DeepMind's agentic coding environment).</p>
+
+      <p>We broke the system down into four layers:</p>
+      <ul>
+        <li><strong>Layer 1:</strong> Generation Engine (color physics and OKLCH math)</li>
+        <li><strong>Layer 2:</strong> Compiler Contract &amp; CI Gates (contrast gates and accessibility validation)</li>
+        <li><strong>Layer 3:</strong> Interaction Physics (hover states, focus rings, and shadow physics)</li>
+        <li><strong>Layer 4:</strong> Semantic Taxonomy (mapping primitives to 36 concrete UI component roles)</li>
+      </ul>
+
+      <p>We expected pure math to handle every edge case out of the box, but real production UI quickly proved our assumptions wrong.</p>
+
+      <h2>1. Testing with Skillbeek: When Math Met Reality</h2>
+      <p>The first production trial for the compiler was <strong>Skillbeek</strong>, an education platform I built and recently published on Binance (open-source on GitHub at <a href="https://github.com/SUBSAHARXN/Skillbeek-App" target="_blank">SUBSAHARXN/Skillbeek-App</a> and deployed live on Vercel at <a href="https://skillbeek-app.vercel.app" target="_blank">skillbeek-app.vercel.app</a>). Its brand identity was built around an ochre gold/brown primary (<code>#B7812F</code>) paired with purple (<code>#8C35BE</code>).</p>
+
+      <p>I wired the compiler's generated tokens into the Skillbeek codebase as <code>--illustration-brown</code>.</p>
+
+      <p>That was when the real defect hit: on actual screens, the compiler's tokens looked dull, earthy, and rotted into mud. The gold and amber tones rotted into murky swamp water whenever they were applied to buttons, active chips, and badges.</p>
+
+      <p>On October 1, I brought the issue straight into our AI pairing session with a direct challenge:</p>
+      <blockquote>
+        "Its determinism is detrimental to design because for each input the saturation is bound to be in a certain range making it dull and earthy. You can run calculations to confirm or deny this."
+      </blockquote>
+
+      <p>We opened the compiler code, ran the telemetry, and verified the flaw. The compiler had been designed with dogmatic contrast gates: to pass strict WCAG AA (4.5:1) and APCA Lc 60 against white backgrounds, it aggressively forced lightness down. But in color physics, yellow and gold only possess high chroma at high lightness. Crushing lightness while keeping hue locked turned vibrant gold into olive mud.</p>
+
+      <h2>2. The Quantization Collapse: When Math Disappears in 8-Bit Space</h2>
+      <p>The mud was only half the problem. When inspecting Skillbeek's <code>--illustration-brown</code> ramp, we ran into an even weirder defect: stop 50 and stop 100 were literally identical colors (<code>#F9F4EE</code>). Light-mode card surfaces and badge tints had zero visual separation.</p>
+
+      <p>This happened because of two flaws in the engine:</p>
+      <ol>
+        <li><strong>Crushed Chroma Envelope:</strong> In <code>layer-1-generation-engine.json</code>, the hardcoded envelope clamped stop 50 down to <code>0.08</code>, stop 100 to <code>0.20</code>, and stop 200 to <code>0.40</code>. This stripped up to 80% of color purity, turning badge backgrounds and active tints into chalky, greyish paste.</li>
+        <li><strong>8-Bit Quantization Step:</strong> Computer screens display color using 8 bits per channel (0 to 255). A step of 1/255 is roughly 0.0039. When the highlight delta-L between adjacent stops was too shallow, <code>round(channel * 255)</code> rounded both stops to the exact same hex code (<code>#F9F4EE</code>).</li>
+      </ol>
+
+      <p>We fixed this directly in the engine on October 1:</p>
+      <ul>
+        <li><strong>Restored Highlight Chroma:</strong> Raised the envelope curve in <code>layer-1-generation-engine.json</code> and <code>design_system_compiler.py</code>:
+          <ul>
+            <li>Stop 50: <code>0.08 → 0.15</code></li>
+            <li>Stop 100: <code>0.20 → 0.35</code></li>
+            <li>Stop 200: <code>0.40 → 0.58</code></li>
+            <li>Stop 300: <code>0.65 → 0.78</code></li>
+          </ul>
+        </li>
+        <li><strong>Added Automated CI Gate:</strong> Built <strong>Concern #28: 8-Bit Quantization Collapse</strong> into <code>design_system_compiler.py</code>. If any two adjacent deployable stops round to the same hex code, the compiler halts the build with an error instead of silently shipping dead hover states.</li>
+      </ul>
+
+      <p>Skillbeek's stops 50 and 100 immediately separated into distinct, luminous tones: <code>#FDF4E9</code> (warm cream surface wash) and <code>#FFEEDA</code> (crisp badge highlight).</p>
+
+      <h2>3. The Yellow Mud Trap: Born from Accessibility Overcompensation</h2>
+      <p>Looking back at our logs and equations, the yellow mud came directly from our compiler overcompensating for accessibility.</p>
+      <p>Saturated yellow (<code>#FFD400</code>) naturally sits at a high lightness of around 0.90 in OKLCH. When our Layer 2 accessibility gates demanded that text and button fills hit strict WCAG 4.5:1 and APCA Lc 60 against light backgrounds, yellow at stop 500 physically could not pass on white. The compiler solved that by dragging yellow's lightness down to 0.40 while leaving the hue angle locked at 94°.</p>
+
+      <pre><code>The Accessibility Overcompensation Trap:
+Target: Pass APCA Lc 60 on light background
+Pure Yellow (#FFD400, Lightness 0.90, Hue ~94°)
+Compiler forces Lightness down to 0.40 at static Hue 94°
+Compiler Output: #625002 (Rotting army-green mud)</code></pre>
+
+      <p>Human vision evolved under sunlight. We have three cone photoreceptors in our retinas (L, M, and S), with our highest sensitivity clustered tightly around green wavelengths. In nature, "dark yellow" does not exist. When yellow objects move into shadow, human vision expects the hue to drift naturally toward warm amber or burnt orange.</p>
+
+      <p>By locking hue at 94° while crushing lightness to pass accessibility tests, our compiler dragged the color directly through the eye's peak green sensitivity curve. The math said it was accessible. The human eye saw vomit.</p>
+
+      <h3>How We Fixed It: Convective Hue Drift</h3>
+      <p>We didn't fix this by hand-tweaking hex codes in Figma. We fixed it by encoding human optical biology directly into the compiler's Layer 3 (Interaction Physics):</p>
+
+      <pre><code># Convective Hue Drift Algorithm (Layer 3)
+if 55.0 <= hue <= 125.0:  # Yellow / Lime hazard band
+    lightness_deficit = max(0.0, 0.70 - current_lightness)
+    # Dynamically rotate hue toward warm amber (45°) as lightness drops
+    convective_hue_shift = (45.0 - hue) * (lightness_deficit / 0.70) * 0.45
+    corrected_hue = hue + convective_hue_shift</code></pre>
+
+      <p>Whenever the compiler darkens a hue between 55° and 125° (for hover states, active borders, or dark mode surfaces), it rotates the hue toward warm amber (<code>45°</code>).</p>
+      <p>The mud vanished. Yellows now degrade into warm honey and amber tones.</p>
+
+      <div class="visual-comparison-box">
+        <div class="swatch-demo-row">
+          <div class="swatch-demo-label">
+            <span>Naive Darkening (Static Hue 94°) → Rotting Mud</span>
+            <span style="color: #ef4444;">Fails Biology</span>
+          </div>
+          <div class="swatch-demo-strip">
+            <span style="background: #FFF5A0;"></span>
+            <span style="background: #FFE840;"></span>
+            <span style="background: #E5BE00;"></span>
+            <span style="background: #9A7B00;"></span>
+            <span style="background: #625002;"></span>
+            <span style="background: #392E00;"></span>
+          </div>
+        </div>
+        <div class="swatch-demo-row" style="margin-bottom: 0;">
+          <div class="swatch-demo-label">
+            <span>Convective Hue Drift (Drifting to 45° Amber) → Warm Cognac</span>
+            <span style="color: var(--brand-primary);">Compiler Fixed</span>
+          </div>
+          <div class="swatch-demo-strip">
+            <span style="background: #FFF2D6;"></span>
+            <span style="background: #FFCD66;"></span>
+            <span style="background: #F3A600;"></span>
+            <span style="background: #8A4E00;"></span>
+            <span style="background: #5A3000;"></span>
+            <span style="background: #3A1D00;"></span>
+          </div>
+        </div>
+      </div>
+
+      <h2>4. The Benchmark Wake-Up Call: Auditing 9 Design Systems</h2>
+      <p>With the mud eliminated and contrast passing, we wanted to see how our compiler measured up against existing systems.</p>
+      <p>To be clear: no consortium or standards body handed us a trophy. We built our own automated Python benchmark suite (<code>benchmarks/expanded_rigorous_benchmark.py</code>) to pit our compiler against nine widely used design systems under identical mathematical rules:</p>
+      <ul>
+        <li>IBM Carbon</li>
+        <li>Google Material Design 3 (M3)</li>
+        <li>4-Layer OKLCH Compiler (Our Baseline)</li>
+        <li>GitHub Primer</li>
+        <li>Microsoft Fluent 2</li>
+        <li>Adobe Spectrum</li>
+        <li>Tailwind CSS</li>
+        <li>Apple Human Interface Guidelines (HIG)</li>
+        <li>Radix Colors</li>
+      </ul>
+
+      <p>We scored each system across six dimensions: WCAG 2.2 AA Pass Rate, APCA Mean Readability (Lc), Linearity Error (StdDev), Muddy Shadow Stops, CVD Deutan Separation (ΔE), and OLED Glare Ceiling Compliance.</p>
+
+      <h3>The Fix: The 1.15 Power Curve</h3>
+      <p>On our first benchmark run, our compiler won #1 in APCA Readability (101.9 Lc) and #1 in WCAG 2.2 AA (100%), yet ranked in the middle of the pack on linearity. IBM Carbon beat us handily (Carbon: <code>0.0133</code>, Our initial build: <code>0.0520</code>). We had built a sports car with infinite contrast horsepower, but broken suspension.</p>
+
+      <p>We solved this in Layer 1 by replacing piecewise hacks with a continuous 1.15 Power Curve:</p>
+      <pre><code>Lightness(step) = 1.0 - (step / 1000) ^ 1.15</code></pre>
+
+      <p>Re-running the benchmark yielded the definitive audit results:</p>
+
+      <div class="benchmark-table-wrapper">
+        <table class="benchmark-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Design System</th>
+              <th>WCAG 2.2 AA</th>
+              <th>APCA Readability</th>
+              <th>Linearity Error</th>
+              <th>Muddy Stops</th>
+              <th>Composite Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>#1</strong></td>
+              <td><strong>IBM Carbon</strong></td>
+              <td>100.0%</td>
+              <td>86.7 Lc</td>
+              <td>0.0133</td>
+              <td>0</td>
+              <td><strong>83.6 / 100</strong></td>
+            </tr>
+            <tr>
+              <td><strong>#2</strong></td>
+              <td><strong>Google Material 3</strong></td>
+              <td>75.0%</td>
+              <td>94.5 Lc</td>
+              <td>0.0185</td>
+              <td>0</td>
+              <td><strong>81.7 / 100</strong></td>
+            </tr>
+            <tr class="highlight-compiler">
+              <td><strong>#3</strong></td>
+              <td><strong>4-Layer Compiler</strong></td>
+              <td>100.0%</td>
+              <td><span class="pill-win">101.9 Lc (#1)</span></td>
+              <td>0.0333</td>
+              <td>0</td>
+              <td><strong>78.5 / 100</strong></td>
+            </tr>
+            <tr>
+              <td>#4</td>
+              <td>GitHub Primer</td>
+              <td>85.0%</td>
+              <td>77.7 Lc</td>
+              <td>0.0265</td>
+              <td>0</td>
+              <td>78.3 / 100</td>
+            </tr>
+            <tr>
+              <td>#5</td>
+              <td>Microsoft Fluent 2</td>
+              <td>85.0%</td>
+              <td>89.8 Lc</td>
+              <td>0.0359</td>
+              <td>0</td>
+              <td>77.4 / 100</td>
+            </tr>
+            <tr>
+              <td>#6</td>
+              <td>Adobe Spectrum</td>
+              <td>65.0%</td>
+              <td>86.1 Lc</td>
+              <td>0.0307</td>
+              <td>0</td>
+              <td>76.4 / 100</td>
+            </tr>
+            <tr>
+              <td>#7</td>
+              <td>Tailwind CSS</td>
+              <td>80.0%</td>
+              <td>88.0 Lc</td>
+              <td>0.0300</td>
+              <td>1 (Yellow 700)</td>
+              <td>76.3 / 100</td>
+            </tr>
+            <tr>
+              <td>#8</td>
+              <td>Apple HIG</td>
+              <td>60.0%</td>
+              <td>81.7 Lc</td>
+              <td>0.0540</td>
+              <td>1</td>
+              <td>66.1 / 100</td>
+            </tr>
+            <tr>
+              <td>#9</td>
+              <td>Radix Colors</td>
+              <td>40.0%</td>
+              <td>74.3 Lc</td>
+              <td>0.0651</td>
+              <td>0</td>
+              <td>46.9 / 100</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>5. Test It Live: Hosted on Subtle Shoppers</h2>
+      <p>We are hosting the interactive compiler test bench live as a dedicated tool:</p>
+      <ul>
+        <li><strong>Interactive Studio:</strong> Explore presets, pick seeds, and toggle CVD modes right in the compiler UI.</li>
+        <li><strong>GitHub Repository:</strong> <a href="https://github.com/SUBSAHARXN/design-system-compiler" target="_blank">SUBSAHARXN/design-system-compiler</a></li>
+        <li><strong>Skillbeek Production App:</strong> <a href="https://skillbeek-app.vercel.app" target="_blank">skillbeek-app.vercel.app</a></li>
+      </ul>
+
+      <p>On the live studio, you can input brand seeds in sRGB or OKLCH, inspect Display P3 wide-gamut boundaries, simulate colorblindness in real-time, and export 36 production UI tokens.</p>
+
+      <h2>6. Open Invitation for Feedback</h2>
+      <p>This compiler was not built in an academic vacuum. It was built by breaking palettes in production with Skillbeek, catching muddy yellow buttons on actual screens, getting humbled by IBM Carbon's linearity in benchmarks, and pairing with AI to write mathematical proofs that actually hold up.</p>
+      <p>Test the engine with your weirdest, hardest brand colors. Tell us where the tokens feel too opinionated, and join us in perfecting color physics for software engineering.</p>
+
+      <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--app-surface-border); display: flex; justify-content: space-between; align-items: center;">
+        <a href="../../index.html#true-case-study" class="back-nav" style="margin-bottom: 0;">← Back to Compiler Test Bench</a>
+        <a href="https://github.com/SUBSAHARXN/design-system-compiler" target="_blank" class="article-link">GitHub Repository ↗</a>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
