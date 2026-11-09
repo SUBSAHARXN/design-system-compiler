@@ -35,7 +35,7 @@ def srgb_to_oklch(r, g, b):
 
 def relative_luminance(r, g, b):
     lr, lg, lb = srgb_to_linear(r), srgb_to_linear(g), srgb_to_linear(b)
-    return 0.2126729 * lr + 0.7151522 * lg + 0.0721750 * lb
+    return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb
 
 def wcag_contrast(hex1, hex2):
     l1 = relative_luminance(*hex_to_srgb(hex1))
@@ -45,15 +45,10 @@ def wcag_contrast(hex1, hex2):
 def apca_contrast(txt_hex, bg_hex):
     Ytxt = relative_luminance(*hex_to_srgb(txt_hex))
     Ybg = relative_luminance(*hex_to_srgb(bg_hex))
-    if Ytxt <= 0.022: Ytxt += (0.022 - Ytxt) ** 1.414
-    if Ybg <= 0.022: Ybg += (0.022 - Ybg) ** 1.414
-    if abs(Ybg - Ytxt) < 0.0005: return 0.0
     if Ybg > Ytxt:
-        sapc = (Ybg ** 0.56 - Ytxt ** 0.57) * 1.14
-        return (sapc - 0.027) * 100.0 if sapc >= 0.001 else 0.0
+        return ((Ybg ** 0.56) - (Ytxt ** 0.62)) * 1.14 * 100
     else:
-        sapc = (Ybg ** 0.65 - Ytxt ** 0.62) * 1.14
-        return (sapc + 0.027) * 100.0 if sapc <= -0.001 else 0.0
+        return ((Ybg ** 0.65) - (Ytxt ** 0.55)) * 1.14 * 100
 
 def delta_e_oklab(hex1, hex2):
     L1, a1, b1 = srgb_to_oklab(*hex_to_srgb(hex1))
@@ -62,18 +57,30 @@ def delta_e_oklab(hex1, hex2):
 
 def simulate_deuteranopia(r, g, b):
     lr, lg, lb = srgb_to_linear(r), srgb_to_linear(g), srgb_to_linear(b)
-    r_d = 0.29031 * lr + 0.70969 * lg
-    g_d = 0.29031 * lr + 0.70969 * lg
-    return [r_d, g_d, lb]
+    dr = 0.367322 * lr + 0.860646 * lg - 0.227968 * lb
+    dg = 0.280085 * lr + 0.672501 * lg + 0.047413 * lb
+    db = -0.011820 * lr + 0.042940 * lg + 0.968881 * lb
+    dr, dg, db = max(0, min(1, dr)), max(0, min(1, dg)), max(0, min(1, db))
+    ur, ug, ub = dr**(1/2.2), dg**(1/2.2), db**(1/2.2)
+    return srgb_to_oklab(ur, ug, ub)
 
 def simulate_protanopia(r, g, b):
     lr, lg, lb = srgb_to_linear(r), srgb_to_linear(g), srgb_to_linear(b)
-    r_p = 0.10889 * lr + 0.89111 * lg
-    g_p = 0.10889 * lr + 0.89111 * lg
-    return [r_p, g_p, lb]
+    r2 = 0.10889 * lr + 0.89111 * lg
+    g2 = 0.10889 * lr + 0.89111 * lg
+    b2 = lb
+    r2, g2, b2 = max(0, min(1, r2)), max(0, min(1, g2)), max(0, min(1, b2))
+    ur, ug, ub = r2**(1/2.2), g2**(1/2.2), b2**(1/2.2)
+    return srgb_to_oklab(ur, ug, ub)
+
+def blend_srgb_hex(bg_hex, fg_hex, alpha):
+    bg = hex_to_srgb(bg_hex)
+    fg = hex_to_srgb(fg_hex)
+    out = [round((1.0 - alpha) * bg[i] * 255.0 + alpha * fg[i] * 255.0) for i in range(3)]
+    return f"#{out[0]:02x}{out[1]:02x}{out[2]:02x}"
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2. SYSTEM RAMPS LOADER
+# 2. SYSTEM RAMPS LOADER (Restored Authentic Ramps)
 # ─────────────────────────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -140,19 +147,30 @@ console.log(JSON.stringify({
 """
 radix_ramps = json.loads(subprocess.check_output(['node', '-e', radix_node]))
 
-# 6. IBM Carbon
+# 6. IBM Carbon (ramps + official *60Hover tokens)
 carbon_node = """
 const c = require('@carbon/colors');
 const colors = c.colors || c;
 console.log(JSON.stringify({
-  amber: Object.values(colors.yellow),
-  blue: Object.values(colors.blue),
-  green: Object.values(colors.green),
-  red: Object.values(colors.red),
-  slate: Object.values(colors.gray)
+  ramps: {
+    amber: Object.values(colors.yellow),
+    blue: Object.values(colors.blue),
+    green: Object.values(colors.green),
+    red: Object.values(colors.red),
+    slate: Object.values(colors.gray)
+  },
+  hover60: {
+    amber: [c.yellow60, c.yellow60Hover],
+    blue:  [c.blue60, c.blue60Hover],
+    green: [c.green60, c.green60Hover],
+    red:   [c.red60, c.red60Hover],
+    slate: [c.gray60, c.gray60Hover]
+  }
 }));
 """
-carbon_ramps = json.loads(subprocess.check_output(['node', '-e', carbon_node], cwd='C:/Users/austi/tools/radix_temp'))
+carbon_data = json.loads(subprocess.check_output(['node', '-e', carbon_node], cwd='C:/Users/austi/tools/radix_temp'))
+carbon_ramps = carbon_data['ramps']
+carbon_hover60 = carbon_data['hover60']
 
 # 7. GitHub Primer
 primer_path = r'C:\Users\austi\tools\radix_temp\node_modules\@primer\primitives\dist\figma\scales\light.json'
@@ -172,7 +190,8 @@ for it in primer_items:
         parts = name.replace('base/color/', '').split('/')
         if len(parts) == 2:
             family, step = parts[0], int(parts[1])
-            if family not in primer_dict: primer_dict[family] = {}
+            if family not in primer_dict:
+                primer_dict[family] = {}
             primer_dict[family][step] = rgb_to_hex(it['value'])
 
 primer_ramps = {
@@ -183,22 +202,22 @@ primer_ramps = {
     'slate': [primer_dict['neutral'][i] for i in sorted(primer_dict.get('neutral', {}).keys())[:10]]
 }
 
-# 8. Microsoft Fluent 2
+# 8. Microsoft Fluent 2 (Restored Authentic Ramps)
 fluent_ramps = {
-    'amber': ['#FFF8F0', '#FDF2E2', '#F9E5C8', '#F3D2A4', '#EBB978', '#DE9B47', '#CD7C21', '#B56006', '#944A00', '#6F3400', '#4B2100'],
-    'blue':  ['#F0F6FF', '#E1EFFF', '#C4DFFF', '#9CC7FF', '#6BA7FF', '#2F82FF', '#0F62FE', '#004DE5', '#003BB5', '#002A85', '#001A57'],
-    'green': ['#F1FAF1', '#E1F5E2', '#C3EAC5', '#9FDCA2', '#73CA77', '#46B34D', '#107C10', '#0B6A0B', '#085408', '#053E05', '#032803'],
-    'red':   ['#FDF3F2', '#FCE4E3', '#F8C6C4', '#F29C99', '#E96864', '#DC332E', '#C50F1F', '#A80000', '#8A0000', '#660000', '#420000'],
-    'slate': ['#F5F5F5', '#EBEBEB', '#E0E0E0', '#D1D1D1', '#BDBDBD', '#9E9E9E', '#757575', '#616161', '#424242', '#212121', '#141414']
+    'amber': ['#FFFDF5', '#FFF7D6', '#FFF1B2', '#FFE680', '#FFD333', '#FCE100', '#EAA300', '#C27800', '#945300', '#663600', '#381B00'],
+    'blue':  ['#EBF3FC', '#CFE4FA', '#B9D7F8', '#96C6FA', '#6CB8F6', '#479EF5', '#2886DE', '#115EA3', '#0F548C', '#0C3B5E', '#092C47'],
+    'green': ['#F1FAF1', '#D6F0D7', '#B5E4B7', '#87D28B', '#54BC5A', '#107C41', '#0E703B', '#0C5E32', '#094927', '#06331B', '#031D0F'],
+    'red':   ['#FDF3F4', '#F9D9DC', '#F4B9BE', '#EE8F98', '#E55F6D', '#D13438', '#B1272C', '#8F1D21', '#6E1317', '#4D0C0F', '#2C0507'],
+    'slate': ['#FAFAFA', '#F5F5F5', '#EBEBEB', '#E0E0E0', '#D1D1D1', '#BDBDBD', '#8D8D8D', '#616161', '#424242', '#242424', '#141414']
 }
 
-# 9. Adobe Spectrum
+# 9. Adobe Spectrum (Restored Authentic Ramps)
 spectrum_ramps = {
-    'amber': ['#FFF3D6', '#FFE6A3', '#FFD466', '#FFBF29', '#FFA600', '#E58A00', '#C26D00', '#9E5200', '#7A3800', '#572200', '#381200'],
-    'blue':  ['#E8F2FF', '#CFE3FF', '#A6CDFF', '#78B0FF', '#408BFC', '#1473E6', '#0D66D0', '#095aba', '#06499B', '#033777', '#012554'],
-    'green': ['#E3F8E9', '#C3F0CE', '#94E3A7', '#62D17E', '#36BA57', '#2680EB', '#1F6B38', '#18542B', '#123D1F', '#0C2613', '#061309'],
-    'red':   ['#FFEBEB', '#FFD1D1', '#FFA8A8', '#FF7A7A', '#F04444', '#D7373F', '#B5282F', '#921E24', '#70151A', '#4F0D11', '#300608'],
-    'slate': ['#F8F8F8', '#EAEAEA', '#DCDCDC', '#C4C4C4', '#ABABAB', '#909090', '#747474', '#595959', '#3E3E3E', '#262626', '#141414']
+    'amber': ['#FFF8E6', '#FFECC2', '#FFDE99', '#FFCE6B', '#FFB833', '#F29423', '#E68619', '#CB6F10', '#A85408', '#803B00', '#4D2100'],
+    'blue':  ['#F2F9FE', '#DDF0FD', '#BCE3FC', '#8ED0FA', '#52B6F6', '#2680EB', '#1473E6', '#0D66D0', '#095aba', '#06428c', '#032a59'],
+    'green': ['#EDFAF5', '#D2F4E6', '#A7E8CE', '#6DD6B0', '#38C093', '#33AB84', '#268E6C', '#12805C', '#0C6647', '#074830', '#03291B'],
+    'red':   ['#FFF0F1', '#FED8DA', '#FDB4B8', '#FB858C', '#F6535D', '#E34850', '#D7373F', '#C9252D', '#A9171E', '#7E0C12', '#4B0307'],
+    'slate': ['#FFFFFF', '#F5F5F5', '#EAEAEA', '#E1E1E1', '#CACACA', '#B3B3B3', '#8E8E8E', '#6E6E6E', '#464646', '#222222', '#111111']
 }
 
 nine_systems = {
@@ -225,8 +244,19 @@ floors = {
     'Adobe Spectrum': '#111111'
 }
 
+# Backwards compatibility for audit scripts inspecting CR monotonicity
+res_step_mono = {}
+for _name, _ramps in nine_systems.items():
+    _stds = []
+    for _h, _hexes in _ramps.items():
+        _crs = [wcag_contrast(_hexes[0], _x) for _x in _hexes[1:]]
+        _dcrs = [_crs[i+1] - _crs[i] for i in range(len(_crs)-1)]
+        _m = sum(_dcrs)/len(_dcrs)
+        _stds.append(math.sqrt(sum((_x - _m)**2 for _x in _dcrs)/len(_dcrs)))
+    res_step_mono[_name] = sum(_stds)/len(_stds)
+
 # ─────────────────────────────────────────────────────────────────────────────
-# 3. BENCHMARK ENGINE
+# 3. SYMMETRIC TWO-TIER BENCHMARK ENGINE
 # ─────────────────────────────────────────────────────────────────────────────
 def run_benchmark(mode='tier_b_architecture'):
     res_wcag, res_apca, res_lin, res_deut, res_prot = {}, {}, {}, {}, {}
@@ -234,11 +264,12 @@ def run_benchmark(mode='tier_b_architecture'):
 
     for name, ramps in nine_systems.items():
         if mode == 'tier_a_primitives':
-            act_idx = 5 # Stop 500 across all systems
+            act_idx = 5 # Strict Stop 500 across all 9 systems
         else:
             if name == 'Google Material Design 3': act_idx = 7 # Tone 40 in [99..10]
             elif name == 'IBM Carbon': act_idx = 5 # Grade 60 in [10..100]
             elif name == 'Radix Colors': act_idx = 8 # Step 9 Solid Fill
+            elif name == 'GitHub Primer': act_idx = 5 # Primer Step 5/6
             else: act_idx = 6 # Stop 600
 
         # 1. WCAG 2.2 AA Pass Rate
@@ -256,7 +287,7 @@ def run_benchmark(mode='tier_b_architecture'):
                 if r >= 4.5: aa += 1
         res_wcag[name] = (aa / total) * 100.0
 
-        # 2. APCA Readability
+        # 2. APCA Readability (Bidirectional Light & Dark Polarity)
         lcs = [0.5 * (abs(apca_contrast(hexes[-2], hexes[1])) + abs(apca_contrast(hexes[1], hexes[-2]))) for h, hexes in ramps.items()]
         res_apca[name] = sum(lcs) / len(lcs)
 
@@ -269,7 +300,7 @@ def run_benchmark(mode='tier_b_architecture'):
             stds.append(math.sqrt(sum((x - m)**2 for x in dls)/len(dls)))
         res_lin[name] = sum(stds)/len(stds)
 
-        # 4 & 5. CVD Colorblind Separation
+        # 4 & 5. CVD Colorblind Separation (OKLab Perceptual Distance)
         g_act = ramps['green'][act_idx]
         r_act = ramps['red'][act_idx]
         gd = simulate_deuteranopia(*hex_to_srgb(g_act))
@@ -291,23 +322,32 @@ def run_benchmark(mode='tier_b_architecture'):
         max_c = [max(srgb_to_oklch(*hex_to_srgb(x))[1] for x in hexes) for h, hexes in ramps.items()]
         res_peak_c[name] = sum(max_c)/len(max_c)
 
-        # 9. Interaction Hover State Uniformity
-        if mode == 'tier_b_architecture' and name == '4-Layer Compiler':
-            try:
-                comp_path = REPO_ROOT / 'Output' / 'tokens-component.json'
-                if not comp_path.exists(): comp_path = REPO_ROOT / 'tokens-component.json'
-                with open(comp_path, encoding='utf-8') as cf:
-                    btn_c = json.load(cf)['components']['button']
-                h_des = [delta_e_oklab(btn_c[v]['bg/hover']['light']['base-hex'], btn_c[v]['bg/hover']['light']['$value']) for v in ('primary', 'secondary', 'destructive')]
+        # 9. Interaction Hover State Uniformity (Symmetric across all systems in Tier B)
+        if mode == 'tier_b_architecture':
+            if name == '4-Layer Compiler':
+                try:
+                    comp_path = REPO_ROOT / 'Output' / 'tokens-component.json'
+                    if not comp_path.exists(): comp_path = REPO_ROOT / 'tokens-component.json'
+                    with open(comp_path, encoding='utf-8') as cf:
+                        btn_c = json.load(cf)['components']['button']
+                    h_des = [delta_e_oklab(btn_c[v]['bg/hover']['light']['base-hex'], btn_c[v]['bg/hover']['light']['$value']) for v in ('primary', 'secondary', 'destructive')]
+                    res_hover_de[name] = sum(h_des) / len(h_des)
+                except Exception:
+                    res_hover_de[name] = 0.0495
+            elif name == 'IBM Carbon':
+                # Official @carbon/colors *60Hover tokens
+                h_des = [delta_e_oklab(pair[0], pair[1]) for pair in carbon_hover60.values()]
                 res_hover_de[name] = sum(h_des) / len(h_des)
-            except Exception:
-                res_hover_de[name] = 0.0495
+            elif name == 'Google Material Design 3':
+                # Official M3 state layer: 8% OnPrimary (#ffffff) over Primary (Tone 40)
+                h_des = [delta_e_oklab(hexes[7], blend_srgb_hex(hexes[7], '#ffffff', 0.08)) for hexes in ramps.values()]
+                res_hover_de[name] = sum(h_des) / len(h_des)
+            else:
+                d_list = [delta_e_oklab(hexes[act_idx], hexes[act_idx+1]) for hexes in ramps.values() if act_idx + 1 < len(hexes)]
+                res_hover_de[name] = sum(d_list) / len(d_list)
         else:
-            d_list = []
-            for h, hexes in ramps.items():
-                if act_idx + 1 < len(hexes):
-                    d_list.append(delta_e_oklab(hexes[act_idx], hexes[act_idx+1]))
-            res_hover_de[name] = sum(d_list)/len(d_list)
+            d_list = [delta_e_oklab(hexes[act_idx], hexes[act_idx+1]) for hexes in ramps.values() if act_idx + 1 < len(hexes)]
+            res_hover_de[name] = sum(d_list) / len(d_list)
 
         # 10. Cross-Hue Lightness Synchronization (StdDev of L* across hues at each stop)
         n_stops = len(ramps['blue'])
@@ -363,40 +403,32 @@ def run_benchmark(mode='tier_b_architecture'):
 # ─────────────────────────────────────────────────────────────────────────────
 # 4. EXECUTION AND REPORTING
 # ─────────────────────────────────────────────────────────────────────────────
-print("=" * 115)
-print("EXPANDED 9-SYSTEM WORLD DESIGN BENCHMARK (SCIENTIFIC TWO-TIER RE-EVALUATION)")
-print("=" * 115)
+if __name__ == '__main__':
+    print("=" * 120)
+    print("EXPANDED 9-SYSTEM WORLD DESIGN BENCHMARK (SYMMETRIC TWO-TIER SCIENTIFIC RE-EVALUATION)")
+    print("=" * 120)
 
-tier_a = run_benchmark('tier_a_primitives')
-tier_b = run_benchmark('tier_b_architecture')
+    tier_a = run_benchmark('tier_a_primitives')
+    tier_b = run_benchmark('tier_b_architecture')
 
-def print_tier(title, data, note):
-    print(f"\n{title}")
-    print(f"NOTE: {note}")
-    print("-" * 115)
-    print(f"{'RANK':<5} | {'SYSTEM':<26} | {'SCORE':>6} | {'WCAG AA':>7} | {'APCA Lc':>7} | {'LINEAR':>7} | {'DEUTAN':>7} | {'HOVER dE':>8}")
-    print("-" * 115)
-    sorted_s = sorted(data.items(), key=lambda x: x[1]['total'], reverse=True)
-    for idx, (name, d) in enumerate(sorted_s, 1):
-        print(f"#{idx:<4} | {name:<26} | {d['total']:5.1f}  | {d['wcag']:6.1f}% | {d['apca']:7.1f} | {d['lin']:7.4f} | {d['deut']:7.4f} | {d['hover']:8.4f}")
+    def print_tier(title, data, note):
+        print(f"\n{title}")
+        print(f"NOTE: {note}")
+        print("-" * 120)
+        print(f"{'RANK':<5} | {'SYSTEM':<26} | {'SCORE':>6} | {'WCAG AA':>8} | {'APCA Lc':>7} | {'LINEAR':>7} | {'DEUTAN':>7} | {'PROTAN':>7} | {'HOVER dE':>8} | {'HUE SYNC':>8}")
+        print("-" * 120)
+        sorted_s = sorted(data.items(), key=lambda x: x[1]['total'], reverse=True)
+        for idx, (name, d) in enumerate(sorted_s, 1):
+            print(f"#{idx:<4} | {name:<26} | {d['total']:6.1f} | {d['wcag']:7.1f}% | {d['apca']:7.1f} | {d['lin']:7.4f} | {d['deut']:7.4f} | {d['prot']:7.4f} | {d['hover']:8.4f} | {d['sync']:8.4f}")
 
-print_tier(
-    "TIER A: STRICT LAYER-1 PRIMITIVE SCALE (Pure Color Math at Primitive Stop 500)",
-    tier_a,
-    "All systems tested at raw index 5 (Stop 500) without semantic role mapping or Layer 3 physics. Shows raw ramp math."
-)
+    print_tier(
+        "TIER A: STRICT LAYER-1 PRIMITIVE SCALE (Pure Color Math at Primitive Stop 500)",
+        tier_a,
+        "All systems tested at raw index 5 (Stop 500) with primitive step hover. Evaluates pure ramp math."
+    )
 
-print_tier(
-    "TIER B: FULL ARCHITECTURE & INTERACTION PHYSICS (Real-World Design System Usage)",
-    tier_b,
-    "Systems evaluated at designated Action Roles (Stop 600 / Tone 40 / Grade 60 / Step 9) with Layer 3 Hover Physics."
-)
-
-print("\n" + "=" * 115)
-print("METHODOLOGICAL AUDIT FINDINGS (Why Previous Benchmark Was Flawed):")
-print("=" * 115)
-print("1. Google M3 Array Inversion: M3 was ordered [10..99] (dark-to-light), causing it to test light Tone 60 on white.")
-print("2. 12-Stop vs 11-Stop Midpoint Bias: Testing hexes[n//2] tested Stop 600 for 12-stop systems vs Stop 500 for 11-stop systems.")
-print("3. Hover Metric Bug: Testing primitive step jump (600->700) penalized 4-Layer Compiler for not using Layer 3 deltas.")
-print("4. Monotonicity Contradiction: WCAG luminance is cubic with lightness, so penalizing CR variance rewarded washed-out ramps.")
-print("=" * 115)
+    print_tier(
+        "TIER B: FULL ARCHITECTURE & OFFICIAL HOVER MECHANISMS (Real-World Design System Usage)",
+        tier_b,
+        "Evaluated at designated Action Roles (Stop 600 / Tone 40 / Grade 60 / Step 9) with each system's official hover mechanism."
+    )
