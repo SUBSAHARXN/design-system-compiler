@@ -43,12 +43,17 @@ def wcag_contrast(hex1, hex2):
     return (max(l1, l2) + 0.05) / (min(l1, l2) + 0.05)
 
 def apca_contrast(txt_hex, bg_hex):
+    # APCA 0.0.98G-4g: soft black clamp, matched polarity exponents, low-contrast clip and offset
     Ytxt = relative_luminance(*hex_to_srgb(txt_hex))
     Ybg = relative_luminance(*hex_to_srgb(bg_hex))
+    if Ytxt <= 0.022: Ytxt += (0.022 - Ytxt) ** 1.414
+    if Ybg <= 0.022: Ybg += (0.022 - Ybg) ** 1.414
+    if abs(Ybg - Ytxt) < 0.0005: return 0.0
     if Ybg > Ytxt:
-        return ((Ybg ** 0.56) - (Ytxt ** 0.62)) * 1.14 * 100
-    else:
-        return ((Ybg ** 0.65) - (Ytxt ** 0.55)) * 1.14 * 100
+        sapc = (Ybg ** 0.56 - Ytxt ** 0.57) * 1.14
+        return (sapc - 0.027) * 100.0 if sapc >= 0.001 else 0.0
+    sapc = (Ybg ** 0.65 - Ytxt ** 0.62) * 1.14
+    return (sapc + 0.027) * 100.0 if sapc <= -0.001 else 0.0
 
 def delta_e_oklab(hex1, hex2):
     L1, a1, b1 = srgb_to_oklab(*hex_to_srgb(hex1))

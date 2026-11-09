@@ -80,36 +80,36 @@ Deterministic mathematical evaluation across 9 design systems executed via `benc
 
 | Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Protan dE | Hover dE | Hue Sync |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | IBM Carbon | 86.1 | 100.0% | 87.4 | 0.0133 | 0.0721 | 0.1266 | 0.1073 | 0.0094 |
-| 2 | Google Material Design 3 | 81.7 | 75.0% | 93.8 | 0.0185 | 0.0517 | 0.1258 | 0.0864 | 0.0096 |
-| **3** | **4-Layer Compiler (L1)** | **81.3** | **90.0%** | **102.2 (#1)** | **0.0333** | **0.1016 (#1)** | **0.2600** | **0.1047** | **0.0328** |
-| 4 | Adobe Spectrum | 77.9 | 65.0% | 87.0 | 0.0307 | 0.0701 | 0.1895 | 0.0647 | 0.0448 |
-| 5 | Tailwind CSS | 76.2 | 80.0% | 88.8 | 0.0300 | 0.0786 | 0.2250 | 0.0924 | 0.0477 |
-| 6 | Microsoft Fluent 2 | 75.6 | 85.0% | 90.5 | 0.0359 | 0.0787 | 0.0957 | 0.0997 | 0.0637 |
-| 7 | Apple HIG | 68.9 | 60.0% | 82.5 | 0.0540 | 0.0671 | 0.2648 | 0.0474 | 0.0634 |
-| 8 | GitHub Primer | 68.7 | 85.0% | 78.5 | 0.0265 | 0.0531 | 0.1335 | 0.0781 | 0.1017 |
-| 9 | Radix Colors | 54.9 | 40.0% | 75.3 | 0.0651 | 0.0107 | 0.0602 | 0.0519 | 0.0266 |
+| 1 | IBM Carbon | 85.5 | 100.0% | 82.6 | 0.0133 | 0.0721 | 0.1266 | 0.1073 | 0.0094 |
+| 2 | Google Material Design 3 | 81.2 | 75.0% | 89.4 | 0.0185 | 0.0517 | 0.1258 | 0.0864 | 0.0096 |
+| **3** | **4-Layer Compiler (L1)** | **80.6** | **90.0%** | **95.8 (#1)** | **0.0333** | **0.1016 (#1)** | **0.2600** | **0.1047** | **0.0328** |
+| 4 | Adobe Spectrum | 77.3 | 65.0% | 82.2 | 0.0307 | 0.0701 | 0.1895 | 0.0647 | 0.0448 |
+| 5 | Tailwind CSS | 75.7 | 80.0% | 84.0 | 0.0300 | 0.0786 | 0.2250 | 0.0924 | 0.0477 |
+| 6 | Microsoft Fluent 2 | 75.1 | 85.0% | 85.9 | 0.0359 | 0.0787 | 0.0957 | 0.0997 | 0.0637 |
+| 7 | Apple HIG | 68.3 | 60.0% | 77.6 | 0.0540 | 0.0671 | 0.2648 | 0.0474 | 0.0634 |
+| 8 | GitHub Primer | 68.1 | 85.0% | 73.6 | 0.0265 | 0.0531 | 0.1335 | 0.0781 | 0.1017 |
+| 9 | Radix Colors | 54.4 | 40.0% | 70.6 | 0.0651 | 0.0107 | 0.0602 | 0.0519 | 0.0266 |
 
 #### Tier B: Full Architecture & Official Hover Mechanisms (Designated Action Roles)
 *Evaluates designated action roles (Stop 600 / Tone 40 / Grade 60 / Step 9) with each system's official hover mechanism (`@carbon/colors` `*60Hover`, M3 8% `OnPrimary` state layer, 4-Layer L3 delta `dL = ±0.05`, Radix Step 9→10).*
 
 | Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Protan dE | Hover dE | Architectural Strength |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | IBM Carbon | 89.5 | 100.0% | 87.4 | 0.0133 | 0.0721 | 0.1266 | 0.0622 | Official `*60Hover` tokens + ultra-linear math |
-| 2 | Google Material Design 3 | 86.8 | 100.0% | 93.8 | 0.0185 | 0.0460 | 0.1045 | 0.0398 | Tone 40 Primary + 8% OnPrimary state layer |
-| **3** | **4-Layer Compiler (Full)** | **86.0** | **100.0%** | **102.2 (#1)** | **0.0333** | **0.0742** | **0.2287** | **0.0495** | **Full L1-L4 Token Architecture + L3 Hover Delta** |
-| 4 | Adobe Spectrum | 79.8 | 75.0% | 87.0 | 0.0307 | 0.0751 | 0.1434 | 0.0638 | Stop 600 fill |
-| 5 | Tailwind CSS | 78.4 | 90.0% | 88.8 | 0.0300 | 0.0831 | 0.1868 | 0.0825 | Stop 600 fill |
-| 6 | Microsoft Fluent 2 | 71.1 | 85.0% | 90.5 | 0.0359 | 0.0487 | 0.1133 | 0.1108 | Stop 600 fill |
-| 7 | GitHub Primer | 68.7 | 85.0% | 78.5 | 0.0265 | 0.0531 | 0.1335 | 0.0781 | Step 5/6 fill |
-| 8 | Apple HIG | 66.4 | 65.0% | 82.5 | 0.0540 | 0.0785 | 0.2796 | 0.1086 | Action tint |
-| 9 | Radix Colors | 62.5 | 50.0% | 75.3 | 0.0651 | 0.0469 | 0.1647 | 0.0293 | Step 9 solid fill → Step 10 hover |
+| 1 | IBM Carbon | 88.9 | 100.0% | 82.6 | 0.0133 | 0.0721 | 0.1266 | 0.0622 | Official `*60Hover` tokens + ultra-linear math |
+| 2 | Google Material Design 3 | 86.3 | 100.0% | 89.4 | 0.0185 | 0.0460 | 0.1045 | 0.0398 | Tone 40 Primary + 8% OnPrimary state layer |
+| **3** | **4-Layer Compiler (Full)** | **85.2** | **100.0%** | **95.8 (#1)** | **0.0333** | **0.0742** | **0.2287** | **0.0495** | **Full L1-L4 Token Architecture + L3 Hover Delta** |
+| 4 | Adobe Spectrum | 79.2 | 75.0% | 82.2 | 0.0307 | 0.0751 | 0.1434 | 0.0638 | Stop 600 fill |
+| 5 | Tailwind CSS | 77.8 | 90.0% | 84.0 | 0.0300 | 0.0831 | 0.1868 | 0.0825 | Stop 600 fill |
+| 6 | Microsoft Fluent 2 | 70.5 | 85.0% | 85.9 | 0.0359 | 0.0487 | 0.1133 | 0.1108 | Stop 600 fill |
+| 7 | GitHub Primer | 68.1 | 85.0% | 73.6 | 0.0265 | 0.0531 | 0.1335 | 0.0781 | Step 5/6 fill |
+| 8 | Apple HIG | 65.8 | 65.0% | 77.6 | 0.0540 | 0.0785 | 0.2796 | 0.1086 | Action tint |
+| 9 | Radix Colors | 62.0 | 50.0% | 70.6 | 0.0651 | 0.0469 | 0.1647 | 0.0293 | Step 9 solid fill → Step 10 hover |
 
 ### Methodological Audit & Why These Changes Were Made
 A rigorous code audit of the earlier benchmark script uncovered four methodology flaws that distorted earlier scores:
 1. **Google M3 Array Direction Inversion:** M3 tones were hardcoded ascending `[10..99]` while all other 8 systems were descending `[50..950]`. This caused M3 to test light Tone 60 on white (dropping its WCAG AA score to 75.0%), while artificially gifting it #1 predictability by measuring contrast steps from black Tone 10.
 2. **12-Stop vs 11-Stop Midpoint Index Bias:** Testing `hexes[n // 2]` evaluated Stop 600 for 12-stop systems (4-Layer) and Grade 60 for 10-stop systems (Carbon), but Stop 500 for 11-stop systems (Tailwind, Fluent, Spectrum). At raw Stop 500, 4-Layer amber and green also fail on white (3.39:1 and 3.10:1), which is why Layer 4 semantic mapping to Stop 600 exists.
-3. **Symmetric Hover Physics Evaluation:** The old script measured primitive step jumps (`Stop 600 → 700`), ignoring dedicated hover layers. Tier B now evaluates every system using its official hover mechanism: IBM Carbon's `@carbon/colors` `*60Hover` tokens (`dE = 0.0622`), Google M3's 8% `OnPrimary` state layer (`dE = 0.0398`), and 4-Layer Compiler's Layer 3 Delta Engine (`dE = 0.0495`). Across both tiers, **IBM Carbon (#1)**, **Google Material Design 3 (#2)**, and **4-Layer Compiler (#3)** hold the top 3 spots, with the 4-Layer Compiler jumping from `78.5` to **`86.0`** in full architectural evaluation and leading all 9 systems in **APCA Readability (`102.2 Lc`)**.
+3. **Symmetric Hover Physics Evaluation:** The old script measured primitive step jumps (`Stop 600 → 700`), ignoring dedicated hover layers. Tier B now evaluates every system using its official hover mechanism: IBM Carbon's `@carbon/colors` `*60Hover` tokens (`dE = 0.0622`), Google M3's 8% `OnPrimary` state layer (`dE = 0.0398`), and 4-Layer Compiler's Layer 3 Delta Engine (`dE = 0.0495`). Across both tiers, **IBM Carbon (#1)**, **Google Material Design 3 (#2)**, and **4-Layer Compiler (#3)** hold the top 3 spots, with the 4-Layer Compiler jumping from `78.5` to **`85.2`** in full architectural evaluation and leading all 9 systems in **APCA Readability (`95.8 Lc` under W3 0.0.98G-4g)**.
 4. **Compiler Bug Fixes:** Fixed `resolve_interaction_state()` to dereference `{layer-3.interaction-physics.*}` pointers (fixing a silent fallback to `dL = 0.0`) and updated `tokens-component.css` to recursively emit nested `--button-*` tokens.
 
 ---
