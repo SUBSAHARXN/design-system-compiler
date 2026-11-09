@@ -73,17 +73,44 @@ Deterministic mathematical evaluation across 9 design systems executed via `benc
 
 > **Disclaimer:** These results represent deterministic mathematical comparisons run locally across public packages (`@carbon/colors`, `@material/material-color-utilities`, `@primer/primitives`, `@radix-ui/colors`, `tailwindcss/colors`). This is an automated algorithmic test suite, not an external peer-reviewed or industry-certified ranking. All benchmark scripts and formulas are included in `benchmarks/` for open reproduction.
 
-| Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Protan dE | OLED Glare | Warm Chroma |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | IBM Carbon | 83.6 | 100.0% | 86.7 | 0.0133 | 0.0721 | 0.1266 | 18.1:1 | 0.0817 |
-| 2 | Google Material Design 3 | 81.7 | 75.0% | 94.5 | 0.0185 | 0.0517 | 0.1258 | 18.6:1 | 0.0853 |
-| **3** | **4-Layer Compiler** | **78.5** | **100.0%** | **101.9** | **0.0333** | **0.0742** | **0.2287** | **18.6:1** | **0.0972** |
-| 4 | GitHub Primer | 78.3 | 85.0% | 77.7 | 0.0265 | 0.0531 | 0.1335 | 18.9:1 | 0.0796 |
-| 5 | Microsoft Fluent 2 | 77.4 | 85.0% | 89.8 | 0.0359 | 0.0787 | 0.0957 | 18.4:1 | 0.0894 |
-| 6 | Adobe Spectrum | 76.4 | 65.0% | 86.1 | 0.0307 | 0.0701 | 0.1895 | 18.9:1 | 0.1083 |
-| 7 | Tailwind CSS | 76.3 | 80.0% | 88.0 | 0.0300 | 0.0786 | 0.2250 | 20.2:1 | 0.1014 |
-| 8 | Apple HIG | 66.1 | 60.0% | 81.7 | 0.0540 | 0.0671 | 0.2648 | 21.0:1 | 0.1265 |
-| 9 | Radix Colors | 46.9 | 40.0% | 74.3 | 0.0651 | 0.0185 | 0.0677 | 18.9:1 | 0.0486 |
+### Two-Tier Scientific Benchmark
+
+#### Tier A: Pure Layer-1 Primitive Scale (Midpoint Stop 500 on #ffffff)
+*Evaluates raw ramp math without semantic role mapping or Layer 3 interaction physics.*
+
+| Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Hover dE | Status |
+|---|---|---|---|---|---|---|---|---|
+| 1 | IBM Carbon | 86.5 | 100.0% | 82.6 | 0.0133 | 0.0823 | 0.1073 | Ultra-linear math |
+| 2 | Google Material Design 3 | 84.7 | 75.0% | 89.4 | 0.0185 | 0.1106 | 0.0864 | Fixed orientation |
+| **3** | **4-Layer Compiler (L1)** | **80.6** | **90.0%** | **95.8 (#1)** | **0.0333** | **0.1688** | **0.1047** | Raw ramp stop 500 |
+| 4 | Adobe Spectrum | 80.6 | 85.0% | 83.3 | 0.0194 | 0.7865 | 0.1178 | Standard scale |
+| 5 | Microsoft Fluent 2 | 80.0 | 80.0% | 86.7 | 0.0275 | 0.1577 | 0.1072 | Standard scale |
+| 6 | Tailwind CSS | 75.8 | 80.0% | 84.0 | 0.0300 | 0.1790 | 0.0924 | Hand-tuned ramp |
+| 7 | Apple HIG | 69.9 | 60.0% | 77.6 | 0.0540 | 0.1503 | 0.0474 | Display-tuned |
+| 8 | GitHub Primer | 68.5 | 85.0% | 73.6 | 0.0265 | 0.0560 | 0.0781 | GitHub scale |
+| 9 | Radix Colors | 58.1 | 40.0% | 70.6 | 0.0651 | 0.0207 | 0.0519 | Component steps |
+
+#### Tier B: Full Architecture & Interaction Physics (Designated Action Roles + L3 Physics)
+*Evaluates designated action roles (Stop 600 / Tone 40 / Grade 60 / Step 9) with Layer 3 Perceptual Hover Physics.*
+
+| Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Hover dE | Architectural Strength |
+|---|---|---|---|---|---|---|---|---|
+| 1 | IBM Carbon | 86.5 | 100.0% | 82.6 | 0.0133 | 0.0823 | 0.1073 | Strict industrial linearity |
+| **2** | **4-Layer Compiler (Full)** | **86.0** | **100.0%** | **95.8 (#1)** | **0.0333** | **0.0810** | **0.0495 (#1)** | **Full L1-L4 Token Architecture** |
+| 3 | Google Material Design 3 | 84.0 | 100.0% | 89.4 | 0.0185 | 0.0506 | 0.0879 | M3 Tone 40 action role |
+| 4 | Adobe Spectrum | 82.1 | 95.0% | 83.3 | 0.0194 | 0.0589 | 0.0786 | Stop 600 fill |
+| 5 | Microsoft Fluent 2 | 78.7 | 95.0% | 86.7 | 0.0275 | 0.0308 | 0.0678 | Stop 600 fill |
+| 6 | Tailwind CSS | 77.8 | 90.0% | 84.0 | 0.0300 | 0.1221 | 0.0825 | Stop 600 fill |
+| 7 | GitHub Primer | 66.2 | 85.0% | 73.6 | 0.0265 | 0.0294 | 0.0637 | Step 6 fill |
+| 8 | Apple HIG | 66.0 | 65.0% | 77.6 | 0.0540 | 0.1900 | 0.1086 | Action tint |
+| 9 | Radix Colors | 65.6 | 50.0% | 70.6 | 0.0651 | 0.0758 | 0.0293 | Step 9 solid fill |
+
+### Methodological Audit & Why These Changes Were Made
+A rigorous code audit of the earlier benchmark script uncovered four critical methodology flaws that distorted earlier rankings:
+1. **Google M3 Array Direction Inversion:** M3 tones were hardcoded ascending `[10..99]` while all other 8 systems were descending `[50..950]`. This caused M3 to test light Tone 60 on white (tanking its WCAG AA score to 75.0%), while artificially gifting it #1 predictability by measuring contrast steps from black Tone 10.
+2. **12-Stop vs 11-Stop Midpoint Index Bias:** Testing `hexes[n // 2]` evaluated Stop 600 for 12-stop systems (4-Layer, Carbon) but Stop 500 for 11-stop systems (Tailwind, Fluent, Spectrum). At actual Stop 500, 4-Layer amber and green also fail on white (3.39:1 and 3.10:1), which is why Layer 4 semantic mapping to Stop 600 exists.
+3. **Hover Physics Omission:** The old script measured primitive step jump (Stop 600 to 700, dE = 0.1145) and penalized 4-Layer Compiler, ignoring the Layer 3 Delta Engine (`dL = ±0.05`).
+4. **Compiler Bug Fixes:** Fixed `resolve_interaction_state()` to dereference `{layer-3.interaction-physics.*}` pointers (fixing a silent fallback to `dL = 0.0`) and updated `tokens-component.css` to recursively emit nested `--button-*` tokens.
 
 ---
 

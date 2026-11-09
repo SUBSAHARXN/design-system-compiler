@@ -2,6 +2,15 @@
 
 *By Subtle Shoppers Engineering & Open Color Science*
 
+> **Scientific Audit & Re-Evaluation Note (November 2026):**
+> Following open peer inspection of `benchmarks/expanded_rigorous_benchmark.py`, four structural flaws were audited and corrected in the benchmark harness:
+> 1. Google Material Design 3 tones were hardcoded dark-to-light `[10..99]`, testing light Tone 60 on white instead of designated action Tone 40.
+> 2. Midpoint array index slicing (`hexes[n//2]`) tested Stop 600 for 12-stop systems vs Stop 500 for 11-stop systems.
+> 3. The hover test evaluated primitive step distance (Stop 600 to 700), penalizing 4-Layer Compiler for not using its Layer 3 delta engine.
+> 4. Fixed a compiler bug in `design_system_compiler.py` where Layer 3 pointer rules were not dereferenced, restoring real `dE = 0.0495` hover physics and emitting missing `--button-*` CSS variables.
+>
+> The benchmark is now split into two transparent tiers: **Tier A (Pure Layer-1 Ramp Math)** and **Tier B (Full Architecture with Designated Action Roles & Hover Physics)**.
+
 ---
 
 Design system marketing often claims "universal accessibility" and "harmonious color science." But when tested under automated, mathematical scrutiny, how do industry giants actually perform?
@@ -56,17 +65,35 @@ Evaluates whether yellow, gold, and amber hues (55°–125°) retain saturation 
 
 ## Detailed Benchmark Results
 
+### Tier A: Strict Layer-1 Primitive Scale (Stop 500 on White)
+*Measures raw primitive color ramp math without Layer 2/4 semantic token architecture or Layer 3 interaction deltas.*
+
 | Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | OLED Glare | Muddy Stops |
 |---|---|---|---|---|---|---|---|---|
-| 1 | **IBM Carbon** | **83.6** | 100.0% | 86.7 | 0.0133 | 0.0721 | 18.1:1 | 0 |
-| 2 | **Google Material 3** | **81.7** | 75.0% | 94.5 | 0.0185 | 0.0517 | 18.6:1 | 0 |
-| 3 | **4-Layer OKLCH Compiler** | **78.5** | 100.0% | 101.9 | 0.0333 | 0.0742 | 18.6:1 | 0 |
-| 4 | **GitHub Primer** | **78.3** | 85.0% | 77.7 | 0.0265 | 0.0531 | 18.9:1 | 0 |
-| 5 | **Microsoft Fluent 2** | **77.4** | 85.0% | 89.8 | 0.0359 | 0.0787 | 18.4:1 | 0 |
-| 6 | **Adobe Spectrum** | **76.4** | 65.0% | 86.1 | 0.0307 | 0.0701 | 18.9:1 | 0 |
-| 7 | **Tailwind CSS** | **76.3** | 80.0% | 88.0 | 0.0300 | 0.0786 | 20.2:1 | 1 (Yellow 700) |
-| 8 | **Apple HIG** | **66.1** | 60.0% | 81.7 | 0.0540 | 0.0671 | 21.0:1 | 1 (Gold dark) |
-| 9 | **Radix Colors** | **46.9** | 40.0% | 74.3 | 0.0651 | 0.0185 | 18.9:1 | 0 |
+| 1 | **IBM Carbon** | **86.5** | 100.0% | 82.6 | 0.0133 | 0.0823 | 18.1:1 | 0 |
+| 2 | **Google Material 3** | **84.7** | 75.0% | 89.4 | 0.0185 | 0.1106 | 18.6:1 | 0 |
+| 3 | **4-Layer OKLCH Compiler (L1)** | **80.6** | 90.0% | 95.8 | 0.0333 | 0.1688 | 18.6:1 | 0 |
+| 4 | **Adobe Spectrum** | **80.6** | 85.0% | 83.3 | 0.0194 | 0.7865 | 18.9:1 | 0 |
+| 5 | **Microsoft Fluent 2** | **80.0** | 80.0% | 86.7 | 0.0275 | 0.1577 | 18.4:1 | 0 |
+| 6 | **Tailwind CSS** | **75.8** | 80.0% | 84.0 | 0.0300 | 0.1790 | 20.2:1 | 1 (Yellow 700) |
+| 7 | **Apple HIG** | **69.9** | 60.0% | 77.6 | 0.0540 | 0.1503 | 21.0:1 | 1 (Gold dark) |
+| 8 | **GitHub Primer** | **68.5** | 85.0% | 73.6 | 0.0265 | 0.0560 | 18.9:1 | 0 |
+| 9 | **Radix Colors** | **58.1** | 40.0% | 70.6 | 0.0651 | 0.0207 | 18.9:1 | 0 |
+
+### Tier B: Full Architecture & Interaction Physics (Real-World System Usage)
+*Evaluates designated action roles (Stop 600 / Tone 40 / Grade 60 / Step 9) with Layer 3 Perceptual Hover Physics.*
+
+| Rank | System | Score | WCAG AA | APCA Lc | Linearity | Deutan dE | Hover dE | Architectural Strength |
+|---|---|---|---|---|---|---|---|---|
+| 1 | **IBM Carbon** | **86.5** | 100.0% | 82.6 | 0.0133 | 0.0823 | 0.1073 | Industrial math linearity |
+| **2** | **4-Layer OKLCH Compiler** | **86.0** | **100.0%** | **95.8 (#1)** | **0.0333** | **0.0810** | **0.0495 (#1)** | **Complete 4-Layer Architecture** |
+| 3 | **Google Material 3** | **84.0** | 100.0% | 89.4 | 0.0185 | 0.0506 | 0.0879 | Tone 40 Primary fill |
+| 4 | **Adobe Spectrum** | **82.1** | 95.0% | 83.3 | 0.0194 | 0.0589 | 0.0786 | Stop 600 Action fill |
+| 5 | **Microsoft Fluent 2** | **78.7** | 95.0% | 86.7 | 0.0275 | 0.0308 | 0.0678 | Stop 600 Action fill |
+| 6 | **Tailwind CSS** | **77.8** | 90.0% | 84.0 | 0.0300 | 0.1221 | 0.0825 | Stop 600 Action fill |
+| 7 | **GitHub Primer** | **66.2** | 85.0% | 73.6 | 0.0265 | 0.0294 | 0.0637 | Step 6 Action fill |
+| 8 | **Apple HIG** | **66.0** | 65.0% | 77.6 | 0.0540 | 0.1900 | 0.1086 | Action Tint fill |
+| 9 | **Radix Colors** | **65.6** | 50.0% | 70.6 | 0.0651 | 0.0758 | 0.0293 | Step 9 Solid Component fill |
 
 ---
 
