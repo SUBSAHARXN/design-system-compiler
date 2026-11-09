@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-17T15:51:17.169813+00:00",
+  "generated": "2026-11-09T15:05:27.882311+00:00",
   "build-config": {
     "floor-stop": 950,
     "cta-color": "primary",
@@ -81,11 +81,11 @@
     },
     {
       "file": "tokens-component.css",
-      "bytes": 46368
+      "bytes": 51463
     },
     {
       "file": "tokens-component.json",
-      "bytes": 132615
+      "bytes": 132731
     },
     {
       "file": "tokens-primitives.json",

@@ -1,6 +1,6 @@
 {
   "$meta": {
-    "generated": "2026-10-17T11:46:08.461338+00:00",
+    "generated": "2026-11-09T15:05:27.866101+00:00",
     "layer-4-version": "1.2",
     "cta-color": "primary",
     "description": "Layer 4 output. Component tokens resolved through full chain.",
@@ -24,11 +24,11 @@
         "desc": "Header hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "header/bg-expanded": {
@@ -36,11 +36,11 @@
         "desc": "Expanded header",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "header/text": {
@@ -48,11 +48,11 @@
         "desc": "Header label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "header/icon": {
@@ -60,11 +60,11 @@
         "desc": "Chevron icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "header/border": {
@@ -72,11 +72,11 @@
         "desc": "Header bottom border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "content/bg": {
@@ -84,11 +84,11 @@
         "desc": "Content area",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "content/text": {
@@ -96,11 +96,11 @@
         "desc": "Content text",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       }
     },
@@ -154,11 +154,11 @@
           "semantic-role": "color/text/primary",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         }
       },
@@ -211,11 +211,11 @@
           "semantic-role": "color/text/primary",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         }
       },
@@ -268,11 +268,11 @@
           "semantic-role": "color/text/primary",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         }
       },
@@ -325,11 +325,11 @@
           "semantic-role": "color/text/primary",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         }
       },
@@ -338,11 +338,11 @@
         "desc": "Dismiss button",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -352,11 +352,11 @@
         "desc": "Placeholder background",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "bg/brand": {
@@ -364,11 +364,11 @@
         "desc": "Brand-tinted placeholder",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "text/default": {
@@ -376,11 +376,11 @@
         "desc": "Initials on neutral",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "text/brand": {
@@ -388,11 +388,11 @@
         "desc": "Initials on brand",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "border/stack": {
@@ -400,11 +400,11 @@
         "desc": "Ring for stacked avatars",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "status/online": {
@@ -436,11 +436,11 @@
         "desc": "Offline indicator",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "status/busy": {
@@ -462,33 +462,33 @@
           "semantic-role": "color/bg-subtle",
           "light": {
             "alias": "{pg.100}",
-            "$value": "#EBF0EA"
+            "$value": "#F3EEE7"
           },
           "dark": {
             "alias": "{elev.0}",
-            "$value": "#0D100C"
+            "$value": "#120F0B"
           }
         },
         "text": {
           "semantic-role": "color/text/secondary",
           "light": {
             "alias": "{pg.800}",
-            "$value": "#2B2F2A"
+            "$value": "#312D28"
           },
           "dark": {
             "alias": "{pg.200}",
-            "$value": "#DBE0D9"
+            "$value": "#E2DDD7"
           }
         },
         "border": {
           "semantic-role": "color/border/default",
           "light": {
             "alias": "{pg.300}",
-            "$value": "#BBBFB9"
+            "$value": "#C2BDB7"
           },
           "dark": {
             "alias": "{pg.600}",
-            "$value": "#60655F"
+            "$value": "#67625D"
           }
         }
       },
@@ -497,33 +497,33 @@
           "semantic-role": "color/fill/brand-subtle",
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9"
+            "$value": "#FEE9CF"
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201"
+            "$value": "#451F00"
           }
         },
         "text": {
           "semantic-role": "color/text/brand",
           "light": {
             "alias": "{primary.600}",
-            "$value": "#3DB102"
+            "$value": "#995600"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "border": {
           "semantic-role": "color/border/brand",
           "light": {
             "alias": "{primary.400}",
-            "$value": "#80FB48"
+            "$value": "#CE9C57"
           },
           "dark": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           }
         }
       },
@@ -672,33 +672,33 @@
           "semantic-role": "color/fill/brand",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "text": {
           "semantic-role": "color/on-fill/brand",
           "light": {
             "alias": "{primary.50}",
-            "$value": "#EDFFE6"
+            "$value": "#FDF4E9"
           },
           "dark": {
             "alias": "{primary.900}",
-            "$value": "#011600"
+            "$value": "#200D00"
           }
         },
         "border": {
           "semantic-role": "color/fill/brand",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         }
       },
@@ -756,11 +756,11 @@
         "desc": "Link hover",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "current/text": {
@@ -768,11 +768,11 @@
         "desc": "Current page",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "separator/icon": {
@@ -780,11 +780,11 @@
         "desc": "Separator chevron",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -795,11 +795,11 @@
           "desc": "Primary button fill",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "bg/hover": {
@@ -811,14 +811,14 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D",
-            "base-hex": "#6BF12D",
+            "$value": "#A7721B",
+            "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7E",
-            "base-hex": "#A3FF7D",
+            "$value": "#D3A66D",
+            "base-hex": "#E3B67C",
             "delta-resolved": true
           }
         },
@@ -831,14 +831,14 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D",
-            "base-hex": "#6BF12D",
+            "$value": "#9A6602",
+            "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7E",
-            "base-hex": "#A3FF7D",
+            "$value": "#C59A60",
+            "base-hex": "#E3B67C",
             "delta-resolved": true
           }
         },
@@ -851,14 +851,14 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D",
-            "base-hex": "#6BF12D",
+            "$value": "#8F5E01",
+            "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7E",
-            "base-hex": "#A3FF7D",
+            "$value": "#BC9057",
+            "base-hex": "#E3B67C",
             "delta-resolved": true
           }
         },
@@ -867,11 +867,11 @@
           "desc": "Focus \u2014 ring applied via focus tokens",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "bg/selected": {
@@ -882,14 +882,14 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D",
-            "base-hex": "#6BF12D",
+            "$value": "#B27602",
+            "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7E",
-            "base-hex": "#A3FF7D",
+            "$value": "#E4A957",
+            "base-hex": "#E3B67C",
             "delta-resolved": true
           }
         },
@@ -901,15 +901,17 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D",
-            "base-hex": "#6BF12D",
-            "delta-resolved": true
+            "$value": "#AD854F",
+            "base-hex": "#B7812F",
+            "delta-resolved": true,
+            "opacity": 0.7
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7E",
-            "base-hex": "#A3FF7D",
-            "delta-resolved": true
+            "$value": "#D7B994",
+            "base-hex": "#E3B67C",
+            "delta-resolved": true,
+            "opacity": 0.7
           }
         },
         "bg/disabled": {
@@ -917,11 +919,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "text/default": {
@@ -929,11 +931,11 @@
           "desc": "Label on primary",
           "light": {
             "alias": "{primary.50}",
-            "$value": "#EDFFE6"
+            "$value": "#FDF4E9"
           },
           "dark": {
             "alias": "{primary.900}",
-            "$value": "#011600"
+            "$value": "#200D00"
           }
         },
         "text/disabled": {
@@ -941,11 +943,11 @@
           "desc": "Disabled label",
           "light": {
             "alias": "{primary.50}",
-            "$value": "#EDFFE6"
+            "$value": "#FDF4E9"
           },
           "dark": {
             "alias": "{primary.900}",
-            "$value": "#011600"
+            "$value": "#200D00"
           }
         },
         "icon/default": {
@@ -953,11 +955,11 @@
           "desc": "Icon on primary",
           "light": {
             "alias": "{primary.50}",
-            "$value": "#EDFFE6"
+            "$value": "#FDF4E9"
           },
           "dark": {
             "alias": "{primary.900}",
-            "$value": "#011600"
+            "$value": "#200D00"
           }
         }
       },
@@ -967,11 +969,11 @@
           "desc": "Secondary button fill \u2014 tinted",
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9"
+            "$value": "#FEE9CF"
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201"
+            "$value": "#451F00"
           }
         },
         "bg/hover": {
@@ -983,14 +985,14 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9",
-            "base-hex": "#E3FFD9",
+            "$value": "#EDD9BF",
+            "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201",
-            "base-hex": "#084201",
+            "$value": "#552A13",
+            "base-hex": "#451F00",
             "delta-resolved": true
           }
         },
@@ -999,11 +1001,11 @@
           "desc": "Active \u2014 steps up to primary fill",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "bg/focus": {
@@ -1011,11 +1013,11 @@
           "desc": "Focus",
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9"
+            "$value": "#FEE9CF"
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201"
+            "$value": "#451F00"
           }
         },
         "bg/selected": {
@@ -1026,14 +1028,14 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9",
-            "base-hex": "#E3FFD9",
+            "$value": "#F4DFC5",
+            "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201",
-            "base-hex": "#084201",
+            "$value": "#4F250D",
+            "base-hex": "#451F00",
             "delta-resolved": true
           }
         },
@@ -1045,15 +1047,17 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9",
-            "base-hex": "#E3FFD9",
-            "delta-resolved": true
+            "$value": "#F1ECE5",
+            "base-hex": "#FEE9CF",
+            "delta-resolved": true,
+            "opacity": 0.7
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201",
-            "base-hex": "#084201",
-            "delta-resolved": true
+            "$value": "#3B2516",
+            "base-hex": "#451F00",
+            "delta-resolved": true,
+            "opacity": 0.7
           }
         },
         "bg/disabled": {
@@ -1061,11 +1065,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.100}",
-            "$value": "#EBF0EA"
+            "$value": "#F3EEE7"
           },
           "dark": {
             "alias": "{pg.800}",
-            "$value": "#2B2F2A"
+            "$value": "#312D28"
           }
         },
         "text/default": {
@@ -1073,11 +1077,11 @@
           "desc": "Label on secondary",
           "light": {
             "alias": "{primary.600}",
-            "$value": "#3DB102"
+            "$value": "#995600"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "text/disabled": {
@@ -1085,11 +1089,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           },
           "dark": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           }
         },
         "icon/default": {
@@ -1097,11 +1101,11 @@
           "desc": "Icon on secondary",
           "light": {
             "alias": "{primary.600}",
-            "$value": "#3DB102"
+            "$value": "#995600"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         }
       },
@@ -1122,11 +1126,11 @@
           "desc": "Hover \u2014 shows subtle fill",
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9"
+            "$value": "#FEE9CF"
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201"
+            "$value": "#451F00"
           }
         },
         "bg/active": {
@@ -1137,14 +1141,14 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#E3FFD9",
-            "base-hex": "#E3FFD9",
+            "$value": "#EDD9BF",
+            "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#084201",
-            "base-hex": "#084201",
+            "$value": "#552A13",
+            "base-hex": "#451F00",
             "delta-resolved": true
           }
         },
@@ -1164,11 +1168,11 @@
           "desc": "Ghost border",
           "light": {
             "alias": "{pg.300}",
-            "$value": "#BBBFB9"
+            "$value": "#C2BDB7"
           },
           "dark": {
             "alias": "{pg.600}",
-            "$value": "#60655F"
+            "$value": "#67625D"
           }
         },
         "border/hover": {
@@ -1176,11 +1180,11 @@
           "desc": "Hover border",
           "light": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           },
           "dark": {
             "alias": "{pg.500}",
-            "$value": "#6F736D"
+            "$value": "#75716B"
           }
         },
         "border/focus": {
@@ -1188,11 +1192,11 @@
           "desc": "Focus border",
           "light": {
             "alias": "{primary.500}",
-            "$value": "#6BF12D"
+            "$value": "#B7812F"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "border/disabled": {
@@ -1200,11 +1204,11 @@
           "desc": "Disabled border",
           "light": {
             "alias": "{pg.200}",
-            "$value": "#DBE0D9"
+            "$value": "#E2DDD7"
           },
           "dark": {
             "alias": "{pg.600}",
-            "$value": "#60655F"
+            "$value": "#67625D"
           }
         },
         "text/default": {
@@ -1212,11 +1216,11 @@
           "desc": "Ghost label",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         },
         "text/disabled": {
@@ -1224,11 +1228,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           },
           "dark": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           }
         }
       },
@@ -1254,13 +1258,13 @@
           },
           "light": {
             "alias": "{error.500}",
-            "$value": "#BA3430",
+            "$value": "#CB453F",
             "base-hex": "#BA3430",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{error.300}",
-            "$value": "#F78B7E",
+            "$value": "#E67B6F",
             "base-hex": "#F78B7E",
             "delta-resolved": true
           }
@@ -1274,13 +1278,13 @@
           },
           "light": {
             "alias": "{error.500}",
-            "$value": "#BA3430",
+            "$value": "#AC2524",
             "base-hex": "#BA3430",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{error.300}",
-            "$value": "#F78B7E",
+            "$value": "#D86F63",
             "base-hex": "#F78B7E",
             "delta-resolved": true
           }
@@ -1302,11 +1306,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.100}",
-            "$value": "#EBF0EA"
+            "$value": "#F3EEE7"
           },
           "dark": {
             "alias": "{pg.800}",
-            "$value": "#2B2F2A"
+            "$value": "#312D28"
           }
         },
         "text/default": {
@@ -1326,11 +1330,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           },
           "dark": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           }
         },
         "icon/default": {
@@ -1364,11 +1368,11 @@
           "desc": "Hover",
           "light": {
             "alias": "{primary.600}",
-            "$value": "#3DB102"
+            "$value": "#995600"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "text/visited": {
@@ -1376,11 +1380,11 @@
           "desc": "Visited",
           "light": {
             "alias": "{primary.700}",
-            "$value": "#1E7602"
+            "$value": "#703601"
           },
           "dark": {
             "alias": "{primary.400}",
-            "$value": "#80FB48"
+            "$value": "#CE9C57"
           }
         },
         "text/disabled": {
@@ -1388,11 +1392,11 @@
           "desc": "Disabled",
           "light": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           },
           "dark": {
             "alias": "{pg.400}",
-            "$value": "#9BA09A"
+            "$value": "#A29E98"
           }
         }
       }
@@ -1403,11 +1407,11 @@
         "desc": "Card background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/hover": {
@@ -1415,11 +1419,11 @@
         "desc": "Interactive card hover",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/selected": {
@@ -1427,11 +1431,11 @@
         "desc": "Selected card",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "bg/disabled": {
@@ -1439,11 +1443,11 @@
         "desc": "Disabled card",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "border/default": {
@@ -1451,11 +1455,11 @@
         "desc": "Card border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/hover": {
@@ -1463,11 +1467,11 @@
         "desc": "Card hover border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/selected": {
@@ -1475,11 +1479,11 @@
         "desc": "Selected card border",
         "light": {
           "alias": "{primary.400}",
-          "$value": "#80FB48"
+          "$value": "#CE9C57"
         },
         "dark": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         }
       },
       "header/bg": {
@@ -1487,11 +1491,11 @@
         "desc": "Card header area",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "divider": {
@@ -1499,11 +1503,11 @@
         "desc": "Internal card divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       }
     },
@@ -1513,11 +1517,11 @@
         "desc": "Unchecked background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "box/bg-checked": {
@@ -1525,11 +1529,11 @@
         "desc": "Checked background",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "box/bg-indeterminate": {
@@ -1537,11 +1541,11 @@
         "desc": "Indeterminate background",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "box/bg-disabled": {
@@ -1549,11 +1553,11 @@
         "desc": "Disabled background",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "box/bg-hover": {
@@ -1561,11 +1565,11 @@
         "desc": "Hover (unchecked)",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "box/bg-error": {
@@ -1585,11 +1589,11 @@
         "desc": "Unchecked border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "box/border-checked": {
@@ -1597,11 +1601,11 @@
         "desc": "Checked border",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "box/border-hover": {
@@ -1609,11 +1613,11 @@
         "desc": "Hover border",
         "light": {
           "alias": "{primary.400}",
-          "$value": "#80FB48"
+          "$value": "#CE9C57"
         },
         "dark": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         }
       },
       "box/border-error": {
@@ -1633,11 +1637,11 @@
         "desc": "Disabled border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "check/color": {
@@ -1645,11 +1649,11 @@
         "desc": "Checkmark icon",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "check/disabled": {
@@ -1657,11 +1661,11 @@
         "desc": "Disabled checkmark",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "label/default": {
@@ -1669,11 +1673,11 @@
         "desc": "Checkbox label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "label/disabled": {
@@ -1681,11 +1685,11 @@
         "desc": "Disabled label",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "label/error": {
@@ -1707,11 +1711,11 @@
         "desc": "Code block background",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "border": {
@@ -1719,11 +1723,11 @@
         "desc": "Code block border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "text/default": {
@@ -1731,11 +1735,11 @@
         "desc": "Plain code text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "text/keyword": {
@@ -1743,11 +1747,11 @@
         "desc": "Keywords \u2014 if, for, return",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "text/string": {
@@ -1779,11 +1783,11 @@
         "desc": "Comments",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "text/function": {
@@ -1815,11 +1819,11 @@
         "desc": "Header bar (language label)",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "header/text": {
@@ -1827,11 +1831,11 @@
         "desc": "Language label",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "copy-btn/text": {
@@ -1839,11 +1843,11 @@
         "desc": "Copy button",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "line-highlight/bg": {
@@ -1851,11 +1855,11 @@
         "desc": "Highlighted line",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "line-number/text": {
@@ -1863,11 +1867,11 @@
         "desc": "Gutter line numbers",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -1877,11 +1881,11 @@
         "desc": "Horizontal/vertical divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "strong": {
@@ -1889,11 +1893,11 @@
         "desc": "Stronger section break",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "with-label/text": {
@@ -1901,11 +1905,11 @@
         "desc": "Divider with label text",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -1915,11 +1919,11 @@
         "desc": "Drag handle icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "handle/icon-hover": {
@@ -1927,11 +1931,11 @@
         "desc": "Hover",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "handle/icon-active": {
@@ -1939,11 +1943,11 @@
         "desc": "Active drag",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "drop-zone/bg": {
@@ -1951,11 +1955,11 @@
         "desc": "Drop target highlight",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "drop-zone/border": {
@@ -1963,11 +1967,11 @@
         "desc": "Drop target border",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       }
     },
@@ -1977,11 +1981,11 @@
         "desc": "Illustration container",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "title/text": {
@@ -1989,11 +1993,11 @@
         "desc": "Empty state heading",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "body/text": {
@@ -2001,11 +2005,11 @@
         "desc": "Supporting text",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "icon/color": {
@@ -2013,11 +2017,11 @@
         "desc": "Decorative icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -2027,11 +2031,11 @@
         "desc": "Focus ring \u2014 2px, 2px offset. Source: Layer 2 interaction-tokens.",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "ring/color-error": {
@@ -2053,11 +2057,11 @@
         "desc": "Input background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/hover": {
@@ -2065,11 +2069,11 @@
         "desc": "Hover background",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/focus": {
@@ -2077,11 +2081,11 @@
         "desc": "Focus \u2014 border changes",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/filled": {
@@ -2089,11 +2093,11 @@
         "desc": "Has value",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/disabled": {
@@ -2101,11 +2105,11 @@
         "desc": "Disabled",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "bg/error": {
@@ -2125,11 +2129,11 @@
         "desc": "Read-only field",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "border/default": {
@@ -2137,11 +2141,11 @@
         "desc": "Default border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/hover": {
@@ -2149,11 +2153,11 @@
         "desc": "Hover border",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.500}",
-          "$value": "#6F736D"
+          "$value": "#75716B"
         }
       },
       "border/focus": {
@@ -2161,11 +2165,11 @@
         "desc": "Focus border",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "border/filled": {
@@ -2173,11 +2177,11 @@
         "desc": "Has value border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/disabled": {
@@ -2185,11 +2189,11 @@
         "desc": "Disabled border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/error": {
@@ -2209,11 +2213,11 @@
         "desc": "Read-only border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "text/value": {
@@ -2221,11 +2225,11 @@
         "desc": "Input text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "text/placeholder": {
@@ -2233,11 +2237,11 @@
         "desc": "Placeholder",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "text/disabled": {
@@ -2245,11 +2249,11 @@
         "desc": "Disabled value",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "text/readonly": {
@@ -2257,11 +2261,11 @@
         "desc": "Read-only value",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "label/default": {
@@ -2269,11 +2273,11 @@
         "desc": "Field label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "label/focus": {
@@ -2281,11 +2285,11 @@
         "desc": "Label on focus",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "label/error": {
@@ -2305,11 +2309,11 @@
         "desc": "Disabled label",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "helper/default": {
@@ -2317,11 +2321,11 @@
         "desc": "Helper text below field",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "helper/error": {
@@ -2353,11 +2357,11 @@
         "desc": "Leading icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "icon/trailing": {
@@ -2365,11 +2369,11 @@
         "desc": "Trailing icon / clear / chevron",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "icon/error": {
@@ -2391,11 +2395,11 @@
         "desc": "Keyboard key background",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "border": {
@@ -2403,11 +2407,11 @@
         "desc": "Key border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "text": {
@@ -2415,11 +2419,11 @@
         "desc": "Key label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       }
     },
@@ -2440,11 +2444,11 @@
         "desc": "Hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-selected": {
@@ -2452,11 +2456,11 @@
         "desc": "Selected",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-active": {
@@ -2467,14 +2471,14 @@
         },
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9",
-          "base-hex": "#E3FFD9",
+          "$value": "#F4DFC5",
+          "base-hex": "#FEE9CF",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201",
-          "base-hex": "#084201",
+          "$value": "#4F250D",
+          "base-hex": "#451F00",
           "delta-resolved": true
         }
       },
@@ -2506,11 +2510,11 @@
         "desc": "Item label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "item/text-secondary": {
@@ -2518,11 +2522,11 @@
         "desc": "Item sublabel",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "item/text-selected": {
@@ -2530,11 +2534,11 @@
         "desc": "Selected item text",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "item/text-disabled": {
@@ -2542,11 +2546,11 @@
         "desc": "Disabled text",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "item/text-destructive": {
@@ -2566,11 +2570,11 @@
         "desc": "Leading icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "item/icon-trailing": {
@@ -2578,11 +2582,11 @@
         "desc": "Trailing icon/chevron",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "item/icon-selected": {
@@ -2590,11 +2594,11 @@
         "desc": "Selection checkmark",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "separator": {
@@ -2602,11 +2606,11 @@
         "desc": "Section separator",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "section-header": {
@@ -2614,11 +2618,11 @@
         "desc": "Section group label",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -2628,11 +2632,11 @@
         "desc": "Menu container",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "container/border": {
@@ -2640,11 +2644,11 @@
         "desc": "Menu border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "item/bg-default": {
@@ -2663,11 +2667,11 @@
         "desc": "Menu item hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-active": {
@@ -2678,14 +2682,14 @@
         },
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9",
-          "base-hex": "#E3FFD9",
+          "$value": "#F4DFC5",
+          "base-hex": "#FEE9CF",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201",
-          "base-hex": "#084201",
+          "$value": "#4F250D",
+          "base-hex": "#451F00",
           "delta-resolved": true
         }
       },
@@ -2694,11 +2698,11 @@
         "desc": "Checked/selected item",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-disabled": {
@@ -2729,11 +2733,11 @@
         "desc": "Item text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "item/text-selected": {
@@ -2741,11 +2745,11 @@
         "desc": "Selected item text",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "item/text-disabled": {
@@ -2753,11 +2757,11 @@
         "desc": "Disabled text",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "item/text-destructive": {
@@ -2777,11 +2781,11 @@
         "desc": "Item icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "item/icon-selected": {
@@ -2789,11 +2793,11 @@
         "desc": "Selected item icon",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "item/shortcut-text": {
@@ -2801,11 +2805,11 @@
         "desc": "Keyboard shortcut label",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "separator": {
@@ -2813,11 +2817,11 @@
         "desc": "Menu section separator",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "section-label": {
@@ -2825,11 +2829,11 @@
         "desc": "Section header text",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -2853,11 +2857,11 @@
         "desc": "Modal background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "container/border": {
@@ -2865,11 +2869,11 @@
         "desc": "Modal border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "header/bg": {
@@ -2877,11 +2881,11 @@
         "desc": "Modal header",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "header/text": {
@@ -2889,11 +2893,11 @@
         "desc": "Modal title",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "header/border": {
@@ -2901,11 +2905,11 @@
         "desc": "Header bottom divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "footer/bg": {
@@ -2913,11 +2917,11 @@
         "desc": "Modal footer",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "footer/border": {
@@ -2925,11 +2929,11 @@
         "desc": "Footer top divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "close/icon-default": {
@@ -2937,11 +2941,11 @@
         "desc": "Close button icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "close/icon-hover": {
@@ -2949,11 +2953,11 @@
         "desc": "Close button hover",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "close/bg-hover": {
@@ -2961,11 +2965,11 @@
         "desc": "Close button hover bg",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       }
     },
@@ -2975,11 +2979,11 @@
         "desc": "Nav container",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "container/border": {
@@ -2987,11 +2991,11 @@
         "desc": "Nav border/divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "item/bg-default": {
@@ -3010,11 +3014,11 @@
         "desc": "Nav item hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-active": {
@@ -3022,11 +3026,11 @@
         "desc": "Active/current item",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-selected": {
@@ -3034,11 +3038,11 @@
         "desc": "Selected item",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/text-default": {
@@ -3046,11 +3050,11 @@
         "desc": "Nav item text",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "item/text-active": {
@@ -3058,11 +3062,11 @@
         "desc": "Active item text",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "item/text-disabled": {
@@ -3070,11 +3074,11 @@
         "desc": "Disabled item",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "item/icon-default": {
@@ -3082,11 +3086,11 @@
         "desc": "Nav icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "item/icon-active": {
@@ -3094,11 +3098,11 @@
         "desc": "Active icon",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "indicator/color": {
@@ -3106,11 +3110,11 @@
         "desc": "Active indicator dot/bar",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "badge/bg": {
@@ -3142,11 +3146,11 @@
         "desc": "Nav section heading",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -3167,11 +3171,11 @@
         "desc": "Hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "item/bg-current": {
@@ -3179,11 +3183,11 @@
         "desc": "Current page",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "item/bg-disabled": {
@@ -3202,11 +3206,11 @@
         "desc": "Page number",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "item/text-current": {
@@ -3214,11 +3218,11 @@
         "desc": "Current page text",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "item/text-disabled": {
@@ -3226,11 +3230,11 @@
         "desc": "Disabled",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "item/border": {
@@ -3238,11 +3242,11 @@
         "desc": "Item border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "ellipsis/text": {
@@ -3250,11 +3254,11 @@
         "desc": "... separator",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -3264,11 +3268,11 @@
         "desc": "Popover background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "border": {
@@ -3276,11 +3280,11 @@
         "desc": "Popover border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "arrow": {
@@ -3288,11 +3292,11 @@
         "desc": "Arrow",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "header/text": {
@@ -3300,11 +3304,11 @@
         "desc": "Popover heading",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "divider": {
@@ -3312,11 +3316,11 @@
         "desc": "Internal divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       }
     },
@@ -3326,11 +3330,11 @@
         "desc": "Track background",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.700}",
-          "$value": "#454944"
+          "$value": "#4B4742"
         }
       },
       "fill/brand": {
@@ -3338,11 +3342,11 @@
         "desc": "Default progress fill",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "fill/success": {
@@ -3386,11 +3390,11 @@
         "desc": "Percentage label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "label/description": {
@@ -3398,11 +3402,11 @@
         "desc": "Supporting text",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -3412,11 +3416,11 @@
         "desc": "Selected dot",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "dot/disabled": {
@@ -3424,11 +3428,11 @@
         "desc": "Disabled dot",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       }
     },
@@ -3449,11 +3453,11 @@
         "desc": "Thumb default",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "thumb/bg-hover": {
@@ -3461,11 +3465,11 @@
         "desc": "Thumb hover",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.500}",
-          "$value": "#6F736D"
+          "$value": "#75716B"
         }
       },
       "thumb/bg-active": {
@@ -3473,11 +3477,11 @@
         "desc": "Thumb active/drag",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       }
     },
@@ -3487,11 +3491,11 @@
         "desc": "Option list background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.2}",
-          "$value": "#141813"
+          "$value": "#191612"
         }
       },
       "option-list/border": {
@@ -3499,11 +3503,11 @@
         "desc": "Option list border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "option/bg-default": {
@@ -3522,11 +3526,11 @@
         "desc": "Option hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "option/bg-selected": {
@@ -3534,11 +3538,11 @@
         "desc": "Option selected",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "option/bg-disabled": {
@@ -3557,11 +3561,11 @@
         "desc": "Option text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "option/text-selected": {
@@ -3569,11 +3573,11 @@
         "desc": "Selected option text",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "option/text-disabled": {
@@ -3581,11 +3585,11 @@
         "desc": "Disabled option",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "option/icon-check": {
@@ -3593,11 +3597,11 @@
         "desc": "Checkmark on selected",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "option/separator": {
@@ -3605,11 +3609,11 @@
         "desc": "Option group separator",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "option/group-label": {
@@ -3617,11 +3621,11 @@
         "desc": "Option group heading",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -3631,11 +3635,11 @@
         "desc": "Text selection highlight",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "highlight/text": {
@@ -3643,11 +3647,11 @@
         "desc": "Selected text colour",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       }
     },
@@ -3657,11 +3661,11 @@
         "desc": "Skeleton base",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "shimmer": {
@@ -3669,11 +3673,11 @@
         "desc": "Shimmer highlight",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       }
     },
@@ -3683,11 +3687,11 @@
         "desc": "Track background",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.700}",
-          "$value": "#454944"
+          "$value": "#4B4742"
         }
       },
       "track/fill": {
@@ -3695,11 +3699,11 @@
         "desc": "Active portion fill",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "track/disabled": {
@@ -3707,11 +3711,11 @@
         "desc": "Disabled track",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "thumb/bg-default": {
@@ -3719,11 +3723,11 @@
         "desc": "Thumb default",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "thumb/bg-hover": {
@@ -3735,14 +3739,14 @@
         },
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D",
-          "base-hex": "#6BF12D",
+          "$value": "#A7721B",
+          "base-hex": "#B7812F",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7E",
-          "base-hex": "#A3FF7D",
+          "$value": "#D3A66D",
+          "base-hex": "#E3B67C",
           "delta-resolved": true
         }
       },
@@ -3755,14 +3759,14 @@
         },
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D",
-          "base-hex": "#6BF12D",
+          "$value": "#8F5E01",
+          "base-hex": "#B7812F",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7E",
-          "base-hex": "#A3FF7D",
+          "$value": "#BC9057",
+          "base-hex": "#E3B67C",
           "delta-resolved": true
         }
       },
@@ -3771,11 +3775,11 @@
         "desc": "Disabled thumb",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "thumb/border": {
@@ -3783,11 +3787,11 @@
         "desc": "Thumb border ring",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "label/value": {
@@ -3795,11 +3799,11 @@
         "desc": "Slider value label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "label/min-max": {
@@ -3807,11 +3811,11 @@
         "desc": "Min/max labels",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       }
     },
@@ -3821,11 +3825,11 @@
         "desc": "Not yet reached",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.700}",
-          "$value": "#454944"
+          "$value": "#4B4742"
         }
       },
       "step/bg-active": {
@@ -3833,11 +3837,11 @@
         "desc": "Current step",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "step/bg-complete": {
@@ -3869,11 +3873,11 @@
         "desc": "Upcoming border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "step/border-active": {
@@ -3881,11 +3885,11 @@
         "desc": "Active border",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "step/icon-upcoming": {
@@ -3893,11 +3897,11 @@
         "desc": "Step number",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "step/icon-active": {
@@ -3905,11 +3909,11 @@
         "desc": "Active step icon",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "step/icon-complete": {
@@ -3941,11 +3945,11 @@
         "desc": "Connector line",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "connector/complete": {
@@ -3965,11 +3969,11 @@
         "desc": "Upcoming label",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "label/active": {
@@ -3977,11 +3981,11 @@
         "desc": "Active label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "label/complete": {
@@ -3989,11 +3993,11 @@
         "desc": "Complete label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "label/error": {
@@ -4015,11 +4019,11 @@
         "desc": "Table background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "container/border": {
@@ -4027,11 +4031,11 @@
         "desc": "Table outer border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "header/bg": {
@@ -4039,11 +4043,11 @@
         "desc": "Header row",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "header/text": {
@@ -4051,11 +4055,11 @@
         "desc": "Header label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "header/icon-sort": {
@@ -4063,11 +4067,11 @@
         "desc": "Sort chevron",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "header/icon-sort-active": {
@@ -4075,11 +4079,11 @@
         "desc": "Active sort",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "header/border": {
@@ -4087,11 +4091,11 @@
         "desc": "Header bottom",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "row/bg-default": {
@@ -4110,11 +4114,11 @@
         "desc": "Alternating stripe",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "row/bg-hover": {
@@ -4122,11 +4126,11 @@
         "desc": "Row hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "row/bg-selected": {
@@ -4134,11 +4138,11 @@
         "desc": "Selected row",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "row/bg-disabled": {
@@ -4146,11 +4150,11 @@
         "desc": "Disabled row",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "row/bg-error": {
@@ -4170,11 +4174,11 @@
         "desc": "Cell text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "cell/text-secondary": {
@@ -4182,11 +4186,11 @@
         "desc": "Secondary cell data",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "cell/border": {
@@ -4194,11 +4198,11 @@
         "desc": "Cell divider",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "footer/bg": {
@@ -4206,11 +4210,11 @@
         "desc": "Footer row",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "footer/text": {
@@ -4218,11 +4222,11 @@
         "desc": "Footer text",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       }
     },
@@ -4232,11 +4236,11 @@
         "desc": "Tab bar background",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bar/border": {
@@ -4244,11 +4248,11 @@
         "desc": "Tab bar bottom border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "tab/bg-default": {
@@ -4267,11 +4271,11 @@
         "desc": "Tab hover",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "tab/bg-active": {
@@ -4279,11 +4283,11 @@
         "desc": "Active tab fill",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "tab/bg-disabled": {
@@ -4302,11 +4306,11 @@
         "desc": "Tab label",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "tab/text-active": {
@@ -4314,11 +4318,11 @@
         "desc": "Active tab label",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "tab/text-disabled": {
@@ -4326,11 +4330,11 @@
         "desc": "Disabled label",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "tab/icon-default": {
@@ -4338,11 +4342,11 @@
         "desc": "Tab icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "tab/icon-active": {
@@ -4350,11 +4354,11 @@
         "desc": "Active tab icon",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "indicator/color": {
@@ -4362,11 +4366,11 @@
         "desc": "Active tab indicator line",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "indicator/disabled": {
@@ -4387,11 +4391,11 @@
         "desc": "Tag default bg",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "bg/hover": {
@@ -4399,11 +4403,11 @@
         "desc": "Tag hover",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{elev.0}",
-          "$value": "#0D100C"
+          "$value": "#120F0B"
         }
       },
       "bg/selected": {
@@ -4411,11 +4415,11 @@
         "desc": "Selected/active tag",
         "light": {
           "alias": "{primary.100}",
-          "$value": "#E3FFD9"
+          "$value": "#FEE9CF"
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#084201"
+          "$value": "#451F00"
         }
       },
       "bg/disabled": {
@@ -4423,11 +4427,11 @@
         "desc": "Disabled tag",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "border/default": {
@@ -4435,11 +4439,11 @@
         "desc": "Tag border",
         "light": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "border/selected": {
@@ -4447,11 +4451,11 @@
         "desc": "Selected border",
         "light": {
           "alias": "{primary.400}",
-          "$value": "#80FB48"
+          "$value": "#CE9C57"
         },
         "dark": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         }
       },
       "text/default": {
@@ -4459,11 +4463,11 @@
         "desc": "Tag text",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "text/selected": {
@@ -4471,11 +4475,11 @@
         "desc": "Selected tag text",
         "light": {
           "alias": "{primary.600}",
-          "$value": "#3DB102"
+          "$value": "#995600"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "text/disabled": {
@@ -4483,11 +4487,11 @@
         "desc": "Disabled text",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "icon/remove": {
@@ -4495,11 +4499,11 @@
         "desc": "Remove/dismiss icon",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "icon/remove-hover": {
@@ -4507,11 +4511,11 @@
         "desc": "Remove icon hover",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       }
     },
@@ -4521,33 +4525,33 @@
           "semantic-role": "color/surface-inverse",
           "light": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           },
           "dark": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           }
         },
         "text": {
           "semantic-role": "color/text/inverse",
           "light": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           },
           "dark": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           }
         },
         "icon": {
           "semantic-role": "color/icon/inverse",
           "light": {
             "alias": "{pg.50}",
-            "$value": "#F5FAF4"
+            "$value": "#FDF8F1"
           },
           "dark": {
             "alias": "{pg.900}",
-            "$value": "#141713"
+            "$value": "#191511"
           }
         }
       },
@@ -4696,11 +4700,11 @@
         "desc": "Dismiss",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         }
       }
     },
@@ -4710,11 +4714,11 @@
         "desc": "Off track",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.700}",
-          "$value": "#454944"
+          "$value": "#4B4742"
         }
       },
       "track/bg-on": {
@@ -4722,11 +4726,11 @@
         "desc": "On track",
         "light": {
           "alias": "{primary.500}",
-          "$value": "#6BF12D"
+          "$value": "#B7812F"
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#A3FF7D"
+          "$value": "#E3B67C"
         }
       },
       "track/bg-disabled": {
@@ -4734,11 +4738,11 @@
         "desc": "Disabled track",
         "light": {
           "alias": "{pg.100}",
-          "$value": "#EBF0EA"
+          "$value": "#F3EEE7"
         },
         "dark": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         }
       },
       "track/bg-hover-off": {
@@ -4746,11 +4750,11 @@
         "desc": "Hover off track",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.500}",
-          "$value": "#6F736D"
+          "$value": "#75716B"
         }
       },
       "thumb/bg-default": {
@@ -4758,11 +4762,11 @@
         "desc": "Thumb (uses on-fill for contrast)",
         "light": {
           "alias": "{primary.50}",
-          "$value": "#EDFFE6"
+          "$value": "#FDF4E9"
         },
         "dark": {
           "alias": "{primary.900}",
-          "$value": "#011600"
+          "$value": "#200D00"
         }
       },
       "thumb/bg-off": {
@@ -4770,11 +4774,11 @@
         "desc": "Thumb on off track",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{elev.1}",
-          "$value": "#10130F"
+          "$value": "#15120D"
         }
       },
       "thumb/bg-disabled": {
@@ -4782,11 +4786,11 @@
         "desc": "Disabled thumb",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "label/default": {
@@ -4794,11 +4798,11 @@
         "desc": "Toggle label",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "label/disabled": {
@@ -4806,11 +4810,11 @@
         "desc": "Disabled label",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       }
     },
@@ -4820,11 +4824,11 @@
         "desc": "Tooltip background",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "text": {
@@ -4832,11 +4836,11 @@
         "desc": "Tooltip text",
         "light": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         },
         "dark": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         }
       },
       "border": {
@@ -4844,11 +4848,11 @@
         "desc": "Tooltip border",
         "light": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         },
         "dark": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         }
       },
       "arrow": {
@@ -4856,11 +4860,11 @@
         "desc": "Arrow same as bg",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       }
     },
@@ -4870,11 +4874,11 @@
         "desc": "Page title, hero",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "heading-2": {
@@ -4882,11 +4886,11 @@
         "desc": "Section heading",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "heading-3": {
@@ -4894,11 +4898,11 @@
         "desc": "Card title, sub-heading",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "heading-4": {
@@ -4906,11 +4910,11 @@
         "desc": "Minor heading",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "body": {
@@ -4918,11 +4922,11 @@
         "desc": "Main body text",
         "light": {
           "alias": "{pg.900}",
-          "$value": "#141713"
+          "$value": "#191511"
         },
         "dark": {
           "alias": "{pg.50}",
-          "$value": "#F5FAF4"
+          "$value": "#FDF8F1"
         }
       },
       "body-secondary": {
@@ -4930,11 +4934,11 @@
         "desc": "Supporting body",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "caption": {
@@ -4942,11 +4946,11 @@
         "desc": "Small labels, timestamps",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "overline": {
@@ -4954,11 +4958,11 @@
         "desc": "All-caps category label",
         "light": {
           "alias": "{pg.600}",
-          "$value": "#60655F"
+          "$value": "#67625D"
         },
         "dark": {
           "alias": "{pg.300}",
-          "$value": "#BBBFB9"
+          "$value": "#C2BDB7"
         }
       },
       "label": {
@@ -4966,11 +4970,11 @@
         "desc": "Form field labels",
         "light": {
           "alias": "{pg.800}",
-          "$value": "#2B2F2A"
+          "$value": "#312D28"
         },
         "dark": {
           "alias": "{pg.200}",
-          "$value": "#DBE0D9"
+          "$value": "#E2DDD7"
         }
       },
       "placeholder": {
@@ -4978,11 +4982,11 @@
         "desc": "Input placeholder",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       },
       "link": {
@@ -5002,11 +5006,11 @@
         "desc": "Visited link",
         "light": {
           "alias": "{primary.700}",
-          "$value": "#1E7602"
+          "$value": "#703601"
         },
         "dark": {
           "alias": "{primary.400}",
-          "$value": "#80FB48"
+          "$value": "#CE9C57"
         }
       },
       "code-inline": {
@@ -5014,22 +5018,22 @@
           "semantic-role": "color/text/code",
           "light": {
             "alias": "{primary.700}",
-            "$value": "#1E7602"
+            "$value": "#703601"
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#A3FF7D"
+            "$value": "#E3B67C"
           }
         },
         "bg": {
           "semantic-role": "color/bg-subtle",
           "light": {
             "alias": "{pg.100}",
-            "$value": "#EBF0EA"
+            "$value": "#F3EEE7"
           },
           "dark": {
             "alias": "{elev.0}",
-            "$value": "#0D100C"
+            "$value": "#120F0B"
           }
         }
       },
@@ -5038,11 +5042,11 @@
         "desc": "Disabled text",
         "light": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         },
         "dark": {
           "alias": "{pg.400}",
-          "$value": "#9BA09A"
+          "$value": "#A29E98"
         }
       }
     }

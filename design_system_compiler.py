@@ -983,20 +983,67 @@ def _get_apca_target(role_name: str) -> float:
         return 30.0
     return float(_rt.get('fallback-lc', 60))
 
+def _resolve_l3_pointer(ptr_str: str):
+    """Dereference a '{layer-3.interaction-physics.*}' pointer against L3."""
+    if not isinstance(ptr_str, str) or not ptr_str.startswith('{layer-3.'):
+        return None
+    clean = ptr_str.strip('{}')
+    parts = clean.split('.')[1:]  # drop 'layer-3'
+    node = L3.get('delta-engine', {})
+    for p in parts:
+        if isinstance(node, dict) and p in node:
+            node = node[p]
+        else:
+            return None
+    return node
+
 def resolve_interaction_state(tok_name, base_hex, delta_config, mode, comp_block):
-    """Applies Layer 3 physics deltas to interaction states (hover/active)."""
+    """Applies Layer 3 physics deltas to interaction states (hover/active/pressed/etc.)."""
     if not base_hex or base_hex == 'transparent':
         return base_hex, None
 
     L, C, H = hex_to_oklch(base_hex)
 
-    # Get the delta for this mode, or fallback to auto-pivot
-    dL = delta_config.get(f'L_{mode}')
-    if dL is None:
-        dL = delta_config.get('L', 0.0)
-        # Pivot: typically darken in light mode, lighten in dark mode
-        if mode == 'dark' and dL < 0:
+    dL = 0.0
+    dC = 0.0
+    opacity = None
+
+    # 1. Check if delta_config uses a Layer 3 pointer rule
+    rule_ptr = delta_config.get('rule')
+    pivot_ptr = delta_config.get('pivot')
+    pivot_val = _resolve_l3_pointer(pivot_ptr) if pivot_ptr else None
+    if not isinstance(pivot_val, (int, float)):
+        pivot_val = L3.get('delta-engine', {}).get('interaction-physics', {}).get('lightness-pivot-threshold', 0.6)
+
+    rule_obj = _resolve_l3_pointer(rule_ptr) if rule_ptr else None
+
+    if isinstance(rule_obj, (int, float)):
+        # Direct scalar pointer, e.g. {layer-3.interaction-physics.hover-deltas.darken}
+        dL = float(rule_obj)
+        if mode == 'dark' and L < pivot_val and dL < 0:
             dL = abs(dL)
+    elif isinstance(rule_obj, dict):
+        if 'lighten' in rule_obj and 'darken' in rule_obj:
+            # Pivot-controlled state delta (hover-deltas, active-deltas, pressed-deltas)
+            # L < pivot_val -> dark fill ('below-threshold' / 'lighten' branch)
+            # L >= pivot_val -> light container ('above-threshold' / 'darken' branch)
+            dL = float(rule_obj['lighten'] if L < pivot_val else rule_obj['darken'])
+        else:
+            # Explicit delta dict (selected-delta, loading-delta, subtle-press-delta, ghost-active-delta, etc.)
+            dL = float(rule_obj.get('dL', 0.0))
+            if mode == 'dark' and L < pivot_val and dL < 0:
+                dL = abs(dL)
+            dC = float(rule_obj.get('dC', 0.0))
+            opacity = rule_obj.get('opacity')
+    else:
+        # Legacy inline delta fallback (L_light, L_dark, L, C, opacity)
+        dL = delta_config.get(f'L_{mode}')
+        if dL is None:
+            dL = float(delta_config.get('L', 0.0))
+            if mode == 'dark' and dL < 0:
+                dL = abs(dL)
+        dC = float(delta_config.get('C', 0.0))
+        opacity = delta_config.get('opacity')
 
     # ── ACHROMATIC SNAP (concern #27) ────────────────────────────────────────
     # Hue angle is numerically undefined at C=0 and unstable below C=0.01.
@@ -1007,28 +1054,36 @@ def resolve_interaction_state(tok_name, base_hex, delta_config, mode, comp_block
     if C < _ACHROMATIC_THRESHOLD:
         new_L = max(0.0, min(1.0, L + dL))
         new_hex = gamut_safe_oklch_to_hex(new_L, 0.0, 0.0)
-        return new_hex, None
+        return new_hex, opacity
 
     new_L = max(0.0, min(1.0, L + dL))
+    new_C = max(0.0, C + dC)
     # ── MUDDY ZONE RESILIENCE ───────────────────────────────────────────────
     # Warm-floor surfaces with linear ΔL can drift into dark-yellow/olive zone.
     # Shift warm hue away from muddy olive zone toward rich amber (H ~ 48°),
     # or desaturate chartreuse/olive to keep interaction states clean and crisp.
-    if _is_muddy_zone(new_L, C, H):
+    if _is_muddy_zone(new_L, new_C, H):
         if 55 <= H <= 85:
             H = 48.0
         elif 85 < H <= 125:
-            C = min(C, 0.035)
+            new_C = min(new_C, 0.035)
 
-    new_hex = gamut_safe_oklch_to_hex(new_L, C, H)
-
+    new_hex = gamut_safe_oklch_to_hex(new_L, new_C, H)
     new_L_f, new_C_f, new_H_f = hex_to_oklch(new_hex)
+    if _is_muddy_zone(new_L_f, new_C_f, new_H_f):
+        if 55 <= new_H_f <= 85:
+            H = 48.0
+        elif 85 < new_H_f <= 125:
+            new_C = min(new_C, 0.035)
+        new_hex = gamut_safe_oklch_to_hex(new_L, new_C, H)
+        new_L_f, new_C_f, new_H_f = hex_to_oklch(new_hex)
+
     if _is_muddy_zone(new_L_f, new_C_f, new_H_f):
         print(f'  ⚠  MUDDY_ZONE [{mode.upper()}] {tok_name}: interaction state '
               f'(L={new_L_f:.2f}, C={new_C_f:.3f}, H={new_H_f:.0f}°) falls in '
               f'dark-yellow/olive muddy zone. Consider desaturating or shifting hue.')
 
-    return new_hex, None
+    return new_hex, opacity
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 8 - Emit tokens-component.json
 # Full chain: component-token → semantic-role → primitive-alias → hex
@@ -1226,15 +1281,19 @@ if not args.no_css:
             for tok_name, tok_data in block.items():
                 if not isinstance(tok_data, dict):
                     continue
-                prop = '--' + prefix + '-' + tok_name.replace('/', '-').replace(' ', '-')
+                clean_tok = tok_name.replace('/', '-').replace(' ', '-')
+                prop = '--' + prefix + '-' + clean_tok
                 # Standard token: has light/dark keys
                 if 'light' in tok_data and isinstance(tok_data['light'], dict):
                     light_val = tok_data['light'].get('$value')
+                    is_delta  = tok_data['light'].get('delta-resolved', False)
                     sem_role  = tok_data.get('semantic-role', '')
                     if light_val and light_val != 'transparent':
-                        # Point to semantic CSS var, fall back to hex
-                        sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
-                        css_val  = f'var({sem_prop}, {light_val})' if sem_prop else light_val
+                        if is_delta:
+                            css_val = light_val
+                        else:
+                            sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
+                            css_val  = f'var({sem_prop}, {light_val})' if sem_prop else light_val
                         comp_css.append(f'  {prop}: {css_val};')
                     elif light_val == 'transparent':
                         comp_css.append(f'  {prop}: transparent;')
@@ -1245,11 +1304,18 @@ if not args.no_css:
                             continue
                         sub_prop = f'{prop}-{prop_k}'
                         light_val = prop_data.get('light', {}).get('$value')
+                        is_delta  = prop_data.get('light', {}).get('delta-resolved', False)
                         sem_role  = prop_data.get('semantic-role', '')
                         if light_val and light_val != 'transparent':
-                            sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
-                            css_val  = f'var({sem_prop}, {light_val})' if sem_prop else light_val
+                            if is_delta:
+                                css_val = light_val
+                            else:
+                                sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
+                                css_val  = f'var({sem_prop}, {light_val})' if sem_prop else light_val
                             comp_css.append(f'  {sub_prop}: {css_val};')
+                # Nested variant block (e.g. button -> primary, secondary, ghost, destructive, link)
+                else:
+                    _flat_css(f'{prefix}-{clean_tok}', tok_data)
         _flat_css(comp_name, comp_data)
     comp_css.append('}')
     comp_css.append('')
@@ -1261,24 +1327,35 @@ if not args.no_css:
             for tok_name, tok_data in block.items():
                 if not isinstance(tok_data, dict):
                     continue
-                prop = '--' + prefix + '-' + tok_name.replace('/', '-').replace(' ', '-')
+                clean_tok = tok_name.replace('/', '-').replace(' ', '-')
+                prop = '--' + prefix + '-' + clean_tok
                 if 'dark' in tok_data and isinstance(tok_data['dark'], dict):
                     dark_val = tok_data['dark'].get('$value')
+                    is_delta = tok_data['dark'].get('delta-resolved', False)
                     sem_role = tok_data.get('semantic-role', '')
                     if dark_val and dark_val != 'transparent':
-                        sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
-                        css_val  = f'var({sem_prop}, {dark_val})' if sem_prop else dark_val
+                        if is_delta:
+                            css_val = dark_val
+                        else:
+                            sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
+                            css_val  = f'var({sem_prop}, {dark_val})' if sem_prop else dark_val
                         comp_css.append(f'    {prop}: {css_val};')
                 elif any(k in tok_data for k in ('bg','text','border','icon','title')):
                     for prop_k, prop_data in tok_data.items():
                         if not isinstance(prop_data, dict): continue
                         sub_prop = f'{prop}-{prop_k}'
                         dark_val = prop_data.get('dark', {}).get('$value')
+                        is_delta = prop_data.get('dark', {}).get('delta-resolved', False)
                         sem_role = prop_data.get('semantic-role', '')
                         if dark_val and dark_val != 'transparent':
-                            sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
-                            css_val  = f'var({sem_prop}, {dark_val})' if sem_prop else dark_val
+                            if is_delta:
+                                css_val = dark_val
+                            else:
+                                sem_prop = '--' + sem_role.replace('/', '-') if sem_role else None
+                                css_val  = f'var({sem_prop}, {dark_val})' if sem_prop else dark_val
                             comp_css.append(f'    {sub_prop}: {css_val};')
+                else:
+                    _flat_css_dark(f'{prefix}-{clean_tok}', tok_data)
         _flat_css_dark(comp_name, comp_data)
     comp_css.append('  }')
     comp_css.append('}')

@@ -1,4 +1,4 @@
-/* Component tokens - Generated 2026-10-17T15:51:17Z */
+/* Component tokens - Generated 2026-11-09T15:05:27Z */
 /* Reference chain: --comp-token → --semantic-role → primitive hex */
 /* Usage: background: var(--button-primary-bg-default); */
 
@@ -81,6 +81,49 @@
   --breadcrumb-separator-icon: var(--color-icon-subtle, #67625D);
 
   /* button */
+  --button-primary-bg-default: var(--color-fill-brand, #B7812F);
+  --button-primary-bg-hover: #A7721B;
+  --button-primary-bg-active: #9A6602;
+  --button-primary-bg-pressed: #8F5E01;
+  --button-primary-bg-focus: var(--color-fill-brand, #B7812F);
+  --button-primary-bg-selected: #B27602;
+  --button-primary-bg-loading: #AD854F;
+  --button-primary-bg-disabled: var(--color-fill-brand, #B7812F);
+  --button-primary-text-default: var(--color-on-fill-brand, #FDF4E9);
+  --button-primary-text-disabled: var(--color-on-fill-brand, #FDF4E9);
+  --button-primary-icon-default: var(--color-on-fill-brand, #FDF4E9);
+  --button-secondary-bg-default: var(--color-fill-brand-subtle, #FEE9CF);
+  --button-secondary-bg-hover: #EDD9BF;
+  --button-secondary-bg-active: var(--color-fill-brand, #B7812F);
+  --button-secondary-bg-focus: var(--color-fill-brand-subtle, #FEE9CF);
+  --button-secondary-bg-selected: #F4DFC5;
+  --button-secondary-bg-loading: #F1ECE5;
+  --button-secondary-bg-disabled: var(--color-surface-disabled, #F3EEE7);
+  --button-secondary-text-default: var(--color-text-brand, #995600);
+  --button-secondary-text-disabled: var(--color-text-disabled, #A29E98);
+  --button-secondary-icon-default: var(--color-icon-brand, #995600);
+  --button-ghost-bg-default: transparent;
+  --button-ghost-bg-hover: var(--color-fill-brand-subtle, #FEE9CF);
+  --button-ghost-bg-active: #EDD9BF;
+  --button-ghost-bg-disabled: transparent;
+  --button-ghost-border-default: var(--color-border-default, #C2BDB7);
+  --button-ghost-border-hover: var(--color-border-strong, #A29E98);
+  --button-ghost-border-focus: var(--color-border-brand-strong, #B7812F);
+  --button-ghost-border-disabled: var(--color-border-disabled, #E2DDD7);
+  --button-ghost-text-default: var(--color-text-primary, #191511);
+  --button-ghost-text-disabled: var(--color-text-disabled, #A29E98);
+  --button-destructive-bg-default: var(--color-fill-error, #BA3430);
+  --button-destructive-bg-hover: #CB453F;
+  --button-destructive-bg-active: #AC2524;
+  --button-destructive-bg-focus: var(--color-fill-error, #BA3430);
+  --button-destructive-bg-disabled: var(--color-surface-disabled, #F3EEE7);
+  --button-destructive-text-default: var(--color-on-fill-error, #FEF6F5);
+  --button-destructive-text-disabled: var(--color-text-disabled, #A29E98);
+  --button-destructive-icon-default: var(--color-on-fill-error, #FEF6F5);
+  --button-link-text-default: var(--color-text-link, #1A37A1);
+  --button-link-text-hover: var(--color-text-brand, #995600);
+  --button-link-text-visited: var(--color-text-link-visited, #703601);
+  --button-link-text-disabled: var(--color-text-disabled, #A29E98);
 
   /* card */
   --card-bg-default: var(--color-surface, #FDF8F1);
@@ -188,7 +231,7 @@
   --list-item-bg-default: transparent;
   --list-item-bg-hover: var(--color-fill-brand-subtle, #FEE9CF);
   --list-item-bg-selected: var(--color-fill-brand-subtle, #FEE9CF);
-  --list-item-bg-active: var(--color-fill-brand-subtle, #FEE9CF);
+  --list-item-bg-active: #F4DFC5;
   --list-item-bg-disabled: transparent;
   --list-item-bg-destructive: var(--color-fill-error-subtle, #FEF6F5);
   --list-item-text-default: var(--color-text-primary, #191511);
@@ -207,7 +250,7 @@
   --menu-container-border: var(--color-border-default, #C2BDB7);
   --menu-item-bg-default: transparent;
   --menu-item-bg-hover: var(--color-fill-brand-subtle, #FEE9CF);
-  --menu-item-bg-active: var(--color-fill-brand-subtle, #FEE9CF);
+  --menu-item-bg-active: #F4DFC5;
   --menu-item-bg-selected: var(--color-fill-brand-subtle, #FEE9CF);
   --menu-item-bg-disabled: transparent;
   --menu-item-bg-destructive-hover: var(--color-fill-error-subtle, #FEF6F5);
@@ -314,8 +357,8 @@
   --slider-track-fill: var(--color-fill-brand, #B7812F);
   --slider-track-disabled: var(--color-surface-disabled, #F3EEE7);
   --slider-thumb-bg-default: var(--color-fill-brand, #B7812F);
-  --slider-thumb-bg-hover: var(--color-fill-brand, #B7812F);
-  --slider-thumb-bg-pressed: var(--color-fill-brand, #B7812F);
+  --slider-thumb-bg-hover: #A7721B;
+  --slider-thumb-bg-pressed: #8F5E01;
   --slider-thumb-bg-disabled: var(--color-text-disabled, #A29E98);
   --slider-thumb-border: var(--color-on-fill-brand, #FDF4E9);
   --slider-label-value: var(--color-text-primary, #191511);
@@ -508,6 +551,47 @@
     --breadcrumb-link-hover: var(--color-text-brand, #E3B67C);
     --breadcrumb-current-text: var(--color-text-primary, #FDF8F1);
     --breadcrumb-separator-icon: var(--color-icon-subtle, #C2BDB7);
+    --button-primary-bg-default: var(--color-fill-brand, #E3B67C);
+    --button-primary-bg-hover: #D3A66D;
+    --button-primary-bg-active: #C59A60;
+    --button-primary-bg-pressed: #BC9057;
+    --button-primary-bg-focus: var(--color-fill-brand, #E3B67C);
+    --button-primary-bg-selected: #E4A957;
+    --button-primary-bg-loading: #D7B994;
+    --button-primary-bg-disabled: var(--color-fill-brand, #E3B67C);
+    --button-primary-text-default: var(--color-on-fill-brand, #200D00);
+    --button-primary-text-disabled: var(--color-on-fill-brand, #200D00);
+    --button-primary-icon-default: var(--color-on-fill-brand, #200D00);
+    --button-secondary-bg-default: var(--color-fill-brand-subtle, #451F00);
+    --button-secondary-bg-hover: #552A13;
+    --button-secondary-bg-active: var(--color-fill-brand, #E3B67C);
+    --button-secondary-bg-focus: var(--color-fill-brand-subtle, #451F00);
+    --button-secondary-bg-selected: #4F250D;
+    --button-secondary-bg-loading: #3B2516;
+    --button-secondary-bg-disabled: var(--color-surface-disabled, #312D28);
+    --button-secondary-text-default: var(--color-text-brand, #E3B67C);
+    --button-secondary-text-disabled: var(--color-text-disabled, #A29E98);
+    --button-secondary-icon-default: var(--color-icon-brand, #E3B67C);
+    --button-ghost-bg-hover: var(--color-fill-brand-subtle, #451F00);
+    --button-ghost-bg-active: #552A13;
+    --button-ghost-border-default: var(--color-border-default, #67625D);
+    --button-ghost-border-hover: var(--color-border-strong, #75716B);
+    --button-ghost-border-focus: var(--color-border-brand-strong, #E3B67C);
+    --button-ghost-border-disabled: var(--color-border-disabled, #67625D);
+    --button-ghost-text-default: var(--color-text-primary, #FDF8F1);
+    --button-ghost-text-disabled: var(--color-text-disabled, #A29E98);
+    --button-destructive-bg-default: var(--color-fill-error, #F78B7E);
+    --button-destructive-bg-hover: #E67B6F;
+    --button-destructive-bg-active: #D86F63;
+    --button-destructive-bg-focus: var(--color-fill-error, #F78B7E);
+    --button-destructive-bg-disabled: var(--color-surface-disabled, #312D28);
+    --button-destructive-text-default: var(--color-on-fill-error, #160001);
+    --button-destructive-text-disabled: var(--color-text-disabled, #A29E98);
+    --button-destructive-icon-default: var(--color-on-fill-error, #160001);
+    --button-link-text-default: var(--color-text-link, #86A5FB);
+    --button-link-text-hover: var(--color-text-brand, #E3B67C);
+    --button-link-text-visited: var(--color-text-link-visited, #CE9C57);
+    --button-link-text-disabled: var(--color-text-disabled, #A29E98);
     --card-bg-default: var(--color-surface, #15120D);
     --card-bg-hover: var(--color-surface-subtle, #15120D);
     --card-bg-selected: var(--color-fill-brand-subtle, #451F00);
@@ -594,7 +678,7 @@
     --kbd-text: var(--color-text-secondary, #E2DDD7);
     --list-item-bg-hover: var(--color-fill-brand-subtle, #451F00);
     --list-item-bg-selected: var(--color-fill-brand-subtle, #451F00);
-    --list-item-bg-active: var(--color-fill-brand-subtle, #451F01);
+    --list-item-bg-active: #4F250D;
     --list-item-bg-destructive: var(--color-fill-error-subtle, #160001);
     --list-item-text-default: var(--color-text-primary, #FDF8F1);
     --list-item-text-secondary: var(--color-text-secondary, #E2DDD7);
@@ -609,7 +693,7 @@
     --menu-container-bg: var(--color-surface-raised, #191612);
     --menu-container-border: var(--color-border-default, #67625D);
     --menu-item-bg-hover: var(--color-fill-brand-subtle, #451F00);
-    --menu-item-bg-active: var(--color-fill-brand-subtle, #451F01);
+    --menu-item-bg-active: #4F250D;
     --menu-item-bg-selected: var(--color-fill-brand-subtle, #451F00);
     --menu-item-bg-destructive-hover: var(--color-fill-error-subtle, #160001);
     --menu-item-text-default: var(--color-text-primary, #FDF8F1);
@@ -687,8 +771,8 @@
     --slider-track-fill: var(--color-fill-brand, #E3B67C);
     --slider-track-disabled: var(--color-surface-disabled, #312D28);
     --slider-thumb-bg-default: var(--color-fill-brand, #E3B67C);
-    --slider-thumb-bg-hover: var(--color-fill-brand, #E3B67C);
-    --slider-thumb-bg-pressed: var(--color-fill-brand, #E3B67C);
+    --slider-thumb-bg-hover: #D3A66D;
+    --slider-thumb-bg-pressed: #BC9057;
     --slider-thumb-bg-disabled: var(--color-text-disabled, #A29E98);
     --slider-thumb-border: var(--color-on-fill-brand, #200D00);
     --slider-label-value: var(--color-text-primary, #FDF8F1);

@@ -1,6 +1,6 @@
 {
   "$meta": {
-    "generated": "2026-10-17T15:51:17.158944+00:00",
+    "generated": "2026-11-09T15:05:27.866101+00:00",
     "layer-4-version": "1.2",
     "cta-color": "primary",
     "description": "Layer 4 output. Component tokens resolved through full chain.",
@@ -811,13 +811,13 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#B7812F",
+            "$value": "#A7721B",
             "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#E3B67C",
+            "$value": "#D3A66D",
             "base-hex": "#E3B67C",
             "delta-resolved": true
           }
@@ -831,13 +831,13 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#B7812F",
+            "$value": "#9A6602",
             "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#E3B67C",
+            "$value": "#C59A60",
             "base-hex": "#E3B67C",
             "delta-resolved": true
           }
@@ -851,13 +851,13 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#B7812F",
+            "$value": "#8F5E01",
             "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#E3B67C",
+            "$value": "#BC9057",
             "base-hex": "#E3B67C",
             "delta-resolved": true
           }
@@ -882,13 +882,13 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#B7812F",
+            "$value": "#B27602",
             "base-hex": "#B7812F",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#E3B67C",
+            "$value": "#E4A957",
             "base-hex": "#E3B67C",
             "delta-resolved": true
           }
@@ -901,15 +901,17 @@
           },
           "light": {
             "alias": "{primary.500}",
-            "$value": "#B7812F",
+            "$value": "#AD854F",
             "base-hex": "#B7812F",
-            "delta-resolved": true
+            "delta-resolved": true,
+            "opacity": 0.7
           },
           "dark": {
             "alias": "{primary.300}",
-            "$value": "#E3B67C",
+            "$value": "#D7B994",
             "base-hex": "#E3B67C",
-            "delta-resolved": true
+            "delta-resolved": true,
+            "opacity": 0.7
           }
         },
         "bg/disabled": {
@@ -983,13 +985,13 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#FEE9CF",
+            "$value": "#EDD9BF",
             "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#451F01",
+            "$value": "#552A13",
             "base-hex": "#451F00",
             "delta-resolved": true
           }
@@ -1026,13 +1028,13 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#FEE9CF",
+            "$value": "#F4DFC5",
             "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#451F01",
+            "$value": "#4F250D",
             "base-hex": "#451F00",
             "delta-resolved": true
           }
@@ -1045,15 +1047,17 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#FEE9CF",
+            "$value": "#F1ECE5",
             "base-hex": "#FEE9CF",
-            "delta-resolved": true
+            "delta-resolved": true,
+            "opacity": 0.7
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#451F01",
+            "$value": "#3B2516",
             "base-hex": "#451F00",
-            "delta-resolved": true
+            "delta-resolved": true,
+            "opacity": 0.7
           }
         },
         "bg/disabled": {
@@ -1137,13 +1141,13 @@
           },
           "light": {
             "alias": "{primary.100}",
-            "$value": "#FEE9CF",
+            "$value": "#EDD9BF",
             "base-hex": "#FEE9CF",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{primary.800}",
-            "$value": "#451F01",
+            "$value": "#552A13",
             "base-hex": "#451F00",
             "delta-resolved": true
           }
@@ -1254,13 +1258,13 @@
           },
           "light": {
             "alias": "{error.500}",
-            "$value": "#BA3430",
+            "$value": "#CB453F",
             "base-hex": "#BA3430",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{error.300}",
-            "$value": "#F78B7E",
+            "$value": "#E67B6F",
             "base-hex": "#F78B7E",
             "delta-resolved": true
           }
@@ -1274,13 +1278,13 @@
           },
           "light": {
             "alias": "{error.500}",
-            "$value": "#BA3430",
+            "$value": "#AC2524",
             "base-hex": "#BA3430",
             "delta-resolved": true
           },
           "dark": {
             "alias": "{error.300}",
-            "$value": "#F78B7E",
+            "$value": "#D86F63",
             "base-hex": "#F78B7E",
             "delta-resolved": true
           }
@@ -2467,13 +2471,13 @@
         },
         "light": {
           "alias": "{primary.100}",
-          "$value": "#FEE9CF",
+          "$value": "#F4DFC5",
           "base-hex": "#FEE9CF",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#451F01",
+          "$value": "#4F250D",
           "base-hex": "#451F00",
           "delta-resolved": true
         }
@@ -2678,13 +2682,13 @@
         },
         "light": {
           "alias": "{primary.100}",
-          "$value": "#FEE9CF",
+          "$value": "#F4DFC5",
           "base-hex": "#FEE9CF",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.800}",
-          "$value": "#451F01",
+          "$value": "#4F250D",
           "base-hex": "#451F00",
           "delta-resolved": true
         }
@@ -3735,13 +3739,13 @@
         },
         "light": {
           "alias": "{primary.500}",
-          "$value": "#B7812F",
+          "$value": "#A7721B",
           "base-hex": "#B7812F",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#E3B67C",
+          "$value": "#D3A66D",
           "base-hex": "#E3B67C",
           "delta-resolved": true
         }
@@ -3755,13 +3759,13 @@
         },
         "light": {
           "alias": "{primary.500}",
-          "$value": "#B7812F",
+          "$value": "#8F5E01",
           "base-hex": "#B7812F",
           "delta-resolved": true
         },
         "dark": {
           "alias": "{primary.300}",
-          "$value": "#E3B67C",
+          "$value": "#BC9057",
           "base-hex": "#E3B67C",
           "delta-resolved": true
         }
